@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+// Route::get('/', [AuthenticatedSessionController::class, 'create'])->middleware('guest');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+// Auth routes
+require __DIR__.'/auth.php';
+
+// configures routes
+require __DIR__.'/configures_routes.php';
+
+// configures routes
+require __DIR__.'/students_routes.php';
+
+// Marks management routes
+require __DIR__.'/marks_routes.php';
+
+// generated average routes
+require __DIR__.'/generated_averages_routes.php';
+
+// generated documents routes
+require __DIR__.'/documents_routes.php';
+
+// generated documents routes
+require __DIR__.'/others_routes.php';

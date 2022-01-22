@@ -1,0 +1,390 @@
+/*
+Author       : Dreamguys
+Template Name: PreClinic - Medical and Hospital Admin Template
+Version      : 1.0
+*/
+
+/*============================
+ [Table of CSS]
+
+1. General
+2. Table
+3. Helper Class
+4. Bootstrap Classes
+5. Header
+6. Sidebar
+7. Content
+8. Login
+9. Dashboard
+10. Activity
+11. Select2
+12. Nav tabs
+13. Holidays
+14. Edit Profile
+15. Chat
+16. Focus Label
+17. Leave
+18. Employee
+19. Events
+20. Profile
+21. Notifications
+22. Roles & Permissions
+23. Chat Right Sidebar
+24. Invoice
+25. Doctors
+26. Add Doctor
+27. Payslip
+28. Attendance
+29. Inbox
+30. Mail View
+31. Blog
+32. Blog View
+33. UI Kit
+34. Error
+35. Lock Screen
+36. Voice call
+37. Video Call
+38. Incoming call
+39. Notification settings
+40. Chat Sidebar
+41. Gallery
+42. Responsive
+
+========================================*/
+
+
+/*-----------------
+	9. Dashboard
+-----------------------*/
+
+.dash-widget {
+	background-color: #fff;
+	border-radius: 4px;
+	margin-bottom: 30px;
+	padding: 20px;
+	position: relative;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+.dash-widget-bg1 {
+	width: 65px;
+	float: left;
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	line-height: 65px;
+	background: #009efb;
+	border-radius: 50%;
+	font-size: 40px;
+	height: 65px;
+}
+.dash-widget-bg2 {
+	width: 65px;
+	float: left;
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	line-height: 65px;
+	background: #55ce63;
+	border-radius: 50%;
+	font-size: 40px;
+	height: 65px;
+}
+.dash-widget-bg3 {
+	width: 65px;
+	float: left;
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	line-height: 65px;
+	background: #7a92a3;
+	border-radius: 50%;
+	font-size: 40px;
+	height: 65px;
+}
+.dash-widget-bg4 {
+	width: 65px;
+	float: left;
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	line-height: 65px;
+	background: #ffbc35;
+	border-radius: 50%;
+	font-size: 40px;
+	height: 65px;
+}
+/* .card-table.card-table-top .card-body {
+	height: 175px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+.chart-title {
+	margin-bottom: 25px;
+}
+.chart-title h4 {
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 20px;
+	margin: 0;
+	color: #333;
+}
+.chart-title span {
+	color: #009efb;
+}
+.card-title > a.btn {
+	color: #fff;
+}
+ul.chat-user-total li {
+	display: inline-block;
+	color: #999;
+}
+ul.chat-user-total li i.current-users {
+	color: #009efb;
+	padding-right: 5px;
+}
+ul.chat-user-total li i.old-users {
+	color: #eaeaea;
+	padding-right: 5px;
+}
+.new-patient-table {
+	display: table;
+}
+.new-patient-table td, .new-patient-table th {
+    vertical-align: middle;
+}
+.new-patient-table tr td img {
+	margin-right: 5px;
+}
+.btn-primary-one {
+	border: 1px solid #ffbc35;
+	border-radius: 25px;
+	width: 100px;
+	background: transparent;
+	color: #000;
+}
+.btn-primary-two {
+	border: 1px solid #009efb;
+	border-radius: 25px;
+	width: 100px;
+	background: transparent;
+	color: #000;
+}
+.btn-primary-three {
+	border: 1px solid #55ce63;
+	border-radius: 25px;
+	width: 100px;
+	background: transparent;
+	color: #000;
+}
+.btn-primary-four {
+	border: 1px solid #ffbc35;
+	border-radius: 25px;
+	width: 100px;
+	background: transparent;
+	color: #000;
+}
+.bar-chart {
+	position: relative;
+	width: 100%;
+	margin-top: 15px;
+}
+.bar-chart > .legend {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	margin-bottom: -45px;
+	border-top: 1px solid #000;
+}
+.bar-chart > .legend > .item {
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 25%;
+}
+.bar-chart > .legend > .item:before {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '';
+	width: 1px;
+	height: 8px;
+	background-color: #000;
+	margin-top: -8px;
+}
+.bar-chart > .legend > .item.text-right:before {
+	right: 0;
+	left: auto;
+}
+.bar-chart > .legend > .item h4 {
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-top: 5px;
+}
+.bar-chart > .chart {
+	position: relative;
+	width: 100%;
+}
+.bar-chart > .chart > .item {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	margin-bottom: 10px;
+	color: #fff;
+	text-transform: uppercase;
+}
+.bar-chart > .chart > .item > .bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #ffbc35;
+	z-index: 5;
+}
+.bar-chart > .chart > .item > .bar > .percent {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 40px;
+	line-height: 40px;
+	padding-right: 12px;
+	z-index: 15;
+}
+.bar-chart > .chart > .item > .bar > .item-progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background-color: #009efb;
+	z-index: 10;
+}
+.bar-chart > .chart > .item > .bar > .item-progress > .title {
+	display: block;
+	position: absolute;
+	height: 40px;
+	line-height: 40px;
+	padding-left: 12px;
+	letter-spacing: 2px;
+	z-index: 15;
+}
+.hospital-barchart h4 {
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 20px;
+	margin: 0;
+	color: #333;
+}
+.custom-table tr {
+	background-color: #fff;
+	box-shadow: 0 0 3px #e5e5e5;
+}
+.table.custom-table > tbody > tr > td,
+.table.custom-table > tbody > tr > th,
+.table.custom-table > tfoot > tr > td,
+.table.custom-table > tfoot > tr > th,
+.table.custom-table > thead > tr > td,
+.table.custom-table > thead > tr > th {
+	padding: 10px 8px;
+	vertical-align: middle;
+} */
+.dash-widget-info > h3 {
+	font-size: 24px;
+	font-weight: 500;
+	margin-bottom: 0.5rem;
+}
+.dash-widget-info span i {
+	width: 16px;
+	background: #fff;
+	border-radius: 50%;
+	color: #666666;
+	font-size: 9px;
+	height: 16px;
+	line-height: 16px;
+	text-align: center;
+	margin-left: 5px;
+}
+.dash-widget-info > span.widget-title1 {
+	background: #009efb;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+.dash-widget-info > span.widget-title2 {
+	background: #55ce63;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+.dash-widget-info > span.widget-title3 {
+	background: #7a92a3;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+.dash-widget-info > span.widget-title4 {
+	background: #ffbc35;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+/* .member-panel .contact-list > li:last-child {
+	border-bottom: 0;
+}
+.member-panel .card-body {
+	overflow-y: auto;
+	height: 275px;
+	-webkit-overflow-scrolling: touch;
+	padding: 0;
+}
+.contact-list {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+.contact-list > li {
+	border-bottom: 1px solid #eaeaea;
+	border-radius: inherit;
+	padding: 10px;
+	background-color:#fff;
+}
+.contact-cont {
+	position: relative;
+}
+.contact-info {
+	padding: 0 30px 0 50px;
+}
+.contact-date {
+	color: #888;
+	font-size: 12px;
+}
+.take-btn {
+    min-width: 80px;
+} */
+.card-box {
+	background-color: #fff;
+	border-radius: 4px;
+	margin-bottom: 30px;
+	padding: 20px;
+	position: relative;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+.card-title {
+	color: #333;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
