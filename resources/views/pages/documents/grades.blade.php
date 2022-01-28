@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout filtrage='true'>
     <x-slot name="custom_css">
         
     </x-slot>
@@ -19,7 +19,7 @@
                                 <h4 class="page-title">Cs1->Grade transcripts</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{ route('dashboard') }}"  onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -43,149 +43,89 @@
                             <h2>
                                 <strong>Cs1->Grade transcripts</strong> List
                             </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="javascript:void(0);">Action</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-hover js-basic-example contact_list">
                                     <thead>
                                         <tr>
-                                            <th class="center">#</th>
-                                            <th class="center"> Invoice No </th>
-                                            <th class="center"> Date </th>
-                                            <th class="center"> Organization </th>
-                                            <th class="center"> Payment Type </th>
-                                            <th class="center"> Amount </th>
-                                            <th class="center"> Invoice </th>
+                                            <th class="center">Matricule</th>
+                                            <th class="center"> First name </th>
+                                            <th class="center"> Last Name </th>
+                                            <th class="center"> Average </th>
+                                            <th class="center"> Notation </th>
+                                            <th class="center"> Statut </th>
                                             <th class="center"> Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="center">1</td>
-                                            <td class="center">IN00125</td>
-                                            <td class="center">01 January 2018</td>
-                                            <td class="center">Sun Technology</td>
-                                            <td class="center">Bank Transfer</td>
-                                            <td class="center"> $10,000</td>
+                                            <td class="center">bs0001</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">14.78</td>
+                                            <td class="center">A</td>
+                                            <td class="center">Pass</td>
                                             <td class="center">
                                                 <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
                                                     <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                            <td class="center">
-                                                <a href="#" class="btn btn-tbl-edit">
-                                                    <i class="material-icons">create</i>
-                                                </a>
-                                                <a href="#" class="btn btn-tbl-delete">
-                                                    <i class="material-icons">delete_forever</i>
                                                 </a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="center">2</td>
-                                            <td class="center">IN00185</td>
-                                            <td class="center">15 January 2017</td>
-                                            <td class="center">Ajay Singh</td>
-                                            <td class="center">Cash</td>
-                                            <td class="center"> $1,000</td>
+                                            <td class="center">bs0002</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">14.78</td>
+                                            <td class="center">A</td>
+                                            <td class="center">Pass</td>
                                             <td class="center">
                                                 <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
                                                     <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                            <td class="center">
-                                                <a href="#" class="btn btn-tbl-edit">
-                                                    <i class="material-icons">create</i>
-                                                </a>
-                                                <a href="#" class="btn btn-tbl-delete">
-                                                    <i class="material-icons">delete_forever</i>
                                                 </a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="center">3</td>
-                                            <td class="center">IN25875</td>
-                                            <td class="center">17 February 2017</td>
-                                            <td class="center">Manas Infotech</td>
-                                            <td class="center">Cheque</td>
-                                            <td class="center"> $3,724</td>
+                                            <td class="center">bs0003</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">14.78</td>
+                                            <td class="center">A</td>
+                                            <td class="center">Pass</td>
                                             <td class="center">
                                                 <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
                                                     <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                            <td class="center">
-                                                <a href="#" class="btn btn-tbl-edit">
-                                                    <i class="material-icons">create</i>
-                                                </a>
-                                                <a href="#" class="btn btn-tbl-delete">
-                                                    <i class="material-icons">delete_forever</i>
                                                 </a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="center">4</td>
-                                            <td class="center">IN00568</td>
-                                            <td class="center">11 March 2017</td>
-                                            <td class="center">Swaraj Steel</td>
-                                            <td class="center">Bank</td>
-                                            <td class="center"> $528</td>
+                                            <td class="center">bs0004</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">14.78</td>
+                                            <td class="center">A</td>
+                                            <td class="center">Pass</td>
                                             <td class="center">
                                                 <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
                                                     <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                            <td class="center">
-                                                <a href="#" class="btn btn-tbl-edit">
-                                                    <i class="material-icons">create</i>
-                                                </a>
-                                                <a href="#" class="btn btn-tbl-delete">
-                                                    <i class="material-icons">delete_forever</i>
                                                 </a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="center">5</td>
-                                            <td class="center">IN0069</td>
-                                            <td class="center">17 March 2017</td>
-                                            <td class="center">Ankur Plastic</td>
-                                            <td class="center">Cheque</td>
-                                            <td class="center"> $856</td>
+                                            <td class="center">bs0005</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">14.78</td>
+                                            <td class="center">A</td>
+                                            <td class="center">Pass</td>
                                             <td class="center">
                                                 <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
                                                     <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                            <td class="center">
-                                                <a href="#" class="btn btn-tbl-edit">
-                                                    <i class="material-icons">create</i>
-                                                </a>
-                                                <a href="#" class="btn btn-tbl-delete">
-                                                    <i class="material-icons">delete_forever</i>
                                                 </a>
                                             </td>
                                         </tr>
                                     </tbody>
-                                    <tfoot>
+                                    {{-- <tfoot>
                                         <tr>
                                             <th class="center">#</th>
                                             <th class="center"> Invoice No </th>
@@ -196,7 +136,7 @@
                                             <th class="center"> Invoice </th>
                                             <th class="center"> Action </th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> --}}
                                 </table>
                             </div>
                         </div>

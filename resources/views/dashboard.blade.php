@@ -1,12 +1,12 @@
-<x-app-layout>
+<x-app-layout filtrage='false'>
     <x-slot name="custom_css">
-        
+
         <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
 
     </x-slot>
 
     <x-slot name="custom_js">
-        
+
         <script src="assets/js/chart.min.js"></script>
         {{-- customs --}}
         <script src="assets/js/bundles/echart/echarts.js"></script>
@@ -16,58 +16,61 @@
 
     <section class="content">
         <div class="container-fluid">
-            {{-- <div class="block-header"> --}}
-                {{-- <div class="row">
+            <div class="block-header">
+                <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="breadcrumb breadcrumb-style ">
                             <li class="breadcrumb-item">
                                 <h4 class="page-title">Dashboard</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="index-2.html">
+                                <a href="{{route('dashboard')}}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ul>
                     </div>
-                </div> --}}
-            {{-- </div> --}}
+                </div>
+            </div>
 
             <div class="row">
-                
+
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="dash-widget">
-                        <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-                        <div class="dash-widget-info text-right">
+                    <div class="dash-widget info-box5 ">
+                        <span class="dash-widget-bg1 m-r-35"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+                        <div class="dash-widget-info text-right pull-right m-l-35">
                             <h3>98</h3>
-                            <span class="widget-title1">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="widget-title1">Users <i class="fa fa-check"
+                                    aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="dash-widget">
-                        <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3 ">
+                    <div class="dash-widget info-box5">
+                        <span class="dash-widget-bg2 m-r-20"><i class="fa fa-user-o"></i></span>
                         <div class="dash-widget-info text-right">
                             <h3>1072</h3>
-                            <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="widget-title2">Departments <i class="fa fa-check"
+                                    aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="dash-widget">
-                        <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+                    <div class="dash-widget info-box5">
+                        <span class="dash-widget-bg3 m-r-70"><i class="fa fa-user-md" aria-hidden="true"></i></span>
                         <div class="dash-widget-info text-right">
                             <h3>72</h3>
-                            <span class="widget-title3">Attend <i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="widget-title3">Classes <i class="fa fa-check" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="dash-widget">
-                        <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+                    <div class="dash-widget info-box5">
+                        <span class="dash-widget-bg4 m-r-70"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
                         <div class="dash-widget-info text-right">
                             <h3>618</h3>
-                            <span class="widget-title4">Pending <i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span class="widget-title4">Students <i class="fa fa-check"
+                                    aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </div>
@@ -168,7 +171,8 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Revenue</strong> Report</h2>
+                                <strong>Revenue</strong> Report
+                            </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -200,7 +204,8 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Revenue</strong> Report</h2>
+                                <strong>Revenue</strong> Report
+                            </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -235,7 +240,8 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Project</strong> Details</h2>
+                                <strong>Project</strong> Details
+                            </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -282,7 +288,8 @@
                                                     <li class="avatar avatar-sm"><img class="rounded-circle"
                                                             src="assets/images/user/user3.jpg" alt="user">
                                                     </li>
-                                                    <li class="avatar avatar-sm"><span class="badge">+4</span>
+                                                    <li class="avatar avatar-sm"><span
+                                                            class="badge">+4</span>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -308,7 +315,8 @@
                                                     <li class="avatar avatar-sm"><img class="rounded-circle"
                                                             src="assets/images/user/user5.jpg" alt="user">
                                                     </li>
-                                                    <li class="avatar avatar-sm"><span class="badge">+3</span>
+                                                    <li class="avatar avatar-sm"><span
+                                                            class="badge">+3</span>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -337,7 +345,8 @@
                                                     <li class="avatar avatar-sm"><img class="rounded-circle"
                                                             src="assets/images/user/user3.jpg" alt="user">
                                                     </li>
-                                                    <li class="avatar avatar-sm"><span class="badge">+4</span>
+                                                    <li class="avatar avatar-sm"><span
+                                                            class="badge">+4</span>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -366,7 +375,8 @@
                                                     <li class="avatar avatar-sm"><img class="rounded-circle"
                                                             src="assets/images/user/user8.jpg" alt="user">
                                                     </li>
-                                                    <li class="avatar avatar-sm"><span class="badge">+4</span>
+                                                    <li class="avatar avatar-sm"><span
+                                                            class="badge">+4</span>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -392,7 +402,8 @@
                                                     <li class="avatar avatar-sm"><img class="rounded-circle"
                                                             src="assets/images/user/user9.jpg" alt="user">
                                                     </li>
-                                                    <li class="avatar avatar-sm"><span class="badge">+1</span>
+                                                    <li class="avatar avatar-sm"><span
+                                                            class="badge">+1</span>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -421,7 +432,8 @@
                                                     <li class="avatar avatar-sm"><img class="rounded-circle"
                                                             src="assets/images/user/user8.jpg" alt="user">
                                                     </li>
-                                                    <li class="avatar avatar-sm"><span class="badge">+3</span>
+                                                    <li class="avatar avatar-sm"><span
+                                                            class="badge">+3</span>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -449,7 +461,8 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>TODO </strong>List</h2>
+                                <strong>TODO </strong>List
+                            </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -519,7 +532,8 @@
                                         <div class="form-check m-l-10">
                                             <label class="form-check-label"> <input class="form-check-input"
                                                     type="checkbox" value="">
-                                                Office Picnic <span class="form-check-sign"> <span class="check"></span>
+                                                Office Picnic <span class="form-check-sign"> <span
+                                                        class="check"></span>
                                                 </span>
                                             </label>
                                         </div>
@@ -680,7 +694,8 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Tags</strong> Input</h2>
+                                <strong>Tags</strong> Input
+                            </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -720,4 +735,3 @@
 
     {{-- @endsection --}}
 </x-app-layout>
-

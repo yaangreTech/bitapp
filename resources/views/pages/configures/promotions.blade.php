@@ -1,14 +1,19 @@
-<x-app-layout>
+<x-app-layout filtrage='false'>
     <x-slot name="custom_css">
-        <link href="../../assets/css/form.min.css" rel="stylesheet">
+        <link href="assets/css/form.min.css" rel="stylesheet">
     </x-slot>
 
     <x-slot name="custom_js">
-        <script src="../../assets/js/table.min.js"></script>
-        <script src="../../assets/js/form.min.js"></script>
+        <script src="assets/js/table.min.js"></script>
+        <script src="assets/js/form.min.js"></script>
         <!-- Custom Js -->
-        <script src="../../assets/js/pages/tables/jquery-datatable.js"></script>
-        <script src="../../assets/js/pages/forms/basic-form-elements.js"></script>
+        <script src="assets/js/pages/tables/jquery-datatable.js"></script>
+        <script src="assets/js/pages/forms/basic-form-elements.js"></script>
+
+
+        <script src="../../assets/js/bundles/jquery-steps/jquery.steps.min.js"></script>
+        <!-- Custom Js -->
+        <script src="../../assets/js/pages/forms/form-wizard.js"></script>
     </x-slot>
 
     <section class="content">
@@ -21,7 +26,7 @@
                                 <h4 class="page-title">Promotions</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{route('dashboard')}}">
+                                <a href="{{ route('dashboard') }}"  onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -65,7 +70,8 @@
                             </li>
                         </ul>
                         <div class="newLabelBtn">
-                            <button type="button" class="btn btn-border-radius bg-purple waves-effect">Start new year</button>
+                            <button type="button" data-toggle="modal" data-target="#add_promotion"
+                                class="btn btn-border-radius bg-purple waves-effect">Start new year</button>
                         </div>
                     </div>
                 </div>
@@ -123,7 +129,7 @@
                                             </td>
                                             <td class="center">02-03-2020</td>
                                             <td class="center">
-                                                 Promotion 19
+                                                Promotion 19
                                             </td>
                                             <td class="center">
                                                 <div class="badge col-red">Ended</div>
@@ -149,32 +155,6 @@
                                             </td>
                                             <td class="center"> 02-03-2020</td>
                                             <td class="center">
-                                               Promotion 19
-                                            </td>
-                                            <td class="center">
-                                                <div class="badge col-red">Ended</div>
-                                            </td>
-                                            <td class="center">
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">mode_edit</i>
-                                                </button>
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">delete</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tbl-checkbox">
-                                                <label>
-                                                    <input type="checkbox" />
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td class="">
-                                                02-03-2019
-                                            </td>
-                                            <td class="center">02-03-2020</td>
-                                            <td class="center">
                                                 Promotion 19
                                             </td>
                                             <td class="center">
@@ -215,7 +195,33 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        
+                                        <tr>
+                                            <td class="tbl-checkbox">
+                                                <label>
+                                                    <input type="checkbox" />
+                                                    <span></span>
+                                                </label>
+                                            </td>
+                                            <td class="">
+                                                02-03-2019
+                                            </td>
+                                            <td class="center">02-03-2020</td>
+                                            <td class="center">
+                                                Promotion 19
+                                            </td>
+                                            <td class="center">
+                                                <div class="badge col-red">Ended</div>
+                                            </td>
+                                            <td class="center">
+                                                <button class="btn tblActnBtn">
+                                                    <i class="material-icons">mode_edit</i>
+                                                </button>
+                                                <button class="btn tblActnBtn">
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -224,6 +230,9 @@
                 </div>
             </div>
         </div>
+
+        {{-- forms --}}
+        <x-promotion-form />
     </section>
 
 </x-app-layout>

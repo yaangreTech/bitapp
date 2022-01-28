@@ -1,6 +1,6 @@
-<x-app-layout>
+<x-app-layout filtrage='true'>
     <x-slot name="custom_css">
-        
+
     </x-slot>
 
     <x-slot name="custom_js">
@@ -19,7 +19,7 @@
                                 <h4 class="page-title">Cs1->Certificates</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{ route('dashboard') }}"  onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -42,48 +42,96 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Cs1->Certificates</strong> List</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="#" onClick="return false;">Action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                <strong>Cs1->Certificates</strong> List
+                            </h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table id="chieldRow" class="display" style="width:100%">
+                                <table class="table table-hover js-basic-example contact_list">
                                     <thead>
                                         <tr>
-                                            <th></th>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Salary</th>
+                                            <th class="center">Matricule</th>
+                                            <th class="center"> First name </th>
+                                            <th class="center"> Last Name </th>
+                                            <th class="center"> Birthdate </th>
+                                            <th class="center"> Statut </th>
+                                            <th class="center"> Action </th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
+                                    <tbody>
                                         <tr>
-                                            <th></th>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Salary</th>
+                                            <td class="center">bs0001</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">19/07/2015</td>
+                                            <td class="center">Pass</td>
+                                            <td class="center">
+                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
+                                                    <i class="far fa-file-pdf"></i>
+                                                </a>
+                                            </td>
                                         </tr>
-                                    </tfoot>
+                                        <tr>
+                                            <td class="center">bs0002</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">19/07/2015</td>
+                                            <td class="center">Pass</td>
+                                            <td class="center">
+                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
+                                                    <i class="far fa-file-pdf"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">bs0003</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">19/07/2015</td>
+                                            <td class="center">Pass</td>
+                                            <td class="center">
+                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
+                                                    <i class="far fa-file-pdf"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">bs0004</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">19/07/2015</td>
+                                            <td class="center">Pass</td>
+                                            <td class="center">
+                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
+                                                    <i class="far fa-file-pdf"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">bs0005</td>
+                                            <td class="center">Sanou</td>
+                                            <td class="center">Nangoro</td>
+                                            <td class="center">19/07/2015</td>
+                                            <td class="center">Pass</td>
+                                            <td class="center">
+                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
+                                                    <i class="far fa-file-pdf"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    {{-- <tfoot>
+                                        <tr>
+                                            <th class="center">#</th>
+                                            <th class="center"> Invoice No </th>
+                                            <th class="center"> Date </th>
+                                            <th class="center"> Organization </th>
+                                            <th class="center"> Payment Type </th>
+                                            <th class="center"> Amount </th>
+                                            <th class="center"> Invoice </th>
+                                            <th class="center"> Action </th>
+                                        </tr>
+                                    </tfoot> --}}
                                 </table>
                             </div>
                         </div>

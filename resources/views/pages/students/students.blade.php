@@ -1,20 +1,20 @@
-<x-app-layout>
+<x-app-layout filtrage='true'>
     <x-slot name="custom_css">
         
     </x-slot>
 
     <x-slot name="custom_js">
          <!-- Plugins Js -->
-    <script src="../../assets/js/table.min.js"></script>
+    <script src="assets/js/table.min.js"></script>
     <!-- Custom Js -->
-    <script src="../../assets/js/bundles/export-tables/dataTables.buttons.min.js"></script>
-    <script src="../../assets/js/bundles/export-tables/buttons.flash.min.js"></script>
-    <script src="../../assets/js/bundles/export-tables/jszip.min.js"></script>
-    <script src="../../assets/js/bundles/export-tables/pdfmake.min.js"></script>
-    <script src="../../assets/js/bundles/export-tables/vfs_fonts.js"></script>
-    <script src="../../assets/js/bundles/export-tables/buttons.html5.min.js"></script>
-    <script src="../../assets/js/bundles/export-tables/buttons.print.min.js"></script>
-    <script src="../../assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="assets/js/bundles/export-tables/dataTables.buttons.min.js"></script>
+    <script src="assets/js/bundles/export-tables/buttons.flash.min.js"></script>
+    <script src="assets/js/bundles/export-tables/jszip.min.js"></script>
+    <script src="assets/js/bundles/export-tables/pdfmake.min.js"></script>
+    <script src="assets/js/bundles/export-tables/vfs_fonts.js"></script>
+    <script src="assets/js/bundles/export-tables/buttons.html5.min.js"></script>
+    <script src="assets/js/bundles/export-tables/buttons.print.min.js"></script>
+    <script src="assets/js/pages/tables/jquery-datatable.js"></script>
     <!-- Demo Js -->
     </x-slot>
 
@@ -28,7 +28,7 @@
                                 <h4 class="page-title">CS1</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{ route('dashboard') }}"  onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -60,14 +60,9 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li>
-                                            <a href="#" onClick="return false;">Action</a>
+                                            <a href="{{ route('students_form')}}"  onClick="setActiveId('Add_new_Students');">Add Student</a>
                                         </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Something else here</a>
-                                        </li>
+
                                     </ul>
                                 </li>
                             </ul>
@@ -199,6 +194,10 @@
             </div>
             <!-- #END# Exportable Table -->
         </div>
+
+        {{-- form --}}
+
+        <x-student-form/>
     </section>
     
 </x-app-layout>

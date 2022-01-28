@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="custom_js">
-        <script src="../../assets/js/pages/apps/chat.js"></script>
+        <script src="assets/js/pages/apps/chat.js"></script>
     </x-slot>
 
     

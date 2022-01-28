@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout filtrage='false'>
     <x-slot name="custom_css">
         
     </x-slot>
@@ -17,7 +17,7 @@
                                 <h4 class="page-title">Profile</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{route('dashboard')}}">
+                                <a href="{{route('dashboard')}}"  onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item active">Profile</li>

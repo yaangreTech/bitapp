@@ -12,7 +12,8 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+        
+        <script src="assets/ownjs/localDB.js"></script>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
@@ -22,4 +23,8 @@
             {{ $slot }}
         </div>
     </body>
+
+    <script>
+         currentActivedb.setItem('currentActive', 'Dashboard');
+    </script>
 </html>

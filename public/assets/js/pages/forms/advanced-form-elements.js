@@ -1,6 +1,6 @@
 "use strict";
 $(function() {
-    $(".colorpicker").colorpicker();
+    // $(".colorpicker").colorpicker();
 
     initBasicSelect();
     initGroupSelect();
@@ -49,11 +49,11 @@ $(function() {
     //Mobile Phone Number
     $demoMaskedInput
         .find(".mobile-phone-number")
-        .inputmask("99 (999) 99-99-99-99", { placeholder: "00 (___) __-__-__-__" });
+        .inputmask("00 (999) 99-99-99-99", { placeholder: "00 (___) __-__-__-__" });
     //Phone Number
     $demoMaskedInput
         .find(".phone-number")
-        .inputmask("99 (999) 99-99-99-99", { placeholder: "00 (___) __-__-__-__" });
+        .inputmask("00 (999) 99-99-99-99", { placeholder: "00 (___) __-__-__-__" });
 
     //Dollar Money
     $demoMaskedInput
@@ -80,7 +80,7 @@ $(function() {
     //name
     // $demoMaskedInput.find(".name").inputmask({ alias: "a" });
 
-    // name
+    // ID
     $demoMaskedInput.find(".ID")
         .inputmask("bs99999", { placeholder: "bs_____" });
 

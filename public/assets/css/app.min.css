@@ -4260,7 +4260,7 @@ nav .input-field {
 nav .input-field input {
     height: 100%;
     font-size: 1.2rem;
-    border: 0;
+    border: 1px;
     padding-left: 2rem
 }
 
@@ -4270,7 +4270,7 @@ nav .input-field input[type=password]:valid,
 nav .input-field input[type=email]:valid,
 nav .input-field input[type=url]:valid,
 nav .input-field input[type=date]:valid {
-    border: 0;
+    border: 1px;
     -webkit-box-shadow: none;
     box-shadow: none
 }
@@ -5892,7 +5892,7 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 .chips .input:focus {
-    border: 0 !important;
+    border: 1px !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important
 }
@@ -6007,10 +6007,10 @@ input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
     background-color: transparent;
-    border: 0;
+    border: 1px;
     border-bottom: 1px solid #9e9e9e;
     border-radius: 0;
-    outline: 0;
+    outline: 1px;
     height: 3rem;
     width: 100%;
     font-size: 16px;
@@ -6098,7 +6098,7 @@ input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #26a69a;
+    border: 1px solid #26a69a;
     -webkit-box-shadow: 0 1px 0 0 #26a69a;
     box-shadow: 0 1px 0 0 #26a69a
 }
@@ -6194,7 +6194,7 @@ input.valid[type=search]:not(.browser-default):focus,
 textarea.materialize-textarea.valid,
 textarea.materialize-textarea.valid:focus,
 .select-wrapper.valid>input.select-dropdown {
-    border-bottom: 1px solid #4caf50;
+    border: 1px solid #4caf50;
     -webkit-box-shadow: 0 1px 0 0 #4caf50;
     box-shadow: 0 1px 0 0 #4caf50
 }
@@ -6227,7 +6227,7 @@ textarea.materialize-textarea.invalid,
 textarea.materialize-textarea.invalid:focus,
 .select-wrapper.invalid>input.select-dropdown,
 .select-wrapper.invalid>input.select-dropdown:focus {
-    border-bottom: 1px solid #f44336;
+    border: 1px solid #f44336;
     -webkit-box-shadow: 0 1px 0 0 #f44336;
     box-shadow: 0 1px 0 0 #f44336
 }
@@ -6394,7 +6394,7 @@ textarea.materialize-textarea+label:after,
 
 .input-field.inline input,
 .input-field.inline .select-dropdown {
-    margin-bottom: 1rem
+    margin: 1rem
 }
 
 .input-field.col label {
@@ -7195,7 +7195,7 @@ input[type=range]+.thumb {
 input[type=range] {
     position: relative;
     background-color: transparent;
-    border: 0;
+    border: 1px;
     outline: 0;
     width: 100%;
     margin: 15px 0;

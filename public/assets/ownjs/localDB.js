@@ -1,0 +1,1 @@
+var currentActivedb = window.localStorage;

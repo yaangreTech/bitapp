@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout filtrage='false'>
     <x-slot name="custom_css">
         <link href="assets/css/form.min.css" rel="stylesheet">
     </x-slot>
@@ -13,7 +13,8 @@
         <script src="assets/js/pages/forms/basic-form-elements.js"></script>
 
         <!-- Demo Js -->
-        <script src="../../assets/js/pages/ui/collapse.js"></script>
+        <script src="assets/js/pages/ui/collapse.js"></script>
+        
     </x-slot>
 
     <section class="content">
@@ -26,7 +27,7 @@
                                 <h4 class="page-title">School</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{route('dashboard')}}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -53,17 +54,17 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li>
-                                            <a href="#" onClick="return false;">Action</a>
+                                            <a href="#" onClick="return false;" data-toggle="modal"
+                                                data-target="#add_department">New Departement</a>
                                         </li>
                                         <li>
-                                            <a href="#" onClick="return false;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Something else here</a>
+                                            <a href="#" onClick="return false;" data-toggle="modal"
+                                                data-target="#add_semester">New Semester</a>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
+
                         </div>
                         <div class="body">
                             <!-- Nav tabs -->
@@ -75,17 +76,17 @@
                                 </li>
                                 <li role="presentation">
                                     <a href="#profile_with_icon_title" data-toggle="tab">
-                                        <i class="material-icons">face</i> Semesters
+                                        <i class="material-icons">view_agenda</i> Semesters
                                     </a>
                                 </li>
                                 <li role="presentation">
                                     <a href="#messages_with_icon_title" data-toggle="tab">
-                                        <i class="material-icons">email</i> Classes
+                                        <i class="material-icons">class</i> Classes
                                     </a>
                                 </li>
                                 <li role="presentation">
                                     <a href="#settings_with_icon_title" data-toggle="tab">
-                                        <i class="material-icons">settings</i> Modulus
+                                        <i class="material-icons">view_module</i> Modulus
                                     </a>
                                 </li>
                             </ul>
@@ -94,6 +95,9 @@
 
                                 {{-- for departments --}}
                                 <div role="tabpanel" class="tab-pane fade in active show" id="home_with_icon_title">
+
+
+
                                     <div class="table-responsive">
                                         <table class="table table-hover js-basic-example contact_list">
                                             <thead>
@@ -250,6 +254,7 @@
 
                                 {{-- For semesters --}}
                                 <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
+
                                     <div class="table-responsive">
                                         <table class="table table-hover js-basic-example contact_list">
                                             <thead>
@@ -403,7 +408,9 @@
                                                                                         <i
                                                                                             class="material-icons">autorenew</i>
                                                                                     </a>
-                                                                                    <a href="#"
+                                                                                    <a href="#" onClick="return false;"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#add_class"
                                                                                         class="col-dark-gray waves-effect m-r-20"
                                                                                         title="add new">
                                                                                         <i
@@ -548,16 +555,16 @@
                                                                         <li>
                                                                             <a href="#" title="Sent">CS2
                                                                                 <span
-                                                                                class="pull-right badge bg-orange">4</span>
+                                                                                    class="pull-right badge bg-orange">4</span>
                                                                             </a>
-                                                                            
+
                                                                         </li>
                                                                         <li>
                                                                             <a href="#;" title="Draft">CS3
                                                                                 <span
-                                                                                class="pull-right badge bg-orange">4</span>
+                                                                                    class="pull-right badge bg-orange">4</span>
                                                                             </a>
-                                                                            
+
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -579,16 +586,16 @@
                                                                         <li>
                                                                             <a href="#" title="EE2">EE2
                                                                                 <span
-                                                                                class="pull-right badge bg-orange">3</span>
+                                                                                    class="pull-right badge bg-orange">3</span>
                                                                             </a>
-                                                                            
+
                                                                         </li>
                                                                         <li>
                                                                             <a href="#;" title="EE3">EE3
                                                                                 <span
-                                                                                class="pull-right badge bg-orange">3</span>
+                                                                                    class="pull-right badge bg-orange">3</span>
                                                                             </a>
-                                                                            
+
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -655,7 +662,9 @@
                                                                                         <i
                                                                                             class="material-icons">autorenew</i>
                                                                                     </a>
-                                                                                    <a href="#"
+                                                                                    <a href="#" onClick="return false;"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#add_modulus"
                                                                                         class="col-dark-gray waves-effect m-r-20"
                                                                                         title="add new">
                                                                                         <i
@@ -803,5 +812,11 @@
             </div>
             <!-- #END# Tabs With Icon Title -->
         </div>
+
+        {{-- forms --}}
+        <x-department-form />
+        <x-semester-form />
+        <x-class-form />
+        <x-modulus-form />
     </section>
 </x-app-layout>

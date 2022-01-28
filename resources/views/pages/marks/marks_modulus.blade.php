@@ -1,10 +1,14 @@
-<x-app-layout>
+<x-app-layout filtrage='false'>
     <x-slot name="custom_css">
 
     </x-slot>
 
     <x-slot name="custom_js">
-        {{-- <script src="../../assets/js/pages/apps/chat.js"></script> --}}
+        <script src="assets/js/table.min.js"></script>
+        <script src="assets/js/form.min.js"></script>
+        <!-- Custom Js -->
+        <script src="assets/js/pages/tables/jquery-datatable.js"></script>
+        <script src="assets/js/pages/forms/basic-form-elements.js"></script>
     </x-slot>
 
 
@@ -18,7 +22,7 @@
                                 <h4 class="page-title">CS1->S1</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{ route('dashboard') }}"  onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -43,28 +47,6 @@
                         <h2>
                             <strong>Cs1->S1</strong> Modulus
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                    role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="#" onClick="return false;" class=" waves-effect waves-block">Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;" class=" waves-effect waves-block">Another
-                                            action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick="return false;" class=" waves-effect waves-block">Something
-                                            else
-                                            here</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <hr>
                     <div class="body">
@@ -104,14 +86,12 @@
                                                         </a>
                                                         <ul class="dropdown-menu pull-right">
                                                             <li>
-                                                                <a href="#" onClick="return false;">Tests</a>
+                                                                <a href="#" data-toggle="modal" data-target="#test_list" onClick="return false;">Tests</a>
                                                             </li>
                                                                        <li>
                                                                 <a href="{{route('add_marks')}}" onClick="return true;">Fill marks</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="#" onClick="return false;">action 1</a>
-                                                            </li>
+
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -150,14 +130,12 @@
                                                         </a>
                                                         <ul class="dropdown-menu pull-right">
                                                             <li>
-                                                                <a href="#" onClick="return false;">Tests</a>
+                                                                <a href="#" data-toggle="modal" data-target="#test_list" onClick="return false;">Tests</a>
                                                             </li>
-                                                            <li>
+                                                                       <li>
                                                                 <a href="{{route('add_marks')}}" onClick="return true;">Fill marks</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="#" onClick="return false;">action 1</a>
-                                                            </li>
+
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -196,14 +174,12 @@
                                                         </a>
                                                         <ul class="dropdown-menu pull-right">
                                                             <li>
-                                                                <a href="#" onClick="return false;">Tests</a>
+                                                                <a href="#" data-toggle="modal" data-target="#test_list" onClick="return false;">Tests</a>
                                                             </li>
-                                                            <li>
+                                                                       <li>
                                                                 <a href="{{route('add_marks')}}" onClick="return true;">Fill marks</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="#" onClick="return false;">action 1</a>
-                                                            </li>
+
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -243,14 +219,12 @@
                                                         </a>
                                                         <ul class="dropdown-menu pull-right">
                                                             <li>
-                                                                <a href="#" onClick="return false;">Tests</a>
+                                                                <a href="#" data-toggle="modal" data-target="#test_list" onClick="return false;">Tests</a>
                                                             </li>
-                                                            <li>
+                                                                       <li>
                                                                 <a href="{{route('add_marks')}}" onClick="return true;">Fill marks</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="#" onClick="return false;">action 1</a>
-                                                            </li>
+
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -266,4 +240,6 @@
         </div>
     </section>
 
+    {{-- form --}}
+    <x-test-form/>
 </x-app-layout>

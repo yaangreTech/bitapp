@@ -1,10 +1,17 @@
-<x-app-layout>
+<x-app-layout filtrage='false'>
     <x-slot name="custom_css">
-        
+
     </x-slot>
 
     <x-slot name="custom_js">
-        <script src="../../assets/js/pages/apps/chat.js"></script>
+        <script src="assets/js/pages/apps/chat.js"></script>
+
+        <script src="assets/js/form.min.js"></script>
+        <!-- Custom Js -->
+        <script src="assets/js/pages/forms/basic-form-elements.js"></script>
+        <script src="../../assets/js/bundles/jquery-steps/jquery.steps.min.js"></script>
+        <!-- Custom Js -->
+        <script src="../../assets/js/pages/forms/form-wizard.js"></script>
     </x-slot>
 
     <section class="content">
@@ -17,7 +24,7 @@
                                 <h4 class="page-title">Users</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{route('dashboard')}}">
+                                <a href="{{route('dashboard')}}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -37,7 +44,8 @@
                         <div class="header">
                             <div class="col-xs-12 col-sm-6">
                                 <h2>
-                                    <strong>Users</strong> List</h2>
+                                    <strong>Users</strong> List
+                                </h2>
                             </div>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -47,14 +55,10 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li>
-                                            <a href="#" onClick="return false;">Action</a>
+                                            <a href="#" data-toggle="modal" data-target="#add_user"
+                                                onClick="return false;">Add user</a>
                                         </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Something else here</a>
-                                        </li>
+
                                     </ul>
                                 </li>
                             </ul>
@@ -79,8 +83,10 @@
                                                         <i class="material-icons">phone</i>264-625-2583</span>
                                                 </div>
                                                 <div class="profile-userbuttons">
-                                                   
-                                <button type="button" class="btn btn-outline-info btn-border-radius">Settings</button>
+
+                                                    <button type="button" data-toggle="modal" data-target="#add_user"
+                                                        class="btn btn-outline-info btn-border-radius">Change
+                                                        right</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -104,8 +110,10 @@
                                                         <i class="material-icons">phone</i>264-625-2583</span>
                                                 </div>
                                                 <div class="profile-userbuttons">
-                                                 
-                                <button type="button" class="btn btn-outline-info btn-border-radius">Settings</button>
+
+                                                    <button type="button" data-toggle="modal" data-target="#add_user"
+                                                        class="btn btn-outline-info btn-border-radius">Change
+                                                        right</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,8 +137,10 @@
                                                         <i class="material-icons">phone</i>264-625-2583</span>
                                                 </div>
                                                 <div class="profile-userbuttons">
-                                                    
-                                <button type="button" class="btn btn-outline-info btn-border-radius">Settings</button>
+
+                                                    <button type="button" data-toggle="modal" data-target="#add_user"
+                                                        class="btn btn-outline-info btn-border-radius">Change
+                                                        right</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,5 +152,8 @@
                 </div>
             </div>
         </div>
+
+        {{-- forms --}}
+        <x-user-form />
     </section>
 </x-app-layout>
