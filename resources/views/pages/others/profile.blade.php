@@ -32,19 +32,19 @@
                         <div class="m-b-20">
                             <div class="contact-grid">
                                 <div class="profile-header bg-dark">
-                                    <div class="user-name">Sanou Lougoudoro</div>
-                                    <div class="name-center">@lougoudoro</div>
+                                    <div class="user-name">{{Auth::user()->firstname.' '.Auth::user()->lastname}}</div>
+                                    <div class="name-center">{{Auth::user()->email}}</div>
                                 </div>
-                                <img src="../../assets/images/user/lougb3.png" class="user-img" alt="">
+                                <img src="assets/images/user/lougb3.png" class="user-img" alt="">
                                 <p>
-                                    Super admin
+                                    {{Auth::user()->right->label}}
                                     <br />since 2021
                                 </p>
                                 <div>
                                     <span class="phone">
-                                        <i class="material-icons">phone</i>+226 56-80-96-35</span>
+                                        <i class="material-icons">phone</i>{{Auth::user()->phone}}</span>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-4">
                                         <h5>564</h5>
                                         <small>Following</small>
@@ -57,7 +57,7 @@
                                         <h5>565</h5>
                                         <small>Post</small>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -90,27 +90,27 @@
                                                 <div class="col-md-4 col-6 b-r">
                                                     <strong>First Name</strong>
                                                     <br>
-                                                    <p class="text-muted">Sanou</p>
+                                                    <p class="text-muted">{{Auth::user()->firstname}}</p>
                                                 </div>
                                                 <div class="col-md-4 col-6 b-r">
                                                     <strong>Last Name</strong>
                                                     <br>
-                                                    <p class="text-muted">Lougoudoro</p>
+                                                    <p class="text-muted">{{Auth::user()->lastname}}</p>
                                                 </div>
                                                 <div class="col-md-4 col-6 b-r">
                                                     <strong>Mobile</strong>
                                                     <br>
-                                                    <p class="text-muted">(123) 456 7890</p>
+                                                    <p class="text-muted">{{Auth::user()->phone!=null ? Auth::user()->phone :'---'}}</p>
                                                 </div>
                                                 <div class="col-md-12 col-6 b-r">
                                                     <strong>Email</strong>
                                                     <br>
-                                                    <p class="text-muted">johndeo@example.com</p>
+                                                    <p class="text-muted">{{Auth::user()->email}}</p>
                                                 </div>
                                                 <div class="col-md-12 col-6">
                                                     <strong>Right</strong>
                                                     <br>
-                                                    <p class="text-muted">Super admin of BitApp</p>
+                                                    <p class="text-muted">{{Auth::user()->right->label}} of BitApp</p>
                                                 </div>
                                             </div>
                                           <br>
@@ -128,22 +128,31 @@
                                     <h2>
                                         <strong>Account</strong> Settings</h2>
                                 </div>
+                                
+                                <form id="update_profile">
                                 <div class="body">
                                     <div class="row clearfix">
+                                          @csrf
                                         <div class="col-lg-6 col-md-12">
                                             <b>First name</b>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Sanou"  value="Sanou">
+                                                <input type="text" name="firstname" class="form-control" placeholder="Sanou"  value="{{Auth::user()->firstname}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12">
-                                            <b>First name</b>
+                                            <b>last name</b>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Lougoudoro" value="Lougoudoro">
+                                                <input type="text" name="lastname" class="form-control" placeholder="Lougoudoro" value="{{Auth::user()->lastname}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <b>Phone</b>
+                                            <div class="form-group">
+                                                <input type="text" name="phone" class="form-control" placeholder="----" value="{{Auth::user()->phone}}">
                                             </div>
                                         </div>
                                         
-                                        <div class="col-md-12">
+                                        {{-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-check m-l-10">
                                                     <label class="form-check-label">
@@ -155,12 +164,14 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-12">
-                                            <button class="btn btn-primary btn-round">Save Changes</button>
+                                            <button id="{{Auth::user()->id}}" onclick="modifier('/profile/'+this.id,'update_profile',null)" class="btn btn-primary btn-round">Save Changes</button>
                                         </div>
+                                      
                                     </div>
                                 </div>
+                            </form>
                             </div>
                         </div>
                     </div>

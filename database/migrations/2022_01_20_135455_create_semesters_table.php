@@ -18,6 +18,7 @@ class CreateSemestersTable extends Migration
             $table->foreignId('classe_id')->constrained()->onDelete('cascade');
             $table->foreignId('semestre_name_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

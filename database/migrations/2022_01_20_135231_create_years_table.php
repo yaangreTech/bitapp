@@ -16,9 +16,10 @@ class CreateYearsTable extends Migration
         Schema::create('years', function (Blueprint $table) {
             $table->id();
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

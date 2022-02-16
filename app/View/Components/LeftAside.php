@@ -2,7 +2,9 @@
 
 namespace App\View\Components;
 
+use App\Models\Departement;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Auth;
 
 class LeftAside extends Component
 {
@@ -11,9 +13,27 @@ class LeftAside extends Component
      *
      * @return void
      */
+
+     public $departements;
+
     public function __construct()
     {
         //
+        switch (Auth::user()->right->title) {
+            case 'isAdmin':
+                $this->departements =Departement::all();
+                break;
+            case 'isHd':
+                $manage=Auth::user()->manage;   
+                 $this->departements =Departement::where('id','=',$manage->departement_id)->get();
+                break;
+              default:
+                 $this->departements =Array(); 
+              break; 
+
+            
+        }
+
     }
 
     /**

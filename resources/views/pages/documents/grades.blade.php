@@ -1,12 +1,19 @@
 <x-app-layout filtrage='true'>
     <x-slot name="custom_css">
-        
+
     </x-slot>
 
     <x-slot name="custom_js">
         <script src="assets/js/table.min.js"></script>
         <!-- Custom Js -->
         <script src="assets/js/pages/tables/jquery-datatable.js"></script>
+        <script src="assets/ajax/transcript_ajax.js"></script>
+
+        <script>
+            var grade_transcript = JSON.parse(currentActivedb.getItem('grade_transcript'));
+            console.log(grade_transcript);
+            getTranscriptOf(grade_transcript.year, grade_transcript.classID)
+        </script>
     </x-slot>
 
     <section class="content">
@@ -19,7 +26,7 @@
                                 <h4 class="page-title">Cs1->Grade transcripts</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{ route('dashboard') }}"  onClick="setActiveId('Dashboard')">
+                                <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -46,7 +53,7 @@
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table class="table table-hover js-basic-example contact_list">
+                                <table id="grade_transcript_table" class="table table-hover  contact_list">
                                     <thead>
                                         <tr>
                                             <th class="center">Matricule</th>
@@ -58,8 +65,8 @@
                                             <th class="center"> Action </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
+                                    <tbody id="grade_transcript">
+                                        {{-- <tr>
                                             <td class="center">bs0001</td>
                                             <td class="center">Sanou</td>
                                             <td class="center">Nangoro</td>
@@ -67,63 +74,11 @@
                                             <td class="center">A</td>
                                             <td class="center">Pass</td>
                                             <td class="center">
-                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
+                                                <a class="invoice" href="{{ route('grades_view') }}">
                                                     <i class="far fa-file-pdf"></i>
                                                 </a>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">bs0002</td>
-                                            <td class="center">Sanou</td>
-                                            <td class="center">Nangoro</td>
-                                            <td class="center">14.78</td>
-                                            <td class="center">A</td>
-                                            <td class="center">Pass</td>
-                                            <td class="center">
-                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
-                                                    <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">bs0003</td>
-                                            <td class="center">Sanou</td>
-                                            <td class="center">Nangoro</td>
-                                            <td class="center">14.78</td>
-                                            <td class="center">A</td>
-                                            <td class="center">Pass</td>
-                                            <td class="center">
-                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
-                                                    <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">bs0004</td>
-                                            <td class="center">Sanou</td>
-                                            <td class="center">Nangoro</td>
-                                            <td class="center">14.78</td>
-                                            <td class="center">A</td>
-                                            <td class="center">Pass</td>
-                                            <td class="center">
-                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
-                                                    <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">bs0005</td>
-                                            <td class="center">Sanou</td>
-                                            <td class="center">Nangoro</td>
-                                            <td class="center">14.78</td>
-                                            <td class="center">A</td>
-                                            <td class="center">Pass</td>
-                                            <td class="center">
-                                                <a class="invoice" href="../../assets/images/test.pdf" target="_blank">
-                                                    <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                     {{-- <tfoot>
                                         <tr>

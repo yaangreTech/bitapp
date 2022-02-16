@@ -2,10 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Mark;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Test extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
+
+
+    protected $fillable = [
+        'test_type',
+'test_label',
+'test_ration',
+    ];
+
+    public function marks(){
+        return $this->hasMany(Mark::class);
+    }
+
+    public function markOf($inscID){
+        $inscID = intval($inscID);
+        $fp = fopen('lidn.txt', 'a');
+        fwrite($fp,  $inscID.'==== '.$this->hasOne(Mark::class)->where('inscription_id',$inscID)->first());
+        fclose($fp);
+        return $this->hasOne(Mark::class)->where('inscription_id',$inscID)->first();
+    }
+
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
 }

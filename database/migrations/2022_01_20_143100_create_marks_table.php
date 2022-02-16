@@ -19,6 +19,7 @@ class CreateMarksTable extends Migration
             $table->foreignId('inscription_id')->constrained()->onDelete('cascade');
             $table->double('value');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

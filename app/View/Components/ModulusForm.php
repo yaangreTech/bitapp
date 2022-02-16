@@ -2,10 +2,12 @@
 
 namespace App\View\Components;
 
+use App\Models\Departement;
 use Illuminate\View\Component;
 
 class ModulusForm extends Component
 {
+    public $departements;
     /**
      * Create a new component instance.
      *
@@ -14,6 +16,7 @@ class ModulusForm extends Component
     public function __construct()
     {
         //
+        $this-> departements =Departement::all();
     }
 
     /**

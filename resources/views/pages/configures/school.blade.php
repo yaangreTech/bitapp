@@ -2,21 +2,6 @@
     <x-slot name="custom_css">
         <link href="assets/css/form.min.css" rel="stylesheet">
     </x-slot>
-
-    <x-slot name="custom_js">
-        <script src="assets/js/table.min.js"></script>
-        <!-- Custom Js -->
-        <script src="assets/js/pages/tables/jquery-datatable.js"></script>
-        <script src="assets/js/form.min.js"></script>
-        <!-- Custom Js -->
-        <script src="assets/js/pages/apps/chat.js"></script>
-        <script src="assets/js/pages/forms/basic-form-elements.js"></script>
-
-        <!-- Demo Js -->
-        <script src="assets/js/pages/ui/collapse.js"></script>
-        
-    </x-slot>
-
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
@@ -27,7 +12,7 @@
                                 <h4 class="page-title">School</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{route('dashboard')}}" onClick="setActiveId('Dashboard')">
+                                <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -40,339 +25,219 @@
             </div>
             <!-- Tabs With Icon Title -->
             <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class=" col-md-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>
-                                <strong>School</strong> Configuration
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="#" onClick="return false;" data-toggle="modal"
-                                                data-target="#add_department">New Departement</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;" data-toggle="modal"
-                                                data-target="#add_semester">New Semester</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-
+                        <div class="profile-tab-box">
+                            <div class="p-l-20">
+                                <ul class="nav ">
+                                    <li class="nav-item tab-all">
+                                        <a class="nav-link active show" href="#m_Departements"
+                                            data-toggle="tab">Departements Settings</a>
+                                    </li>
+                                    <li class="nav-item tab-all">
+                                        <a class="nav-link" href="#m_branches"
+                                            data-toggle="tab">Branches Settings</a>
+                                    </li>
+                                    <li class="nav-item tab-all p-l-20">
+                                        <a class="nav-link" href="#m_Semesters" data-toggle="tab">Semesters
+                                            Settings</a>
+                                    </li>
+                                    <li class="nav-item tab-all">
+                                        <a class="nav-link" href="#m_Classes" data-toggle="tab">Classes
+                                            Settings</a>
+                                    </li>
+                                    <li class="nav-item tab-all p-l-20">
+                                        <a class="nav-link" href="#m_TU" data-toggle="tab">TU Settings</a>
+                                    </li>
+                                    <li class="nav-item tab-all p-l-20">
+                                        <a class="nav-link" href="#m_Modulus" data-toggle="tab">Modulus
+                                            Settings</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="body">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation">
-                                    <a href="#home_with_icon_title" data-toggle="tab" class="active show">
-                                        <i class="material-icons">home</i> Departments
-                                    </a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#profile_with_icon_title" data-toggle="tab">
-                                        <i class="material-icons">view_agenda</i> Semesters
-                                    </a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#messages_with_icon_title" data-toggle="tab">
-                                        <i class="material-icons">class</i> Classes
-                                    </a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#settings_with_icon_title" data-toggle="tab">
-                                        <i class="material-icons">view_module</i> Modulus
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-
-                                {{-- for departments --}}
-                                <div role="tabpanel" class="tab-pane fade in active show" id="home_with_icon_title">
-
-
-
-                                    <div class="table-responsive">
-                                        <table class="table table-hover js-basic-example contact_list">
-                                            <thead>
-                                                <tr>
-                                                    <th class=""> Departement Name </th>
-                                                    <th class=""> Classes </th>
-                                                    <th class=""> Created at </th>
-                                                    <th class=""> Actual Team </th>
-                                                    <th class=""> Status </th>
-                                                    <th class=""> Progress</th>
-                                                    <th class=""> Action </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="odd gradeX">
-                                                    <td class="">Computer Science</td>
-                                                    <td class=""><span class="badge bg-white">3
-                                                            Classes</span></td>
-                                                    <td class="">11-10-2018</td>
-                                                    <td class="text-truncate ">
-                                                        <ul class="list-unstyled order-list">
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <span class="badge">+2</span>
-                                                            </li>
-                                                        </ul>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="badge col-green">Active</div>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="progress-xs not-rounded progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                role="progressbar" aria-valuenow="25" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: 25%">
-                                                                <span class="sr-only">25%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="center">
-                                                        <a href="#" class="btn btn-tbl-edit">
-                                                            <i class="material-icons">create</i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-tbl-delete">
-                                                            <i class="material-icons">delete_forever</i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td class="">Electrical Engineering</td>
-                                                    <td class=""><span class="badge bg-white">3
-                                                            Classes</span></td>
-                                                    <td class="">02-03-2019</td>
-                                                    <td class="text-truncate ">
-                                                        <ul class="list-unstyled order-list">
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <span class="badge">+4</span>
-                                                            </li>
-                                                        </ul>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="badge col-orange">Pending</div>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="progress-xs not-rounded progress">
-                                                            <div class="progress-bar progress-bar-warning"
-                                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: 40%">
-                                                                <span class="sr-only">40%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="center">
-                                                        <a href="#" class="btn btn-tbl-edit">
-                                                            <i class="material-icons">create</i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-tbl-delete">
-                                                            <i class="material-icons">delete_forever</i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td class="">Mechanical Engineering</td>
-                                                    <td class=""><span class="badge bg-white">3
-                                                            Classes</span></td>
-                                                    <td class="">18-12-2018</td>
-                                                    <td class="text-truncate ">
-                                                        <ul class="list-unstyled order-list">
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <img class="rounded-circle"
-                                                                    src="assets/images/user/loug.png" alt="user">
-                                                            </li>
-                                                            <li class="avatar avatar-sm">
-                                                                <span class="badge">+7</span>
-                                                            </li>
-                                                        </ul>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="badge col-green">Active</div>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="progress-xs not-rounded progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                role="progressbar" aria-valuenow="56" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: 56%">
-                                                                <span class="sr-only">56%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="center">
-                                                        <a href="#" class="btn btn-tbl-edit">
-                                                            <i class="material-icons">create</i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-tbl-delete">
-                                                            <i class="material-icons">delete_forever</i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                    </div>
+                    <div class="tab-content">
+                        {{-- departments views --}}
+                        <div role="tabpanel" class="tab-pane active" id="m_Departements" aria-expanded="true">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card project_widget">
+                                        <div class="header">
+                                            <h2><strong>Departements </strong>Settings</h2>
+                                            <ul class="header-dropdown m-r--5">
+                                                <button data-toggle="modal" data-target="#add_department" type="button"
+                                                    class="btn  btn-outline-info initier">
+                                                    <i class="material-icons">
+                                                        add_circle_outline</i>
+                                                    <span>new Departement</span>
+                                                </button>
+                                            </ul>
+                                        </div>
+                                        <div class="body">
+                                            <div class="table-responsive">
+                                                <table id="departement_table" class="table table-hover  ">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class=""> Departement Name </th>
+                                                            <th class=""> Branches </th>
+                                                            <th class=""> Created at </th>
+                                                            <th class=""> Actual Team </th>
+                                                            <th class=""> Status </th>
+                                                            {{-- <th class=""> Configuration</th> --}}
+                                                            <th class=""> Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="department_body">
+                                                        {{-- <tr>
+                                                            <td>d</td>
+                                                            <td>d</td>
+                                                            <td>d</td>
+                                                            <td>c</td>
+                                                            <td>c</td>
+                                                            <td>c</td>
+                                                            <td>c</td>
+                                                        </tr> --}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <br>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {{-- For semesters --}}
-                                <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
+                            </div>
+                        </div>
 
+                        {{-- branches view --}}
+                        <div role="tabpanel" class="tab-pane" id="m_branches" aria-expanded="false">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card project_widget">
+                                        <div class="header">
+                                            <h2><strong>Branches </strong>Settings</h2>
+                                            <ul class="header-dropdown m-r--5">
+                                                <button data-toggle="modal" data-target="#add_branch" type="button"
+                                                    class="btn  btn-outline-info initier">
+                                                    <i class="material-icons">
+                                                        add_circle_outline</i>
+                                                    <span>new Branch</span>
+                                                </button>
+                                            </ul>
+                                        </div>
+                                        <div class="body">
+                                            <div class="table-responsive">
+                                                <table id="branches_table" class="table table-hover  ">
+                                                    {{-- <thead>
+                                                        <tr>
+                                                            <th class=""> Departement Name </th>
+                                                            <th class=""> Classes </th>
+                                                            <th class=""> Created at </th>
+                                                            <th class=""> Actual Team </th>
+                                                            <th class=""> Status </th>
+                                                            <th class=""> Action </th>
+                                                        </tr>
+                                                    </thead> --}}
+                                                    <tbody id="branches_body">
+                                                        {{-- <tr>
+                                                            <td>d</td>
+                                                            <td>d</td>
+                                                            <td>d</td>
+                                                            <td>c</td>
+                                                            <td>c</td>
+                                                            <td>c</td>
+                                                            <td>c</td>
+                                                        </tr> --}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {{-- semesters view --}}
+                        <div role="tabpanel" class="tab-pane" id="m_Semesters" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        <strong>Semesters</strong> Settings
+                                    </h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <button data-toggle="modal" data-target="#add_semester" type="button"
+                                            class="btn  btn-outline-info initier">
+                                            <i class="material-icons">
+                                                add_circle_outline</i>
+                                            <span>new semester</span>
+                                        </button>
+                                    </ul>
+                                </div>
+                                <div class="body">
                                     <div class="table-responsive">
-                                        <table class="table table-hover js-basic-example contact_list">
+                                        <table id="semester_table" class="table table-hover  contact_list">
                                             <thead>
                                                 <tr>
                                                     <th class=""> Semester </th>
-                                                    <th class=""> Modulus </th>
+                                                    <th class=""> Classes </th>
                                                     <th class=""> Status </th>
-                                                    <th class=""> Progress</th>
+                                                    {{-- <th class=""> Progress</th> --}}
                                                     <th class=""> Action </th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr class="odd gradeX">
-                                                    <td class="">Semester 1</td>
-                                                    <td class=""><span class="badge bg-teal">10
-                                                            Modulus</span></td>
-                                                    <td class="">
-                                                        <div class="badge col-green">Active</div>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="progress-xs not-rounded progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                role="progressbar" aria-valuenow="25" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: 25%">
-                                                                <span class="sr-only">25%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="center">
-                                                        <a href="#" class="btn btn-tbl-edit">
-                                                            <i class="material-icons">create</i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-tbl-delete">
-                                                            <i class="material-icons">delete_forever</i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td class="">Semester 2</td>
-                                                    <td class=""><span class="badge bg-teal">10
-                                                            Modulus</span></td>
-                                                    <td class="">
-                                                        <div class="badge col-orange">Pending</div>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="progress-xs not-rounded progress">
-                                                            <div class="progress-bar progress-bar-warning"
-                                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: 40%">
-                                                                <span class="sr-only">40%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="center">
-                                                        <a href="#" class="btn btn-tbl-edit">
-                                                            <i class="material-icons">create</i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-tbl-delete">
-                                                            <i class="material-icons">delete_forever</i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td class="">Semester 3</td>
-                                                    <td class=""><span class="badge bg-teal">10
-                                                            Modulus</span></td>
-                                                    <td class="">
-                                                        <div class="badge col-green">Active</div>
-                                                    </td>
-                                                    <td class="">
-                                                        <div class="progress-xs not-rounded progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                role="progressbar" aria-valuenow="56" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: 56%">
-                                                                <span class="sr-only">56%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="center">
-                                                        <a href="#" class="btn btn-tbl-edit">
-                                                            <i class="material-icons">create</i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-tbl-delete">
-                                                            <i class="material-icons">delete_forever</i>
-                                                        </a>
-                                                    </td>
+                                            <tbody id='semester_body'>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
 
-                                {{-- For classes --}}
-                                <div role="tabpanel" class="tab-pane fade" id="messages_with_icon_title">
+                            </div>
+                        </div>
+
+                        {{-- classes view --}}
+                        <div role="tabpanel" class="tab-pane" id="m_Classes" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        <strong>Classes</strong> Settings
+                                    </h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <button data-toggle="modal" data-target="#add_class" type="button"
+                                            class="btn  btn-outline-info initier">
+                                            <i class="material-icons">
+                                                add_circle_outline</i>
+                                            <span>new classe</span>
+                                        </button>
+                                    </ul>
+                                </div>
+                                <div class="body">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <div class="card">
                                                 <div class="body">
                                                     <div id="mail-nav">
                                                         <h3 type="button" class="">Departements</h3>
-                                                        <ul class="" id="mail-folders">
+                                                        <ul class="classes_departments" id="mail-folders">
+
+                                                            {{-- @forelse ($shool_departments as $shool_department)
                                                             <li class="active">
-                                                                <a href="#" title="Computer Science">Computer Science
+                                                                <a href="#" title="Computer Science">{{$shool_department->name}}
                                                                     <span class="pull-right badge bg-orange">3</span>
                                                                 </a>
-                                                            </li>
-                                                            <li class="">
-                                                                <a href="#" title="Electrical Engineering">Electrical
-                                                                    Engineering
-                                                                    <span class="pull-right badge bg-orange">3</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="">
-                                                                <a href="#" title="Mechanical Engineering">Mechanical
-                                                                    Engineering
-                                                                    <span class="pull-right badge bg-orange">3</span>
-                                                                </a>
-                                                            </li>
+                                                            </li> 
+                                                            @empty
+                                                                <div>Acun departement</div>
+                                                            @endforelse --}}
+
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -382,251 +247,50 @@
                                             <div class="card">
                                                 <div class="boxs mail_listing">
                                                     <div class="inbox-center table-responsive">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="text-center">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </th>
-                                                                    <th colspan="3">
-                                                                        <div class="inbox-header">
-                                                                            <div class="mail-option no-pad-left">
-                                                                                <div class="email-btn-group m-l-15">
+                                                        <table 
+                                                        {{-- id="classe_table"  --}}
+                                                        class="table table-hover">
+                                                            <tbody id="classe_body">
 
-                                                                                    <a href="#"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="Delete">
-                                                                                        <i
-                                                                                            class="material-icons">delete</i>
-                                                                                    </a>
-                                                                                    <a href="#"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="refresh">
-                                                                                        <i
-                                                                                            class="material-icons">autorenew</i>
-                                                                                    </a>
-                                                                                    <a href="#" onClick="return false;"
-                                                                                        data-toggle="modal"
-                                                                                        data-target="#add_class"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="add new">
-                                                                                        <i
-                                                                                            class="material-icons">add_circle</i>
-                                                                                    </a>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </th>
-                                                                    <th class="hidden-xs" colspan="2">
-                                                                        <div class="pull-right">
-                                                                            <div class="email-btn-group m-l-15">
-                                                                                <a href="#"
-                                                                                    class="col-dark-gray waves-effect m-r-20"
-                                                                                    title="back">
-                                                                                    <i
-                                                                                        class="material-icons">navigate_before</i>
-                                                                                </a>
-                                                                                <a href="#"
-                                                                                    class="col-dark-gray waves-effect m-r-20"
-                                                                                    title="Archive">
-                                                                                    <i
-                                                                                        class="material-icons">navigate_next</i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="unread">
-                                                                    <td class="tbl-checkbox">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </td>
-                                                                    <td class="hidden-xs">CS1</td>
-                                                                    <td class="max-texts">
-                                                                        <a href="#">
-                                                                            <span
-                                                                                class="label l-bg-purple shadow-style m-r-10">30</span>
-                                                                            Students</a>
-                                                                    </td>
-                                                                    <td class="hidden-xs">
-                                                                        <div class="badge col-green">Active</div>
-                                                                    </td>
-                                                                    <td class="text-right"><span
-                                                                            class="badge bg-teal">5 Modulus</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="unread">
-                                                                    <td class="tbl-checkbox">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </td>
-                                                                    <td class="hidden-xs">CS2</td>
-                                                                    <td class="max-texts">
-                                                                        <a href="#">
-                                                                            <span
-                                                                                class="label l-bg-purple shadow-style m-r-10">35</span>
-                                                                            Students</a>
-                                                                    </td>
-                                                                    <td class="hidden-xs">
-                                                                        <div class="badge col-green">Active</div>
-                                                                    </td>
-                                                                    <td class="text-right"> <span
-                                                                            class="badge bg-teal">5 Modulus</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="unread">
-                                                                    <td class="tbl-checkbox">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </td>
-                                                                    <td class="hidden-xs">CS3</td>
-                                                                    <td class="max-texts">
-                                                                        <a href="#">
-                                                                            <span
-                                                                                class="label l-bg-purple shadow-style m-r-10">50</span>
-                                                                            Students</a>
-                                                                    </td>
-                                                                    <td class="hidden-xs">
-                                                                        <div class="badge col-green">Active</div>
-                                                                    </td>
-                                                                    <td class="text-right"> <span
-                                                                            class="badge bg-teal">5 Modulus</span>
-                                                                    </td>
-                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-7 ">
-                                                            <p class="p-15">Showing 1 - 4 of 4</p>
-                                                        </div>
-                                                        <div class="col-sm-5 text-right">
-                                                            <div class="pull-right p-15">
-                                                                <button type="button" class="btn btn-primary">
-                                                                    <i class="material-icons">navigate_before</i>
-                                                                </button>
-                                                                <button type="button" class="btn btn-primary">
-                                                                    <i class="material-icons">navigate_next</i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                {{-- For modulus --}}
-                                <div role="tabpanel" class="tab-pane fade" id="settings_with_icon_title">
+                            </div>
+                        </div>
+
+                        {{-- tus view --}}
+                        <div role="tabpanel" class="tab-pane" id="m_TU" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        <strong>Tu</strong> Settings
+                                    </h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <button data-toggle="modal" data-target="#add_TU" type="button"
+                                            class="btn  btn-outline-info initier">
+                                            <i class="material-icons">
+                                                add_circle_outline</i>
+                                            <span>new TU</span>
+                                        </button>
+                                </div>
+
+
+                                <div class="body">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <div class="card">
                                                 <div class="body">
                                                     <div id="mail-nav">
                                                         <h3 type="button" class="">Departements</h3>
-                                                        <ul class="collapsible">
-                                                            <li>
-                                                                <div class="collapsible-header">Computer Science
-                                                                    <div style="position: absolute; right: 10px;"><i
-                                                                            class="material-icons">keyboard_arrow_down</i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="collapsible-body">
-                                                                    <ul class="" id="mail-folders">
-                                                                        <li class="active">
-                                                                            <a href="#" title="Inbox">CS1
-                                                                                <span
-                                                                                    class="pull-right badge bg-orange">4</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#" title="Sent">CS2
-                                                                                <span
-                                                                                    class="pull-right badge bg-orange">4</span>
-                                                                            </a>
-
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#;" title="Draft">CS3
-                                                                                <span
-                                                                                    class="pull-right badge bg-orange">4</span>
-                                                                            </a>
-
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="collapsible-header">Electrical Engineering
-                                                                    <div style="position: absolute; right: 10px;"><i
-                                                                            class="material-icons">keyboard_arrow_down</i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="collapsible-body">
-                                                                    <ul class="" id="mail-folders">
-                                                                        <li class="active">
-                                                                            <a href="#" title="EE1">EE1
-                                                                                <span
-                                                                                    class="pull-right badge bg-orange">3</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#" title="EE2">EE2
-                                                                                <span
-                                                                                    class="pull-right badge bg-orange">3</span>
-                                                                            </a>
-
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#;" title="EE3">EE3
-                                                                                <span
-                                                                                    class="pull-right badge bg-orange">3</span>
-                                                                            </a>
-
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="collapsible-header">Mechanical Engineering
-                                                                    <div style="position: absolute; right: 10px;"><i
-                                                                            class="material-icons">keyboard_arrow_down</i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="collapsible-body">
-                                                                    <ul class="" id="mail-folders">
-                                                                        <li class="active">
-                                                                            <a href="#" title="ME1">ME1
-                                                                                <span
-                                                                                    class="pull-right badge bg-orange">5</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#" title="ME2">ME2 <span
-                                                                                    class="pull-right badge bg-orange">5</span></a>
-
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#;" title="ME3">ME3<span
-                                                                                    class="pull-right badge bg-orange">5</span></a>
-
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
+                                                        <ul class="collapsible tu_departments">
+                                                          {{--  --}}
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -636,8 +300,10 @@
                                             <div class="card">
                                                 <div class="boxs mail_listing">
                                                     <div class="inbox-center table-responsive">
-                                                        <table class="table table-hover">
-                                                            <thead>
+                                                        <table
+                                                         {{-- id="modulus_table"  --}}
+                                                         class="table table-hover">
+                                                            {{-- <thead>
                                                                 <tr>
                                                                     <th class="text-center">
                                                                         <label class="form-check-label">
@@ -694,9 +360,9 @@
                                                                         </div>
                                                                     </th>
                                                                 </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="unread">
+                                                            </thead> --}}
+                                                            <tbody id="tu_body">
+                                                                {{-- <tr class="unread">
                                                                     <td class="tbl-checkbox">
                                                                         <label class="form-check-label">
                                                                             <input type="checkbox">
@@ -715,108 +381,201 @@
                                                                             Credicts</a>
                                                                     </td>
 
-                                                                    <td class="text-right"> <span
+                                                                    <td class=""> <span
                                                                             class="badge bg-pink">120 Hours</span>
                                                                     </td>
-                                                                </tr>
-                                                                <tr class="unread">
-                                                                    <td class="tbl-checkbox">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
+                                                                    <td class="text-right">
+                                                                        <button class="btn tblActnBtn">
+                                                                            <i class="material-icons">mode_edit</i>
+                                                                        </button>
+                                                                        <button class="btn tblActnBtn">
+                                                                            <i class="material-icons">delete</i>
+                                                                        </button>
                                                                     </td>
-                                                                    <td class="hidden-xs">Database</td>
-                                                                    <td class="hidden-xs">
-                                                                        <div class="badge col-gray">Semester 2</div>
-                                                                    </td>
-                                                                    <td class="max-texts">
-                                                                        <a href="#">
-                                                                            <span
-                                                                                class="label l-bg-orange shadow-style m-r-10">6</span>
-                                                                            Credicts</a>
-                                                                    </td>
-                                                                    <td class="text-right"> <span
-                                                                            class="badge bg-pink">120 Hours</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="unread">
-                                                                    <td class="tbl-checkbox">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </td>
-                                                                    <td class="hidden-xs">Python</td>
-                                                                    <td class="hidden-xs">
-                                                                        <div class="badge col-gray">Semester 1</div>
-                                                                    </td>
-                                                                    <td class="max-texts">
-                                                                        <a href="#">
-                                                                            <span
-                                                                                class="label l-bg-orange shadow-style m-r-10">6</span>
-                                                                            Credicts</a>
-                                                                    </td>
-                                                                    <td class="text-right"> <span
-                                                                            class="badge bg-pink">120 Hours</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="tbl-checkbox">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </td>
-                                                                    <td class="hidden-xs">Statistics</td>
-                                                                    <td class="hidden-xs">
-                                                                        <div class="badge col-gray">Semester 2</div>
-                                                                    </td>
-                                                                    <td class="max-texts">
-                                                                        <a href="#">
-                                                                            <span
-                                                                                class="label l-bg-orange shadow-style m-r-10">6</span>
-                                                                            Credicts</a>
-                                                                    </td>
-                                                                    <td class="text-right"><span
-                                                                            class="badge bg-pink">120 Hours</span>
-                                                                    </td>
-                                                                </tr>
+                                                                </tr> --}}
+
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-7 ">
-                                                            <p class="p-15">Showing 1 - 4 of 4</p>
-                                                        </div>
-                                                        <div class="col-sm-5 text-right">
-                                                            <div class="pull-right p-15">
-                                                                <button type="button" class="btn btn-primary">
-                                                                    <i class="material-icons">navigate_before</i>
-                                                                </button>
-                                                                <button type="button" class="btn btn-primary">
-                                                                    <i class="material-icons">navigate_next</i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                            </div>
+                        </div>
+
+                        {{-- modulus view --}}
+                        <div role="tabpanel" class="tab-pane" id="m_Modulus" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>
+                                        <strong>Modulus</strong> Settings
+                                    </h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <button data-toggle="modal" data-target="#add_modulus" type="button"
+                                            class="btn  btn-outline-info initier">
+                                            <i class="material-icons">
+                                                add_circle_outline</i>
+                                            <span>new Modulus</span>
+                                        </button>
+                                </div>
+                                <div class="body">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                            <div class="card">
+                                                <div class="body">
+                                                    <div id="mail-nav">
+                                                        <h3 type="button" class="">Departements</h3>
+                                                        <ul class="collapsible modulus_departments">
+                                                           
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                            <div class="card">
+                                                <div class="boxs mail_listing">
+                                                    <div class="inbox-center table-responsive">
+                                                        <table
+                                                         {{-- id="modulus_table"  --}}
+                                                         class="table table-hover">
+                                                            {{-- <thead>
+                                                                <tr>
+                                                                    <th class="text-center">
+                                                                        <label class="form-check-label">
+                                                                            <input type="checkbox">
+                                                                            <span class="form-check-sign"></span>
+                                                                        </label>
+                                                                    </th>
+                                                                    <th colspan="3">
+                                                                        <div class="inbox-header">
+                                                                            <div class="mail-option no-pad-left">
+                                                                                <div class="email-btn-group m-l-15">
+
+                                                                                    <a href="#"
+                                                                                        class="col-dark-gray waves-effect m-r-20"
+                                                                                        title="Delete">
+                                                                                        <i
+                                                                                            class="material-icons">delete</i>
+                                                                                    </a>
+                                                                                    <a href="#"
+                                                                                        class="col-dark-gray waves-effect m-r-20"
+                                                                                        title="refresh">
+                                                                                        <i
+                                                                                            class="material-icons">autorenew</i>
+                                                                                    </a>
+                                                                                    <a href="#" onClick="return false;"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#add_modulus"
+                                                                                        class="col-dark-gray waves-effect m-r-20"
+                                                                                        title="add new">
+                                                                                        <i
+                                                                                            class="material-icons">add_circle</i>
+                                                                                    </a>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </th>
+                                                                    <th class="hidden-xs" colspan="2">
+                                                                        <div class="pull-right">
+                                                                            <div class="email-btn-group m-l-15">
+                                                                                <a href="#"
+                                                                                    class="col-dark-gray waves-effect m-r-20"
+                                                                                    title="back">
+                                                                                    <i
+                                                                                        class="material-icons">navigate_before</i>
+                                                                                </a>
+                                                                                <a href="#"
+                                                                                    class="col-dark-gray waves-effect m-r-20"
+                                                                                    title="Archive">
+                                                                                    <i
+                                                                                        class="material-icons">navigate_next</i>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead> --}}
+                                                            <tbody id="modulus_body">
+                                                                {{-- <tr class="unread">
+                                                                    <td class="tbl-checkbox">
+                                                                        <label class="form-check-label">
+                                                                            <input type="checkbox">
+                                                                            <span class="form-check-sign"></span>
+                                                                        </label>
+                                                                    </td>
+                                                                    <td class="hidden-xs">Mathmatic</td>
+                                                                    <td class="hidden-xs">
+                                                                        <div class="badge col-gray">Semester 1</div>
+                                                                    </td>
+
+                                                                    <td class="max-texts">
+                                                                        <a href="#">
+                                                                            <span
+                                                                                class="label l-bg-orange shadow-style m-r-10">6</span>
+                                                                            Credicts</a>
+                                                                    </td>
+
+                                                                    <td class=""> <span
+                                                                            class="badge bg-pink">120 Hours</span>
+                                                                    </td>
+                                                                    <td class="text-right">
+                                                                        <button class="btn tblActnBtn">
+                                                                            <i class="material-icons">mode_edit</i>
+                                                                        </button>
+                                                                        <button class="btn tblActnBtn">
+                                                                            <i class="material-icons">delete</i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr> --}}
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-            <!-- #END# Tabs With Icon Title -->
+
         </div>
+
 
         {{-- forms --}}
         <x-department-form />
+        <x-branch-form />
         <x-semester-form />
         <x-class-form />
         <x-modulus-form />
+        <x-tu-form />
     </section>
+
+    <x-slot name="custom_js">
+        <script src="assets/js/table.min.js"></script>
+        <!-- Custom Js -->
+        <script src="assets/js/pages/tables/jquery-datatable.js"></script>
+        <script src="assets/js/form.min.js"></script>
+
+        <script src="assets/ajax/school_ajax.js"></script>
+        <!-- Custom Js -->
+        <script src="assets/js/pages/apps/chat.js"></script>
+        <script src="assets/js/pages/forms/basic-form-elements.js"></script>
+
+        <!-- Demo Js -->
+        <script src="assets/js/pages/ui/collapse.js"></script>
+      
+    </x-slot>
 </x-app-layout>

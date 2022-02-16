@@ -3,10 +3,12 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Models\Year;
 
 class NavBar extends Component
 {
    public $displayf;
+   public $years;
     /**
      * Create a new component instance.
      *
@@ -16,6 +18,7 @@ class NavBar extends Component
     {
         //
         $this->displayf = $displayf;
+        $this->years = Year::orderBy('id','DESC')->get();
 
         // dd($displayf);
     }

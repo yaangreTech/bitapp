@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TranscriptController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 // for grades page
-Route::get('grades', function () {
-    return view('pages.documents.grades');
-})->middleware(['auth'])->name('grades');
-
+Route::get('grades',[TranscriptController::class,'index'])->middleware(['auth'])->name('grades');
+Route::get('/grades/get_grades_of/{yearID}/{classID}/',[TranscriptController::class, 'getGradesOf'])->middleware(['auth']);
+Route::get('grades_view',[TranscriptController::class,'view'])->middleware(['auth'])->name('grades_view');
+Route::get('/grades_view/view_grades_of/{inscID}/',[TranscriptController::class, 'viewGradesOf'])->middleware(['auth']);
 
 // for certificate page
 Route::get('certificates', function () {

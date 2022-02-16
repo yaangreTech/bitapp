@@ -2,19 +2,20 @@
     <x-slot name="custom_css">
         <style>
             .rotate_text {
-                /* -moz-transform: rotate(-50deg);
-                -moz-transform-origin: top left;
-                -webkit-transform: rotate(-50deg);
-                -webkit-transform-origin: top left;
-                -o-transform: rotate(-50deg);
-                -o-transform-origin: top left;
-                position: relative; */
-                /* top: 20px;*/
+                -moz-transform: rotate(-90deg);
+                -moz-transform-origin: center left;
+                -webkit-transform: rotate(-90deg);
+                -webkit-transform-origin: center left;
+                -o-transform: rotate(-90deg);
+                -o-transform-origin: center left;
+                position: absolute;
             }
 
+
+
             .rotated_cell {
-                /* height: 100px;
-                vertical-align: bottom */
+                height: 100px;
+                vertical-align: bottom;
             }
 
             .nb_cell {
@@ -31,25 +32,32 @@
 
         <script src="assets/js/table.min.js"></script>
         <!-- Export table -->
-        {{-- <script src="assets/js/bundles/export-tables/dataTables.buttons.min.js"></script>
-        <script src="assets/js/bundles/export-tables/buttons.flash.min.js"></script>
-        <script src="assets/js/bundles/export-tables/jszip.min.js"></script>
-        <script src="assets/js/bundles/export-tables/pdfmake.min.js"></script>
-        <script src="assets/js/bundles/export-tables/vfs_fonts.js"></script>
-        <script src="assets/js/bundles/export-tables/buttons.html5.min.js"></script>
-        <script src="assets/js/bundles/export-tables/buttons.print.min.js"></script> --}}
-        {{-- <script src="assets/js/pages/apps/support.js"></script> --}}
-        <script src="../../assets/js/pages/tables/jquery-datatable.js"></script>
+        {{-- <script src="assets/js/pages/tables/jquery-datatable.js"></script> --}}
+        <script src="assets/ajax/average_ajax.js"></script>
 
-        <script src="assets/export_plugins/libs/jsPDF/polyfills.umd.min.js"></script>
-        <script src="assets/export_plugins/libs/jsPDF/jspdf.umd.min.js"></script>
-        <script src="assets/export_plugins/libs/pdfmake/pdfmake.min.js"></script>
-        <script src="assets/export_plugins/libs/pdfmake/vfs_fonts.js"></script>
-        <script type="text/javascript" src="assets/export_plugins/libs/html2canvas/html2canvas.min.js"></script>
+      
 
-        <script src="assets/export_plugins/tableExport.js"></script>
+        <script>
+             $('.rota_div').addClass('rotate_text');
 
+            function turnTableOn(checked) {
+                // console.log(value.checked);
+                if (checked == true) {
+                    console.log('rotate_text');
+                    $('.nb_cell').removeClass('rotated_cell');
+                    $('.rota_div').removeClass('rotate_text');
+                    console.log('rotate_textF');
+                } else {
+                    $('.nb_cell').addClass('rotated_cell');
+                    $('.rota_div').addClass('rotate_text');
+                }
+            }
 
+            var average_management = JSON.parse(currentActivedb.getItem('average_management'));
+    console.log(average_management);
+     getAverageOf(average_management.year, average_management.semesterID);
+            $('.hider').hide();
+        </script>
 
     </x-slot>
 
@@ -88,6 +96,15 @@
                             <h2>
                                 <strong>CS1->S1</strong> Averages
                             </h2>
+                            <div class="form-check m-l-10 " style="position: absolute; right: 50px;bottom:5px;">
+                                <label class="form-check-label">
+                                    <input onChange="turnTableOn(this.checked)" class="form-check-input" type="checkbox"
+                                        name="acceptTerms" required> Extended view
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -96,14 +113,9 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li>
-                                            <a href="#" onClick="toPdf()">
+                                            <a href="#" onClick="imprimer('nesp')">
                                                 export to Pdf</a>
                                         </li>
-                                        <li>
-                                            <a href="#" onClick="run()">
-                                                export to Pdf2</a>
-                                        </li>
-
                                     </ul>
                                 </li>
                             </ul>
@@ -111,11 +123,14 @@
                         <hr />
                         <div class="body">
                             {{-- resume section --}}
-                            <ul class="collapsible">
+                         <div class="loading">
+                            <x-loading />
+                         </div>
+                            <ul class="collapsible hider">
                                 <li>
                                     <div class="collapsible-header">
                                         <i class="material-icons">filter_drama</i>
-                                        First
+                                        Overview
                                         <div style="position: absolute; right: 10px;"><i
                                                 class="material-icons">keyboard_arrow_down</i></div>
                                     </div>
@@ -124,11 +139,11 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="support-box text-center l-bg-red">
                                                     <div class="icon m-b-10">
-                                                        <div class="chart chart-bar">
+                                                        {{-- <div class="chart chart-bar">
                                                             6,4,8,6,8,10,5,6,7,9,5,6,4,8,6,8,10,5,6,7,9,5
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
-                                                    <div class="text m-b-10">Total Ticket</div>
+                                                    <div class="text m-b-10">All </div>
                                                     <h3 class="m-b-0">1512
                                                         <i class="material-icons">trending_up</i>
                                                     </h3>
@@ -136,10 +151,10 @@
                                             </div>
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="support-box text-center l-bg-cyan">
-                                                    <div class="icon m-b-10">
+                                                    {{-- <div class="icon m-b-10">
                                                         <span class="chart chart-line">9,4,6,5,6,4,7,3</span>
-                                                    </div>
-                                                    <div class="text m-b-10">Reply</div>
+                                                    </div> --}}
+                                                    <div class="text m-b-10">Passed</div>
                                                     <h3 class="m-b-0">1236
                                                         <i class="material-icons">trending_up</i>
                                                     </h3>
@@ -147,10 +162,10 @@
                                             </div>
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="support-box text-center l-bg-orange">
-                                                    <div class="icon m-b-10">
+                                                    {{-- <div class="icon m-b-10">
                                                         <div class="chart chart-pie">30, 35, 25, 8</div>
-                                                    </div>
-                                                    <div class="text m-b-10">Resolve</div>
+                                                    </div> --}}
+                                                    <div class="text m-b-10">Failed</div>
                                                     <h3 class="m-b-0">1107
                                                         <i class="material-icons">trending_down</i>
                                                     </h3>
@@ -159,11 +174,11 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="support-box text-center green">
                                                     <div class="icon m-b-10">
-                                                        <div class="chart chart-bar">
+                                                        {{-- <div class="chart chart-bar">
                                                             4,6,-3,-1,2,-2,4,3,6,7,-2,3,4,6,-3,-1,2,-2,4,3,6,7,-2,3
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
-                                                    <div class="text m-b-10">Pending</div>
+                                                    <div class="text m-b-10">Should do session</div>
                                                     <h3 class="m-b-0">167
                                                         <i class="material-icons">trending_down</i>
                                                     </h3>
@@ -173,55 +188,13 @@
                                     </div>
                                 </li>
                             </ul>
-
-                            <div class="table-responsive">
-                                <table id="exportable"
-                                    class="table table-bordered table-hover js-basic-example dataTable table-header-rotated"
+                            <div class="table-responsive" id="nesp">
+                                <table id="s_semester_table"
+                                    class="table table-bordered table-hover  dataTable"
                                     {{-- id="tableExport" --}} {{-- class="display table table-bordered table-hover table-checkable order-column width-per-100 table-header-rotated" --}}>
-                                    <div id="nesp">
-                                        <thead id="note_export">
-                                            <tr>
-                                                <th class="">
-                                                    <div class="">ID</div>
-                                                </th>
-                                                <th class="rotate">
-                                                    <div class="rot">Fist Name</div>
-                                                </th>
-                                                <th class="rotate">
-                                                    <div class="rot">Last Name</div>
-                                                </th>
 
-                                                <th class="rotated_cell center nb_cell">
-                                                    <div class="rotate_text">English</div>
-                                                </th>
-                                                <th class="rotated_cell center nb_cell">
-                                                    <div class="rotate_text">Maths</div>
-                                                </th>
-                                                <th class="rotated_cell center nb_cell">
-                                                    <div class="rotate_text">Database</div>
-                                                </th>
-                                                <th class="rotated_cell center nb_cell">
-                                                    <div class="rotate_text">Python</div>
-                                                </th>
-                                                <th class="rotated_cell center nb_cell">
-                                                    <div class="rotate_text">Statistics</div>
-                                                </th>
-                                                <th class="rotated_cell center nb_cell">
-                                                    <div class="rotate_text">Android</div>
-                                                </th>
-                                                <th class="rotated_cell center nb_cell">
-                                                    <div class="rotate_text">php</div>
-                                                </th>
-                                                <th class="rotated_cell center nb_cell">
-                                                    <div class="rotate_text">C#</div>
-                                                </th>
-
-                                                <th class="">
-                                                    <div class="">Statut</div>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tr id="can_export">
+                                    <thead  id="s_semester_thead">
+                                        {{-- <tr>
                                             <th class="">
                                                 <div class="">ID</div>
                                             </th>
@@ -233,135 +206,82 @@
                                             </th>
 
                                             <th class="rotated_cell center nb_cell">
-                                                <div class="rotate_text">English</div>
+                                                <div class="rota_div">English</div>
                                             </th>
                                             <th class="rotated_cell center nb_cell">
-                                                <div class="rotate_text">Maths</div>
+                                                <div class="rota_div">Maths</div>
                                             </th>
                                             <th class="rotated_cell center nb_cell">
-                                                <div class="rotate_text">Database</div>
+                                                <div class="rota_div">Database</div>
                                             </th>
                                             <th class="rotated_cell center nb_cell">
-                                                <div class="rotate_text">Python</div>
+                                                <div class="rota_div">Python</div>
                                             </th>
                                             <th class="rotated_cell center nb_cell">
-                                                <div class="rotate_text">Statistics</div>
+                                                <div class="rota_div">Statistics</div>
                                             </th>
                                             <th class="rotated_cell center nb_cell">
-                                                <div class="rotate_text">Android</div>
+                                                <div class="rota_div">Android</div>
                                             </th>
                                             <th class="rotated_cell center nb_cell">
-                                                <div class="rotate_text">php</div>
+                                                <div class="rota_div">php</div>
                                             </th>
                                             <th class="rotated_cell center nb_cell">
-                                                <div class="rotate_text">C#</div>
+                                                <div class="rota_div">C#</div>
+                                            </th>
+                                            <th class="rotated_cell center nb_cell">
+                                                <div class="rota_div">Total</div>
+                                            </th>
+                                            <th class="rotated_cell center nb_cell">
+                                                <div class="rota_div">Final Average</div>
+                                            </th>
+                                            <th class="rotated_cell center nb_cell">
+                                                <div class="rota_div">Inernational grate</div>
+                                            </th>
+                                            <th class="rotated_cell center nb_cell">
+                                                <div class="rota_div">Convertion</div>
                                             </th>
 
-                                            <th class="">
-                                                <div class="">Statut</div>
+                                            <th class="rotated_cell center nb_cell">
+                                                <div class="rota_div">Statut</div>
                                             </th>
-                                        </tr>
-                                        <tbody>
-                                            <tr>
-                                                <td class="">bs0001</td>
-                                                <td class="">Sanogo</td>
-                                                <td class="">Adama</td>
-                                                <td class="center">05</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="center">05</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="">
-                                                    <div class="badge col-red">fail</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">bs0009</td>
-                                                <td class="">Da</td>
-                                                <td class="">Solange</td>
-                                                <td class="center">05</td>
-                                                <td class="center">05</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="">
-                                                    <div class="badge col-red">fail</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">bs0008</td>
-                                                <td class="">Nana</td>
-                                                <td class="">Jeremie</td>
-                                                <td class="center">05</td>
-                                                <td class="center">05</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="">
-                                                    <div class="badge col-red">fail</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">bs0007</td>
-                                                <td class="">Yaro</td>
-                                                <td class="">Emmanuel</td>
-                                                <td class="center">05</td>
-                                                <td class="center">05</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="">
-                                                    <div class="badge col-red">fail</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">bs0002</td>
-                                                <td class="">Sanou</td>
-                                                <td class="">Lougoudoro</td>
-                                                <td class="center">05</td>
-                                                <td class="center">05</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="">
-                                                    <div class="badge col-red">fail</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">bs0004</td>
-                                                <td class="">Soro</td>
-                                                <td class="">Moussa</td>
-                                                <td class="center">15</td>
-                                                <td class="center">05</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="center">10</td>
-                                                <td class="center">15</td>
-                                                <td class="center">13</td>
-                                                <td class="">
-                                                    <div class="badge col-green">pass</div>
-                                                </td>
-                                            </tr>
+                                            <th class="rotated_cell center nb_cell">
+                                                <div class="rota_div">Re-do Module</div>
+                                            </th>
+                                            <th class="rotated_cell center nb_cell">
+                                                <div class="rota_div">Remark</div>
+                                            </th>
+                                        </tr> --}}
+                                    </thead>
+                           
+                                    <tbody id="s_semester_tbody">
 
+                                        {{-- <tr>
+                                            <td class="">bs0002</td>
+                                            <td class="">Sanou</td>
+                                            <td class="">Lougoudoro</td>
+                                            <td class="center">05</td>
+                                            <td class="center">05</td>
+                                            <td class="center">10</td>
+                                            <td class="center">15</td>
+                                            <td class="center">13</td>
+                                            <td class="center">10</td>
+                                            <td class="center">15</td>
+                                            <td class="center">13</td>
+                                            <td class="center">13</td>
+                                            <td class="center">13</td>
+                                            <td class="center">Not Good</td>
+                                            <td class="center">13</td>
+                                            <td class="">
+                                                <div class="badge col-red">fail</div>
+                                            </td>
+                                            <td class="center">13</td>
+                                            <td class="center">Give_Up</td>
+                                        </tr> --}}
+                                
 
-                                        </tbody>
-                                    </div>
+                                    </tbody>
+
                                     {{-- <tfoot>
                                         <tr>
                                             <th class="center">User</th>
@@ -382,122 +302,6 @@
             </div>
         </div>
     </section>
-
-    <script>
-        function vtpdf() {
-            var doc = new jsPDF();
-            var elementHTML = $('#nesp').html();
-            // var specialElementHandlers = {
-            //     '#elementH': function(element, renderer) {
-            //         return true;
-            //     }
-            // };
-            // doc.fromHTML(elementHTML, 15, 15, {
-            //     'width': 170,
-            //     'elementHandlers': specialElementHandlers
-            // });
-
-            // Save the PDF
-            doc.fromHTML(elementHTML);
-            doc.save('sample-document.pdf');
-
-
-
-        }
-
-
-        function run() {
-            var pdf = new jsPDF('p', 'pt', 'letter'),
-                source = $('.header')[0],
-                margins = {
-                    top: 40,
-                    bottom: 40,
-                    left: 40,
-                    right: 40,
-                    width: 522
-                };
-
-            pdf.fromHTML(
-                source,
-                margins.left,
-                margins.top, {
-                    'width': margins.width
-                },
-                // function(dispose) {
-                    pdf.save('Test.pdf'),
-                // },
-                margins
-            );
-        };
-
-
-
-
-        $('#can_export').hide();
-
-        function toPdf() {
-            $('#can_export').show();
-            $('#note_export').hide();
-
-
-            function drawh(cell, data) {
-                console.log('ddddddddddddddddd');
-                cell.styles.fontSize = 20;
-            }
-
-            function DoCellData(cell, row, col, data) {
-                console.log('row');
-            }
-
-            function DoBeforeAutotable(table, headers, rows, AutotableSettings) {
-                console.log(AutotableSettings);
-            }
-
-            $('#exportable').tableExport({
-                fileName: 'sFileName',
-                headers: false,
-                type: 'pdf',
-
-                jspdf: {
-                    orientation: 'l',
-                    // format: 'bestfit',
-                    margins: {
-                        left: 20,
-                        right: 10,
-                        top: 20,
-                        bottom: 20
-                    },
-
-
-                    autotable: false,
-
-
-
-                }
-            });
-
-
-            // $('#exportable').tableExport({
-            //     type: 'pdf',
-            //     htmlContent: true,
-            //     ignoreColumn: '.center',
-            //     pdfmake: {
-            //         enabled: true,
-            //         docDefinition: {
-            //             pageOrientation: 'landscape'
-            //         }
-            //     }
-            // });
-            // $('#note_export').show();
-            // $('#can_export').hide();
-        }
-
-        function toXls() {
-            $('#exportable').tableExport({
-                type: 'excel'
-            });
-        }
-    </script>
 
 
 </x-app-layout>

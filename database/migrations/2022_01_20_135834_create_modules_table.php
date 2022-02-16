@@ -15,10 +15,12 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('semester_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tu_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->integer('credict');
+            $table->integer('heure');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

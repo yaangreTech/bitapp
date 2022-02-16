@@ -18,6 +18,7 @@ class CreatePromotionsTable extends Migration
             $table->foreignId('year_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

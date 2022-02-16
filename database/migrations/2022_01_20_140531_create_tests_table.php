@@ -21,6 +21,7 @@ class CreateTestsTable extends Migration
             $table->integer('ratio');
             $table->string('type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

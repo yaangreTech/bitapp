@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 // for users page
-Route::get('profile', function () {
-    return view('pages.others.profile');
-})->middleware(['auth'])->name('profile');
+Route::get('profile/', [ProfileController::class,'index'])->middleware(['auth'])->name('profile');
+Route::post('/profile/{id}', [ProfileController::class,'updateProfile'])->middleware(['auth']);
 
 Route::get('faqs', function () {
     return view('pages.others.faqs');

@@ -11,9 +11,10 @@
         <script src="assets/js/pages/forms/basic-form-elements.js"></script>
 
 
-        <script src="../../assets/js/bundles/jquery-steps/jquery.steps.min.js"></script>
+        {{-- <script src="assets/js/bundles/jquery-steps/jquery.steps.min.js"></script> --}}
         <!-- Custom Js -->
-        <script src="../../assets/js/pages/forms/form-wizard.js"></script>
+        <script src="assets/ajax/promotion_ajax.js"></script>
+        {{-- <script src="assets/js/pages/forms/form-wizard.js"></script> --}}
     </x-slot>
 
     <section class="content">
@@ -42,33 +43,35 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+
                     <div class="card body">
                         <div class="contact-usertitle">
                             <div class="contact-usertitle-name"> Actual School year</div>
-                            <div class="contact-usertitle-job"> Engineer </div>
+                            {{-- <div class="contact-usertitle-job"> Engineer </div> --}}
                         </div>
+                        @if ($years->count()>0)
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
                                 <b>Created at</b>
-                                <a class="pull-right"><span class="badge bg-blue">02-03-2019</span></a>
+                                <a class="pull-right"><span class="badge bg-blue">{{$years->first()->created_at}}</span></a>
                             </li>
                             <li class="list-group-item">
-                                Created Promotion
-                                <a class="pull-right"><span class="badge bg-blue">Promotion 19</span></a>
+                            Promotion
+                                <a class="pull-right"><span class="badge bg-blue">{{$years->first()->promotion->name}}</span></a>
                             </li>
                             <li class="list-group-item">
                                 Number of Student
-                                <a class="pull-right"><span class="badge bg-blue">130 Students</span></a>
+                                <a class="pull-right"><span class="badge bg-blue">{{$years->first()->inscriptions->count()}} Students</span></a>
                             </li>
                             <li class="list-group-item">
                                 Duration
-                                <a class="pull-right"><span class="badge bg-blue">100 days until today</span></a>
+                                <a class="pull-right"><span class="badge bg-blue">{{round((time()-strtotime($years->first()->start_date))/(60 * 60 * 24))}} days until today</span></a>
                             </li>
-                            <li class="list-group-item">
-                                Departements
-                                <a class="pull-right"><span class="badge bg-blue">3 Departements</span></a>
-                            </li>
+                           
                         </ul>
+                        @else
+                            <h3 class="center">No School year</h3>
+                        @endif
                         <div class="newLabelBtn">
                             <button type="button" data-toggle="modal" data-target="#add_promotion"
                                 class="btn btn-border-radius bg-purple waves-effect">Start new year</button>
@@ -91,6 +94,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($years as $year)
                                         <tr>
                                             <td class="tbl-checkbox">
                                                 <label>
@@ -99,129 +103,30 @@
                                                 </label>
                                             </td>
                                             <td class="">
-                                                02-03-2019
+                                                {{$year->start_date}}
                                             </td>
-                                            <td class="center">---------</td>
+                                            <td class="center">{{$year->end_date==null ?'---':$year->end_date}} </td>
                                             <td class="center">
-                                                Promotion 19
+                                                {{$year->promotion->name}}
                                             </td>
                                             <td class="center">
+                                                @if ($year->end_date==null)
                                                 <div class="badge col-green">Actual</div>
+                                                @else
+                                                <div class="badge col-red">ended</div>  
+                                                @endif
+                                               
                                             </td>
                                             <td class="center">
-                                                <button class="btn tblActnBtn">
+                                                {{-- <button class="btn tblActnBtn">
                                                     <i class="material-icons">mode_edit</i>
-                                                </button>
-                                                <button class="btn tblActnBtn">
+                                                </button> --}}
+                                                <button onclick="delete_Year({{$year->id}})" class="btn tblActnBtn">
                                                     <i class="material-icons">delete</i>
                                                 </button>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tbl-checkbox">
-                                                <label>
-                                                    <input type="checkbox" />
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td class="">
-                                                02-03-2019
-                                            </td>
-                                            <td class="center">02-03-2020</td>
-                                            <td class="center">
-                                                Promotion 19
-                                            </td>
-                                            <td class="center">
-                                                <div class="badge col-red">Ended</div>
-                                            </td>
-                                            <td class="center">
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">mode_edit</i>
-                                                </button>
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">delete</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tbl-checkbox">
-                                                <label>
-                                                    <input type="checkbox" />
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td class="">
-                                                02-03-2019
-                                            </td>
-                                            <td class="center"> 02-03-2020</td>
-                                            <td class="center">
-                                                Promotion 19
-                                            </td>
-                                            <td class="center">
-                                                <div class="badge col-red">Ended</div>
-                                            </td>
-                                            <td class="center">
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">mode_edit</i>
-                                                </button>
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">delete</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tbl-checkbox">
-                                                <label>
-                                                    <input type="checkbox" />
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td class="">
-                                                02-03-2019
-                                            </td>
-                                            <td class="center">02-03-2020</td>
-                                            <td class="center">
-                                                Promotion 19
-                                            </td>
-                                            <td class="center">
-                                                <div class="badge col-red">Ended</div>
-                                            </td>
-                                            <td class="center">
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">mode_edit</i>
-                                                </button>
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">delete</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tbl-checkbox">
-                                                <label>
-                                                    <input type="checkbox" />
-                                                    <span></span>
-                                                </label>
-                                            </td>
-                                            <td class="">
-                                                02-03-2019
-                                            </td>
-                                            <td class="center">02-03-2020</td>
-                                            <td class="center">
-                                                Promotion 19
-                                            </td>
-                                            <td class="center">
-                                                <div class="badge col-red">Ended</div>
-                                            </td>
-                                            <td class="center">
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">mode_edit</i>
-                                                </button>
-                                                <button class="btn tblActnBtn">
-                                                    <i class="material-icons">delete</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-
+                                        </tr> 
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

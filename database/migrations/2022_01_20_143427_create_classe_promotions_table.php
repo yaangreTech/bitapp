@@ -18,6 +18,7 @@ class CreateClassePromotionsTable extends Migration
             $table->foreignId('classe_id')->constrained()->onDelete('cascade');
             $table->foreignId('promotion_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

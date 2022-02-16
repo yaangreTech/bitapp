@@ -1,21 +1,23 @@
 <x-app-layout filtrage='true'>
     <x-slot name="custom_css">
-        
+        <script src="assets\ajax\student_ajax.js"></script>
     </x-slot>
 
+
     <x-slot name="custom_js">
+  <!-- Demo Js -->
+  
+
+<script>
+      var students_list = JSON.parse(currentActivedb.getItem('students_list'));
+    console.log(students_list);
+    getStudentOf(students_list.year, students_list.classID);
+</script>
          <!-- Plugins Js -->
     <script src="assets/js/table.min.js"></script>
     <!-- Custom Js -->
-    <script src="assets/js/bundles/export-tables/dataTables.buttons.min.js"></script>
-    <script src="assets/js/bundles/export-tables/buttons.flash.min.js"></script>
-    <script src="assets/js/bundles/export-tables/jszip.min.js"></script>
-    <script src="assets/js/bundles/export-tables/pdfmake.min.js"></script>
-    <script src="assets/js/bundles/export-tables/vfs_fonts.js"></script>
-    <script src="assets/js/bundles/export-tables/buttons.html5.min.js"></script>
-    <script src="assets/js/bundles/export-tables/buttons.print.min.js"></script>
-    <script src="assets/js/pages/tables/jquery-datatable.js"></script>
-    <!-- Demo Js -->
+    
+  
     </x-slot>
 
     <section class="content">
@@ -71,123 +73,49 @@
                         <hr>
                         <div class="body">
                             <div class="table-responsive">
-                                <table id="tableExport"
-                                {{-- table-striped --}}
-                                    class="display table table-bordered  table-hover table-checkable order-column m-t-20 width-per-100   dataTable">
+                                <table 
+                                id="students_table" 
+                                    class="display student_ table table-bordered  table-hover table-checkable order-column m-t-20 width-per-100   dataTable">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>First Name</th>
                                             <th>Last name</th>
                                             <th>Gender</th>
+                                            <th>Email</th>
                                             <th>Birthdate</th>
                                             <th>Phone</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="student_body"> 
+                                        <tr>
+                                            <td>
 
-                                        <tr>
-                                            <td>bs00001</td>
-                                            <td>Sanou</td>
-                                            <td>Lougoudoro</td>
-                                            <td>Edinburgh</td>
-                                            <td>2008/11/13</td>
-                                            <td>51-34-59-12</td>
-                                            <td class="text-right">
-                                             <ul>
-                                                <li class="dropdown">
-                                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                                        role="button" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="material-icons">more_vert</i>
-                                                    </a>
-                                                    <ul class="dropdown-menu pull-right">
-                                                        <li>
-                                                            <a href="#" onClick="return false;">action 1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" onClick="return false;">action 1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" onClick="return false;">action 1</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                             </ul>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                            <td>bs00002</td>
-                                            <td>Yannogo</td>
-                                            <td>Patric</td>
-                                            <td>Singapore</td>
-                                            <td>2011/06/27</td>
-                                            <td>51-34-59-12</td>
-                                            <td class="text-right">
-                                                <ul>
-                                                   <li class="dropdown">
-                                                       <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                                           role="button" aria-haspopup="true" aria-expanded="false">
-                                                           <i class="material-icons">more_vert</i>
-                                                       </a>
-                                                       <ul class="dropdown-menu pull-right">
-                                                           <li>
-                                                               <a href="#" onClick="return false;">action 1</a>
-                                                           </li>
-                                                           <li>
-                                                               <a href="#" onClick="return false;">action 1</a>
-                                                           </li>
-                                                           <li>
-                                                               <a href="#" onClick="return false;">action 1</a>
-                                                           </li>
-                                                       </ul>
-                                                   </li>
-                                                </ul>
-                                           </td>
-                                        </tr>
-                                        <tr>
-                                            <td>bs00003</td>
-                                            <td>Yaro</td>
-                                            <td>Emmanuel</td>
-                                            <td>New York</td>
-                                            <td>2011/01/25</td>
-                                            <td>51-34-59-12</td>
-                                            <td class="text-right">
-                                                <ul>
-                                                   <li class="dropdown">
-                                                       <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                                           role="button" aria-haspopup="true" aria-expanded="false">
-                                                           <i class="material-icons">more_vert</i>
-                                                       </a>
-                                                       <ul class="dropdown-menu pull-right">
-                                                           <li>
-                                                               <a href="#" onClick="return false;">action 1</a>
-                                                           </li>
-                                                           <li>
-                                                               <a href="#" onClick="return false;">action 1</a>
-                                                           </li>
-                                                           <li>
-                                                               <a href="#" onClick="return false;">action 1</a>
-                                                           </li>
-                                                       </ul>
-                                                   </li>
-                                                </ul>
-                                           </td>
-                                        </tr>
+                                                <x-loading/>  
+                                            </td> 
+                                        </tr>                               
                                     </tbody>
-                                    {{-- <tfoot>
+                                 
+                                 
+                                </table>
+                               
+                                {{-- <table id="example" class="display student_ table table-bordered  table-hover table-checkable order-column m-t-20 width-per-100   dataTable">
+                                    <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name</th>
+                                            <th>First Name</th>
                                             <th>Last name</th>
-                                            <th>gender</th>
+                                            <th>Gender</th>
+                                            <th>Email</th>
                                             <th>Birthdate</th>
-                                            <th>phone</th>
+                                            <th>Phone</th>
                                             <th>Action</th>
                                         </tr>
-                                    </tfoot> --}}
-                                </table>
+                                    </thead>
+                                </table> --}}
                             </div>
+                          
                         </div>
                     </div>
                 </div>
@@ -197,7 +125,8 @@
 
         {{-- form --}}
 
-        <x-student-form/>
+        <x-student-form />
+
     </section>
-    
+
 </x-app-layout>

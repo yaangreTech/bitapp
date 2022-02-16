@@ -9,11 +9,12 @@
     <x-slot name="custom_js">
         <script src="assets/js/form.min.js"></script>
         <script src="assets/js/bundles/multiselect/js/jquery.multi-select.js"></script>
-        <script src="assets/js/bundles/jquery-steps/jquery.steps.min.js"></script>
+        {{-- <script src="assets/js/bundles/jquery-steps/jquery.steps.min.js"></script> --}}
         <!-- Custom Js -->
         <script src="assets/js/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
-        <script src="assets/js/pages/forms/form-wizard.js"></script>
+        {{-- <script src="assets/js/pages/forms/form-wizard.js"></script> --}}
         <script src="assets/js/pages/forms/advanced-form-elements.js"></script>
+        <script src="assets/ajax/student_ajax.js"></script>
     </x-slot>
     <section class="content">
         <div class="container-fluid">
@@ -25,7 +26,7 @@
                                 <h4 class="page-title">Add new students</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{route('dashboard')}}"  onClick="setActiveId('Dashboard')">
+                                <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -36,112 +37,122 @@
                     </div>
                 </div>
             </div>
-         
+
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Add new student</strong> Form</h2>
+                                <strong>Add new student</strong> Form
+                            </h2>
                         </div>
                         <div class="body">
-                            <form id="wizard_with_validation" method="POST">
+                            <form id="wizard_with_validation" class="student_form" method="POST">
+                                @csrf
                                 <h3>Students references</h3>
                                 <fieldset>
                                     <div class="demo-masked-input">
                                         <div class="row clearfix">
-                                              {{-- students ID fied --}}
-                                              <div class="col-md-4">
-                                                <b>ID</b>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">access_time</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control ID" placeholder="Ex: bs00001">
+                                            {{-- students ID fied --}}
+                                            <div class="col-md-4">
+                                                <b>Matricule</b><span class="text-danger">*</span>
+                                                <div class="input-group ">
+                                                    <div class="form-group ">
+                                                        <div class="form-line">
+                                                            <input id="studentID" name='studentID' type="text"
+                                                                class="form-control ID" placeholder="Ex: bs00001"
+                                                                required>
+                                                        </div>
                                                     </div>
+                                                    <span class="text-danger studentID"> </span>
                                                 </div>
+
                                             </div>
 
                                             {{-- First name field --}}
                                             <div class="col-md-4">
-                                                <b>First name</b>
+                                                <b>First name</b><span class="text-danger">*</span>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">access_time</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control name"
-                                                            placeholder="Ex: Sanou">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input id="studentFirstName" name="studentFirstName"
+                                                                type="text" class="form-control name"
+                                                                placeholder="Ex: Sanou" required>
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </div>
 
                                             {{-- Last name fied --}}
                                             <div class="col-md-4">
-                                                <b>Last mane</b>
+                                                <b>Last mane</b><span class="text-danger">*</span>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">date_range</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control name"
-                                                            placeholder="Ex: lougoudoro">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input id="studentLastName" name="studentLastName"
+                                                                type="text" class="form-control name"
+                                                                placeholder="Ex: lougoudoro" required>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             {{-- Birthday field --}}
                                             <div class="col-md-4">
-                                                <b>BirthDate</b>
+                                                <b>BirthDate</b><span class="text-danger">*</span>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">date_range</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control date"
-                                                            placeholder="Ex: 1999/07/10">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input id="studentBirthDate" name="studentBirthDate"
+                                                                type="text" class="form-control date"
+                                                                placeholder="Ex: 1999/07/10" required>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             {{-- Phone number field --}}
                                             <div class="col-md-4">
-                                                <b>Mobile Phone Number</b>
+                                                <b>Mobile Phone Number</b><span class="text-danger">*</span>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">phone_iphone</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control mobile-phone-number"
-                                                            placeholder="Ex: 00 (000) 00-00-00-00">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input id="studentPhone" name="studentPhone" type="text"
+                                                                class="form-control mobile-phone-number"
+                                                                placeholder="Ex: 00 (000) 00-00-00-00" required>
+                                                        </div>
                                                     </div>
+                                                    <span class="text-danger studentPhone"> </span>
                                                 </div>
                                             </div>
-        
+
                                             {{-- Email adress Field --}}
                                             <div class="col-md-4">
-                                                <b>Email Address</b>
+                                                <b>Email Address</b><span class="text-danger">*</span>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">email</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control email"
-                                                            placeholder="Ex: example@example.com">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input id="studentEmail" name="studentEmail" type="text"
+                                                                class="form-control email"
+                                                                placeholder="Ex: example@example.com" required>
+                                                        </div>
                                                     </div>
+                                                    <span class="text-danger studentEmail"> </span>
                                                 </div>
                                             </div>
 
                                             {{-- Gender field --}}
                                             <div class="col-md-4">
-                                                <b>Gender</b>
+                                                <b>Gender</b><span class="text-danger">*</span>
                                                 <div class="form-group">
                                                     <label>
-                                                        <input class="with-gap" name="group1" type="radio" checked />
+                                                        <input class="with-gap" value="Male" name="studentGender"
+                                                            type="radio" checked />
                                                         <span>Male</span>
                                                     </label>
                                                     <label>
-                                                        <input class="with-gap" name="group1" type="radio" />
+                                                        <input value="Female" class="with-gap"
+                                                            name="studentGender" type="radio" />
                                                         <span>Female</span>
                                                     </label>
                                                 </div>
@@ -154,71 +165,67 @@
                                     <div class="demo-masked-input">
                                         <div class="row clearfix">
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <b>First name</b>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">access_time</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Ex: Soro">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" name="studentParentFirstName"
+                                                                class="form-control" placeholder="Ex: Soro" required>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <b>Last mane</b>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">date_range</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control "
-                                                            placeholder="Ex: brahima">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input name="studentParentLastName" type="text"
+                                                                class="form-control " placeholder="Ex: brahima"
+                                                                required>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <b>Mobile Phone Number</b>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">phone_iphone</i>
-                                                    </span>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control mobile-phone-number"
-                                                            placeholder="Ex: 00 (000) 000-00-00">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input name="studentParentPhone" type="text"
+                                                                class="form-control mobile-phone-number"
+                                                                placeholder="Ex: 00 (000) 000-00-00" required>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="row clearfix">
-                                                    <div class="col-md-6">
-                                                        <label>Profession</label>
-                                                        <select class="browser-default">
-                                                            <option value="" disabled selected>Choose option</option>
-                                                            <option value="1">Former</option>
-                                                            <option value="2">House</option>
-                                                            <option value="3">Seller</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label>Type</label>
-                                                        <select class="browser-default">
-                                                            <option value="" disabled selected>Choose option</option>
-                                                            <option value="1">Father</option>
-                                                            <option value="2">Mother</option>
-                                                            <option value="3">Tutor</option>
-                                                            <option value="3">Oncle</option>
-                                                        </select>
-                                                    </div>
+
+                                            <div class="col-md-6">
+                                                <label>Profession</label>
+                                                <div class="form-group">
+                                                    <select name="studentParentProfession" class="browser-default"
+                                                        required>
+                                                        <option value="" disabled selected>Choose option</option>
+                                                        <option value="Farmer">Farmer</option>
+                                                        <option value="House">House</option>
+                                                        <option value="Worker">Worker</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                           
-                                        </div>
-                                        <div class="row clearfix">
-                                           <div>
-                                            <button type="button" class="btn btn-outline-primary m-l-20">Add new parent</button>
-                                           </div>
+                                            <div class="col-md-6">
+                                                <label>Type</label>
+                                                <div class="form-group">
+                                                    <select required name="studentParentType" class="browser-default">
+                                                        <option value="" disabled selected>Choose option</option>
+                                                        <option value="Father">Father</option>
+                                                        <option value="Mother">Mother</option>
+                                                        <option value="Oncle">Oncle</option>
+                                                        <option value="Brother">Brother</option>
+                                                        <option value="tutor">tutor</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -226,49 +233,42 @@
                                 <fieldset>
                                     <div class="row clearfix">
                                         <div class="col-md-3">
-                                            <label>Departement</label>
-                                            <select class="browser-default">
-                                                <option value="" disabled selected>Choose the departement</option>
-                                                <option value="1">departement 1</option>
-                                                <option value="2">departement 2</option>
-                                                <option value="3">departement 3</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Branch</label>
-                                            <select class="browser-default">
-                                                <option value="" disabled selected>Choose the Branch</option>
-                                                <option value="1">Branch 1</option>
-                                                <option value="2">Branch 2</option>
-                                                <option value="3">Branch 3</option>
-                                            </select>
-                                        </div>
-        
-                                        <div class="col-md-3">
                                             <label>Class</label>
-                                            <select class="browser-default">
-                                                <optgroup label="Branch 1">
-                                                    <option value="" disabled selected>Choose the Class</option>
-                                                    <option>Class 1</option>
-                                                    <option>Class 2</option>
-                                                    <option>Class 3</option>
-                                                </optgroup>
-                                                <optgroup label="Branch 2">
-                                                    <option>Class 6</option>
-                                                    <option>Class 7</option>
-                                                    <option>Class 8</option>
-                                                </optgroup>
+                                            <select required id="studentClasse" name="studentClasse"
+                                                class="browser-default">
+                                                <option value="" disabled selected>Choose the Class</option>
+                                                @forelse ($departments as $department)
+                                                    @if ($department->classes->count() > 0)
+                                                        <optgroup label="{{ $department->name }}">
+                                                            @foreach ($department->classes as $classe)
+                                                                <option value="{{ $classe->id }}">
+                                                                    {{ $classe->name }}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @endif
+
+                                                @empty
+
+                                                @endforelse
                                             </select>
+                                            <span class="text-danger studentClasse"></span>
                                         </div>
-                                       
+
                                         <div class="col-md-3">
                                             <label>Promotion</label>
-                                            <select class="browser-default">
+                                            <select required id="studentPromotion" name="studentPromotion"
+                                                class="browser-default">
                                                 <option value="" disabled selected>Choose the Promotion</option>
-                                                <option value="1">Promotion 1</option>
-                                                <option value="2">Promotion 2</option>
-                                                <option value="3">Promotion 3</option>
+                                                @forelse ($promotions as $promotion)
+                                                    <option value="{{ $promotion->id }}">{{ $promotion->name }}
+                                                    </option>
+                                                @empty
+                                                    <option disabled>No promotion</option>
+                                                @endforelse
+
+
                                             </select>
+                                            <span class="text-danger studentPromotion"></span>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -276,8 +276,8 @@
                                 <fieldset>
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" id="acceptTerms-2" name="acceptTerms"
-                                                required> I agree with the Terms and Conditions.
+                                            <input class="form-check-input" type="checkbox" id="acceptTerms-2"
+                                                name="acceptTerms" required> I agree with the Terms and Conditions.
                                             <span class="form-check-sign">
                                                 <span class="check"></span>
                                             </span>
@@ -290,12 +290,12 @@
                 </div>
             </div>
 
-      
+
         </div>
     </section>
 
     <script type="text/javascript">
-    $('#wizard_with_validation').css('height','450px');
-    $('fieldset').css('height','325px');
+        $('#wizard_with_validation').css('height', '450px');
+        $('fieldset').css('height', '325px');
     </script>
 </x-app-layout>

@@ -8,14 +8,14 @@
 
     <title>{{ config('app.name', 'BitApp') }} </title>
 
+
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> --}}
 
     {{-- <script src="assets/added/js/main-jquery.js"></script> --}}
     <script src="assets/added/js/jquery.js"></script>
     <script src="assets/ownjs/localDB.js"></script>
-    <script src="assets/ownjs/jsPDF.js"></script>
-
+    {{-- <script src="assets/ownjs/jsPDF.js"></script> --}}
 
     <!-- Plugins Core Css -->
     <link href="assets/css/app.min.css" rel="stylesheet">
@@ -24,10 +24,20 @@
     {{-- vrai --}}
     <link href="assets/css/style.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="assets/edite/css/jquery-simpleedit.css" />
+
+
+
+
+
     {{ $custom_css }}
 
     <!--  all themes -->
     <link href="assets/css/styles/all-themes.css" rel="stylesheet" />
+
+    <link href="assets/ownjs/sweetalert2.all.min.css" rel="stylesheet">
+
+    <script src="assets/ajax/ajax_helpers.js"></script>
 </head>
 
 <body class="light">
@@ -38,7 +48,7 @@
 
     <!-- Top Bar -->
     <nav class="navbar">
-        <x-nav-bar displayf={{$filtrage}} />
+        <x-nav-bar displayf={{ $filtrage }} />
     </nav>
     <!-- #Top Bar -->
 
@@ -61,26 +71,55 @@
     <!-- Page Content -->
     {{ $slot }}
     <!-- End page Content -->
+@if (Auth::user()->lastname == null || Auth::user()->firstname==null)
+<x-complete-profile-form/> 
+@endif
+    
+
 
     {{-- Js links --}}
     <script src="assets/js/app.min.js"></script>
+    <script src="assets/ownjs/logic.js"></script>
 
     <!-- Custom Js -->
     <script src="assets/js/admin.js"></script>
     <script src="assets/js/pages/ui/dialogs.js"></script>
+    <script src="assets/ownjs/sweetalert2.all.min.js"></script>
 
     {{-- others --}}
     {{-- <script src="assets/ownjs/modaljs.js"></script> --}}
 
+    <script src="assets/edite/js/jquery-simpleedit.js"></script>
+   
+    <script src="assets/js/bundles/jquery-steps/jquery.steps.min.js"></script>
+    <script src="assets/js/pages/forms/form-wizard.js"></script>
+    <script>
+        $('#compete_profile').modal('show');
+    </script>
 
     {{-- moi --}}
     {{ $custom_js }}
+
+
 
     <script>
         var currentActive = currentActivedb.getItem('currentActive');
         var parents = $('#' + currentActive).parents('li');
         parents.addClass('active');
     </script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+
+       function complete_Registration(formID){
+        modifier('/school/complete_registration/', formID, null, true);
+       }
+    </script>
+ <script src="assets/ownjs/printThis.js"></script>
 </body>
 
 </html>

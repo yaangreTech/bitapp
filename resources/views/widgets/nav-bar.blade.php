@@ -15,14 +15,17 @@
                     <i class="nav-hdr-btn ti-align-left"></i>
                 </a>
             </li>
-            @if ($displayf=='true')
+            @if ($displayf=='true' && $years->count()>0)
             <li>
                    <div class="m-t-10 m-l-20" style="height: 100%;">
                     <select class="browser-default">
-                        <option value="" disabled selected>2021-2022</option>
-                        <option value="1">2021-2022</option>
-                        <option value="2">2021-2022</option>
-                        <option value="3">2021-2022</option>
+                      @foreach ($years as $year)
+                      @if ($year->end_date==null)
+                        <option value="{{$year->id}}">Current year</option>
+                      @else
+                      <option value="{{$year->id}}">{{ $year->name}}</option>
+                      @endif
+                      @endforeach
                     </select>
                    </div>
                
@@ -51,7 +54,7 @@
                 </a>
                 <ul class="dropdown-menu pullDown">
                     <li class="header">NOTIFICATIONS</li>
-                    <li class="body">
+                    {{-- <li class="body">
                         <ul class="menu">
                             <li>
                                 <a href="#" onClick="return false;">
@@ -99,6 +102,9 @@
                     </li>
                     <li class="footer">
                         <a href="#" onClick="return false;">View All Notifications</a>
+                    </li> --}}
+                    <li class="footer">
+                        <a href="#" onClick="return false;">No Notifications</a>
                     </li>
                 </ul>
             </li>
