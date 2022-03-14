@@ -15,30 +15,34 @@ use Illuminate\Auth\Events\Registered;
 class UtilisateurController extends Controller
 {
     //
-    public function  index(){
-        $users = User::all();
-        foreach ($users as $user){
-            if($user->right->title=='isHd'){
-                $user['department']= Departement::findOrFail($user->manage->departement_id);
+    public function index()
+    {
+        // $users = User::all();
+        $users = User::withTrashed()->get();
+        foreach ($users as $user) {
+            if ($user->right->title == 'isHd') {
+                $user['department'] = Departement::findOrFail(
+                    $user->manage->departement_id
+                );
             }
-            
         }
         return view('pages.configures.users', compact('users'));
     }
 
-    public function  verifier_email($email){
-   
-        $user = User::where('email','=',$email)->first();
+    public function verifier_email($email)
+    {
+        $user = User::where('email', '=', $email)->first();
 
         // dd($user);
         return response()->json($user);
     }
 
-    public function  storeUtilisateur(Request $request){
+    public function storeUtilisateur(Request $request)
+    {
         $data = false;
         $request->validate([
-            'email'=>['required'],
-            'right_id'=>['required'], 
+            'email' => ['required'],
+            'right_id' => ['required'],
         ]);
 
         $user = User::create([
@@ -47,44 +51,62 @@ class UtilisateurController extends Controller
             'password' => Hash::make($request->email),
         ]);
 
-        
         event(new Registered($user));
-        if($user!=null){
+        if ($user != null) {
             $data = true;
-            if($user->right->title=='isHd'){
-                $manage=Manage::insert([
-                    'departement_id'=>$request->user_departement,
-                   'user_id'=>$user->id,
-                   'created_at'=>Carbon::now(),
-                   'updated_at' =>Carbon::now(),
-                   ]);
-                   $data=$manage;
+            if ($user->right->title == 'isHd') {
+                $manage = Manage::insert([
+                    'departement_id' => $request->user_departement,
+                    'user_id' => $user->id,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+                $data = $manage;
             }
-  
         }
-    
+
         return response()->json($data);
-
     }
-    public function  updateUtilisateur($id){}
-    
-    public function  completeRegistration(Request $request){
-        $user =User::findOrFail(Auth::user()->id);
-        $user->firstname=$request->firstname;
-        $user->lastname=$request->lastname;
-        $user->phone=$request->phone;
+    public function updateUtilisateur($id)
+    {
+    }
+
+    public function completeRegistration(Request $request)
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        $user->firstname =  ucwords($request->firstname);
+        $user->lastname =  ucwords($request->lastname);
+        $user->phone = $request->phone;
         event(new Registered($user));
-        $user= $user->update();
+        $user = $user->update();
         return response()->json($user);
 
-       
-    //    dd($user);
+        //    dd($user);
     }
-    
-    public function  deleteUtilisateur($id){
-        $user=User::findOrFail($id);
-        $user=$user->delete();
+
+    public function deleteUtilisateur($id)
+    {
+        $user = User::withTrashed()->where('id', $id)->first();
+        $user = $user->forceDelete();
         return response()->json($user);
     }
-    public function  destroyUtilisateur($id){}
+
+    public function desableUtilisateur($id)
+    {
+        $user = User::withTrashed()->where('id', $id)->first();
+        $user = $user->delete();
+        return response()->json($user);
+    }
+
+    public function enableUtilisateur($id)
+    {
+        $user = User::withTrashed()->where('id', $id)->first();
+        $user = $user->restore();
+        return response()->json($user);
+    }
+
+
+    public function destroyUtilisateur($id)
+    {
+    }
 }

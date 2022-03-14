@@ -382,7 +382,7 @@ function classeData(data) {
         branch.classes.length > 0 ?
             $.each(branch.classes, function(key, val) {
                 // console.log(val.semesters);
-                classe_editparames.push('classe_name=' + val.name + '&^classe_branch=' + val.branche_id + '&^classe_level=' + val.level + '&^classe_semester_2=' + val.semesters[1].id + '&^classe_semester_1=' + val.semesters[0].id);
+                classe_editparames.push('classe_name=' + val.name + '&^classe_branch=' + val.branche_id + '&^classe_level=' + val.level + '&^classe_semester_2=' + val.semesters[1].semestre_name_id + '&^classe_semester_1=' + val.semesters[0].semestre_name_id);
                 elements += '<tr class="unread">'
                 elements += '    <td class="hidden-xs">' + val.name + '</td>'
                 elements += '    <td class="max-texts">'
@@ -390,7 +390,7 @@ function classeData(data) {
                 elements += '           <span class="label l-bg-purple shadow-style m-r-10">' + val.inscriptions.length + '</span> Students</a>'
                 elements += '    </td>'
                 elements += '    <td class="hidden-xs">'
-                elements += '         <div class="badge col-gray">' + val.semestre_names[0].name + ' && ' + val.semestre_names[1].name + '</div>'
+                elements += '         <div class="badge col-gray">' + val.semesters[0].semestre_name.name + ' && ' + val.semesters[1].semestre_name.name + '</div>'
                 elements += '     </td>'
                 elements += '    <td class="hidden-xs">'
                 elements += '        <div class="badge col-green">Active</div>'
@@ -423,7 +423,7 @@ function departmentData(data) {
     classes_departments_elements = '';
     modulus_departments_elements = '';
     tu_departments_elements = '';
-
+    console.log(data);
     var active = '';
     var intialDepID = -1;
     department_editparames = []
@@ -445,8 +445,8 @@ function departmentData(data) {
         tu_departments_elements += '    <div class="collapsible-body">'
         tu_departments_elements += '        <ul class="" id="mail-folders">'
         if (val.classes.length > 0) {
-            $.each(val.classes, function(key, vale) {
-                tu_departments_elements += '            <li class="modulus_menu">'
+            $.each(val.classes, function(key2, vale) {
+                tu_departments_elements += '            <li class="tu_menu ">'
                 tu_departments_elements += '                <a href="#" id="tu' + vale.id + '" onclick="display_tu_of(this.id);" title="' + vale.name + '">' + vale.name + '<span class="pull-right badge bg-orange">4</span></a>'
                 tu_departments_elements += '            </li>'
             })
@@ -466,7 +466,7 @@ function departmentData(data) {
         modulus_departments_elements += '    <div class="collapsible-body">'
         modulus_departments_elements += '        <ul class="" id="mail-folders">'
         if (val.classes.length > 0) {
-            $.each(val.classes, function(key, vale) {
+            $.each(val.classes, function(key3, vale) {
                 modulus_departments_elements += '            <li class="modulus_menu">'
                 modulus_departments_elements += '                <a href="#" id="mm' + vale.id + '" onclick="display_modulus_of(this.id);" title="' + vale.name + '">' + vale.name + '<span class="pull-right badge bg-orange">4</span></a>'
                 modulus_departments_elements += '            </li>'
@@ -486,28 +486,20 @@ function departmentData(data) {
             ' Branches</span></td>'
         elements += '  <td class="">' + new Date(val.created_at).toISOString().split('T')[0] + '</td>'
         elements += ' <td class="text-truncate center">'
-        elements += '---'
-            // elements += '<ul class="list-unstyled order-list">'
-            // elements += '<li class="avatar avatar-sm">'
-            // elements +=
-            //     '<img class="rounded-circle" src="assets/images/user/loug.png" alt="user">'
-            // elements += '</li>'
-            // elements += '<li class="avatar avatar-sm">'
-            // elements += '<img class="rounded-circle" src="assets/images/user/loug.png" alt="user">'
-            // elements += ' </li>'
-            // elements += '</ul>'
+        if (val.heads.length === 0) {
+            elements += '---'
+        } else {
+            $.each(val.heads, function(index, head) {
+                head.firstname != null && head.lastname != null ?
+                    elements += head.firstname + ' ' + head.lastname :
+                    elements += head.email;
+                index < val.heads.length - 1 && (elements += ', ');
+            })
+        }
         elements += '</td>'
         elements += '<td class="">'
         elements += '<div class="badge col-green">Active</div>'
         elements += '</td>'
-            // elements += '<td class="">'
-            // elements += '<div class="progress-xs not-rounded progress">'
-            // elements +=
-            //     '<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">'
-            // elements += '<span class="sr-only">25%</span>'
-            // elements += '</div>'
-            // elements += '</div>'
-            // elements += ' </td>'
         elements += '<td class="center">'
         elements += ' <a href="#" data-target="#add_department" data-toggle="modal" onclick="editer( department_editparames[' + key + '],' + val.id + ')" class="btn btn-tbl-edit">'
         elements += '<i class="material-icons">create</i>'

@@ -1,6 +1,6 @@
 <x-app-layout filtrage='true'>
     <x-slot name="custom_css">
-
+        <script> var action='grade_transcript';</script>
     </x-slot>
 
     <x-slot name="custom_js">
@@ -13,6 +13,14 @@
             var grade_transcript = JSON.parse(currentActivedb.getItem('grade_transcript'));
             console.log(grade_transcript);
             getTranscriptOf(grade_transcript.year, grade_transcript.classID)
+
+            function display_with_session(checked){
+                if(checked == true){
+                    getTranscript_with_session_Of(grade_transcript.year, grade_transcript.classID);
+                }else{
+                    getTranscriptOf(grade_transcript.year, grade_transcript.classID);  
+                }
+            }
         </script>
     </x-slot>
 
@@ -23,22 +31,22 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="breadcrumb breadcrumb-style ">
                             <li class="breadcrumb-item">
-                                <h4 class="page-title">Cs1->Grade transcripts</h4>
+                                <h4 class="page-title"></h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
                                 <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
-                                <a href="#" onClick="return false;">Genarated documents</a>
+                                <a href="#" onClick="return false;">Documents</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">grade transcripts</a>
                             </li>
-                            <li class="breadcrumb-item bcrumb-2">
+                            {{-- <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">CS</a>
                             </li>
-                            <li class="breadcrumb-item active">cs 1</li>
+                            <li class="breadcrumb-item active">cs 1</li> --}}
                         </ul>
                     </div>
                 </div>
@@ -48,50 +56,26 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Cs1->Grade transcripts</strong> List
+                                <strong class="page-title"></strong> List
                             </h2>
+                            <div class="form-check m-l-10 " style="position: absolute; right: 50px;bottom:5px;">
+                                
+                                <label class="form-check-label">
+                                    <input onChange="display_with_session(this.checked)" class="form-check-input" type="checkbox"
+                                        name="acceptTerms" required> With session
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table id="grade_transcript_table" class="table table-hover  contact_list">
-                                    <thead>
-                                        <tr>
-                                            <th class="center">Matricule</th>
-                                            <th class="center"> First name </th>
-                                            <th class="center"> Last Name </th>
-                                            <th class="center"> Average </th>
-                                            <th class="center"> Notation </th>
-                                            <th class="center"> Statut </th>
-                                            <th class="center"> Action </th>
-                                        </tr>
+                                <table id="grade_transcript_table" class="table table-hover table-bordered  contact_list">
+                                    <thead id="grade_transcript_head">    
                                     </thead>
                                     <tbody id="grade_transcript">
-                                        {{-- <tr>
-                                            <td class="center">bs0001</td>
-                                            <td class="center">Sanou</td>
-                                            <td class="center">Nangoro</td>
-                                            <td class="center">14.78</td>
-                                            <td class="center">A</td>
-                                            <td class="center">Pass</td>
-                                            <td class="center">
-                                                <a class="invoice" href="{{ route('grades_view') }}">
-                                                    <i class="far fa-file-pdf"></i>
-                                                </a>
-                                            </td>
-                                        </tr> --}}
                                     </tbody>
-                                    {{-- <tfoot>
-                                        <tr>
-                                            <th class="center">#</th>
-                                            <th class="center"> Invoice No </th>
-                                            <th class="center"> Date </th>
-                                            <th class="center"> Organization </th>
-                                            <th class="center"> Payment Type </th>
-                                            <th class="center"> Amount </th>
-                                            <th class="center"> Invoice </th>
-                                            <th class="center"> Action </th>
-                                        </tr>
-                                    </tfoot> --}}
                                 </table>
                             </div>
                         </div>

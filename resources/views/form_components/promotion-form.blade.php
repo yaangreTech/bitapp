@@ -17,15 +17,17 @@
                                 <form id="wizard_with_validation" class="promotion_form" method="POST">
                                     <h3>End curent year</h3>
                                     <fieldset>
-                                        <div class="m-b-20 m-t-20">
-                                            Important!!!<br/>
-                                            In order to create new promotion, if there is new year in prossess,<br/>
-                                            it will be ended!<br/>
+                                        <div class="m-b-20 m-t-20 center">
+                                            <h4>Important!!!</h4><br/>
+                                            <h5>
+                                                In order to create new promotion, if there is a school year in process,<br/>
+                                            it will be ended!!!<br/>
+                                            </h5>
                                         </div>
-                                        <div class="form-check m-l-10">
+                                        <div class="form-check m-l-10 center">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" id="acceptTerms-2"
-                                                    name="acceptTerms" required> I agree to end if there is current year.
+                                                    name="acceptTerms" required> I agree with that.
                                                 <span class="form-check-sign">
                                                     <span class="check"></span>
                                                 </span>
@@ -41,10 +43,12 @@
                                             </div>
                                         </div> --}}
 
-                                        <div class="form-group form-floa">
+                                        <div class="form-group form-float">
                                             <label for="year_date">Start date</label>
                                             <div class="form-line">
-                                                <input type="date"  name='start_date'  id="start_date" value='{{date('Y-m-d')}}' class="datepicker form-control"
+                                                <input type="text"  name='start_date'  id="start_date" 
+                                                value='{{date('Y-m-d')}}' 
+                                                class=" form-control"
                                                     placeholder="Please choose a date..." required readonly>
                                             </div>
                                         </div>
@@ -68,14 +72,8 @@
                                     </fieldset>
                                     <h3>Validation</h3>
                                     <fieldset>
-                                        <div class="form-check m-l-10">
-                                            {{-- <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" id="acceptTerms-2"
-                                                    name="acceptTerms" required> I agree To make change.
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label> --}}
+                                        <div class="form-check m-l-10 center">
+                                            <h3>Click  to the save button below to finalize the new school year creation process !!!</h3>
                                         </div>
                                     </fieldset>
                                 </form>

@@ -15,13 +15,13 @@
                     <i class="nav-hdr-btn ti-align-left"></i>
                 </a>
             </li>
-            @if ($displayf=='true' && $years->count()>0)
+            @if ($displayf=='true' && $years->count()>1)
             <li>
                    <div class="m-t-10 m-l-20" style="height: 100%;">
-                    <select class="browser-default">
+                    <select class="browser-default filtreur">
                       @foreach ($years as $year)
                       @if ($year->end_date==null)
-                        <option value="{{$year->id}}">Current year</option>
+                        <option selected value="{{$year->id}}">Current year</option>
                       @else
                       <option value="{{$year->id}}">{{ $year->name}}</option>
                       @endif
@@ -34,10 +34,18 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="">
-                <a href="{{ route('locked') }}" class="">
-                    <i class="nav-hdr-btn ti-lock"></i>
-                </a>
+                <form method="post" action="{{ route('lock') }}" class="p-t-15">
+                    @csrf
+                    <a :href="{{ route('locked') }}"
+                     onclick="currentActivedb.setItem('user_email',{{json_encode(Auth::user()->email)}});event.preventDefault();
+                    this.closest('form').submit();"
+                    >
+                        <i class="nav-hdr-btn ti-lock"></i>
+                    </a>
+                </form>
             </li>
+
+ 
             <!-- Full Screen Button -->
             <li class="fullscreen">
                 <a href="javascript:;" class="fullscreen-btn">
@@ -111,7 +119,7 @@
             <!-- #END# Notifications-->
             <li class="dropdown user_profile">
                 <div class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="assets/images/loug.png" alt="user">
+                    <img width="30" src="assets/images/loug.png" alt="user">
                 </div>
                 <ul class="dropdown-menu pullDown">
                     <li class="body">

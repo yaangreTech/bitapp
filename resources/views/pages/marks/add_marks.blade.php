@@ -1,9 +1,6 @@
-<x-app-layout filtrage='false'>
+<x-app-layout filtrage='true'>
     <x-slot name="custom_css">
-        {{-- <link rel="stylesheet" href="assets/added/css/select2.css" /> --}}
-        {{-- <link rel="stylesheet" href="assets/added/css/select2-bootstrap.min.css" /> --}}
-        {{-- <link rel="stylesheet" href="assets/added/css/dataTables.bootstrap5.css" /> --}}
-
+        <script> var action='marksRef';</script>
     </x-slot>
 
     <x-slot name="custom_js">
@@ -32,7 +29,7 @@
         <script>
              var marksRef = JSON.parse(currentActivedb.getItem('marksRef'));
     console.log(marksRef);
-            getMarksOf(marksRef.yearID, marksRef.modulusID)
+            getMarksOf(marksRef.year, marksRef.modulusID)
         </script>
     </x-slot>
 
@@ -43,7 +40,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="breadcrumb breadcrumb-style ">
                             <li class="breadcrumb-item">
-                                <h4 class="page-title">Cs1=>ENGLISH 1</h4>
+                                <h4 class="page-title"></h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
                                 <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
@@ -52,7 +49,7 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">Marks Management</a>
                             </li>
-                            <li class="breadcrumb-item bcrumb-2">
+                            {{-- <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">CS</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -61,46 +58,120 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">Semester1</a>
                             </li>
-                            <li class="breadcrumb-item active">ENGLISH</li>
+                            <li class="breadcrumb-item active">ENGLISH</li> --}}
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                <strong>Cs1=>ENGLISH</strong> Marks
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="{{route('view_marks')}}" onClick="return true;">View Marks</a>
+                
+                        <div class="card">
+                            <div class="profile-tab-box">
+                                <div class="p-l-20">
+                                    <ul class="nav ">
+                                        <li class="nav-item tab-all">
+                                            <a class="nav-link active show" href="#Normal_Session"
+                                                data-toggle="tab">Normal Session</a>
                                         </li>
-                                       
+                                        <li class="nav-item tab-all">
+                                            <a class="nav-link" href="#Redo_Session" onclick="getSessionMarksOf(marksRef.year, marksRef.modulusID)"
+                                                data-toggle="tab">Redo Session</a>
+                                        </li>
                                     </ul>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div class="body" id="list_corps">
+                        <div class="tab-content">
+                            {{-- Normal session inputs --}}
+                            <div role="tabpanel" class="tab-pane active" id="Normal_Session" aria-expanded="true">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>
+                                            {{-- <strong>Cs1=>ENGLISH</strong> Marks --}}
+                                        </h2>
+                                        <ul class="header-dropdown m-r--5">
+                                            <li class="dropdown">
+                                                <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
+                                                    role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>
+                                                        <a href="{{route('view_marks')}}" onClick="return true;">View Marks</a>
+                                                    </li>
+                                                   
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="body" id="list_corps">
+                                        <div class="alert bg-pink alert-dismissible align-center font-bold notif" hidden role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                           <span id="notif"></span>
+                                        </div>
+            
+                                        <table  id="marksModulusMarks_table" class="table table-bordered  mb-0">
+                                            
+                                            <thead id="marksModulusMarks_head">
+                                                <tr>
+                                                   <th> <x-loading/></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="marksModulusMarks_body">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <table  id="marksModulusMarks_table" class="table table-bordered  mb-0">
-                                <thead id="marksModulusMarks_head">
-                                    <tr>
-                                       <th> <x-loading/></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="marksModulusMarks_body">
-                                </tbody>
-                            </table>
+                            {{-- Redo session inputs --}}
+                            <div role="tabpanel" class="tab-pane" id="Redo_Session" aria-expanded="true">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>
+                                            {{-- <strong>Cs1=>ENGLISH</strong> Marks --}}
+                                        </h2>
+                                        <ul class="header-dropdown m-r--5">
+                                            <li class="dropdown">
+                                                <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
+                                                    role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>
+                                                        <a href="{{route('view_marks')}}" onClick="return true;">View Marks</a>
+                                                    </li>
+                                                   
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="body" id="session_corps">
+            
+                                        <table  id="marksModulusSession_table" class="table table-bordered  mb-0">
+                                            <thead id="marksModulusSession_head">
+                                                {{-- <tr>
+                                                   <th> <x-loading/></th>
+                                                </tr> --}}
+                                            </thead>
+                                            <tbody id="marksModulusSession_body">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
+                   
+
+
+
+
+                    {{--  --}}
+                   
                 </div>
             </div>
         </div>

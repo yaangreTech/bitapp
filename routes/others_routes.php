@@ -14,6 +14,10 @@ Route::get('faqs', function () {
     return view('pages.others.faqs');
 })->middleware(['auth'])->name('faqs');
 
+// Route::get('403', function () {
+//     return view('pages.others.403');
+// })->name('403');
+
 Route::get('locked', function () {
     return view('pages.others.locked');
-})->middleware(['auth'])->name('locked');
+})->middleware('guest')->name('locked');

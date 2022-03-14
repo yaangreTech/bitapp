@@ -10,25 +10,30 @@
             <div class="modal-body ">
 
                 <form id="wizard_with_validation" class="user_form" method="POST">
-                    <h3>! Important</h3>
+                    <h3>Important</h3>
                     <fieldset>
-                        <div class="form-check m-l-10">
+                        <div class="m-b-20 m-t-20 center">
+                            <h4>Important!!!</h4><br/>
+                          <h5>  If your add new user, he will be able to actions in the system,<br/>
+                            according to his rights!!!<br/></h5>
+                        </div>
+                        <div class="form-check m-l-10 center">
                             <label class="form-check-label">
                                 <input class="form-check-input" type="checkbox" id="acceptTerms-2" name="acceptTerms"
-                                    required> I agree with the Terms and Conditions.
+                                    required> I understood.
                                 <span class="form-check-sign">
                                     <span class="check"></span>
                                 </span>
                             </label>
                         </div>
                     </fieldset>
-                    <h3>new user role</h3>
+                    <h3>User role</h3>
                     <fieldset>
-                        <div class="form-group">
+                        <div class="form-group demo-masked-input">
                             <label for="email">new user email</label>
                         <div class="form-line">
-                            <input onblur="verifier_email(this.value)"  id="email" name="email" type="text" class="form-control"
-                                placeholder="user email" required>
+                            <input onblur="verifier_email(this.value)"  id="email" name="email" type="text" class="form-control email"
+                                placeholder="user email " required>
                         </div>
                         <span class="email text-danger"></span>
                         </div>
@@ -64,15 +69,9 @@
                     </fieldset>
                     <h3>Validation</h3>
                     <fieldset>
-                        {{-- <div class="form-check m-l-10">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" id="acceptTerms-2" name="acceptTerms"
-                                    required> I agree with the Terms and Conditions.
-                                <span class="form-check-sign">
-                                    <span class="check"></span>
-                                </span>
-                            </label>
-                        </div> --}}
+                        <div class="form-check m-l-10 center">
+                            <h3>Click  to the save button below to finalize the new user creation process !!!</h3>
+                        </div>
                     </fieldset>
                 </form>
             </div>

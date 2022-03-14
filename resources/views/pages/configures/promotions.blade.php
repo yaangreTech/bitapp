@@ -5,7 +5,7 @@
 
     <x-slot name="custom_js">
         <script src="assets/js/table.min.js"></script>
-        <script src="assets/js/form.min.js"></script>
+        {{-- <script src="assets/js/form.min.js"></script> --}}
         <!-- Custom Js -->
         <script src="assets/js/pages/tables/jquery-datatable.js"></script>
         <script src="assets/js/pages/forms/basic-form-elements.js"></script>

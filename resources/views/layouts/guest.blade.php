@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="assets/ownjs/gestStyles.css">
         
         <script src="assets/ownjs/localDB.js"></script>
         <!-- Scripts -->

@@ -19,7 +19,7 @@ $(function() {
     //Date
     $demoMaskedInput
         .find(".date")
-        .inputmask("yyyy/mm/dd", { placeholder: "____/__/__" });
+        .inputmask("yyyy-mm-dd", { placeholder: "____-__-__" });
 
     //Time
     $demoMaskedInput

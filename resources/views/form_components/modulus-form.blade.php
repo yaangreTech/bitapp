@@ -22,20 +22,27 @@
                             <div class="col-md-6">
                                 <label for="modulus_credict">Module Credict</label>
                                 <div class="form-group">
+                                   <div class='input-group'>
                                     <div class="form-line">
                                         <input type="number" id="modulus_credict" name="modulus_credict"
                                             class="form-control" placeholder="Enter the Credict">
                                     </div>
+                                    <span class="input-group-addon">Credits</span>
+                                   </div>
+                                  
                                     <span class="modulus_credict  text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="modulus_hours">Module Hours</label>
                                 <div class="form-group">
+                                  <div class="input-group">
                                     <div class="form-line">
                                         <input type="number" id="modulus_hours" name="modulus_hours"
                                             class="form-control" placeholder="Enter the Hours">
                                     </div>
+                                    <span class="input-group-addon">Hours</span>
+                                  </div>
                                     <span class="modulus_hours"></span>
                                 </div>
                             </div>
@@ -46,7 +53,7 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <select onChange="bindTuOf(this.value)" id='modulus_classe'
-                                            name="modulus_classe" class="browser-default bordered bordered-select">
+                                            name="modulus_classe" class="browser-default">
                                             <option value="" disabled selected>Choose the class</option>
                                             @foreach ($departements as $departement)
                                                 <optgroup label="{{ $departement->name }}">
@@ -63,6 +70,7 @@
                                             @endforeach;
                                         </select>
                                     </div>
+                                   
                                     <span class="modulus_classe  text-danger"></span>
                                 </div>
                             </div>

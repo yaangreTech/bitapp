@@ -13,4 +13,8 @@ class Conforme extends Model
     public function conformeOf($average){
         return Conforme::all()->where('initial','<=',$average)->where('final','>=',$average)->last();
     }
+
+    public function getAttributes(){
+        return $this->attributes;
+    }
 }

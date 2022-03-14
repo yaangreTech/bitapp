@@ -1,6 +1,6 @@
 <x-app-layout filtrage='false'>
     <x-slot name="custom_css">
-
+        <script> var action='marks_management';</script>
     </x-slot>
 
     <x-slot name="custom_js">
@@ -31,13 +31,7 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">Marks management</a>
                             </li>
-                            <li class="breadcrumb-item bcrumb-2">
-                                <a href="#" onClick="return false;">CS</a>
-                            </li>
-                            <li class="breadcrumb-item bcrumb-2">
-                                <a href="#" onClick="return false;">CS1</a>
-                            </li>
-                            <li class="breadcrumb-item active">Semester 1</li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -48,7 +42,7 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            <strong>Cs1->S1</strong> Modulus
+                            <strong class="page-title">---</strong> Modulus
                         </h2>
                     </div>
                     <hr>

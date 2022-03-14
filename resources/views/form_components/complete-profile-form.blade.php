@@ -19,9 +19,9 @@
                                     <h3>Notification</h3>
                                     <fieldset>
                                         <div class="m-b-20 m-t-20">
-                                            Important!!!<br/>
-                                            Please follow these step to complete your registration,<br/>
-                                            it will be ended!<br/>
+                                           <h4> Important!!!<br/>
+                                            Please follow these step to complete your registration !!!<br/></h4>
+                                           <br/>
                                         </div>
                                     </fieldset>
                                     <h3>First name</h3>
@@ -48,10 +48,12 @@
                                     <fieldset>
                                         <div class="form-group form-floa">
                                             <label for="phone">Phone number</label>
+                                          <div class="demo-masked-input">
                                             <div class="form-line">
-                                                <input type="phone"  name='phone'  id="phone" class="form-control"
+                                                <input type="phone"  name='phone'  id="phone" class="form-control mobile-phone-number"
                                                     placeholder="Please type your phone number..." required>
                                             </div>
+                                          </div>
                                         </div>
                                     </fieldset>
                                 </form>

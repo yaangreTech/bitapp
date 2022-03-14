@@ -1,21 +1,41 @@
-function getYear(key) {
-    var year = {};
-    $.ajax({
-        type: "GET",
-        dataType: "JSON",
-        url: '/school/get_year/' + key,
-        success: function(data) {
-            // console.log(data);
-            year = data;
-        },
-        error: function(error) { console.log(error); }
-    });
-    console.log(year);
-    // return year;
-}
+$(function() {
+    // console.log(action);
+    try {
+        var donners = JSON.parse(currentActivedb.getItem(action));
+
+        console.log('donners');
+        if (donners.year != 0 && donners.year != undefined) {
+            $('.filtreur').val(donners.year).change();
+        }
+
+
+        startSevices();
+    } catch (error) {
+        console.log('without filter');
+    }
+
+})
+
+
+// function getYear(key) {
+//     var year = {};
+//     $.ajax({
+//         type: "GET",
+//         dataType: "JSON",
+//         url: '/school/get_year/' + key,
+//         success: function(data) {
+//             // console.log(data);
+//             year = data;
+//         },
+//         error: function(error) { console.log(error); }
+//     });
+//     console.log(year);
+//     // return year;
+// }
 
 
 function editer(assosValues = '', id) {
+    console.log(assosValues);
     $('.update').show();
     $('.update').attr('id', id);
     $('.save').hide();
@@ -67,4 +87,22 @@ function imprimer(id) {
 
 function toUp(string) {
     return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+}
+
+function setBreadcrumb(titles = '', breadcrumIitems = '') {
+    titles = titles.split('&');
+    breadcrumIitems = breadcrumIitems.split('&');
+    var s_titles = '';
+    $.each(titles, function(index, title) {
+        s_titles += title;
+        index != titles.length - 1 && (s_titles += ' > ');
+    })
+    $('.page-title').html(s_titles);
+
+    $.each(breadcrumIitems, function(index, breadcrumIitem) {
+        $('.breadcrumb').append(
+            index != breadcrumIitems.length - 1 ? $("<li class = \"breadcrumb-item bcrumb-2\" ><a href = \"#\" onClick = \"return false;\" > " + breadcrumIitem + " </a></li>") :
+            $("<li class = \"breadcrumb-item bcrumb-2 active \" >" + breadcrumIitem + "</li>")
+        );
+    })
 }

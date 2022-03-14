@@ -1,13 +1,13 @@
 <x-app-layout filtrage='false'>
     <x-slot name="custom_css">
-        
+
     </x-slot>
 
     <x-slot name="custom_js">
 
     </x-slot>
 
-     <section class="content">
+    <section class="content">
         <div class="container-fluid">
             <div class="block-header">
                 <div class="row">
@@ -17,7 +17,7 @@
                                 <h4 class="page-title">Profile</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{route('dashboard')}}"  onClick="setActiveId('Dashboard')">
+                                <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item active">Profile</li>
@@ -32,32 +32,19 @@
                         <div class="m-b-20">
                             <div class="contact-grid">
                                 <div class="profile-header bg-dark">
-                                    <div class="user-name">{{Auth::user()->firstname.' '.Auth::user()->lastname}}</div>
-                                    <div class="name-center">{{Auth::user()->email}}</div>
+                                    <div class="user-name">{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}
+                                    </div>
+                                    <div class="name-center">{{ Auth::user()->email }}</div>
                                 </div>
                                 <img src="assets/images/user/lougb3.png" class="user-img" alt="">
                                 <p>
-                                    {{Auth::user()->right->label}}
+                                    {{ Auth::user()->right->label }}
                                     <br />since 2021
                                 </p>
                                 <div>
                                     <span class="phone">
-                                        <i class="material-icons">phone</i>{{Auth::user()->phone}}</span>
+                                        <i class="material-icons">phone</i>{{ Auth::user()->phone }}</span>
                                 </div>
-                                {{-- <div class="row">
-                                    <div class="col-4">
-                                        <h5>564</h5>
-                                        <small>Following</small>
-                                    </div>
-                                    <div class="col-4">
-                                        <h5>18k</h5>
-                                        <small>Followers</small>
-                                    </div>
-                                    <div class="col-4">
-                                        <h5>565</h5>
-                                        <small>Post</small>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -90,34 +77,36 @@
                                                 <div class="col-md-4 col-6 b-r">
                                                     <strong>First Name</strong>
                                                     <br>
-                                                    <p class="text-muted">{{Auth::user()->firstname}}</p>
+                                                    <p class="text-muted">{{ Auth::user()->firstname }}</p>
                                                 </div>
                                                 <div class="col-md-4 col-6 b-r">
                                                     <strong>Last Name</strong>
                                                     <br>
-                                                    <p class="text-muted">{{Auth::user()->lastname}}</p>
+                                                    <p class="text-muted">{{ Auth::user()->lastname }}</p>
                                                 </div>
                                                 <div class="col-md-4 col-6 b-r">
                                                     <strong>Mobile</strong>
                                                     <br>
-                                                    <p class="text-muted">{{Auth::user()->phone!=null ? Auth::user()->phone :'---'}}</p>
+                                                    <p class="text-muted">
+                                                        {{ Auth::user()->phone != null ? Auth::user()->phone : '---' }}</p>
                                                 </div>
                                                 <div class="col-md-12 col-6 b-r">
                                                     <strong>Email</strong>
                                                     <br>
-                                                    <p class="text-muted">{{Auth::user()->email}}</p>
+                                                    <p class="text-muted">{{ Auth::user()->email }}</p>
                                                 </div>
                                                 <div class="col-md-12 col-6">
                                                     <strong>Right</strong>
                                                     <br>
-                                                    <p class="text-muted">{{Auth::user()->right->label}} of BitApp</p>
+                                                    <p class="text-muted">{{ Auth::user()->right->label }} of BitApp
+                                                    </p>
                                                 </div>
                                             </div>
-                                          <br>
+                                            <br>
                                         </div>
                                     </div>
                                 </div>
-                              
+
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="timeline" aria-expanded="false">
@@ -126,33 +115,40 @@
                             <div class="card">
                                 <div class="header">
                                     <h2>
-                                        <strong>Account</strong> Settings</h2>
+                                        <strong>Account</strong> Settings
+                                    </h2>
                                 </div>
-                                
+
                                 <form id="update_profile">
-                                <div class="body">
-                                    <div class="row clearfix">
-                                          @csrf
-                                        <div class="col-lg-6 col-md-12">
-                                            <b>First name</b>
-                                            <div class="form-group">
-                                                <input type="text" name="firstname" class="form-control" placeholder="Sanou"  value="{{Auth::user()->firstname}}">
+                                    <div class="body">
+                                        <div class="row clearfix">
+                                            @csrf
+                                            <div class="col-lg-6 col-md-12">
+                                                <b>First name</b>
+                                                <div class="form-group">
+                                                    <input type="text" name="firstname" class="form-control"
+                                                        placeholder="Sanou" value="{{ Auth::user()->firstname }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12">
-                                            <b>last name</b>
-                                            <div class="form-group">
-                                                <input type="text" name="lastname" class="form-control" placeholder="Lougoudoro" value="{{Auth::user()->lastname}}">
+                                            <div class="col-lg-6 col-md-12">
+                                                <b>last name</b>
+                                                <div class="form-group">
+                                                    <input type="text" name="lastname" class="form-control"
+                                                        placeholder="Lougoudoro" value="{{ Auth::user()->lastname }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12">
-                                            <b>Phone</b>
-                                            <div class="form-group">
-                                                <input type="text" name="phone" class="form-control" placeholder="----" value="{{Auth::user()->phone}}">
+                                            <div class="col-lg-6 col-md-12">
+                                                <b>Phone</b>
+                                                <div class=" demo-masked-input">
+                                                    <div class="form-group">
+                                                        <input type="text" name="phone"
+                                                            class="form-control mobile-phone-number" placeholder="----"
+                                                            value="{{ Auth::user()->phone }}">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        
-                                        {{-- <div class="col-md-12">
+
+                                            {{-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-check m-l-10">
                                                     <label class="form-check-label">
@@ -165,13 +161,15 @@
                                                 </div>
                                             </div>
                                         </div> --}}
-                                        <div class="col-md-12">
-                                            <button id="{{Auth::user()->id}}" onclick="modifier('/profile/'+this.id,'update_profile',null)" class="btn btn-primary btn-round">Save Changes</button>
+                                            <div class="col-md-12">
+                                                <button id="{{ Auth::user()->id }}"
+                                                    onclick="modifier('/profile/'+this.id,'update_profile',null)"
+                                                    class="btn btn-primary btn-round">Save Changes</button>
+                                            </div>
+
                                         </div>
-                                      
                                     </div>
-                                </div>
-                            </form>
+                                </form>
                             </div>
                         </div>
                     </div>

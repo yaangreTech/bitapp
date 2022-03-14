@@ -12387,9 +12387,9 @@ table .checkbox [type="checkbox"]+label {
 .support-box {
     padding: 15px;
     color: #fff;
-    margin: 8px 0 25px 0;
+    margin: 0px 0 0px 0;
     border-radius: 10px;
-    min-height: 140px
+    min-height: 70px
 }
 
 .counter-box {

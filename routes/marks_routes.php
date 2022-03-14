@@ -23,6 +23,8 @@ Route::post('/marks_modulus/update_test/{id}/',[MarksController::class, 'updateT
 Route::get('add_marks/',[MarksInputController::class, 'index'])->middleware(['auth'])->name('add_marks');
 Route::get('view_marks/',[MarksInputController::class, 'view'])->middleware(['auth'])->name('view_marks');
 Route::get('/marks_modulus/get_marks_modulus_marks_of/{yearID}/{modulusID}/',[MarksInputController::class, 'getMarksModulusMarksOf'])->middleware(['auth']);
+Route::get('/marks_modulus/get_marks_modulus_session_mark_of/{yearID}/{modulusID}/',[MarksInputController::class, 'getMarksModulusMarks_sessionOf'])->middleware(['auth']);
 Route::get('/marks_modulus/view_marks_modulus_marks_of/{yearID}/{modulusID}/',[MarksInputController::class, 'viewMarksModulusMarksOf'])->middleware(['auth']);
+Route::get('/marks_modulus/viewMarksModulusMarks_with_session_Of/{yearID}/{modulusID}/',[MarksInputController::class, 'viewMarksModulusMarks_with_session_Of'])->middleware(['auth']);
 Route::post('/marks_modulus/store_marks_modulus_marks_of/{inscID}/{testID}/',[MarksInputController::class, 'storeMarksModulusMarksOf'])->middleware(['auth']);
 Route::post('/marks_modulus/update_marks_modulus_marks_of/{markID}/',[MarksInputController::class, 'updateMarksModulusMarksOf'])->middleware(['auth']);

@@ -1,9 +1,6 @@
-<x-app-layout filtrage='false'>
+<x-app-layout filtrage='true'>
     <x-slot name="custom_css">
-        {{-- <link rel="stylesheet" href="assets/added/css/select2.css" /> --}}
-        {{-- <link rel="stylesheet" href="assets/added/css/select2-bootstrap.min.css" /> --}}
-        {{-- <link rel="stylesheet" href="assets/added/css/dataTables.bootstrap5.css" /> --}}
-
+        <script> var action='marksRef';</script>
     </x-slot>
 
     <x-slot name="custom_js">
@@ -12,27 +9,24 @@
         <!-- Custom Js -->
         <script src="assets/js/pages/tables/jquery-datatable.js"></script>
 
-        {{-- <script src="assets/js/bundles/editable-table/mindmup-editabletable.js"></script>
-        <!-- Custom Js -->
-        <script src="assets/js/pages/tables/editable-table.js"></script> --}}
-
-        {{-- addded --}}
-
-        {{-- <script src="assets/added/js/select2.js"></script> --}}
-
-
-
-        {{-- <script src="assets/added/js/jquery.dataTables.min.js"></script> --}}
-
-        {{-- <script src="assets/added/js/examples.datatables.editable.js"></script> --}}
-
-        {{-- <script src="assets/added/js/dataTables.bootstrap5.min.js"></script> --}}
+       
         <script src="assets/ajax/marks_inputs_ajax.js"></script>
 <script>
-    
+    $('#marksModulusMarks_with_session_table').hide();
     var marksRef = JSON.parse(currentActivedb.getItem('marksRef'));
     console.log(marksRef);
-            viewMarksOf(marksRef.yearID, marksRef.modulusID)
+            viewMarksOf(marksRef.year, marksRef.modulusID)
+            viewMarks_with_session_Of(marksRef.year, marksRef.modulusID)
+
+          function  display_with_session(checked){
+              if(checked == true){
+                $('#marksModulusMarks_with_session_table').show(); 
+                $('#marksModulusMarks_table').hide(); 
+              }else{
+                $('#marksModulusMarks_with_session_table').hide(); 
+                $('#marksModulusMarks_table').show(); 
+              }
+          }
 </script>
     </x-slot>
 
@@ -43,7 +37,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="breadcrumb breadcrumb-style ">
                             <li class="breadcrumb-item">
-                                <h4 class="page-title">Cs1=>ENGLISH 1</h4>
+                                <h4 class="page-title"></h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
                                 <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
@@ -52,7 +46,7 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">Marks Management</a>
                             </li>
-                            <li class="breadcrumb-item bcrumb-2">
+                            {{-- <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">CS</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -61,7 +55,7 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">Semester1</a>
                             </li>
-                            <li class="breadcrumb-item active">ENGLISH</li>
+                            <li class="breadcrumb-item active">ENGLISH</li> --}}
                         </ul>
                     </div>
                 </div>
@@ -71,8 +65,19 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Cs1=>ENGLISH</strong> Marks
+                                <strong class="page-title"></strong> Marks
                             </h2>
+                            <div class="form-check m-l-10 " style="position: absolute; right: 50px;bottom:5px;">
+                                
+                                <label class="form-check-label">
+                                    <input onChange="display_with_session(this.checked)" class="form-check-input" type="checkbox"
+                                        name="acceptTerms" required> With session
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -81,7 +86,10 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li>
-                                            <a href="{{route('add_marks')}}" onClick="return true;">edit marks</a>
+                                            <a href="{{route('add_marks')}}" onClick="return true;">Edit marks</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onClick="imprimer('list_corps')">Print</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -96,6 +104,16 @@
                                     </tr>
                                 </thead>
                                 <tbody id="marksModulusMarks_body">
+                                </tbody>
+                            </table>
+
+                            <table  id="marksModulusMarks_with_session_table" class="table table-bordered  mb-0">
+                                <thead id="marksModulusMarks_with_session_head">
+                                    <tr>
+                                       <th> <x-loading/></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="marksModulusMarks_with_session_body">
                                 </tbody>
                             </table>
                         </div>

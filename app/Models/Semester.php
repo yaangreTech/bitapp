@@ -29,4 +29,8 @@ class Semester extends Model
     public function classe(){
         return $this->belongsTo(Classe::class);
     }
+
+    public function getAttributes(){
+        return $this->attributes;
+    }
 }

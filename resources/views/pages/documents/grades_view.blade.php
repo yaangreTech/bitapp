@@ -14,6 +14,13 @@
             console.log(inscID);
             console.log('inscID');
             viewTranscriptOf(inscID);
+           function display_with_session(checked){
+            if(checked == true){
+                viewTranscript_with_session_Of(inscID);
+            }else{
+                viewTranscriptOf(inscID);  
+            }
+           }
         </script>
     </x-slot>
 
@@ -51,12 +58,24 @@
                                     <div class="white-box first_hide">
                                         <h3>
                                             <b>Grade Transcripts</b>
+                                           
+
                                             <button onClick="imprimer('notes')" type="button"
                                                 class="btn pull-right btn-border-radius btn-outline-info">
                                                 <i class="material-icons">print</i>
                                                 <span>PRINT...</span>
                                             </button>
                                         </h3>
+                                        <div class="form-check m-l-10 " style="position: absolute; right: 150px;top:5px;">
+                                
+                                            <label class="form-check-label">
+                                                <input onChange="display_with_session(this.checked)" class="form-check-input" type="checkbox"
+                                                    name="acceptTerms" required> With session
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
                                         <hr>
 
                                         <div id='notes' class="row">

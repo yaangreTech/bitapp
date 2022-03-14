@@ -1,7 +1,7 @@
 <div class="modal fade bd-example-modal-lg" data-backdrop="static" id="test_list" tabindex="-1" role="dialog"
     aria-labelledby="formModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content card">
+        <div class="modal-content card" >
             <div class="modal-header">
                 <h5 class="modal-title" id="formModal">Tests list</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -23,7 +23,7 @@
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li>
-                                    <a href="#" data-toggle="modal" class="initier" data-target="#add_test" onClick="return false;">add
+                                    <a href="#" data-toggle="modal" class="initier" data-target="#add_test">add
                                         new test</a>
                                 </li>
 
@@ -32,7 +32,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="max-height: 450px;">
                         <table id="marksModulusTest_table" class="table table-hover contact_list">
                             <thead>
                                 <tr>
@@ -106,9 +106,13 @@
                         <div class="col-md-6">
                             <label for="test_ration">Test Ratio</label>
                             <div class="form-group">
-                                <div class="form-line">
-                                    <input type="number" id="test_ration" name="test_ration"
-                                        class="form-control cacherel" placeholder="Enter the ratio">
+                                <div class="input-group">
+                                    <div class="form-line">
+                                        <input type="number" id="test_ration" name="test_ration"
+                                            class="form-control cacherel" placeholder="Enter the ratio">
+                                            <span class="test_ration text-warning"></span>
+                                    </div>
+                                    <span class="input-group-addon font-bold ">%</span>
                                 </div>
                             </div>
                         </div>

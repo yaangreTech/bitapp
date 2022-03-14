@@ -19,7 +19,6 @@ class AppLayout extends Component
     public function __construct($filtrage){
     //    $user= User::all();
 
-    //    dd($user);
 
     $this->filtrage=$filtrage;
     $this->saveConformes();

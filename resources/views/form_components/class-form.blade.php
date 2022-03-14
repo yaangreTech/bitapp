@@ -51,9 +51,9 @@
                                             class="browser-default bordered bordered-select">
                                             <option value="" disabled selected>Choose the level</option>
                                        
-                                                <option value="1">Level 1</option>
-                                                <option value="2">Level 2</option>
-                                                <option value="3">Level 3</option>
+                                                <option value="1">Licence 1</option>
+                                                <option value="2">Licence 2</option>
+                                                <option value="3">Licence 3</option>
                                             
                                         </select>
                                     </div>

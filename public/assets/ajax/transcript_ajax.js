@@ -31,15 +31,45 @@ function getTranscriptOf(yearID, classID) {
 
 }
 
-function getTranscriptData(data) {
+function getTranscript_with_session_Of(yearID, classID) {
+    $.ajax({
+        type: "GET",
+        dataType: "JSON",
+        url: '/school/get_year/' + yearID,
+        success: function(year) {
+            console.log('minteneant');
+            console.log(year);
+            selectionner('/grades/getGrades_with_session_Of/' + year.id + '/' + classID, getTranscript_with_session_Data);
+            // yearData = year;
+        },
+        error: function(error) {
+            console.log(error);
+            // $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No School year<br/><span class="font-bold">Please Create a school year before !!!</span></h3></div>')
+        }
+    });
+
+}
+
+
+
+function getTranscript_with_session_Data(data) {
+    console.log(data);
     var body_elements = ''
+    var head_elements = '<tr><th class="center">Matricule</th><th class="center"> First name </th><th class="center"> Last Name </th>'
+    $.each(data.head_element, function(i, semester) {
+        head_elements += '<th class="center">' + semester.semestre_name.name + ' </th>'
+    })
+    head_elements += '<th class="center"> Average </th><th class="center"> Notation </th><th class="center"> Statut </th><th class="center"> Action </th></tr>'
     console.log('getTranscriptData');
     console.log(data);
-    $.each(data, function(key, insc) {
+    $.each(data.inscriptions, function(key, insc) {
         body_elements += '<tr>'
         body_elements += '    <td class="center">' + insc.student.matricule + '</td>'
         body_elements += '    <td class="center">' + insc.student.first_name + '</td>'
         body_elements += '    <td class="center">' + insc.student.Last_name + '</td>'
+        $.each(insc.year_semesters, function(key, semester) {
+            body_elements += '    <td class="center">' + semester.s_n_average + '</td>'
+        })
         body_elements += '    <td class="center">' + insc.t_n_average + '</td>'
         body_elements += '    <td class="center">' + (insc.conforme != null ? insc.conforme.international_Grade : '---') + '</td>'
         body_elements += '    <td class="center">' + insc.t_n_status + '</td>'
@@ -55,7 +85,58 @@ function getTranscriptData(data) {
     // $('#grade_transcript').html(body_elements);
 
     $.fn.dataTable.isDataTable('#grade_transcript_table') && grade_transcript_table.destroy();
+    $('#grade_transcript_head').html(head_elements);
+    body_elements.length > 0 ? $('#grade_transcript').html(body_elements) : $('#grade_transcript').html('<tr><td colspan="7" class="center">No data available<td></tr>')
 
+    if (body_elements.length > 0) {
+        grade_transcript_table = $('#grade_transcript_table').DataTable({
+            responsive: true,
+        });
+    }
+}
+
+
+function getTranscriptData(data) {
+    console.log(data);
+    var body_elements = ''
+    var head_elements = '<tr><th class="center">Matricule</th><th class="center"> First name </th><th class="center"> Last Name </th>'
+    $.each(data.head_element, function(i, semester) {
+        head_elements += '<th class="center">' + semester.semestre_name.name + ' </th>'
+    })
+    head_elements += '<th class="center"> Average </th><th class="center"> Notation </th><th class="center"> Statut </th><th class="center"> Action </th></tr>'
+    console.log('getTranscriptData');
+    console.log(data);
+    $.each(data.inscriptions, function(key, insc) {
+        body_elements += '<tr>'
+        body_elements += '    <td class="center">' + insc.student.matricule + '</td>'
+        body_elements += '    <td class="center">' + insc.student.first_name + '</td>'
+        body_elements += '    <td class="center">' + insc.student.Last_name + '</td>'
+        $.each(insc.year_semesters, function(key, semester) {
+            body_elements += '    <td class="center">' + semester.s_n_average + '</td>'
+        })
+        body_elements += '    <td class="center">' + insc.t_n_average + '</td>'
+        body_elements += '    <td class="center">' + (insc.conforme != null ? insc.conforme.international_Grade : '---') + '</td>'
+        body_elements += '    <td class="center">' + insc.t_n_status + '</td>'
+        body_elements += '    <td class="center">'
+        body_elements += '        <a class="invoice" href="grades_view" onClick="saveinscID(' + insc.id + ')">'
+        body_elements += '            <i class="far fa-file-pdf"></i>'
+        body_elements += '        </a>'
+        body_elements += '    </td>'
+        body_elements += '</tr>'
+    })
+
+
+    // $('#grade_transcript').html(body_elements);
+
+    setBreadcrumb(
+        /* data.page_title.tu.semester.classe.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
+        data.page_title.name + '&' + 'Grade transcripts',
+        data.page_title.branche.departement.name + '&' + data.page_title.name
+    );
+
+
+    $.fn.dataTable.isDataTable('#grade_transcript_table') && grade_transcript_table.destroy();
+    $('#grade_transcript_head').html(head_elements);
     body_elements.length > 0 ? $('#grade_transcript').html(body_elements) : $('#grade_transcript').html('<tr><td colspan="7" class="center">No data available<td></tr>')
 
     if (body_elements.length > 0) {
@@ -68,22 +149,13 @@ function getTranscriptData(data) {
 
 function viewTranscriptOf(inscID) {
     console.log('kkkk', inscID);
-    // $.ajax({
-    //     type: "GET",
-    //     dataType: "JSON",
-    //     url: '/school/get_year/' + yearID,
-    //     success: function(year) {
-    //         console.log('minteneant');
-    //         console.log(year);
     selectionner('/grades_view/view_grades_of/' + inscID, viewTranscriptData);
-    // yearData = year;
-    //     },
-    //     error: function(error) {
-    //         console.log(error);
-    //         $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No School year<br/><span class="font-bold">Please Create a school year before !!!</span></h3></div>')
-    //     }
-    // });
+}
 
+
+function viewTranscript_with_session_Of(inscID) {
+    console.log('kkkk', inscID);
+    selectionner('/grades_view/view_grades_with_session_of/' + inscID, viewTranscriptData);
 }
 
 function viewTranscriptData(data) {

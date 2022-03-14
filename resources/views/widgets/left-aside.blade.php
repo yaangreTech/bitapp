@@ -63,6 +63,20 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('reinscription_form') }}" id="reinscript_Students"
+                        onClick="setActiveId(this.id)">
+                        <span>Reinscript Students</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('end_cycle_form') }}" id="end_Cycle"
+                        onClick="setActiveId(this.id)">
+                        <span>End cycle</span>
+                    </a>
+                </li>
+               
+
+                <li>
                     <a href="#" onClick="return false;" class="menu-toggle">
                         <span>Students list</span>
                     </a>
@@ -78,7 +92,9 @@
                                             <li>
                                                 <a title="students_list" href="{{ route('all_students') }}"
                                                     id="{{ 'sl' . $departement->id . '_' . $classe->id }}"
-                                                    onClick="setActiveId(this.id, this.title)">
+                                                    onClick="setActiveId(this.id, this.title)"
+                                                    >
+
                                                     <span>{{ $classe->name }}</span>
                                                 </a>
                                             </li>
@@ -333,7 +349,7 @@
                         <div class="title">Year</div>
                     </div>
                     <div class="status">
-                        <span>79</span>%
+                        <span>79 %</span>
                     </div>
                     <div class="progress-s progress">
                         <div class="progress-bar progress-bar-warning width-per-79" role="progressbar"
@@ -342,8 +358,6 @@
                     </div>
                 </div>
             </div>
-
-
         </li>
 
     </ul>

@@ -48,7 +48,8 @@
 
     <!-- Top Bar -->
     <nav class="navbar">
-        <x-nav-bar displayf={{ $filtrage }} />
+
+        <x-nav-bar displayf='{{ $filtrage }}' />
     </nav>
     <!-- #Top Bar -->
 
@@ -71,10 +72,10 @@
     <!-- Page Content -->
     {{ $slot }}
     <!-- End page Content -->
-@if (Auth::user()->lastname == null || Auth::user()->firstname==null)
-<x-complete-profile-form/> 
-@endif
-    
+    @if (Auth::user()->lastname == null || Auth::user()->firstname == null)
+        <x-complete-profile-form />
+    @endif
+
 
 
     {{-- Js links --}}
@@ -90,9 +91,19 @@
     {{-- <script src="assets/ownjs/modaljs.js"></script> --}}
 
     <script src="assets/edite/js/jquery-simpleedit.js"></script>
-   
-    <script src="assets/js/bundles/jquery-steps/jquery.steps.min.js"></script>
+
+
+
+
     <script src="assets/js/pages/forms/form-wizard.js"></script>
+
+    <script src="assets/js/pages/forms/advanced-form-elements.js"></script>
+    <script src="assets/js/form.min.js"></script>
+
+
+    <script src="assets/js/bundles/jquery-steps/jquery.steps.min.js"></script>
+    <script src="assets/js/bundles/multiselect/js/jquery.multi-select.js"></script>
+
     <script>
         $('#compete_profile').modal('show');
     </script>
@@ -115,11 +126,12 @@
             }
         })
 
-       function complete_Registration(formID){
-        modifier('/school/complete_registration/', formID, null, true);
-       }
+        function complete_Registration(formID) {
+            modifier('/school/complete_registration/', formID, null, true);
+        }
     </script>
- <script src="assets/ownjs/printThis.js"></script>
+    <script src="assets/ownjs/printThis.js"></script>
+
 </body>
 
 </html>

@@ -7,13 +7,6 @@
     </x-slot>
 
     <x-slot name="custom_js">
-        <script src="assets/js/form.min.js"></script>
-        <script src="assets/js/bundles/multiselect/js/jquery.multi-select.js"></script>
-        {{-- <script src="assets/js/bundles/jquery-steps/jquery.steps.min.js"></script> --}}
-        <!-- Custom Js -->
-        <script src="assets/js/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
-        {{-- <script src="assets/js/pages/forms/form-wizard.js"></script> --}}
-        <script src="assets/js/pages/forms/advanced-form-elements.js"></script>
         <script src="assets/ajax/student_ajax.js"></script>
     </x-slot>
     <section class="content">
@@ -32,7 +25,7 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">Students management</a>
                             </li>
-                            <li class="breadcrumb-item active">Add new student</li>
+                            <li class="breadcrumb-item active">Add new students</li>
                         </ul>
                     </div>
                 </div>
@@ -43,7 +36,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Add new student</strong> Form
+                                <strong>Add new students</strong> Form
                             </h2>
                         </div>
                         <div class="body">
@@ -59,12 +52,11 @@
                                                 <div class="input-group ">
                                                     <div class="form-group ">
                                                         <div class="form-line">
-                                                            <input id="studentID" name='studentID' type="text"
-                                                                class="form-control ID" placeholder="Ex: bs00001"
-                                                                required>
+                                                        <input id="studentID" oninput="verfierMatricule(value)" name='studentID' type="text"
+                                                            class="form-control ID" placeholder="Ex: bs00001" required>
+                                                    <span class="text-danger studentID"> </span>
                                                         </div>
                                                     </div>
-                                                    <span class="text-danger studentID"> </span>
                                                 </div>
 
                                             </div>
@@ -105,7 +97,7 @@
                                                         <div class="form-line">
                                                             <input id="studentBirthDate" name="studentBirthDate"
                                                                 type="text" class="form-control date"
-                                                                placeholder="Ex: 1999/07/10" required>
+                                                                placeholder="Ex: 1999-07-10" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -117,7 +109,7 @@
                                                 <div class="input-group">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <input id="studentPhone" name="studentPhone" type="text"
+                                                            <input id="studentPhone"  name="studentPhone" type="text"
                                                                 class="form-control mobile-phone-number"
                                                                 placeholder="Ex: 00 (000) 00-00-00-00" required>
                                                         </div>
@@ -229,50 +221,51 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <h3>students class</h3>
+                                <h3>Students class</h3>
                                 <fieldset>
-                                    <div class="row clearfix">
-                                        <div class="col-md-3">
-                                            <label>Class</label>
-                                            <select required id="studentClasse" name="studentClasse"
-                                                class="browser-default">
-                                                <option value="" disabled selected>Choose the Class</option>
-                                                @forelse ($departments as $department)
-                                                    @if ($department->classes->count() > 0)
-                                                        <optgroup label="{{ $department->name }}">
-                                                            @foreach ($department->classes as $classe)
-                                                                <option value="{{ $classe->id }}">
-                                                                    {{ $classe->name }}</option>
-                                                            @endforeach
-                                                        </optgroup>
-                                                    @endif
-
-                                                @empty
-
-                                                @endforelse
-                                            </select>
-                                            <span class="text-danger studentClasse"></span>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label>Promotion</label>
-                                            <select required id="studentPromotion" name="studentPromotion"
-                                                class="browser-default">
-                                                <option value="" disabled selected>Choose the Promotion</option>
-                                                @forelse ($promotions as $promotion)
-                                                    <option value="{{ $promotion->id }}">{{ $promotion->name }}
-                                                    </option>
-                                                @empty
-                                                    <option disabled>No promotion</option>
-                                                @endforelse
-
-
-                                            </select>
-                                            <span class="text-danger studentPromotion"></span>
+                                    <div class="demo-masked-input">
+                                        <div class="row clearfix">
+                                            <div class="col-md-3">
+                                                <label>Class</label>
+                                                <select required id="studentClasse" name="studentClasse"
+                                                    class="browser-default">
+                                                    <option value="" disabled selected>Choose the Class</option>
+                                                    @forelse ($departments as $department)
+                                                        @if ($department->classes->count() > 0)
+                                                            <optgroup label="{{ $department->name }}">
+                                                                @foreach ($department->classes as $classe)
+                                                                    <option value="{{ $classe->id }}">
+                                                                        {{ $classe->name }}</option>
+                                                                @endforeach
+                                                            </optgroup>
+                                                        @endif
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                <span class="text-danger studentClasse"></span>
+                                            </div>
+    
+                                            <div class="col-md-3">
+                                                <label>Promotion</label>
+                                                <select required id="studentPromotion" name="studentPromotion"
+                                                    class="browser-default">
+                                                    <option value="" disabled selected>Choose the Promotion</option>
+                                                    @forelse ($promotions as $promotion)
+                                                        <option value="{{ $promotion->id }}">{{ $promotion->name }}
+                                                        </option>
+                                                    @empty
+                                                        <option disabled>No promotion</option>
+                                                    @endforelse
+    
+    
+                                                </select>
+                                                <span class="text-danger studentPromotion"></span>
+                                            </div>
                                         </div>
                                     </div>
+                                    
                                 </fieldset>
-                                <h3>Validation</h3>
+                                {{-- <h3>Validation</h3>
                                 <fieldset>
                                     <div class="form-check m-l-10">
                                         <label class="form-check-label">
@@ -283,7 +276,7 @@
                                             </span>
                                         </label>
                                     </div>
-                                </fieldset>
+                                </fieldset> --}}
                             </form>
                         </div>
                     </div>
@@ -298,4 +291,7 @@
         $('#wizard_with_validation').css('height', '450px');
         $('fieldset').css('height', '325px');
     </script>
+
+
+
 </x-app-layout>

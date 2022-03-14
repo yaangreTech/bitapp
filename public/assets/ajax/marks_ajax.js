@@ -6,9 +6,17 @@ $(function() {
 var yearData = {};
 var marksModulusTest_table = null;
 
+
 function saveMarkRef(yearID, modulusID) {
     currentActivedb.setItem('marksRef', JSON.stringify({
-        'yearID': yearID,
+        'year': yearID,
+        'modulusID': modulusID,
+    }))
+}
+
+function saveTestRef(yearID, modulusID) {
+    currentActivedb.setItem('marksRef', JSON.stringify({
+        'year': yearID,
         'modulusID': modulusID,
     }))
 }
@@ -36,77 +44,81 @@ function marksModulusData(data) {
     var elements = ''
     console.log(data);
     classe_editparames = []
-    $.each(data, function(key, tu) {
-        elements += '<li class="">'
-        elements += '    <div class="timeline-badge primary m-l-10">'
-        elements += '        <img class="" src="assets/images/details_open.png" alt="...">'
-        elements += '    </div>'
-        elements += '    <div class="timeline-panel">'
-        elements += '        <div class="timeline-heading m-b-20">'
-        elements += '            <h2 class="" >' + tu.name + '</h2>'
-        elements += '        </div>'
-        elements += '        <div class="timeline-body">'
-        elements += '            <div class="demo">'
-        elements += '                <div class="container">'
-        elements += '                    <div class="row">'
-        tu.modulus.length > 0 ?
-            $.each(tu.modulus, function(key, module) {
-                elements += '<div class="col-md-3 col-sm-6">'
-                elements += '    <div class="pricingTable">'
-                elements += '        <h3 class="heading"></h3>'
-                elements += '        <h3 class="heading">' + module.name + '</h3>'
-                elements += '            <div class="heading"> ' + module.credict + ' Credits</div>'
-                elements += '            <span class="heading">' + module.heure + ' Hours</span>'
-                elements += '        <div class="">'
-                elements += '            <ul>'
-                elements += '                <li>'
-                elements += '                    <b>2 tests</b> Done'
-                elements += '                </li>'
-                elements += '                <li>'
-                elements += '                    <b>1 tests</b> in process'
-                elements += '                </li>'
-                elements += '            </ul>'
-                elements += '        </div>'
-                elements += '        <div style="position: absolute; top:10px; right:5px; ">'
-                elements += '            <ul>'
-                elements += '                <li class="dropdown">'
-                elements += '                    <a href="#" onClick="return false;" class="dropdown-toggle"'
-                elements += '                        data-toggle="dropdown" role="button" aria-haspopup="true"'
-                elements += '                        aria-expanded="false">'
-                elements += '                        <i class="material-icons">more_vert</i>'
-                elements += '                    </a>'
-                elements += '                    <ul class="dropdown-menu pull-right">'
-                elements += '                        <li>'
-                elements += '                            <a href="#" data-toggle="modal" data-target="#test_list"'
-                elements += '                                onClick="getTestOf(0,' + module.id + ')">Tests</a>'
-                elements += '                        </li>'
-                elements += '                        <li>'
-                elements += '                            <a href="add_marks"'
-                elements += '                                onClick="saveMarkRef(0,' + module.id + ')">Fill marks</a>'
-                elements += '                        </li>'
-                elements += '                        <li>'
-                elements += '                            <a href="view_marks"'
-                elements += '                                onClick="saveMarkRef(0,' + module.id + ')">view marks</a>'
-                elements += '                        </li>'
-                elements += '                    </ul>'
-                elements += '                </li>'
-                elements += '            </ul>'
-                elements += '        </div>'
-                elements += '    </div>'
-                elements += '</div>'
-            }) :
-            elements += '<p>No Modulus for this Tu</p> '
+    $.each(data.tus, function(key, tu) {
+            elements += '<li class="">'
+            elements += '    <div class="timeline-badge primary m-l-10">'
+            elements += '        <img class="" src="assets/images/details_open.png" alt="...">'
+            elements += '    </div>'
+            elements += '    <div class="timeline-panel">'
+            elements += '        <div class="timeline-heading m-b-20">'
+            elements += '            <h2 class="" >' + tu.name + '</h2>'
+            elements += '        </div>'
+            elements += '        <div class="timeline-body">'
+            elements += '            <div class="demo">'
+            elements += '                <div class="container">'
+            elements += '                    <div class="row">'
+            tu.modulus.length > 0 ?
+                $.each(tu.modulus, function(key, module) {
+                    elements += '<div class="col-md-3 col-sm-6">'
+                    elements += '    <div class="pricingTable">'
+                    elements += '        <h3 class="heading"></h3>'
+                    elements += '        <h3 class="heading">' + module.name + '</h3>'
+                    elements += '            <div class="heading"> ' + module.credict + ' Credits</div>'
+                    elements += '            <span class="heading">' + module.heure + ' Hours</span>'
+                    elements += '        <div class="">'
+                    elements += '            <ul>'
+                    elements += '                <li>'
+                    elements += '                    <b>' + (module.tests.length - 2) + ' tests</b> added'
+                    elements += '                </li>'
+                        // elements += '                <li>'
+                        // elements += '                    <b>1 tests</b> in process'
+                        // elements += '                </li>'
+                    elements += '            </ul>'
+                    elements += '        </div>'
+                    elements += '        <div style="position: absolute; top:10px; right:5px; ">'
+                    elements += '            <ul>'
+                    elements += '                <li class="dropdown">'
+                    elements += '                    <a href="#" onClick="return false;" class="dropdown-toggle"'
+                    elements += '                        data-toggle="dropdown" role="button" aria-haspopup="true"'
+                    elements += '                        aria-expanded="false">'
+                    elements += '                        <i class="material-icons">more_vert</i>'
+                    elements += '                    </a>'
+                    elements += '                    <ul class="dropdown-menu pull-right">'
+                    elements += '                        <li>'
+                    elements += '                            <a href="#" data-toggle="modal" data-target="#test_list"'
+                    elements += '                                onClick="getTestOf(0,' + module.id + ')">Tests</a>'
+                    elements += '                        </li>'
+                    elements += '                        <li>'
+                    elements += '                            <a href="add_marks"'
+                    elements += '                                onClick="saveMarkRef(0,' + module.id + ')">Fill marks</a>'
+                    elements += '                        </li>'
+                    elements += '                        <li>'
+                    elements += '                            <a href="view_marks"'
+                    elements += '                                onClick="saveMarkRef(0,' + module.id + ')">view marks</a>'
+                    elements += '                        </li>'
+                    elements += '                    </ul>'
+                    elements += '                </li>'
+                    elements += '            </ul>'
+                    elements += '        </div>'
+                    elements += '    </div>'
+                    elements += '</div>'
+                }) :
+                elements += '<p>No Modulus for this Tu</p> '
 
-        elements += '                    </div>'
-        elements += '                </div>'
-        elements += '            </div>'
-        elements += '        </div>'
-        elements += '    </div>'
-        elements += '</li>'
-    })
+            elements += '                    </div>'
+            elements += '                </div>'
+            elements += '            </div>'
+            elements += '        </div>'
+            elements += '    </div>'
+            elements += '</li>'
+        })
+        // $('.page-title').html(data.classe.name + ' > ' + data.semestre_name.name)
+        // var breadcrumb = data.classe.branche.departement.name.
 
+    setBreadcrumb(data.classe.name + '&' + data.semestre_name.name, data.classe.branche.departement.name + '&' + data.classe.name + '&' + data.semestre_name.name);
 
     elements.length > 0 ? $('#marks_modulus').html(elements) : $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No Modulus for this classe Semester</h3></div>');
+
 }
 
 function addTest(value) {
@@ -171,7 +183,21 @@ function marksModulusTestData(data) {
     var elements = ''
     console.log(data);
     test_editparames = []
+    var to_ratio = 0;
+
+    set_max = () => {
+        $('#test_ration').attr('max', 100 - to_ratio);
+        $('.test_ration').html('max to add => ' + (100 - to_ratio));
+    }
+
+    max_with_update = (self) => {
+        $('#test_ration').attr('max', 100 - to_ratio + self);
+        $('.test_ration').html('max to add => ' + (100 - to_ratio + self));
+    }
     $.each(data, function(key, test) {
+        if (test.type == 'normal') {
+            to_ratio += test.ratio;
+        }
         test_editparames.push('^test_type=' + test.type + '&^test_label=' + test.title + '&test_ration=' + test.ratio);
         elements += '<tr>'
         elements += '    <td class="tbl-checkbox">'
@@ -187,15 +213,25 @@ function marksModulusTestData(data) {
         elements += '        <div class="badge col-green">active</div>'
         elements += '    </td>'
         elements += '    <td class="center">'
-        elements += '        <button onClick="editer(test_editparames[' + key + '],' + test.id + ')" data-toggle="modal" data-target="#add_test" class="btn tblActnBtn">'
-        elements += '            <i class="material-icons">mode_edit</i>'
-        elements += '        </button>'
-        elements += '        <button id="' + test.id + '" onClick="delete_test(this.id)" class="btn tblActnBtn">'
-        elements += '            <i class="material-icons">delete</i>'
-        elements += '        </button>'
+        if (test.title != 'Attendance' && test.title != 'Participation') {
+            if (test.type != 'session') {
+                elements += '        <button onClick="editer(test_editparames[' + key + '],' + test.id + ');max_with_update(' + test.ratio + ');" data-toggle="modal" data-target="#add_test" class="btn tblActnBtn">'
+                elements += '            <i class="material-icons">mode_edit</i>'
+                elements += '        </button>'
+            }
+            elements += '        <button id="' + test.id + '" onClick="delete_test(this.id)" class="btn tblActnBtn">'
+            elements += '            <i class="material-icons">delete</i>'
+            elements += '        </button>'
+        }
         elements += '    </td>'
         elements += '</tr>'
     })
+    set_max();
+
+    $('.initier').on('click', function(e) {
+        set_max();
+    })
+
     $.fn.dataTable.isDataTable('#marksModulusTest_table') && marksModulusTest_table.destroy();
 
     elements.length > 0 ? $('#marksModulusTest_body').html(elements) : $('#marksModulusTest_body').html('<div class="">No tests</div>');

@@ -110,11 +110,16 @@
                                                             <i class="material-icons">phone</i>
                                                             {{ $user->phone == null ? '---' : $user->phone }}</span>
                                                     </div>
-                                                    <span class="badge col-green">{{ $user->status }}</span>
+                                                   @if ( $user->trashed())
+                                                   <span class="badge col-red">desabled</span>
+                                                   @else
+                                                   <span class="badge col-green">active</span>
+                                                   @endif
+                                                    
 
                                                 </div>
                                             </div>
-                                            @if ($user->right->title != 'isAdmin' || Auth::user()->status=='super' && $user->status != 'super')
+                                            @if ($user->right->title != 'isAdmin' || (Auth::user()->status == 'super' && $user->status != 'super'))
                                                 <div style="position: absolute; top:10px; right:5px; ">
                                                     <ul>
                                                         <li class="dropdown">
@@ -127,11 +132,23 @@
                                                                 {{-- <li>
                                                             <a href="#" data-toggle="modal" data-target="#add_user" onClick="return false;">Update</a>
                                                         </li> --}}
+                                                                @if ($user->trashed())
+                                                                    <li>
+                                                                        <a href="#"
+                                                                            onClick=" enable_User({{ $user->id }})">Enable</a>
+                                                                    </li>
+                                                                @else
+                                                                    <li>
+                                                                        <a href="#"
+                                                                            onClick=" desable_User({{ $user->id }})">Desable</a>
+                                                                    </li>
+                                                                @endif
+                                                                @if(Auth::user()->status == 'super')
                                                                 <li>
                                                                     <a href="#"
                                                                         onClick=" delete_User({{ $user->id }})">Delete</a>
                                                                 </li>
-
+                                                                @endif
                                                             </ul>
                                                         </li>
                                                     </ul>

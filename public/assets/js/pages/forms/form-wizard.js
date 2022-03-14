@@ -80,6 +80,12 @@ $(function() {
             } else if ($('#wizard_with_validation').hasClass('complete_profile_form')) {
                 console.log(values);
                 complete_Registration('wizard_with_validation');
+            } else if ($('#wizard_with_validation').hasClass('conserned_students_form')) {
+                console.log(values);
+                reinscriptStudents('wizard_with_validation');
+            } else if ($('#wizard_with_validation').hasClass('end_cycle_students_form')) {
+                console.log(values);
+                endStudents_Cycle('wizard_with_validation');
             }
 
         }

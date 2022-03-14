@@ -2,6 +2,8 @@
 
 namespace App\View\Components;
 
+use App\Models\Promotion;
+use App\Models\Departement;
 use Illuminate\View\Component;
 
 class StudentForm extends Component
@@ -11,9 +13,15 @@ class StudentForm extends Component
      *
      * @return void
      */
+    public $departments;
+    public $promotions;
+
     public function __construct()
     {
         //
+
+        $this->departments = Departement::all();
+        $this->promotions = Promotion::all();
     }
 
     /**

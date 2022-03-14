@@ -19,6 +19,7 @@ class CreateInscriptionsTable extends Migration
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->foreignId('classe_id')->constrained()->onDelete('cascade');
             $table->foreignId('year_id')->constrained()->onDelete('cascade');
+            $table->String('status')->default('active');
             $table->timestamps();
             $table->softDeletes();
         });

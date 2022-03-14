@@ -9,7 +9,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="breadcrumb breadcrumb-style ">
                             <li class="breadcrumb-item">
-                                <h4 class="page-title">School</h4>
+                                <h4 class="page-title">School Settings</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
                                 <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
@@ -18,7 +18,7 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">Configuration</a>
                             </li>
-                            <li class="breadcrumb-item active">School</li>
+                            <li class="breadcrumb-item active">School Settings</li>
                         </ul>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                                             data-toggle="tab">Departements Settings</a>
                                     </li>
                                     <li class="nav-item tab-all">
-                                        <a class="nav-link" href="#m_branches"
-                                            data-toggle="tab">Branches Settings</a>
+                                        <a class="nav-link" href="#m_branches" data-toggle="tab">Branches
+                                            Settings</a>
                                     </li>
                                     <li class="nav-item tab-all p-l-20">
                                         <a class="nav-link" href="#m_Semesters" data-toggle="tab">Semesters
@@ -82,22 +82,12 @@
                                                             <th class=""> Departement Name </th>
                                                             <th class=""> Branches </th>
                                                             <th class=""> Created at </th>
-                                                            <th class=""> Actual Team </th>
+                                                            <th class=""> Head of Departement </th>
                                                             <th class=""> Status </th>
-                                                            {{-- <th class=""> Configuration</th> --}}
                                                             <th class=""> Action </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="department_body">
-                                                        {{-- <tr>
-                                                            <td>d</td>
-                                                            <td>d</td>
-                                                            <td>d</td>
-                                                            <td>c</td>
-                                                            <td>c</td>
-                                                            <td>c</td>
-                                                            <td>c</td>
-                                                        </tr> --}}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -128,26 +118,7 @@
                                         <div class="body">
                                             <div class="table-responsive">
                                                 <table id="branches_table" class="table table-hover  ">
-                                                    {{-- <thead>
-                                                        <tr>
-                                                            <th class=""> Departement Name </th>
-                                                            <th class=""> Classes </th>
-                                                            <th class=""> Created at </th>
-                                                            <th class=""> Actual Team </th>
-                                                            <th class=""> Status </th>
-                                                            <th class=""> Action </th>
-                                                        </tr>
-                                                    </thead> --}}
                                                     <tbody id="branches_body">
-                                                        {{-- <tr>
-                                                            <td>d</td>
-                                                            <td>d</td>
-                                                            <td>d</td>
-                                                            <td>c</td>
-                                                            <td>c</td>
-                                                            <td>c</td>
-                                                            <td>c</td>
-                                                        </tr> --}}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -227,17 +198,6 @@
                                                     <div id="mail-nav">
                                                         <h3 type="button" class="">Departements</h3>
                                                         <ul class="classes_departments" id="mail-folders">
-
-                                                            {{-- @forelse ($shool_departments as $shool_department)
-                                                            <li class="active">
-                                                                <a href="#" title="Computer Science">{{$shool_department->name}}
-                                                                    <span class="pull-right badge bg-orange">3</span>
-                                                                </a>
-                                                            </li> 
-                                                            @empty
-                                                                <div>Acun departement</div>
-                                                            @endforelse --}}
-
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -247,9 +207,7 @@
                                             <div class="card">
                                                 <div class="boxs mail_listing">
                                                     <div class="inbox-center table-responsive">
-                                                        <table 
-                                                        {{-- id="classe_table"  --}}
-                                                        class="table table-hover">
+                                                        <table {{-- id="classe_table" --}} class="table table-hover">
                                                             <tbody id="classe_body">
 
                                                             </tbody>
@@ -290,7 +248,7 @@
                                                     <div id="mail-nav">
                                                         <h3 type="button" class="">Departements</h3>
                                                         <ul class="collapsible tu_departments">
-                                                          {{--  --}}
+                                                            {{--  --}}
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -300,100 +258,9 @@
                                             <div class="card">
                                                 <div class="boxs mail_listing">
                                                     <div class="inbox-center table-responsive">
-                                                        <table
-                                                         {{-- id="modulus_table"  --}}
-                                                         class="table table-hover">
-                                                            {{-- <thead>
-                                                                <tr>
-                                                                    <th class="text-center">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </th>
-                                                                    <th colspan="3">
-                                                                        <div class="inbox-header">
-                                                                            <div class="mail-option no-pad-left">
-                                                                                <div class="email-btn-group m-l-15">
+                                                        <table class="table table-hover">
 
-                                                                                    <a href="#"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="Delete">
-                                                                                        <i
-                                                                                            class="material-icons">delete</i>
-                                                                                    </a>
-                                                                                    <a href="#"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="refresh">
-                                                                                        <i
-                                                                                            class="material-icons">autorenew</i>
-                                                                                    </a>
-                                                                                    <a href="#" onClick="return false;"
-                                                                                        data-toggle="modal"
-                                                                                        data-target="#add_modulus"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="add new">
-                                                                                        <i
-                                                                                            class="material-icons">add_circle</i>
-                                                                                    </a>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </th>
-                                                                    <th class="hidden-xs" colspan="2">
-                                                                        <div class="pull-right">
-                                                                            <div class="email-btn-group m-l-15">
-                                                                                <a href="#"
-                                                                                    class="col-dark-gray waves-effect m-r-20"
-                                                                                    title="back">
-                                                                                    <i
-                                                                                        class="material-icons">navigate_before</i>
-                                                                                </a>
-                                                                                <a href="#"
-                                                                                    class="col-dark-gray waves-effect m-r-20"
-                                                                                    title="Archive">
-                                                                                    <i
-                                                                                        class="material-icons">navigate_next</i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead> --}}
                                                             <tbody id="tu_body">
-                                                                {{-- <tr class="unread">
-                                                                    <td class="tbl-checkbox">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </td>
-                                                                    <td class="hidden-xs">Mathmatic</td>
-                                                                    <td class="hidden-xs">
-                                                                        <div class="badge col-gray">Semester 1</div>
-                                                                    </td>
-
-                                                                    <td class="max-texts">
-                                                                        <a href="#">
-                                                                            <span
-                                                                                class="label l-bg-orange shadow-style m-r-10">6</span>
-                                                                            Credicts</a>
-                                                                    </td>
-
-                                                                    <td class=""> <span
-                                                                            class="badge bg-pink">120 Hours</span>
-                                                                    </td>
-                                                                    <td class="text-right">
-                                                                        <button class="btn tblActnBtn">
-                                                                            <i class="material-icons">mode_edit</i>
-                                                                        </button>
-                                                                        <button class="btn tblActnBtn">
-                                                                            <i class="material-icons">delete</i>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr> --}}
-
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -430,7 +297,7 @@
                                                     <div id="mail-nav">
                                                         <h3 type="button" class="">Departements</h3>
                                                         <ul class="collapsible modulus_departments">
-                                                           
+
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -440,99 +307,9 @@
                                             <div class="card">
                                                 <div class="boxs mail_listing">
                                                     <div class="inbox-center table-responsive">
-                                                        <table
-                                                         {{-- id="modulus_table"  --}}
-                                                         class="table table-hover">
-                                                            {{-- <thead>
-                                                                <tr>
-                                                                    <th class="text-center">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </th>
-                                                                    <th colspan="3">
-                                                                        <div class="inbox-header">
-                                                                            <div class="mail-option no-pad-left">
-                                                                                <div class="email-btn-group m-l-15">
+                                                        <table {{-- id="modulus_table" --}} class="table table-hover">
 
-                                                                                    <a href="#"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="Delete">
-                                                                                        <i
-                                                                                            class="material-icons">delete</i>
-                                                                                    </a>
-                                                                                    <a href="#"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="refresh">
-                                                                                        <i
-                                                                                            class="material-icons">autorenew</i>
-                                                                                    </a>
-                                                                                    <a href="#" onClick="return false;"
-                                                                                        data-toggle="modal"
-                                                                                        data-target="#add_modulus"
-                                                                                        class="col-dark-gray waves-effect m-r-20"
-                                                                                        title="add new">
-                                                                                        <i
-                                                                                            class="material-icons">add_circle</i>
-                                                                                    </a>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </th>
-                                                                    <th class="hidden-xs" colspan="2">
-                                                                        <div class="pull-right">
-                                                                            <div class="email-btn-group m-l-15">
-                                                                                <a href="#"
-                                                                                    class="col-dark-gray waves-effect m-r-20"
-                                                                                    title="back">
-                                                                                    <i
-                                                                                        class="material-icons">navigate_before</i>
-                                                                                </a>
-                                                                                <a href="#"
-                                                                                    class="col-dark-gray waves-effect m-r-20"
-                                                                                    title="Archive">
-                                                                                    <i
-                                                                                        class="material-icons">navigate_next</i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead> --}}
                                                             <tbody id="modulus_body">
-                                                                {{-- <tr class="unread">
-                                                                    <td class="tbl-checkbox">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox">
-                                                                            <span class="form-check-sign"></span>
-                                                                        </label>
-                                                                    </td>
-                                                                    <td class="hidden-xs">Mathmatic</td>
-                                                                    <td class="hidden-xs">
-                                                                        <div class="badge col-gray">Semester 1</div>
-                                                                    </td>
-
-                                                                    <td class="max-texts">
-                                                                        <a href="#">
-                                                                            <span
-                                                                                class="label l-bg-orange shadow-style m-r-10">6</span>
-                                                                            Credicts</a>
-                                                                    </td>
-
-                                                                    <td class=""> <span
-                                                                            class="badge bg-pink">120 Hours</span>
-                                                                    </td>
-                                                                    <td class="text-right">
-                                                                        <button class="btn tblActnBtn">
-                                                                            <i class="material-icons">mode_edit</i>
-                                                                        </button>
-                                                                        <button class="btn tblActnBtn">
-                                                                            <i class="material-icons">delete</i>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr> --}}
 
                                                             </tbody>
                                                         </table>
@@ -543,7 +320,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -576,6 +352,6 @@
 
         <!-- Demo Js -->
         <script src="assets/js/pages/ui/collapse.js"></script>
-      
+
     </x-slot>
 </x-app-layout>

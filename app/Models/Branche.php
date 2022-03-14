@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Classe;
+use App\Models\Semester;
 use App\Models\Departement;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,5 +25,9 @@ class Branche extends Model
 
     public function departement(){
         return $this->belongsTo(Departement::class);
+    }
+
+    public function semesters(){
+        return $this->hasManyThrough(Semester::class, Classe::class);
     }
 }

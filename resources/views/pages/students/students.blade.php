@@ -1,23 +1,24 @@
 <x-app-layout filtrage='true'>
     <x-slot name="custom_css">
-        <script src="assets\ajax\student_ajax.js"></script>
+        <script> var action='students_list';</script>
     </x-slot>
 
 
     <x-slot name="custom_js">
-  <!-- Demo Js -->
-  
+        <!-- Demo Js -->
+        <script src="assets/ajax/student_ajax.js"></script>
 
-<script>
-      var students_list = JSON.parse(currentActivedb.getItem('students_list'));
-    console.log(students_list);
-    getStudentOf(students_list.year, students_list.classID);
-</script>
-         <!-- Plugins Js -->
-    <script src="assets/js/table.min.js"></script>
-    <!-- Custom Js -->
-    
-  
+        <script>
+            var students_list = JSON.parse(currentActivedb.getItem('students_list'));
+            console.log(students_list);
+            
+            getStudentOf(students_list.year, students_list.classID);
+        </script>
+        <!-- Plugins Js -->
+        <script src="assets/js/table.min.js"></script>
+        <!-- Custom Js -->
+
+
     </x-slot>
 
     <section class="content">
@@ -30,7 +31,7 @@
                                 <h4 class="page-title">CS1</h4>
                             </li>
                             <li class="breadcrumb-item bcrumb-1">
-                                <a href="{{ route('dashboard') }}"  onClick="setActiveId('Dashboard')">
+                                <a href="{{ route('dashboard') }}" onClick="setActiveId('Dashboard')">
                                     <i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="breadcrumb-item bcrumb-2">
@@ -53,7 +54,8 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>CS1 </strong> List</h2>
+                                <strong>CS1 </strong> List
+                            </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -62,20 +64,22 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li>
-                                            <a href="{{ route('students_form')}}"  onClick="setActiveId('Add_new_Students');">Add Student</a>
+                                            <a href="{{ route('students_form') }}"
+                                                onClick="setActiveId('Add_new_Students');">Add Student</a>
                                         </li>
-
+                                        <li>
+                                            <a href="#" onClick="setActiveId('Add_new_Students');">Print list</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
-                            
+
                         </div>
                         <hr>
                         <div class="body">
                             <div class="table-responsive">
-                                <table 
-                                id="students_table" 
-                                    class="display student_ table table-bordered  table-hover table-checkable order-column m-t-20 width-per-100   dataTable">
+                                <table id="students_table"
+                                    class="display student_ table table-bordered  table-hover  order-column m-t-20 width-per-100   dataTable">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -85,21 +89,22 @@
                                             <th>Email</th>
                                             <th>Birthdate</th>
                                             <th>Phone</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="student_body"> 
+                                    <tbody id="student_body">
                                         <tr>
                                             <td>
 
-                                                <x-loading/>  
-                                            </td> 
-                                        </tr>                               
+                                                <x-loading />
+                                            </td>
+                                        </tr>
                                     </tbody>
-                                 
-                                 
+
+
                                 </table>
-                               
+
                                 {{-- <table id="example" class="display student_ table table-bordered  table-hover table-checkable order-column m-t-20 width-per-100   dataTable">
                                     <thead>
                                         <tr>
@@ -115,7 +120,7 @@
                                     </thead>
                                 </table> --}}
                             </div>
-                          
+
                         </div>
                     </div>
                 </div>
@@ -126,6 +131,7 @@
         {{-- form --}}
 
         <x-student-form />
+        <x-student-infos />
 
     </section>
 
