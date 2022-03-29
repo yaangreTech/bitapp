@@ -48,12 +48,25 @@ function averageData(data) {
     var body_elements = ''
     var head_elements = ''
     var theadModulus = data.theadModulus
+    var theadTus = data.theadTus
     var inscriptions = data.inscriptions
     var failed = 0;
     var giveUp = 0;
     var totalOfCredit = 0
     console.log(data);
     classe_editparames = []
+    head_elements += '<tr> <th colspan="3" rowspan="2"></th>'
+    $.each(theadTus, function(tukey, tu) {
+        head_elements += ' <th class="center" colspan="' + tu.modulus.length + '">' + tu.name + '</th>'
+    })
+    head_elements += '<th colspan="7" rowspan="2"></th> </tr>'
+
+    head_elements += '<tr>'
+    $.each(theadTus, function(tukey, tu) {
+        head_elements += ' <th class="center" colspan="' + tu.modulus.length + '">' + tu.tu_credit + ' cred.</th>'
+    })
+    head_elements += '</tr>'
+
     head_elements += '<tr>'
     head_elements += '    <th colspan="3" class=""><div class=""><img width="300px" src="assets/images/head_icon.png" alt="logo" class="logo-default" /></div></th>'
     $.each(theadModulus, function(key, mod) {
@@ -76,7 +89,7 @@ function averageData(data) {
     $.each(theadModulus, function(key, mod) {
         // console.log(mod);
         totalOfCredit += mod.credict;
-        head_elements += '    <th class=""> <div class="">' + mod.credict + '</div></th>'
+        head_elements += '    <th class=""> <div class="">' + mod.credict + ' cred.</div></th>'
     })
     head_elements += '    <th class=""> <div class="">' + totalOfCredit + '</div></th>'
     head_elements += '    <th class=""><div class=""></div></th>'
@@ -86,10 +99,6 @@ function averageData(data) {
     head_elements += '    <th class=""><div class=""></div></th>'
     head_elements += '    <th class=""><div class=""></div></th>'
     head_elements += '</tr>'
-
-
-
-
 
     $.each(inscriptions, function(key, insc) {
         console.log(insc);
@@ -121,8 +130,8 @@ function averageData(data) {
     if (deja == -1) {
         setBreadcrumb(
             /* data.page_title.tu.semester.classe.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
-            data.page_title.classe.name + '&' + data.page_title.semestre_name.name,
-            data.page_title.classe.branche.departement.name + '&' + data.page_title.classe.name + '&' + data.page_title.semestre_name.name
+            data.page_title.level.name + '&' + data.page_title.name,
+            data.page_title.level.branche.departement.name + '&' + data.page_title.level.name + '&' + data.page_title.name
         );
         deja = 1;
     }
@@ -157,6 +166,7 @@ function average_with_session_Data(data) {
     var body_elements = ''
     var head_elements = ''
     var theadModulus = data.theadModulus
+    var theadTus = data.theadTus
     var inscriptions = data.inscriptions
     var totalOfCredit = 0
     var failed = 0;
@@ -164,6 +174,19 @@ function average_with_session_Data(data) {
 
     console.log(data);
     classe_editparames = []
+
+    head_elements += '<tr> <th colspan="3" rowspan="2"></th>'
+    $.each(theadTus, function(tukey, tu) {
+        head_elements += ' <th class="center" colspan="' + tu.modulus.length + '">' + tu.name + '</th>'
+    })
+    head_elements += '<th colspan="7" rowspan="2"></th> </tr>'
+
+    head_elements += '<tr>'
+    $.each(theadTus, function(tukey, tu) {
+        head_elements += ' <th class="center" colspan="' + tu.modulus.length + '">' + tu.tu_credit + ' cred.</th>'
+    })
+    head_elements += '</tr>'
+
     head_elements += '<tr>'
     head_elements += '    <th colspan="3" class=""><div class=""><img width="300px" src="assets/images/head_icon.png" alt="logo" class="logo-default" /></div></th>'
     $.each(theadModulus, function(key, mod) {
@@ -186,7 +209,7 @@ function average_with_session_Data(data) {
     $.each(theadModulus, function(key, mod) {
         // console.log(mod);
         totalOfCredit += mod.credict;
-        head_elements += '    <th class=""> <div class="">' + mod.credict + '</div></th>'
+        head_elements += '    <th class=""> <div class="">' + mod.credict + ' cred.</div></th>'
     })
     head_elements += '    <th class=""> <div class="">' + totalOfCredit + '</div></th>'
     head_elements += '    <th class=""><div class=""></div></th>'
@@ -196,17 +219,11 @@ function average_with_session_Data(data) {
     head_elements += '    <th class=""><div class=""></div></th>'
     head_elements += '    <th class=""><div class=""></div></th>'
     head_elements += '</tr>'
-
-
-
-
-
     $.each(inscriptions, function(key, insc) {
         console.log(insc);
         if (insc.t_n_status == 'Fail') {
             failed += 1;
         }
-
         if (insc.student.status != 'active') {
             giveUp += 1;
         }

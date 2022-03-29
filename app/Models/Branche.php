@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Classe;
+use App\Models\Level;
 use App\Models\Semester;
 use App\Models\Departement;
 use Illuminate\Database\Eloquent\Model;
@@ -17,10 +17,12 @@ class Branche extends Model
     protected $fillable = [
         'branch_name',
         'branch_departement',
+        'branch_i_level',
+'branch_f_level'
     ];
 
-    public function classes(){
-        return $this->hasMany(Classe::class);
+    public function levels(){
+        return $this->hasMany(Level::class);
     }
 
     public function departement(){
@@ -28,6 +30,6 @@ class Branche extends Model
     }
 
     public function semesters(){
-        return $this->hasManyThrough(Semester::class, Classe::class);
+        return $this->hasManyThrough(Semester::class, Level::class);
     }
 }

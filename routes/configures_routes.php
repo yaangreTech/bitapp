@@ -56,6 +56,12 @@ Route::get('/school/destroy_branch/{id}', [
     'destroyBranch',
 ])->middleware(['auth', 'isAdmin']);
 
+Route::get('/school/bind_levels_of/{initalID}', [
+    SchoolController::class,
+    'bind_levels_of',
+])->middleware(['auth', 'isAdmin']);
+
+
 // For school=> Semester
 Route::post('/school/store_semester', [
     SchoolController::class,
@@ -131,7 +137,7 @@ Route::get('/school/bind_semester_of/{classID}', [
 ])->middleware(['auth', 'isAdmin']);
 
 // For school=>Modulus
-Route::post('/school/store_modulus', [
+Route::post('/school/store_modulus/{tuID}', [
     SchoolController::class,
     'storeModulus',
 ])->middleware(['auth', 'isAdmin']);

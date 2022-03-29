@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Year;
+use App\Models\Level;
 use App\Models\Classe;
+use App\Models\Branche;
 use App\Models\Departement;
 use App\Models\Inscription;
 use Illuminate\Http\Request;
@@ -20,7 +22,9 @@ class DashboardController extends Controller
         $departments = Departement::all();
 
         // get all classes from the database
-        $classes = Classe::all();
+        $levels = Level::all();
+
+        $options = Branche::all();
 
         // get all students inscription of the current year from the database
         $students = Inscription::all()->where(
@@ -31,10 +35,12 @@ class DashboardController extends Controller
         // get all active users from the database
         $users = User::all()->where('status', 'active');
 
+ 
+
         // return of the dashboard view + variables
         return view(
             'dashboard',
-            compact('year', 'departments', 'classes', 'students', 'users')
+            compact('year', 'options' ,'departments', 'levels', 'students', 'users')
         );
     }
 }

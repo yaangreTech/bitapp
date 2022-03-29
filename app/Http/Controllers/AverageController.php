@@ -26,8 +26,8 @@ class AverageController extends Controller
         // get all tus of the semester 
         $tus = $semester->tus;
 
-        // all inscription of the classe for the given year
-        $inscriptions = $semester->classe->inscriptions->where(
+        // all inscription of the level for the given year
+        $inscriptions = $semester->level->inscriptions->where(
             'year_id',
             $yearID
         );
@@ -98,6 +98,8 @@ class AverageController extends Controller
                 if (/*$tu_average >= 8 && */ $tu_average < 10) {
                     $redo_mod_ = $redo_mod_ . ', ' . $tu->name;
                 }
+
+                $tu['tu_credit']=$tu_credit;
             }
             $inscription['notes'] = $les_note;
             $inscription['t_credit'] = $t_credit;
@@ -121,13 +123,13 @@ class AverageController extends Controller
         }
 
         $page_title=Semester::findOrFail($semesterID);
-        $page_title->semestre_name;
-        $page_title->classe->branche->departement;
+        $page_title->level->branche->departement;
 
         return response()->json([
             'theadModulus' => $theadModulus,
             'inscriptions' => $inscriptions,
-            'page_title'=>$page_title
+            'page_title'=>$page_title,
+            'theadTus'=>$tus
         ]);
     }
 
@@ -137,7 +139,7 @@ class AverageController extends Controller
         $semester = Semester::findOrFail($semesterID);
         $theadModulus = $semester->modulus;
         $tus = $semester->tus;
-        $inscriptions = $semester->classe->inscriptions->where(
+        $inscriptions = $semester->level->inscriptions->where(
             'year_id',
             $yearID
         );
@@ -212,6 +214,8 @@ class AverageController extends Controller
                 if (/*$tu_average >= 8 && */ $tu_average < 10) {
                     $redo_mod_ = $redo_mod_ . ', ' . $tu->name;
                 }
+                $tu['tu_credit']=$tu_credit;
+
             }
             $inscription['notes'] = $les_note;
             $inscription['t_credit'] = $t_credit;
@@ -236,6 +240,7 @@ class AverageController extends Controller
         return response()->json([
             'theadModulus' => $theadModulus,
             'inscriptions' => $inscriptions,
+            'theadTus'=>$tus
         ]);
     }
 }

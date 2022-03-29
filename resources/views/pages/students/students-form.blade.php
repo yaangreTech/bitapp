@@ -226,16 +226,16 @@
                                     <div class="demo-masked-input">
                                         <div class="row clearfix">
                                             <div class="col-md-3">
-                                                <label>Class</label>
+                                                <label>Level</label>
                                                 <select required id="studentClasse" name="studentClasse"
                                                     class="browser-default">
-                                                    <option value="" disabled selected>Choose the Class</option>
+                                                    <option value="" disabled selected>Choose the Level</option>
                                                     @forelse ($departments as $department)
-                                                        @if ($department->classes->count() > 0)
+                                                        @if ($department->levels->count() > 0)
                                                             <optgroup label="{{ $department->name }}">
-                                                                @foreach ($department->classes as $classe)
-                                                                    <option value="{{ $classe->id }}">
-                                                                        {{ $classe->name }}</option>
+                                                                @foreach ($department->levels as $level)
+                                                                    <option value="{{ $level->id }}">
+                                                                        {{ $level->name }}</option>
                                                                 @endforeach
                                                             </optgroup>
                                                         @endif

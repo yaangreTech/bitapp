@@ -38,8 +38,8 @@ class MarksInputController extends Controller
         $Tests = $module->tests
             ->where('year_id', $yearID)
             ->where('type', 'session');
-        $classe = $module->tu->semester->classe;
-        $S_check_inscriptions = $classe->inscriptions->where(
+        $level = $module->tu->semester->level;
+        $S_check_inscriptions = $level->inscriptions->where(
             'year_id',
             $yearID
         );
@@ -81,9 +81,9 @@ class MarksInputController extends Controller
         //   get the module
         $module = Module::findOrFail($modulusID);
         //  get the class of the module
-        $classe = $module->tu->semester->classe;
-        // get the  all inscription for the year of the classe
-        $inscriptions = $classe->inscriptions->where('year_id', $yearID);
+        $level = $module->tu->semester->level;
+        // get the  all inscription for the year of the level
+        $inscriptions = $level->inscriptions->where('year_id', $yearID);
 
         //    get all tests of the modulus for the year
         $Tests = $module->tests
@@ -109,7 +109,7 @@ class MarksInputController extends Controller
         
         $page_title=Module::findOrFail($modulusID);
         $page_title->tu->semester->semestre_name;
-        $page_title->tu->semester->classe->branche->departement;
+        $page_title->tu->semester->level->branche->departement;
         return response()->json([
             'testList' => $Tests,
             'inscriptions' => $inscriptions,
@@ -123,9 +123,9 @@ class MarksInputController extends Controller
         //   get the module
         $module = Module::findOrFail($modulusID);
         //  get the class of the module
-        $classe = $module->tu->semester->classe;
-        // get the  all inscription for the year of the classe
-        $inscriptions = $classe->inscriptions->where('year_id', $yearID);
+        $level = $module->tu->semester->level;
+        // get the  all inscription for the year of the level
+        $inscriptions = $level->inscriptions->where('year_id', $yearID);
 
         //    get all tests of the modulus for the year
         $Tests = $module->tests
@@ -180,9 +180,9 @@ class MarksInputController extends Controller
         //   get the module
         $module = Module::findOrFail($modulusID);
         //  get the class of the module
-        $classe = $module->tu->semester->classe;
-        // get the  all inscription for the year of the classe
-        $inscriptions = $classe->inscriptions->where('year_id', $yearID);
+        $level = $module->tu->semester->level;
+        // get the  all inscription for the year of the level
+        $inscriptions = $level->inscriptions->where('year_id', $yearID);
 
         //    get all tests of the modulus for the year
         $Tests = $module->tests
@@ -223,7 +223,7 @@ class MarksInputController extends Controller
         
         $page_title=Module::findOrFail($modulusID);
         $page_title->tu->semester->semestre_name;
-        $page_title->tu->semester->classe->branche->departement;
+        $page_title->tu->semester->level->branche->departement;
         return response()->json([
             'testList' => $Tests,
             'inscriptions' => $inscriptions,

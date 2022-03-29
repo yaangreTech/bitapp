@@ -14,7 +14,7 @@
                     <label for="department">Departmemt name</label>
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="text" id="department" old='department' name="department" class="form-control" placeholder="Enter the department">
+                            <input type="text" id="department" name="department" class="form-control" placeholder="Enter the department">
                         </div>
                         <span class="text-danger department"> </span>
                     </div>

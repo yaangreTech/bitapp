@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Classe;
+use App\Models\Level;
 use App\Models\Conforme;
 use App\Models\Sessione;
 use App\Models\Inscription;
@@ -23,13 +22,13 @@ class TranscriptController extends Controller
 
     function getGradesOf($yearID, $classID)
     {
-        $classe = Classe::findOrFail($classID);
-        $inscriptions = $classe->inscriptions->where('year_id', $yearID);
+        $level = Level::findOrFail($classID);
+        $inscriptions = $level->inscriptions->where('year_id', $yearID);
         $head_element = [];
         foreach ($inscriptions as $inscription) {
             $conforme = new Conforme();
             $inscription->student;
-            $semesters = $classe->semesters;
+            $semesters = $level->semesters;
             $t_credit = 0;
             $t_n_ponderer = 0;
             $status = 'Pass';
@@ -38,7 +37,6 @@ class TranscriptController extends Controller
             $year_semester = [];
             $head_element = [];
             foreach ($semesters as $semester) {
-                $semester->semestre_name;
                 array_push($head_element, $semester);
                 $tus = $semester->tus;
                 $s_average = 0;
@@ -107,7 +105,7 @@ class TranscriptController extends Controller
             // $inscription=$inscription->getAttributes();
         }
 
-        $page_title=Classe::findOrFail($classID);
+        $page_title=Level::findOrFail($classID);
         $page_title->branche->departement;
         return response()->json([
             'head_element' => $head_element,
@@ -119,13 +117,13 @@ class TranscriptController extends Controller
 
     function getGrades_with_session_Of($yearID, $classID)
     {
-        $classe = Classe::findOrFail($classID);
-        $inscriptions = $classe->inscriptions->where('year_id', $yearID);
+        $level = Level::findOrFail($classID);
+        $inscriptions = $level->inscriptions->where('year_id', $yearID);
 
         foreach ($inscriptions as $inscription) {
             $conforme = new Conforme();
             $inscription->student;
-            $semesters = $classe->semesters;
+            $semesters = $level->semesters;
             $t_credit = 0;
             $t_n_ponderer = 0;
             $status = 'Pass';
@@ -134,7 +132,6 @@ class TranscriptController extends Controller
             $year_semester = [];
             $head_element = [];
             foreach ($semesters as $semester) {
-                $semester->semestre_name;
                 array_push($head_element, $semester);
                 $tus = $semester->tus;
                 $s_average = 0;
@@ -217,13 +214,12 @@ class TranscriptController extends Controller
     function viewGradesOf($inscID)
     {
         $inscription = Inscription::findOrFail($inscID);
-        $classe = $inscription->classe;
+        $level = $inscription->level;
         $inscription->promotion;
-        $classe->branche->departement;
-        $semesters = $inscription->classe->semesters;
+        $level->branche->departement;
+        $semesters = $inscription->level->semesters;
         foreach ($semesters as $semester) {
             $conforme = new Conforme();
-            $semester->semestre_name;
             $tus = $semester->tus;
             $les_note = [];
             $inscription->student;
@@ -306,13 +302,12 @@ class TranscriptController extends Controller
     function viewGrades_with_session_Of($inscID)
     {
         $inscription = Inscription::findOrFail($inscID);
-        $classe = $inscription->classe;
+        $level = $inscription->level;
         $inscription->promotion;
-        $classe->branche->departement;
-        $semesters = $inscription->classe->semesters;
+        $level->branche->departement;
+        $semesters = $inscription->level->semesters;
         foreach ($semesters as $semester) {
             $conforme = new Conforme();
-            $semester->semestre_name;
             $tus = $semester->tus;
             $les_note = [];
             $inscription->student;

@@ -1,19 +1,13 @@
 <x-app-layout filtrage='false'>
     <x-slot name="custom_css">
-
         <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
-
     </x-slot>
-
     <x-slot name="custom_js">
-
         <script src="assets/js/chart.min.js"></script>
         {{-- customs --}}
         <script src="assets/js/bundles/echart/echarts.js"></script>
         <script src="assets/js/bundles/apexcharts/apexcharts.min.js"></script>
         <script src="assets/js/pages/index.js"></script>
-        
-       
     </x-slot>
 
     <section class="content">
@@ -46,9 +40,9 @@
                                 <div class="col-lg-7 col-7">
                                     <div>
                                         <h2 class="col-purple">
-                                            <span>{{$users->count()}}</span>
+                                            <span>{{$departments->count()}}</span>
                                         </h2>
-                                        <p>Users</p>
+                                        <p>Departements</p>
                                     </div>
                                 </div>
                             </div>
@@ -65,9 +59,9 @@
                                 <div class="col-lg-7 col-7">
                                     <div>
                                         <h2 class="col-green">
-                                            <span>{{$departments->count()}}</span>
+                                            <span>{{$options->count()}}</span>
                                         </h2>
-                                        <p>Departements</p>
+                                        <p>Options</p>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +78,7 @@
                                 <div class="col-lg-7 col-7">
                                     <div>
                                         <h2 class="col-orange">
-                                            <span>{{$classes->count()}}</span>
+                                            <span>{{$levels->count()}}</span>
                                         </h2>
                                         <p>Classes</p>
                                     </div>

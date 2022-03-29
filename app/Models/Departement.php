@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Classe;
+use App\Models\Level;
+// use App\Models\Classe;
 use App\Models\Manage;
 use App\Models\Branche;
 use Illuminate\Database\Eloquent\Model;
@@ -21,8 +22,8 @@ class Departement extends Model
     ];
 
     
-    public function classes() {
-        return $this->hasManyThrough(Classe::class, Branche::class);
+    public function levels() {
+        return $this->hasManyThrough(Level::class, Branche::class);
     }
 
     public function heads() {

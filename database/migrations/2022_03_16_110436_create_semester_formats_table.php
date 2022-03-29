@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClassesTable extends Migration
+class CreateSemesterFormatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('semester_formats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branche_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('level');
+            $table->foreignId('level_format_id')->constrained()->onDelete('cascade');
+            $table->string("name");
+            $table->string("label");
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +29,6 @@ class CreateClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('semester_formats');
     }
 }

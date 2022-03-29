@@ -22,7 +22,7 @@ class MarksController extends Controller
     {
         // get tus of the given semester
         $semester= Semester::findOrFail($semesterID);
-        $semester->semestre_name;
+        
         
         $tus =  $semester->tus;
         foreach ($tus as $tu) {
@@ -32,7 +32,7 @@ class MarksController extends Controller
                 $modulu->tests->where('year_id', $yearID);
             }
         }
-        $semester->classe->branche->departement;
+        $semester->level->branche->departement;
         return response()->json($semester);
     }
 
@@ -104,7 +104,7 @@ class MarksController extends Controller
             ->where('year_id', $yearID)
             ->sum('ratio');
             // finally we insert the test in question
-            if($total_ratio+$request->test_ration<100){
+            if($total_ratio+$request->test_ration<=100){
                 $test = Test::insert([
                     'module_id' => $modulusID,
                     'year_id' => $yearID,

@@ -86,6 +86,10 @@ $(function() {
             } else if ($('#wizard_with_validation').hasClass('end_cycle_students_form')) {
                 console.log(values);
                 endStudents_Cycle('wizard_with_validation');
+            } else if ($('#wizard_with_validation').hasClass('TU_form')) {
+                console.log(values);
+                add_tu('wizard_with_validation')
+                    // endStudents_Cycle('wizard_with_validation');
             }
 
         }

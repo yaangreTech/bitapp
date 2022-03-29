@@ -50,9 +50,9 @@
                                                 @forelse ($departments as $department)
                                                     @forelse ($department->branches as $branche)
                                                         <optgroup label="{{ $department->name .'->' . $branche->name}}">
-                                                            @if ($branche->classes->where('level',3)->first()!==null)
-                                                                <option value="{{ $branche->classes->where('level',3)->first()->id }}">
-                                                                    {{ $branche->classes->where('level',3)->first()->name }}
+                                                            @if ($branche->levels->where('name','L3')->first()!==null)
+                                                                <option value="{{ $branche->levels->where('name','L3')->first()->id }}">
+                                                                    {{ $branche->levels->where('name','L3')->first()->name }}
                                                                 </option>
                                                             @else
                                                             <option value="" disabled>No licence-3 Classe for the branch: <strong>{{$branche->name}}</strong></option>

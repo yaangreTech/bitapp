@@ -1,5 +1,5 @@
 'use strict';
-$(function () {
+$(function() {
     //Taken from http://ionden.com/a/plugins/ion.rangeSlider/demo.html
 
     $("#range_01").ionRangeSlider();
@@ -55,7 +55,15 @@ $(function () {
         grid: true,
         from: 1,
         to: 5,
-        values: [0, 10, 100, 1000, 10000, 100000, 1000000]
+        values: [
+                "zero", "one",
+                "two", "three",
+                "four", "five",
+                "six", "seven",
+                "eight", "nine",
+                "ten"
+            ]
+            // values: [0, 10, 100, 1000, 10000, 100000, 1000000]
     });
 
 

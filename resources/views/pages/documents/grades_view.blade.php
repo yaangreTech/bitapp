@@ -31,17 +31,6 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="breadcrumb breadcrumb-style ">
-                            {{-- <li class="breadcrumb-item">
-                                <h4 class="page-title">Payslip</h4>
-                            </li>
-                            <li class="breadcrumb-item bcrumb-1">
-                                <a href="../../index-2.html">
-                                    <i class="fas fa-home"></i> Home</a>
-                            </li>
-                            <li class="breadcrumb-item bcrumb-2">
-                                <a href="#" onClick="return false;">Payroll</a>
-                            </li>
-                            <li class="breadcrumb-item active">Payslip</li> --}}
                         </ul>
                     </div>
                 </div>
@@ -171,7 +160,7 @@
                                                             Accademic
                                                             Director</span><br />
                                                     </div>
-                                                    <div class="m-t-10" style="width:300px;">
+                                                    <div class="m-t-20" style="width:300px;margin-top: 100px">
                                                         <span class="font-underline" style="color:black;"> Dr.
                                                             Bawindsom Marcel KEBRE</span>
                                                         <p>Maître de Conférences (Lecturer)</p>

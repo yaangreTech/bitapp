@@ -122,16 +122,16 @@ function marksModulusMarksData_view(data) {
     console.log('tbody_elements');
 
     setBreadcrumb(
-        /* data.page_title.tu.semester.classe.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
+        /* data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
         data.page_title.name,
-        data.page_title.tu.semester.classe.branche.departement.name + '&' + data.page_title.tu.semester.classe.name + '&' + data.page_title.tu.semester.semestre_name.name + '&' + data.page_title.tu.name + '&' + data.page_title.name
+        data.page_title.tu.semester.level.branche.departement.name + '&' + data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.name + '&' + data.page_title.tu.name + '&' + data.page_title.name
     );
 
     $.fn.dataTable.isDataTable('#marksModulusMarks_table') && marksModulusMarks_table.destroy();
 
     if (data.testList != null && thead_elements.length > 0) {
         $('#marksModulusMarks_head').html(thead_elements)
-        tbody_elements.length > 0 ? $('#marksModulusMarks_body').html(tbody_elements) : $('#list_corps').html('<div><h3 class="align-center">No Students in this classe</h3></div>');
+        tbody_elements.length > 0 ? $('#marksModulusMarks_body').html(tbody_elements) : $('#list_corps').html('<div><h3 class="align-center">No Students in this level</h3></div>');
         console.log('fini');
     } else {
         $('#list_corps').html('<div><h3 class="align-center">No Test for this modulus</h3></div>');
@@ -233,16 +233,16 @@ function marksModulusMarksData(data) {
         // console.log(tbody_elements);
 
     setBreadcrumb(
-        /* data.page_title.tu.semester.classe.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
+        /* data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
         data.page_title.name,
-        data.page_title.tu.semester.classe.branche.departement.name + '&' + data.page_title.tu.semester.classe.name + '&' + data.page_title.tu.semester.semestre_name.name + '&' + data.page_title.tu.name + '&' + data.page_title.name
+        data.page_title.tu.semester.level.branche.departement.name + '&' + data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.name + '&' + data.page_title.tu.name + '&' + data.page_title.name
     );
 
     $.fn.dataTable.isDataTable('#marksModulusMarks_table') && marksModulusMarks_table.destroy();
 
     if (data.testList != null) {
         $('#marksModulusMarks_head').html(thead_elements)
-        tbody_elements.length > 0 ? $('#marksModulusMarks_body').html(tbody_elements) : $('#list_corps').html('<div><h3 class="align-center">No Students in this classe</h3></div>');
+        tbody_elements.length > 0 ? $('#marksModulusMarks_body').html(tbody_elements) : $('#list_corps').html('<div><h3 class="align-center">No Students in this level</h3></div>');
         console.log('fini');
     } else {
         $('#list_corps').html('<div><h3 class="align-center">No Test for this modulus</h3></div>');

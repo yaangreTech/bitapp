@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body ">
                 @if ($departements->count()>0)
-                    @if ($semestre_names->count()>1)
+                    @if ($semesters->count()>1)
                     <form id="classe_form">
                         @csrf
                         <label for="classe_name">class name</label>

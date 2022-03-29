@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Tu;
 use Carbon\Carbon;
 use App\Models\Year;
-use App\Models\Classe;
+use App\Models\Level;
 use App\Models\Module;
 use App\Models\Branche;
 use App\Models\Semester;
 use App\Models\Departement;
+use App\Models\Level_format;
 use Illuminate\Http\Request;
-use App\Models\Semestre_name;
 use Illuminate\Support\Facades\DB;
 
 class SchoolController extends Controller
@@ -24,7 +24,7 @@ class SchoolController extends Controller
     public function index()
     {
         $shool_departments = Departement::all();
-        return view('pages.configures.school', compact('shool_departments'));
+    return view('pages.configures.school' /*,compact('shool_departments')*/);
     }
 
     /** about departement*/
@@ -34,8 +34,11 @@ class SchoolController extends Controller
         // dd('ddd');
         $departments = Departement::all();
         foreach ($departments as $department) {
-            $department->classes;
+            $department->levels;
             $department->branches;
+            foreach ($department->branches as $branch) {
+                $branch->levels->load('semesters');
+            }
             $department->heads;
         }
 
@@ -90,7 +93,7 @@ class SchoolController extends Controller
         foreach ($departments as $department) {
             $department->branches;
             foreach ($department->branches as $branch) {
-                $branch->classes;
+                $branch->levels;
             }
         }
 
@@ -102,13 +105,41 @@ class SchoolController extends Controller
         $request->validate([
             'branch_name' => ['required', 'string', 'max:255'],
             'branch_departement' => ['required'],
+            'branch_i_level'=> ['required'],
+            'branch_f_level'=> ['required'],
+            // 'levels_range'=>['required'],
+
         ]);
-        $data = Branche::insert([
+        $data=true;
+        $optionID = Branche::insertGetId([
             'name' => $request->branch_name,
             'departement_id' => $request->branch_departement,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        // dd(str_replace('_',' ',explode('x',$request->levels_range)[0]));
+        // $initial_format=Level_format::all()->where('label', explode('x',$request->levels_range)[0])->first();
+      
+        // $final_format=Level_format::all()->where('label', explode('x',$request->levels_range)[1])->first();
+        
+        
+        $levels_formats=Level_format::all()->where('id','>=',$request->branch_i_level)->where('id','<=',$request->branch_f_level);
+        
+        foreach ($levels_formats as $lf){
+            $levelID=Level::insertGetId([
+                'name' =>  $lf->name,
+                'label' =>  $lf->label,
+                'cycle' =>  $lf->cycle,
+                'branche_id'=> $optionID
+            ]);
+            foreach ($lf->semester_formats as $sf){
+                $data=Semester::insert([
+                    'name' => $sf->name,
+                    'label' => $sf->label,
+                    'level_id' => $levelID,
+                ]);
+            }
+        }
         return response()->json($data);
     }
 
@@ -117,15 +148,48 @@ class SchoolController extends Controller
         $request->validate([
             'branch_name' => ['required', 'string', 'max:255'],
             'branch_departement' => ['required'],
+            'branch_i_level'=> ['required'],
+            'branch_f_level'=> ['required'],
         ]);
+        $data=false;
+        $levels_formats=Level_format::all()->where('id','>=',$request->branch_i_level)->where('id','<=',$request->branch_f_level);
+        $branch = Branche::findOrFail($id);
 
-        $data = Branche::findOrFail($id);
+        $branch->name = $request->branch_name;
+        $branch->departement_id = $request->branch_departement;
+        $data = $branch->update();
+        $levels=$branch->levels;
 
-        $data->name = $request->branch_name;
-        $data->departement_id = $request->branch_departement;
-        $data = $data->update();
+        $levelAsSuppimers=$branch->levels->whereNotIn('name', $levels_formats->pluck('name'));
 
+        $levelAsAjouters=$levels_formats->whereNotIn('name', $levels->pluck('name'));
+       
+        foreach ($levelAsAjouters as $levelAsAjouter){
+          
+            $levelID=Level::insertGetId([
+                'name' =>  $levelAsAjouter->name,
+                'label' =>  $levelAsAjouter->label,
+                'cycle' =>  $levelAsAjouter->cycle,
+                'branche_id'=> $branch->id
+            ]);
+            foreach ($levelAsAjouter->semester_formats as $sf){
+                $data=Semester::insert([
+                    'name' => $sf->name,
+                    'label' => $sf->label,
+                    'level_id' => $levelID,
+                ]);
+            }
+        }
+
+        foreach ($levelAsSuppimers as $levelAsSuppimer){
+            $levelAsSuppimer->delete();
+        }
         return response()->json($data);
+    }
+
+    public function bind_levels_of( $initalID){
+        $levels_formats=Level_format::all()->where('id','>=',$initalID);
+        return response()->json($levels_formats);
     }
 
     public function deleteBranch($id)
@@ -144,10 +208,10 @@ class SchoolController extends Controller
 
     public function getSemesters()
     {
-        $semesters = Semestre_name::all();
-        foreach ($semesters as $semester) {
-            $semester->affectations;
-        }
+        $semesters = Semester::all();
+        // foreach ($semesters as $semester) {
+        //     $semester->affectations;
+        // }
 
         return response()->json($semesters);
     }
@@ -158,7 +222,7 @@ class SchoolController extends Controller
             'semester' => ['required', 'string', 'max:255'],
         ]);
 
-        $data = Semestre_name::insert([
+        $data = Semester::insert([
             'name' => $request->semester,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -172,7 +236,7 @@ class SchoolController extends Controller
             'semester' => ['required', 'string', 'max:255'],
         ]);
 
-        $data = Semestre_name::findOrFail($id);
+        $data = Semester::findOrFail($id);
 
         $data->name = $request->semester;
         $data = $data->update();
@@ -182,7 +246,7 @@ class SchoolController extends Controller
 
     public function deleteSemester($id)
     {
-        $data = Semestre_name::findOrFail($id);
+        $data = Semester::findOrFail($id);
         $data = $data->delete();
         return response()->json($data);
     }
@@ -201,11 +265,11 @@ class SchoolController extends Controller
 
         $current_year = Year::all()->last();
         foreach ($branches as $branch) {
-            $classes = $branch->classes;
-            foreach ($classes as $classe) {
+            $levels = $branch->levels;
+            foreach ($levels as $level) {
                 // $classe->semestre_names;
-                $classe->semesters->load("semestre_name");
-                $classe->tus;
+                $levels->semesters;//->load("semestre_name");
+                $levels->tus;
                 if ($current_year != null) {
                     $classe->inscriptions->where('year_id', $current_year->id);
                 } else {
@@ -261,7 +325,7 @@ class SchoolController extends Controller
             'classe_semester_1' => ['required', 'max:255'],
         ]);
 
-        $data = Classe::findOrFail($id);
+        $data = Level::findOrFail($id);
          $semesterN1=$data->semesters->first();
          $semesterN2=$data->semesters->last();
 
@@ -278,7 +342,7 @@ class SchoolController extends Controller
 
     public function deleteClasse($id)
     {
-        $data = Classe::findOrFail($id);
+        $data = Level::findOrFail($id);
         $data = $data->delete();
         return response()->json($data);
     }
@@ -290,39 +354,49 @@ class SchoolController extends Controller
 
     /** about TU*/
 
-    public function getTuOf($classID)
+    public function getTuOf($semesterID)
     {
         // dd('ddd');
         $tu_body = [];
-        $classe = Classe::findOrFail($classID);
-        $tus = $classe->tus;
-        foreach ($tus as $tu) {
-            //  $modulu['semesterID']=$modulu->semester->id;
-            //  $semester=$modulu->semester;
-            $tu->semester->semestre_name->name;
-            $tu->modulus;
+        $semester = Semester::findOrFail($semesterID);
+        $semester->level->branche;
+        $semester->tus->load('modulus');
+        
 
-            //   array_unshift($modulus_body,$modulu);
-        }
-
-        return response()->json($tus);
+        return response()->json($semester);
     }
 
     public function storeTu(Request $request)
     {
         $request->validate([
             'TU_name' => ['required', 'string', 'max:255'],
-            'TU_classe' => ['required', 'max:255'],
             'TU_semester' => ['required', 'max:255'],
+            'TU_checker' => ['required'],
+        ]);
+$data=false;
+        $semester= Semester::findOrFail($request->TU_semester);
+
+        $tuID=Tu::insertGetId([
+            'semester_id'=>$semester->id,
+            'name'=>$request->TU_name
         ]);
 
-        $data = Tu::insert([
-            'name' => $request->TU_name,
-            'semester_id' => $request->TU_semester,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
+        $ecus=json_decode($request->TU_checker);
+        foreach($ecus as $ecu){
+            $data=Module::insert([
+                'tu_id' =>$tuID,
+                'name'=>$ecu->module_name,
+                'credict' =>$ecu->modulus_credict,
+                'heure' =>$ecu->modulus_hours
+            ]);
+        }
+        // $data = Tu::insert([
+        //     'name' => $request->TU_name,
+        //     'semester_id' => $request->TU_semester,
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now(),
+        // ]);
+// dd($request);
         return response()->json($data);
     }
 
@@ -357,7 +431,7 @@ class SchoolController extends Controller
 
     public function bindSemestersOf($classID)
     {
-        $classe = Classe::findOrFail($classID);
+        $classe = Level::findOrFail($classID);
         $semesters = $classe->semesters;
         foreach ($semesters as $semester) {
             $semester->semestre_name;
@@ -372,7 +446,7 @@ class SchoolController extends Controller
     {
         // dd('ddd');
         //    $modulus_body=Array();
-        $classe = Classe::findOrFail($classID);
+        $classe = Level::findOrFail($classID);
         $tus = $classe->tus;
         foreach ($tus as $tu) {
             $tu->modulus;
@@ -382,20 +456,18 @@ class SchoolController extends Controller
         return response()->json($tus);
     }
 
-    public function storeModulus(Request $request)
+    public function storeModulus(Request $request,$tuID)
     {
         $request->validate([
             'module_name' => ['required', 'string', 'max:255'],
             'modulus_credict' => ['required', 'max:255'],
             'modulus_hours' => ['required', 'max:255'],
-            'modulus_classe' => ['required', 'max:255'],
-            'modulus_TU' => ['required', 'max:255'],
         ]);
 
         $data = Module::insert([
             'name' => $request->module_name,
             'credict' => $request->modulus_credict,
-            'tu_id' => $request->modulus_TU,
+            'tu_id' => $tuID,
             'heure' => $request->modulus_hours,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -410,15 +482,12 @@ class SchoolController extends Controller
             'module_name' => ['required', 'string', 'max:255'],
             'modulus_credict' => ['required', 'max:255'],
             'modulus_hours' => ['required', 'max:255'],
-            'modulus_classe' => ['required', 'max:255'],
-            'modulus_TU' => ['required', 'max:255'],
         ]);
 
         $data = Module::findOrFail($id);
 
         $data->name = $request->module_name;
         $data->credict = $request->modulus_credict;
-        $data->tu_id = $request->modulus_TU;
         $data->heure = $request->modulus_hours;
         $data = $data->update();
 
@@ -439,7 +508,7 @@ class SchoolController extends Controller
 
     public function bindTuOf($classID)
     {
-        $classe = Classe::findOrFail($classID);
+        $classe = Level::findOrFail($classID);
         $semesters = $classe->semesters;
         foreach ($semesters as $semester) {
             $semester->semestre_name;

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSemestreNamesTable extends Migration
+class CreateLevelFormatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSemestreNamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('semestre_names', function (Blueprint $table) {
+        Schema::create('level_formats', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string("name");
+            $table->string("label");
+            $table->string("cycle");
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateSemestreNamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('semestre_names');
+        Schema::dropIfExists('level_formats');
     }
 }

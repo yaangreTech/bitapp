@@ -15,8 +15,9 @@ class CreateSemestersTable extends Migration
     {
         Schema::create('semesters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('classe_id')->constrained()->onDelete('cascade');
-            $table->foreignId('semestre_name_id')->constrained()->onDelete('cascade');
+            $table->foreignId('level_id')->constrained()->onDelete('cascade');
+            $table->string("name");
+            $table->string("label");
             $table->timestamps();
             $table->softDeletes();
         });

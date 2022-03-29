@@ -135,7 +135,7 @@ function studentData(data) {
     console.log(student_editparames);
     $.fn.dataTable.isDataTable('#students_table') && students_table.destroy();
 
-    elements.length > 0 ? $('#student_body').html(elements) : $('#student_body').html('<tr><td colspan="9" class="center">No Students for this class<td></tr>')
+    elements.length > 0 ? $('#student_body').html(elements) : $('#student_body').html('<tr><td colspan="8" class="center">No Students for this class<td></tr>')
 
     if (elements.length > 0) {
         students_table = $('#students_table').DataTable({
@@ -148,7 +148,7 @@ function vew_studentData(inscription) {
     console.log(inscription);
     $('.s_matricule').html(inscription.student.matricule)
     $('.s_promotion').html(inscription.promotion.name)
-    $('.s_classe').html(inscription.classe.name)
+    $('.s_classe').html(inscription.level.label)
     $('.s_firstName').html(inscription.student.first_name)
     $('.s_lastName').html(inscription.student.Last_name)
     $('.s_phone').html(inscription.student.phone)

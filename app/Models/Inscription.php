@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Classe;
+use App\Models\Level;
 use App\Models\Student;
 use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Model;
@@ -26,9 +26,9 @@ class Inscription extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function classe()
+    public function level()
     {
-        return $this->belongsTo(Classe::class);
+        return $this->belongsTo(Level::class);
     }
 
     public function promotion()

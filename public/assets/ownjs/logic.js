@@ -35,20 +35,25 @@ $(function() {
 
 
 function editer(assosValues = '', id) {
+    var ciclist = ["Licence 1", "Licence 2", "Licence 3", "Master 1", "Master 2"];
     console.log(assosValues);
     $('.update').show();
     $('.update').attr('id', id);
     $('.save').hide();
     $.each(assosValues.split('&'), function(key, val) {
-        if (val.split('=')[0].indexOf('^') == -1) {
-            $('#' + val.split('=')[0]).val(val.split('=')[1])
-        } else {
+        if (val.split('=')[0].indexOf('^') != -1) {
             $('#' + val.split('=')[0].split('^')[1]).val(val.split('=')[1]).change();
+        } else if (val.split('=')[0].indexOf('*') != -1) {
+            val = val.split('=')[1].split('_');
+            console.log(val, ciclist.indexOf(val[0]), ciclist.indexOf(val[1]));
+            // setRang(ciclist.indexOf(val[0]), ciclist.indexOf(val[1]));
+        } else {
 
+            $('#' + val.split('=')[0]).val(val.split('=')[1])
         }
 
     })
-
+    setRang(0, 3);
     $('#modulus_semester').attr('disabled', true);
 }
 
@@ -57,6 +62,13 @@ $('.initier').on('click', function(e) {
     $('.update').hide();
     $('.save').show();
 })
+
+function initier(other = '') {
+    $('input').val('');
+    $('.update').hide();
+    $('.save').show();
+
+}
 
 function showToast(icon = 'success', title = 'no Title', loader = false) {
     const Toast = Swal.mixin({
@@ -80,7 +92,8 @@ function showToast(icon = 'success', title = 'no Title', loader = false) {
 
 function imprimer(id) {
     $('#' + id).printThis({
-        importStyle: true,
+        // importStyle: false,
+        printContainer: true,
     });
 }
 
@@ -105,4 +118,21 @@ function setBreadcrumb(titles = '', breadcrumIitems = '') {
             $("<li class = \"breadcrumb-item bcrumb-2 active \" >" + breadcrumIitem + "</li>")
         );
     })
+}
+
+
+function setRang(initial, final) {
+    $("#levels_range").ionRangeSlider({
+        type: "double",
+        grid: true,
+        from: initial,
+        to: final,
+        values: [
+            "Licence 1", "Licence 2",
+            "Licence 3", "Master 1",
+            "Master 2"
+        ],
+        input_values_separator: 'x'
+            // values: [0, 10, 100, 1000, 10000, 100000, 1000000]
+    });
 }

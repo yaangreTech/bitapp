@@ -43,7 +43,7 @@ function getModulusOf(yearID, semesterID) {
 function marksModulusData(data) {
     var elements = ''
     console.log(data);
-    classe_editparames = []
+    level_editparames = []
     $.each(data.tus, function(key, tu) {
             elements += '<li class="">'
             elements += '    <div class="timeline-badge primary m-l-10">'
@@ -112,12 +112,12 @@ function marksModulusData(data) {
             elements += '    </div>'
             elements += '</li>'
         })
-        // $('.page-title').html(data.classe.name + ' > ' + data.semestre_name.name)
-        // var breadcrumb = data.classe.branche.departement.name.
+        // $('.page-title').html(data.level.name + ' > ' + data.semestre_name.name)
+        // var breadcrumb = data.level.branche.departement.name.
 
-    setBreadcrumb(data.classe.name + '&' + data.semestre_name.name, data.classe.branche.departement.name + '&' + data.classe.name + '&' + data.semestre_name.name);
+    setBreadcrumb(data.level.name + '&' + data.name, data.level.branche.departement.name + '&' + data.level.name + '&' + data.name);
 
-    elements.length > 0 ? $('#marks_modulus').html(elements) : $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No Modulus for this classe Semester</h3></div>');
+    elements.length > 0 ? $('#marks_modulus').html(elements) : $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No Modulus for this level Semester</h3></div>');
 
 }
 

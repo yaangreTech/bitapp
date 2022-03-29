@@ -2,14 +2,14 @@
 
 namespace App\View\Components;
 
-use Illuminate\View\Component;
+use App\Models\Semester;
 use App\Models\Departement;
-use App\Models\Semestre_name;
+use Illuminate\View\Component;
 
 class ClassForm extends Component
 {
     public $departements;
-    public $semestre_names;
+    public $semesters;
     /**
      * Create a new component instance.
      *
@@ -19,7 +19,7 @@ class ClassForm extends Component
     {
         //
         $this->departements =Departement::all();
-        $this->semestre_names=Semestre_name::all();
+        $this->semesters=Semester::all();
     }
 
     /**

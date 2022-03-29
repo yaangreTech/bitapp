@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Departement;
+use App\Models\Level_format;
 use Illuminate\View\Component;
 
 class BranchForm extends Component
@@ -14,11 +15,14 @@ class BranchForm extends Component
      */
 
      public $departements;
+     public $levels;
+
     public function __construct()
     {
         //
 
         $this->departements=Departement::all();
+        $this->levels=Level_format::all();
     }
 
     /**

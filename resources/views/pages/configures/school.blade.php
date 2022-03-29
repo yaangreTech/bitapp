@@ -1,6 +1,9 @@
 <x-app-layout filtrage='false'>
     <x-slot name="custom_css">
         <link href="assets/css/form.min.css" rel="stylesheet">
+
+        <link href="assets/js/bundles/rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="assets/js/bundles/rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
     </x-slot>
     <section class="content">
         <div class="container-fluid">
@@ -35,24 +38,24 @@
                                             data-toggle="tab">Departements Settings</a>
                                     </li>
                                     <li class="nav-item tab-all">
-                                        <a class="nav-link" href="#m_branches" data-toggle="tab">Branches
+                                        <a class="nav-link" href="#m_branches" data-toggle="tab">Option
                                             Settings</a>
                                     </li>
-                                    <li class="nav-item tab-all p-l-20">
+                                    {{-- <li class="nav-item tab-all p-l-20">
                                         <a class="nav-link" href="#m_Semesters" data-toggle="tab">Semesters
                                             Settings</a>
                                     </li>
                                     <li class="nav-item tab-all">
                                         <a class="nav-link" href="#m_Classes" data-toggle="tab">Classes
                                             Settings</a>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item tab-all p-l-20">
-                                        <a class="nav-link" href="#m_TU" data-toggle="tab">TU Settings</a>
+                                        <a class="nav-link" href="#m_TU" data-toggle="tab">TU && ECU Settings</a>
                                     </li>
-                                    <li class="nav-item tab-all p-l-20">
+                                    {{-- <li class="nav-item tab-all p-l-20">
                                         <a class="nav-link" href="#m_Modulus" data-toggle="tab">Modulus
                                             Settings</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </div>
@@ -80,7 +83,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th class=""> Departement Name </th>
-                                                            <th class=""> Branches </th>
+                                                            <th class=""> Options </th>
                                                             <th class=""> Created at </th>
                                                             <th class=""> Head of Departement </th>
                                                             <th class=""> Status </th>
@@ -118,7 +121,9 @@
                                         <div class="body">
                                             <div class="table-responsive">
                                                 <table id="branches_table" class="table table-hover  ">
-                                                    <tbody id="branches_body">
+                                                    <tbody 
+                                                    id="branches_body"
+                                                    >
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -131,7 +136,7 @@
                         </div>
 
                         {{-- semesters view --}}
-                        <div role="tabpanel" class="tab-pane" id="m_Semesters" aria-expanded="false">
+                        {{-- <div role="tabpanel" class="tab-pane" id="m_Semesters" aria-expanded="false">
                             <div class="card">
                                 <div class="header">
                                     <h2>
@@ -154,7 +159,6 @@
                                                     <th class=""> Semester </th>
                                                     <th class=""> Classes </th>
                                                     <th class=""> Status </th>
-                                                    {{-- <th class=""> Progress</th> --}}
                                                     <th class=""> Action </th>
                                                 </tr>
                                             </thead>
@@ -172,10 +176,10 @@
                                 </div>
 
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- classes view --}}
-                        <div role="tabpanel" class="tab-pane" id="m_Classes" aria-expanded="false">
+                        {{-- <div role="tabpanel" class="tab-pane" id="m_Classes" aria-expanded="false">
                             <div class="card">
                                 <div class="header">
                                     <h2>
@@ -207,7 +211,7 @@
                                             <div class="card">
                                                 <div class="boxs mail_listing">
                                                     <div class="inbox-center table-responsive">
-                                                        <table {{-- id="classe_table" --}} class="table table-hover">
+                                                        <table  id="classe_table" class="table table-hover">
                                                             <tbody id="classe_body">
 
                                                             </tbody>
@@ -221,7 +225,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- tus view --}}
                         <div role="tabpanel" class="tab-pane" id="m_TU" aria-expanded="false">
@@ -275,7 +279,7 @@
                         </div>
 
                         {{-- modulus view --}}
-                        <div role="tabpanel" class="tab-pane" id="m_Modulus" aria-expanded="false">
+                        {{-- <div role="tabpanel" class="tab-pane" id="m_Modulus" aria-expanded="false">
                             <div class="card">
                                 <div class="header">
                                     <h2>
@@ -307,7 +311,7 @@
                                             <div class="card">
                                                 <div class="boxs mail_listing">
                                                     <div class="inbox-center table-responsive">
-                                                        <table {{-- id="modulus_table" --}} class="table table-hover">
+                                                        <table id="modulus_table" class="table table-hover">
 
                                                             <tbody id="modulus_body">
 
@@ -321,7 +325,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -333,8 +337,8 @@
         {{-- forms --}}
         <x-department-form />
         <x-branch-form />
-        <x-semester-form />
-        <x-class-form />
+        {{-- <x-semester-form /> --}}
+        {{-- <x-class-form /> --}}
         <x-modulus-form />
         <x-tu-form />
     </section>
@@ -352,6 +356,10 @@
 
         <!-- Demo Js -->
         <script src="assets/js/pages/ui/collapse.js"></script>
+
+        {{-- range  --}}
+        <script src="assets/js/bundles/rangeSlider/js/ion.rangeSlider.js"></script>
+        {{-- <script src="assets/js/pages/ui/range-sliders.js"></script> --}}
 
     </x-slot>
 </x-app-layout>

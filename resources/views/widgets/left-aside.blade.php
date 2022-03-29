@@ -69,12 +69,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('end_cycle_form') }}" id="end_Cycle"
-                        onClick="setActiveId(this.id)">
+                    <a href="{{ route('end_cycle_form') }}" id="end_Cycle" onClick="setActiveId(this.id)">
                         <span>End cycle</span>
                     </a>
                 </li>
-               
+
 
                 <li>
                     <a href="#" onClick="return false;" class="menu-toggle">
@@ -88,32 +87,54 @@
                                         <span>{{ $departement->name }}</span>
                                     </a>
                                     <ul class="ml-menu">
-                                        @forelse ($departement->classes as $classe)
+                                        @forelse ($departement->branches as $branche)
                                             <li>
-                                                <a title="students_list" href="{{ route('all_students') }}"
-                                                    id="{{ 'sl' . $departement->id . '_' . $classe->id }}"
-                                                    onClick="setActiveId(this.id, this.title)"
-                                                    >
-
-                                                    <span>{{ $classe->name }}</span>
+                                                <a href="#" onClick="return false;" class="menu-toggle">
+                                                    <span>{{ $branche->name }}</span>
                                                 </a>
+                                                <ul class="ml-menu">
+                                                    @forelse ($branche->levels as $level)
+                                                        <li>
+                                                            <a title="students_list"
+                                                                href="{{ route('all_students') }}"
+                                                                id="{{ 'sl' . $departement->id . '_' . $level->id }}"
+                                                                onClick="setActiveId(this.id, this.title)">
+
+                                                                <span>{{ $level->label }} ({{ $level->name }})</span>
+                                                            </a>
+                                                        </li>
+                                                    @empty
+                                                        <span>No Classe for this department</span>
+                                                    @endforelse
+                                                </ul>
                                             </li>
                                         @empty
-                                            <span>No Classe for this department</span>
+                                            <span>No branches</span>
                                         @endforelse
                                     </ul>
                                 </li>
                             @else
-                                @forelse ($departement->classes as $classe)
+                                @forelse ($departement->branches as $branche)
                                     <li>
-                                        <a title="students_list" href="{{ route('all_students') }}"
-                                            id="{{ 'sl' . $departement->id . '_' . $classe->id }}"
-                                            onClick="setActiveId(this.id,this.title)">
-                                            <span>{{ $classe->name }}</span>
+                                        <a href="#" onClick="return false;" class="menu-toggle">
+                                            <span>{{ $branche->name }}</span>
                                         </a>
+                                        <ul class="ml-menu">
+                                            @forelse ($branche->levels as $level)
+                                                <li>
+                                                    <a title="students_list" href="{{ route('all_students') }}"
+                                                        id="{{ 'sl' . $departement->id . '_' . $level->id }}"
+                                                        onClick="setActiveId(this.id,this.title)">
+                                                        <span>{{ $level->label }} ({{ $level->name }})</span>
+                                                    </a>
+                                                </li>
+                                            @empty
+                                                <span>No Classe for this department</span>
+                                            @endforelse
+                                        </ul>
                                     </li>
                                 @empty
-                                    <span>No Classe for this department</span>
+                                    <span>No branches</span>
                                 @endforelse
                             @endif
                         @empty
@@ -139,58 +160,83 @@
                                 <span>{{ $departement->name }}</span>
                             </a>
                             <ul class="ml-menu">
-
-                                @forelse ($departement->classes as $classe)
+                                @forelse ($departement->branches as $branche)
                                     <li>
                                         <a href="#" onClick="return false;" class="menu-toggle">
-                                            <span>{{ $classe->name }}</span>
+                                            <span>{{ $branche->name }}</span>
                                         </a>
                                         <ul class="ml-menu">
-
-                                            @forelse ($classe->semesters as $semester)
+                                            @forelse ($branche->levels as $level)
                                                 <li>
-                                                    <a title="marks_management" href="{{ route('marks_modulus') }}"
-                                                        id="mm{{ $departement->id . $classe->id .'_'. $semester->id }}"
-                                                        onClick="setActiveId(this.id, this.title)">
-                                                        <span>{{ $semester->semestre_name->name }}</span>
+                                                    <a href="#" onClick="return false;" class="menu-toggle">
+                                                        <span>{{ $level->label }} ({{ $level->name }})</span>
                                                     </a>
+                                                    <ul class="ml-menu">
+
+                                                        @forelse ($level->semesters as $semester)
+                                                            <li>
+                                                                <a title="marks_management"
+                                                                    href="{{ route('marks_modulus') }}"
+                                                                    id="mm{{ $departement->id . $level->id . '_' . $semester->id }}"
+                                                                    onClick="setActiveId(this.id, this.title)">
+                                                                    <span>{{ $semester->label }} ({{ $semester->name }})</span>
+                                                                </a>
+                                                            </li>
+                                                        @empty
+                                                            <span>No Semester</span>
+                                                        @endforelse
+
+                                                    </ul>
                                                 </li>
                                             @empty
-                                                <span>No Semester</span>
+                                                <span>No Level</span>
                                             @endforelse
-
                                         </ul>
                                     </li>
                                 @empty
-                                    <span>No Classe</span>
+                                    <span>No Option</span>
                                 @endforelse
+
+
+
                             </ul>
                         </li>
                     @else
-                        @forelse ($departement->classes as $classe)
+                        @forelse ($departement->branches as $branche)
                             <li>
                                 <a href="#" onClick="return false;" class="menu-toggle">
-                                    <span>{{ $classe->name }}</span>
+                                    <span>{{ $branche->name }}</span>
                                 </a>
                                 <ul class="ml-menu">
-                                    @forelse ($classe->semesters as $semester)
+                                    @forelse ($branche->levels as $level)
                                         <li>
-                                            <a title='marks_management' href="{{ route('marks_modulus') }}"
-                                                id="mm{{ $departement->id . $classe->id .'_'. $semester->id }}"
-                                                onClick="setActiveId(this.id,this.title)">
-                                                <span>{{ $semester->semestre_name->name }}</span>
+                                            <a href="#" onClick="return false;" class="menu-toggle">
+                                                <span>{{ $level->label }} ({{ $level->name }})</span>
                                             </a>
+                                            <ul class="ml-menu">
+                                                @forelse ($level->semesters as $semester)
+                                                    <li>
+                                                        <a title='marks_management'
+                                                            href="{{ route('marks_modulus') }}"
+                                                            id="mm{{ $departement->id . $level->id . '_' . $semester->id }}"
+                                                            onClick="setActiveId(this.id,this.title)">
+                                                            <span>{{ $semester->label }} ({{ $semester->name }})</span>
+                                                        </a>
+                                                    </li>
+                                                @empty
+                                                    <span>No Semester</span>
+                                                @endforelse
+
+                                            </ul>
                                         </li>
                                     @empty
-                                        <span>No Semester</span>
+                                        <span>No Level</span>
                                     @endforelse
-
                                 </ul>
                             </li>
                         @empty
-                            <span>No Classe</span>
+                            <span>No Option</span>
                         @endforelse
-
                     @endif
                 @empty
                     <span>No Department</span>
@@ -214,57 +260,82 @@
                             </a>
                             <ul class="ml-menu">
 
-                                @forelse ($departement->classes as $classe)
+                                @forelse ($departement->branches as $branche)
                                     <li>
                                         <a href="#" onClick="return false;" class="menu-toggle">
-                                            <span>{{ $classe->name }}</span>
+                                            <span>{{ $branche->name }}</span>
                                         </a>
                                         <ul class="ml-menu">
 
-                                            @forelse ($classe->semesters as $semester)
+                                            @forelse ($branche->levels as $level)
                                                 <li>
-                                                    <a title="average_management" href="{{ route('semester_averages') }}"
-                                                        id="sa{{ $departement->id . $classe->id . $semester->id.'_'.$semester->id }}"
-                                                        onClick="setActiveId(this.id,this.title)">
-                                                        <span>{{ $semester->semestre_name->name }}</span>
+                                                    <a href="#" onClick="return false;" class="menu-toggle">
+                                                        <span>{{ $level->label }} ({{ $level->name }})</span>
                                                     </a>
+                                                    <ul class="ml-menu">
+
+                                                        @forelse ($level->semesters as $semester)
+                                                            <li>
+                                                                <a title="average_management"
+                                                                    href="{{ route('semester_averages') }}"
+                                                                    id="sa{{ $departement->id . $level->id . $semester->id . '_' . $semester->id }}"
+                                                                    onClick="setActiveId(this.id,this.title)">
+                                                                    <span>{{ $semester->label }} ({{ $semester->name }})</span>
+                                                                </a>
+                                                            </li>
+                                                        @empty
+                                                            <span>No Semester</span>
+                                                        @endforelse
+
+                                                    </ul>
                                                 </li>
                                             @empty
-                                                <span>No Semester</span>
+                                                <span>No Classe</span>
                                             @endforelse
-
                                         </ul>
                                     </li>
                                 @empty
-                                    <span>No Classe</span>
+                                    <span>No Branches</span>
                                 @endforelse
+
                             </ul>
                         </li>
                     @else
-                        @forelse ($departement->classes as $classe)
+                        @forelse ($departement->branches as $branche)
                             <li>
                                 <a href="#" onClick="return false;" class="menu-toggle">
-                                    <span>{{ $classe->name }}</span>
+                                    <span>{{ $branche->name }}</span>
                                 </a>
                                 <ul class="ml-menu">
-                                    @forelse ($classe->semesters as $semester)
+                                    @forelse ($branche->levels as $level)
                                         <li>
-                                            <a  title="average_management" href="{{ route('semester_averages') }}"
-                                                id="sa{{ $departement->id . $classe->id . $semester->id .'_'.$semester->id}}"
-                                                onClick="setActiveId(this.id,this.title)">
-                                                <span>{{ $semester->semestre_name->name }}</span>
+                                            <a href="#" onClick="return false;" class="menu-toggle">
+                                                <span>{{ $level->label }} ({{ $level->name }})</span>
                                             </a>
+                                            <ul class="ml-menu">
+                                                @forelse ($level->semesters as $semester)
+                                                    <li>
+                                                        <a title="average_management"
+                                                            href="{{ route('semester_averages') }}"
+                                                            id="sa{{ $departement->id . $level->id . $semester->id . '_' . $semester->id }}"
+                                                            onClick="setActiveId(this.id,this.title)">
+                                                            <span>{{ $semester->label }} ({{ $semester->name }})</span>
+                                                        </a>
+                                                    </li>
+                                                @empty
+                                                    <span>No Semester</span>
+                                                @endforelse
+
+                                            </ul>
                                         </li>
                                     @empty
-                                        <span>No Semester</span>
+                                        <span>No Classe</span>
                                     @endforelse
-
                                 </ul>
                             </li>
                         @empty
-                            <span>No Classe</span>
+                            <span>No Branches</span>
                         @endforelse
-
                     @endif
                 @empty
                     <span>No Department</span>
@@ -292,30 +363,54 @@
                                         <span>{{ $departement->name }}</span>
                                     </a>
                                     <ul class="ml-menu">
-                                        @forelse ($departement->classes as $classe)
+                                        @forelse ($departement->branches as $branche)
                                             <li>
-                                                <a title="grade_transcript" href="{{ route('grades') }}"
-                                                    id="{{ 'gt' . $departement->id . $classe->id.'_'.$classe->id }}"
-                                                    onClick="setActiveId(this.id, this.title)">
-                                                    <span>{{ $classe->name }}</span>
+                                                <a href="#" onClick="return false;" class="menu-toggle">
+                                                    <span>{{ $branche->name }}</span>
                                                 </a>
+                                                <ul class="ml-menu">
+
+                                                    @forelse ($branche->levels as $level)
+                                                        <li>
+                                                            <a title="grade_transcript" href="{{ route('grades') }}"
+                                                                id="{{ 'gt' . $departement->id . $level->id . '_' . $level->id }}"
+                                                                onClick="setActiveId(this.id, this.title)">
+                                                                <span>{{ $level->label }} ({{ $level->name }})</span>
+                                                            </a>
+                                                        </li>
+                                                    @empty
+                                                        <span>No Classe for this department</span>
+                                                    @endforelse
+                                                </ul>
                                             </li>
                                         @empty
-                                            <span>No Classe for this department</span>
+                                            <span>No Branches</span>
                                         @endforelse
+
                                     </ul>
                                 </li>
                             @else
-                                @forelse ($departement->classes as $classe)
+                                @forelse ($departement->branches as $branche)
                                     <li>
-                                        <a title="grade_transcript" href="{{ route('grades') }}"
-                                            id="{{ 'gt' . $departement->id . $classe->id.'_'.$classe->id }}"
-                                            onClick="setActiveId(this.id,this.title)">
-                                            <span>{{ $classe->name }}</span>
+                                        <a href="#" onClick="return false;" class="menu-toggle">
+                                            <span>{{ $branche->name }}</span>
                                         </a>
+                                        <ul class="ml-menu">
+                                            @forelse ($branche->levels as $level)
+                                                <li>
+                                                    <a title="grade_transcript" href="{{ route('grades') }}"
+                                                        id="{{ 'gt' . $departement->id . $level->id . '_' . $level->id }}"
+                                                        onClick="setActiveId(this.id,this.title)">
+                                                        <span>{{ $level->label }} ({{ $level->name }})</span>
+                                                    </a>
+                                                </li>
+                                            @empty
+                                                <span>No Classe for this department</span>
+                                            @endforelse
+                                        </ul>
                                     </li>
                                 @empty
-                                    <span>No Classe for this department</span>
+                                    <h3>No Branches</h3>
                                 @endforelse
                             @endif
                         @empty
@@ -386,23 +481,23 @@
                     }))
                     break;
                 case 'average_management':
-                // Average part
-                console.log(id);
-                console.log(id.split('_')[id.split('_').length - 1]);
-                currentActivedb.setItem('average_management', JSON.stringify({
-                    'year': 0,
-                    'semesterID': id.split('_')[id.split('_').length - 1]
-                }))
-                break;
+                    // Average part
+                    console.log(id);
+                    console.log(id.split('_')[id.split('_').length - 1]);
+                    currentActivedb.setItem('average_management', JSON.stringify({
+                        'year': 0,
+                        'semesterID': id.split('_')[id.split('_').length - 1]
+                    }))
+                    break;
                 case 'grade_transcript':
-                // grade transcript part
-                // console.log(id);
-                console.log(id.split('_')[id.split('_').length - 1]);
-                currentActivedb.setItem('grade_transcript', JSON.stringify({
-                    'year': 0,
-                    'classID': id.split('_')[id.split('_').length - 1]
-                }))
-                break;
+                    // grade transcript part
+                    // console.log(id);
+                    console.log(id.split('_')[id.split('_').length - 1]);
+                    currentActivedb.setItem('grade_transcript', JSON.stringify({
+                        'year': 0,
+                        'classID': id.split('_')[id.split('_').length - 1]
+                    }))
+                    break;
                 default:
                     console.log('defau');
                     break;

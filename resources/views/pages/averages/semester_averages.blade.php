@@ -18,6 +18,7 @@
 
             .nb_cell {
                 width: 10px;
+               
             }
 
             .tableStyle {
@@ -25,6 +26,13 @@
                 overflow-x: auto;
                 white-space: nowrap;
             }
+
+           .bodyStyle {
+            /* overflow-x:auto; */
+            display: table;
+            width: 100%;
+           }
+
 
         </style>
         <script> var action='average_management';</script>
@@ -217,7 +225,7 @@
                                     {{-- id="tableExport" --}} {{-- class="display table table-bordered table-hover table-checkable order-column width-per-100 table-header-rotated" --}}>
                                     <thead id="s_semester_thead">
                                     </thead>
-                                    <tbody id="s_semester_tbody">
+                                    <tbody id="s_semester_tbody" >
                                     </tbody>
                                 </table>
 

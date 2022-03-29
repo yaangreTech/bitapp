@@ -57,7 +57,7 @@ function getTranscript_with_session_Data(data) {
     var body_elements = ''
     var head_elements = '<tr><th class="center">Matricule</th><th class="center"> First name </th><th class="center"> Last Name </th>'
     $.each(data.head_element, function(i, semester) {
-        head_elements += '<th class="center">' + semester.semestre_name.name + ' </th>'
+        head_elements += '<th class="center">' + semester.name + ' </th>'
     })
     head_elements += '<th class="center"> Average </th><th class="center"> Notation </th><th class="center"> Statut </th><th class="center"> Action </th></tr>'
     console.log('getTranscriptData');
@@ -101,7 +101,7 @@ function getTranscriptData(data) {
     var body_elements = ''
     var head_elements = '<tr><th class="center">Matricule</th><th class="center"> First name </th><th class="center"> Last Name </th>'
     $.each(data.head_element, function(i, semester) {
-        head_elements += '<th class="center">' + semester.semestre_name.name + ' </th>'
+        head_elements += '<th class="center">' + semester.name + ' </th>'
     })
     head_elements += '<th class="center"> Average </th><th class="center"> Notation </th><th class="center"> Statut </th><th class="center"> Action </th></tr>'
     console.log('getTranscriptData');
@@ -129,7 +129,7 @@ function getTranscriptData(data) {
     // $('#grade_transcript').html(body_elements);
 
     setBreadcrumb(
-        /* data.page_title.tu.semester.classe.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
+        /* data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
         data.page_title.name + '&' + 'Grade transcripts',
         data.page_title.branche.departement.name + '&' + data.page_title.name
     );
@@ -164,7 +164,7 @@ function viewTranscriptData(data) {
     body_elements = ''
     var new_semester = 1
         // semesters = data.semesters;
-    $.each(data.classe.semesters, function(semester_index, semester) {
+    $.each(data.level.semesters, function(semester_index, semester) {
         new_semester = 1;
         $.each(semester.tus, function(tu_index, tu) {
 
@@ -175,33 +175,33 @@ function viewTranscriptData(data) {
                         new_semester = -1
                         var semestre_rowspan = semester.s_n_modulus + 1;
                         body_elements += '<tr>'
-                        body_elements += '    <td class="center" rowspan="' + semestre_rowspan + '">' + semester.semestre_name.name + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
-                        body_elements += '    <td class="">' + modul.name + '</td>'
-                        body_elements += '    <td class="center">' + modul.credict + '</td>'
-                        body_elements += '    <td class="center">' + modul.note + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + tu.tu_average + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + tu.tu_credit + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + tu.tu_validation + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + (tu.conforme != null ? tu.conforme.international_Grade : '---') + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + semestre_rowspan + '">' + semester.name + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
+                        body_elements += '    <td class=" mini">' + modul.name + '</td>'
+                        body_elements += '    <td class="center mini">' + modul.credict + '</td>'
+                        body_elements += '    <td class="center mini">' + modul.note + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_average + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_credit + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_validation + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + (tu.conforme != null ? tu.conforme.international_Grade : '---') + '</td>'
                         body_elements += '</tr>'
                     } else {
                         body_elements += '<tr>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
-                        body_elements += '    <td class="">' + modul.name + '</td>'
-                        body_elements += '    <td class="center">' + modul.credict + '</td>'
-                        body_elements += '    <td class="center">' + modul.note + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + tu.tu_average + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + tu.tu_credit + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + tu.tu_validation + '</td>'
-                        body_elements += '    <td class="center" rowspan="' + tu.t_n_modulus + '">' + (tu.conforme != null ? tu.conforme.international_Grade : '---') + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
+                        body_elements += '    <td class=" mini">' + modul.name + '</td>'
+                        body_elements += '    <td class="center mini">' + modul.credict + '</td>'
+                        body_elements += '    <td class="center mini">' + modul.note + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_average + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_credit + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_validation + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + (tu.conforme != null ? tu.conforme.international_Grade : '---') + '</td>'
                         body_elements += '</tr> '
                     }
                 } else {
                     body_elements += '<tr>'
-                    body_elements += '    <td class="">' + modul.name + '</td>'
-                    body_elements += '    <td class="center">' + modul.credict + '</td>'
-                    body_elements += '    <td class="center">' + modul.note + '</td>'
+                    body_elements += '    <td class=" mini">' + modul.name + '</td>'
+                    body_elements += '    <td class="center mini">' + modul.credict + '</td>'
+                    body_elements += '    <td class="center mini">' + modul.note + '</td>'
                     body_elements += '</tr>'
                 }
 
@@ -210,7 +210,7 @@ function viewTranscriptData(data) {
 
         if (new_semester == -1) {
             body_elements += '<tr class="btn-default">'
-            body_elements += '    <td colspan="2" class="center font-bold">Summary ' + semester.semestre_name.name + '</td>'
+            body_elements += '    <td colspan="2" class="center font-bold">Summary ' + semester.name + '</td>'
             body_elements += '    <td class="center font-bold">' + semester.s_credit + '</td>'
             body_elements += '    <td class="center bg-white"></td>'
             body_elements += '    <td class="center font-bold">' + semester.s_n_average + '</td>'
@@ -229,17 +229,19 @@ function viewTranscriptData(data) {
     );
 
     var level = 'First';
-    data.classe.level == 2 ? level = 'Second' : data.classe.level == 3 ? level = 'Third' : level = 'First';
+    data.level.name == 'L2' ? level = 'Second' : data.level == 'L3' ? level = 'Third' : level = 'First';
 
     $('.promotion_ref').html(
         '<p class=" ">Accademic Year<span class=""> : ' + level + ' year</span></p>' +
         '<p class="">Graduation Year <span class=""> : ' + data.promotion.name.split('-')[1] + '</span></p>' +
-        '<p class="">Subject <span class=""> : ' + data.classe.branche.departement.name + '</span></p>'
+        '<p class="">Subject <span class=""> : ' + data.level.branche.departement.name + '</span></p>'
     );
 
     $('#grades_view_body').html(body_elements);
 
     $('.secon_hide').hide();
     $('.first_hide').show();
+
+    $('.mini').css('padding', 0);
 
 }

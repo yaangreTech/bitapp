@@ -49,8 +49,8 @@
                                                 @forelse ($departments as $department)
                                                     @forelse ($department->branches as $branche)
                                                         <optgroup label="{{ $department->name . '->' . $branche->name }}">
-                                                            @forelse ($branche->classes as $classe)
-                                                                <option value="{{ $classe->id }}">{{ $classe->name }}
+                                                            @forelse ($branche->levels as $level)
+                                                                <option value="{{ $level->id }}">{{ $level->name }}
                                                                 </option>
                                                             @empty
                                                             @endforelse

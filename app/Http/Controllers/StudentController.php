@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Year;
-use App\Models\Classe;
+use App\Models\Level;
 use App\Models\Parente;
 use App\Models\Student;
 use App\Models\Conforme;
@@ -66,7 +66,7 @@ class StudentController extends Controller
         // return view('pages.students.students');
         $inscriptions = Inscription::all()
             ->where('year_id', $yearID)
-            ->where('classe_id', $classID);
+            ->where('level_id', $classID);
         foreach ($inscriptions as $inscription) {
             $inscription->student->parent;
         }
@@ -78,7 +78,7 @@ class StudentController extends Controller
         // return view('pages.students.students');
         $inscription = Inscription::findOrFail($inscID);
         $inscription->student->parent;
-        $inscription->classe;
+        $inscription->level;
         $inscription->promotion;
         // $inscription->parent;
         return response()->json($inscription);
@@ -133,7 +133,7 @@ class StudentController extends Controller
         $inscription = Inscription::insert([
             'promotion_id' => $request->studentPromotion,
             'student_id' => $student_id,
-            'classe_id' => $request->studentClasse,
+            'level_id' => $request->studentClasse,
             'year_id' => $current_year->id,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -205,10 +205,10 @@ class StudentController extends Controller
     function getDestination($lastYearID, $initialClassID)
     {
         $lastYear = Year::findOrFail($lastYearID);
-        $initialClass = Classe::findOrFail($initialClassID);
+        $initialClass = Level::findOrFail($initialClassID);
 
         $branche = $initialClass->branche;
-        $destination_classes = Classe::where('branche_id', $branche->id)
+        $destination_classes = Level::where('branche_id', $branche->id)
             ->where('level', '>=', $initialClass->level)
             ->orderBy('level', 'ASC')
             ->take(2)
@@ -228,7 +228,7 @@ class StudentController extends Controller
     function getConsernedStudents($lastYear_id, $initialClass_id)
     {
         $lastYear = Year::findOrFail($lastYear_id);
-        $initialClass = Classe::findOrFail($initialClass_id);
+        $initialClass = Level::findOrFail($initialClass_id);
         $current_year = Year::all()->last();
         $head_element = [];
         $last_inscriptions = $initialClass->inscriptions
@@ -356,7 +356,7 @@ class StudentController extends Controller
             $data = Inscription::insert([
                 'promotion_id' => $previousInsc->promotion_id,
                 'student_id' => $student_id,
-                'classe_id' => $request->destination_class,
+                'level_id' => $request->destination_class,
                 'year_id' => $current_year->id,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -376,10 +376,10 @@ class StudentController extends Controller
     {
         $years_promotions = [];
         $firstInscription = Inscription::all()
-            ->where('classe_id', 2)
+            ->where('level_id', 2)
             ->first();
         $lastInscription = Inscription::all()
-            ->where('classe_id', 2)
+            ->where('level_id', 2)
             ->last();
         if ($lastInscription != null) {
             $years_promotions = Year::with('promotion')
@@ -395,7 +395,7 @@ class StudentController extends Controller
 
     public function getStudentsToEnd($yearID, $classID)
     {
-        $classe = Classe::findOrFail($classID);
+        $classe = Level::findOrFail($classID);
         $branche = $classe->branche;
 
       
@@ -519,7 +519,7 @@ class StudentController extends Controller
 
     // public function getStudentsToEnd($yearID, $classID)
     // {
-    //     $classe = Classe::findOrFail($classID);
+    //     $classe = Level::findOrFail($classID);
     //     $branche = $classe->branche;
 
     //     $semesters = $branche->semesters;
