@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Csv;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MarksController;
 use App\Http\Controllers\MarksInputController;
@@ -28,3 +29,16 @@ Route::get('/marks_modulus/view_marks_modulus_marks_of/{yearID}/{modulusID}/',[M
 Route::get('/marks_modulus/viewMarksModulusMarks_with_session_Of/{yearID}/{modulusID}/',[MarksInputController::class, 'viewMarksModulusMarks_with_session_Of'])->middleware(['auth']);
 Route::post('/marks_modulus/store_marks_modulus_marks_of/{inscID}/{testID}/',[MarksInputController::class, 'storeMarksModulusMarksOf'])->middleware(['auth']);
 Route::post('/marks_modulus/update_marks_modulus_marks_of/{markID}/',[MarksInputController::class, 'updateMarksModulusMarksOf'])->middleware(['auth']);
+
+
+Route::post('/download_marks_form_themplate/{modulusID}/{type}', [
+    Csv::class,
+    'download_marks_form_themplate',
+])->name('download_marks_form_themplate')->middleware(['auth']);
+
+Route::post('save_marks/{modulusID}', [
+    Csv::class,
+    'save_marks',
+])->name('save_marks')->middleware(['auth']);
+
+

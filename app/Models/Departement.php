@@ -9,11 +9,12 @@ use App\Models\Manage;
 use App\Models\Branche;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Departement extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes, CascadeSoftDeletes;
 
     public $timestamps = true;
 
@@ -21,7 +22,9 @@ class Departement extends Model
         'department',
     ];
 
-    
+    protected $cascadeDeletes=['heads','branches'];
+
+
     public function levels() {
         return $this->hasManyThrough(Level::class, Branche::class);
     }
@@ -29,9 +32,6 @@ class Departement extends Model
     public function heads() {
         return $this->belongsToMany(User::class,Manage::class);
     }
-    // public function classes() {
-    //     return $this->hasMany(Classe::class);
-    // }
 
     public function branches(){
         return $this->hasMany(Branche::class);

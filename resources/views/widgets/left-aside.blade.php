@@ -56,6 +56,12 @@
                 <span>Student management</span>
             </a>
             <ul class="ml-menu">
+                {{-- <li>
+                    <a href="{{ route('import_form') }}" id="import_Students"
+                        onClick="setActiveId('import_Students')">
+                        <span>Import Students</span>
+                    </a>
+                </li> --}}
                 <li>
                     <a href="{{ route('students_form') }}" id="Add_new_Students"
                         onClick="setActiveId('Add_new_Students')">
@@ -100,7 +106,8 @@
                                                                 id="{{ 'sl' . $departement->id . '_' . $level->id }}"
                                                                 onClick="setActiveId(this.id, this.title)">
 
-                                                                <span>{{ $level->label }} ({{ $level->name }})</span>
+                                                                <span>{{ $level->label }}
+                                                                    ({{ $level->name }})</span>
                                                             </a>
                                                         </li>
                                                     @empty
@@ -109,7 +116,7 @@
                                                 </ul>
                                             </li>
                                         @empty
-                                            <span>No branches</span>
+                                            <span>No Options for {{ $departement->name }}</span>
                                         @endforelse
                                     </ul>
                                 </li>
@@ -134,7 +141,7 @@
                                         </ul>
                                     </li>
                                 @empty
-                                    <span>No branches</span>
+                                    <span>No Options for {{ $departement->name }}</span>
                                 @endforelse
                             @endif
                         @empty
@@ -179,7 +186,8 @@
                                                                     href="{{ route('marks_modulus') }}"
                                                                     id="mm{{ $departement->id . $level->id . '_' . $semester->id }}"
                                                                     onClick="setActiveId(this.id, this.title)">
-                                                                    <span>{{ $semester->label }} ({{ $semester->name }})</span>
+                                                                    <span>{{ $semester->label }}
+                                                                        ({{ $semester->name }})</span>
                                                                 </a>
                                                             </li>
                                                         @empty
@@ -194,7 +202,7 @@
                                         </ul>
                                     </li>
                                 @empty
-                                    <span>No Option</span>
+                                    <span>No Option for {{ $departement->name }}</span>
                                 @endforelse
 
 
@@ -220,7 +228,8 @@
                                                             href="{{ route('marks_modulus') }}"
                                                             id="mm{{ $departement->id . $level->id . '_' . $semester->id }}"
                                                             onClick="setActiveId(this.id,this.title)">
-                                                            <span>{{ $semester->label }} ({{ $semester->name }})</span>
+                                                            <span>{{ $semester->label }}
+                                                                ({{ $semester->name }})</span>
                                                         </a>
                                                     </li>
                                                 @empty
@@ -235,7 +244,7 @@
                                 </ul>
                             </li>
                         @empty
-                            <span>No Option</span>
+                            <span>No Option for {{ $departement->name }}</span>
                         @endforelse
                     @endif
                 @empty
@@ -280,7 +289,8 @@
                                                                     href="{{ route('semester_averages') }}"
                                                                     id="sa{{ $departement->id . $level->id . $semester->id . '_' . $semester->id }}"
                                                                     onClick="setActiveId(this.id,this.title)">
-                                                                    <span>{{ $semester->label }} ({{ $semester->name }})</span>
+                                                                    <span>{{ $semester->label }}
+                                                                        ({{ $semester->name }})</span>
                                                                 </a>
                                                             </li>
                                                         @empty
@@ -295,7 +305,7 @@
                                         </ul>
                                     </li>
                                 @empty
-                                    <span>No Branches</span>
+                                    <span>No Option for {{ $departement->name }}</span>
                                 @endforelse
 
                             </ul>
@@ -319,7 +329,8 @@
                                                             href="{{ route('semester_averages') }}"
                                                             id="sa{{ $departement->id . $level->id . $semester->id . '_' . $semester->id }}"
                                                             onClick="setActiveId(this.id,this.title)">
-                                                            <span>{{ $semester->label }} ({{ $semester->name }})</span>
+                                                            <span>{{ $semester->label }}
+                                                                ({{ $semester->name }})</span>
                                                         </a>
                                                     </li>
                                                 @empty
@@ -334,7 +345,7 @@
                                 </ul>
                             </li>
                         @empty
-                            <span>No Branches</span>
+                            <span>No Option for {{ $departement->name }}</span>
                         @endforelse
                     @endif
                 @empty
@@ -375,7 +386,8 @@
                                                             <a title="grade_transcript" href="{{ route('grades') }}"
                                                                 id="{{ 'gt' . $departement->id . $level->id . '_' . $level->id }}"
                                                                 onClick="setActiveId(this.id, this.title)">
-                                                                <span>{{ $level->label }} ({{ $level->name }})</span>
+                                                                <span>{{ $level->label }}
+                                                                    ({{ $level->name }})</span>
                                                             </a>
                                                         </li>
                                                     @empty
@@ -384,7 +396,7 @@
                                                 </ul>
                                             </li>
                                         @empty
-                                            <span>No Branches</span>
+                                            <span>No Option for {{ $departement->name }}</span>
                                         @endforelse
 
                                     </ul>
@@ -410,7 +422,7 @@
                                         </ul>
                                     </li>
                                 @empty
-                                    <h3>No Branches</h3>
+                                    <span>No Option for {{ $departement->name }}</span>
                                 @endforelse
                             @endif
                         @empty

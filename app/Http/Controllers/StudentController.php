@@ -43,9 +43,16 @@ class StudentController extends Controller
             compact(['departments', 'promotions'])
         );
     }
+    
     public function reinscription_index()
     {
         $departments = Departement::all();
+        if (Auth::user()->right->title == 'isHd') {
+            $departments = Departement::where(
+                'id',
+                Auth::user()->manage->departement_id
+            )->get();
+        }
         return view(
             'pages.students.reinscription-form',
             compact(['departments'])
@@ -369,6 +376,12 @@ class StudentController extends Controller
     public function end_cyle_index()
     {
         $departments = Departement::all();
+        if (Auth::user()->right->title == 'isHd') {
+            $departments = Departement::where(
+                'id',
+                Auth::user()->manage->departement_id
+            )->get();
+        }
         return view('pages.students.end_cycle-form', compact(['departments']));
     }
 

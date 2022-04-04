@@ -16,15 +16,15 @@
     var marksRef = JSON.parse(currentActivedb.getItem('marksRef'));
     console.log(marksRef);
             viewMarksOf(marksRef.year, marksRef.modulusID)
-            viewMarks_with_session_Of(marksRef.year, marksRef.modulusID)
+            
 
           function  display_with_session(checked){
+           
+
               if(checked == true){
-                $('#marksModulusMarks_with_session_table').show(); 
-                $('#marksModulusMarks_table').hide(); 
+                viewMarks_with_session_Of(marksRef.year, marksRef.modulusID);
               }else{
-                $('#marksModulusMarks_with_session_table').hide(); 
-                $('#marksModulusMarks_table').show(); 
+                viewMarksOf(marksRef.year, marksRef.modulusID)
               }
           }
 </script>
@@ -104,16 +104,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="marksModulusMarks_body">
-                                </tbody>
-                            </table>
-
-                            <table  id="marksModulusMarks_with_session_table" class="table table-bordered  mb-0">
-                                <thead id="marksModulusMarks_with_session_head">
-                                    <tr>
-                                       <th> <x-loading/></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="marksModulusMarks_with_session_body">
                                 </tbody>
                             </table>
                         </div>

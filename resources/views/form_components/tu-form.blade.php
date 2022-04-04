@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body ">
-                <form id="wizard_with_validation" class="TU_form" method="POST">
+                <form id="wizard_with_validation" class="" method="POST">
                     <h3>Tu references</h3>
                     <fieldset>
                         <div class="form-group">
@@ -67,6 +67,8 @@
                         {{-- <div class="form-line"> --}}
                         <input type="text" class="form-control" style="position: absolute; width:0px; height:0px"
                             name="TU_checker" id="TU_checker" required>
+                            <input type="text" class="form-control" style="position: absolute; width:0px; height:0px"
+                            id="tu_id">
                         {{-- </div> --}}
                         {{-- </div> --}}
                         <div class="body">
@@ -85,7 +87,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <button onclick="bindEcu('adding')" type="button"
-                                        class="btn btn-outline-info waves-effect save pull-right">add</button>
+                                        class="btn btn-outline-info waves-effect pull-right">add</button>
                                 </div>
                             </div>
                             <div class="tdl-content" style="max-height: 200px !important; overflow-y: scroll;">

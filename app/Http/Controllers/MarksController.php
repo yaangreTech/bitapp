@@ -21,9 +21,7 @@ class MarksController extends Controller
     public function getMarksModulusOf($yearID, $semesterID)
     {
         // get tus of the given semester
-        $semester= Semester::findOrFail($semesterID);
-        
-        
+        $semester= Semester::findOrFail($semesterID);  
         $tus =  $semester->tus;
         foreach ($tus as $tu) {
           // get the modulud of the given tu

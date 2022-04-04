@@ -45,12 +45,12 @@
                                         <label>Initial class</label>
                                         <div class="form-group">
                                             <select required id="initial_class" name="initial_class" class="browser-default" onChange="getDestinationClass(this.value)">
-                                                <option value="" disabled selected>Choose the initial class</option>
+                                                <option value="" disabled selected>Choose the initial Level</option>
                                                 @forelse ($departments as $department)
                                                     @forelse ($department->branches as $branche)
                                                         <optgroup label="{{ $department->name . '->' . $branche->name }}">
                                                             @forelse ($branche->levels as $level)
-                                                                <option value="{{ $level->id }}">{{ $level->name }}
+                                                                <option value="{{ $level->id }}">{{ $branche->name.' (' .$level->name.')' }}
                                                                 </option>
                                                             @empty
                                                             @endforelse
@@ -80,13 +80,13 @@
                                         </table>
                                     </div>
                                 </fieldset>
-                                <h3>destination class</h3>
+                                <h3>destination Level</h3>
                                 <fieldset>
                                     <div class="demo-masked-input">
-                                        <label>Destination class</label>
+                                        <label>Destination Level</label>
                                         <div class="form-group">
                                             <select required name="destination_class" id="destination_class" class="browser-default" onChange="bind_action_to_important()">
-                                                <option value="" disabled selected>Choose the destination class</option>
+                                                <option value="" disabled selected>Choose the destination Level</option>
                                                 <option value="Father"></option>
                                             </select>
                                         </div>

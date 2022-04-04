@@ -6,17 +6,19 @@ use App\Models\Mark;
 use App\Models\Module;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Test extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes, CascadeSoftDeletes;
 
+    protected $cascadeDeletes=['marks'];
 
     protected $fillable = [
         'test_type',
-'test_label',
-'test_ration',
+        'test_label',
+        'test_ration',
     ];
 
     public function marks(){

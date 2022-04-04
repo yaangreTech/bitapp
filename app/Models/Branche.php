@@ -7,19 +7,22 @@ use App\Models\Semester;
 use App\Models\Departement;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Branche extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes, CascadeSoftDeletes;
 
     
     protected $fillable = [
         'branch_name',
         'branch_departement',
         'branch_i_level',
-'branch_f_level'
+        'branch_f_level'
     ];
+
+    protected $cascadeSoftDeletes = ['levels'];
 
     public function levels(){
         return $this->hasMany(Level::class);

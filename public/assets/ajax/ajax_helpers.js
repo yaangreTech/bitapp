@@ -25,31 +25,45 @@ function inserer(url, formID, nexAction = null, loader = false) {
         $('.' + element).html('');
     });
 
-    $.ajax({
-        type: "POST",
-        dataType: "JSON",
-        url: url,
-        data: values,
-        error: function(error) {
-            // executer en cas d'erreur
-            keys = [];
-            $.each(error.responseJSON.errors, function(key, val) {
-                keys.push(key);
-                $('.' + key).html(val);
-            })
-        },
-        success: function(data) {
-            // executer en cas de succes
-            if (data == true) {
-                showToast('success', 'Added successfully', loader);
-                nexAction != null && nexAction();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, add it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: url,
+                data: values,
+                error: function(error) {
+                    // executer en cas d'erreur
+                    keys = [];
+                    $.each(error.responseJSON.errors, function(key, val) {
+                        keys.push(key);
+                        $('.' + key).html(val);
+                    })
+                },
+                success: function(data) {
+                    // executer en cas de succes
+                    if (data == true) {
+                        showToast('success', 'Added successfully', loader);
+                        nexAction != null && nexAction();
 
-                $.each(values.split('&'), function(key, value) {
-                    value.split('=')[0] != '_token' && $('#' + value.split('=')[0]).val('');
-                })
-            }
-        },
+                        $.each(values.split('&'), function(key, value) {
+                            value.split('=')[0] != '_token' && $('#' + value.split('=')[0]).val('');
+                        })
+                    }
+                },
+            })
+        }
     })
+
+
 }
 
 // suprimer
@@ -110,33 +124,47 @@ function modifier(url, formID, nexAction = null, loader = false) {
         $('.' + element).html('');
     });
 
-    $.ajax({
-        type: "POST",
-        dataType: "JSON",
-        url: url,
-        data: values,
-        error: function(error) {
-            // executer en cas d'erreur
-            keys = [];
-            $.each(error.responseJSON.errors, function(key, val) {
-                keys.push(key);
-                $('.' + key).html(val);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, save it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: url,
+                data: values,
+                error: function(error) {
+                    // executer en cas d'erreur
+                    keys = [];
+                    $.each(error.responseJSON.errors, function(key, val) {
+                        keys.push(key);
+                        $('.' + key).html(val);
+                    })
+                },
+                success: function(data) {
+                    // executer en cas de succes
+                    if (data == true) {
+
+                        showToast('success', 'Updated successfully', loader);
+
+                        nexAction != null && nexAction();
+
+                        // $.each(values.split('&'), function(key, value) {
+                        //     value.split('=')[0] != '_token' && $('#' + value.split('=')[0]).val('');
+                        // })
+                    }
+                },
             })
-        },
-        success: function(data) {
-            // executer en cas de succes
-            if (data == true) {
-
-                showToast('success', 'Updated successfully', loader);
-
-                nexAction != null && nexAction();
-
-                $.each(values.split('&'), function(key, value) {
-                    value.split('=')[0] != '_token' && $('#' + value.split('=')[0]).val('');
-                })
-            }
-        },
+        }
     })
+
+
 }
 
 // desable
@@ -253,4 +281,65 @@ function startSevices() {
         currentActivedb.setItem(action, JSON.stringify(donners));
         location.reload();
     })
+}
+
+
+// importer
+
+function importer(url, formID, nexAction = null, loader = false) {
+    // var values = $('#' + formID).serialize();
+    var values = new FormData(
+        document.forms.import_form
+    );
+
+    console.log(values);
+    keys.forEach(element => {
+        $('.' + element).html('');
+    });
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, import it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                // dataType: "JSON",
+                contentType: false,
+                cache: false,
+                processData: false,
+                url: url,
+                data: values,
+                error: function(error) {
+                    // executer en cas d'erreur
+                    // keys = [];
+                    // $.each(error.responseJSON.errors, function(key, val) {
+                    //     keys.push(key);
+                    //     $('.' + key).html(val);
+                    // })
+
+                    console.log(error);
+
+                },
+                success: function(data) {
+                    // executer en cas de succes
+
+                    showToast('success', 'Imported successfully', loader);
+                    nexAction != null && nexAction(data);
+
+                    // $.each(values.split('&'), function(key, value) {
+                    //     value.split('=')[0] != '_token' && $('#' + value.split('=')[0]).val('');
+                    // })
+
+                },
+            })
+        }
+    })
+
+
 }

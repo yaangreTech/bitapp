@@ -24,7 +24,7 @@ class AverageController extends Controller
         $theadModulus = $semester->modulus;
 
         // get all tus of the semester 
-        $tus = $semester->tus;
+        $Vtus = $semester->tus->load('modulus');
 
         // all inscription of the level for the given year
         $inscriptions = $semester->level->inscriptions->where(
@@ -38,6 +38,8 @@ class AverageController extends Controller
             $conforme = new Conforme();
 
             // tus to calculate the year
+         
+           
             $tus = $semester->tus;
 
             // variable to save all marks of a students
@@ -129,7 +131,7 @@ class AverageController extends Controller
             'theadModulus' => $theadModulus,
             'inscriptions' => $inscriptions,
             'page_title'=>$page_title,
-            'theadTus'=>$tus
+            'theadTus'=>  $Vtus 
         ]);
     }
 
@@ -138,7 +140,7 @@ class AverageController extends Controller
     {
         $semester = Semester::findOrFail($semesterID);
         $theadModulus = $semester->modulus;
-        $tus = $semester->tus;
+        $Vtus = $semester->tus->load('modulus');
         $inscriptions = $semester->level->inscriptions->where(
             'year_id',
             $yearID
@@ -240,7 +242,7 @@ class AverageController extends Controller
         return response()->json([
             'theadModulus' => $theadModulus,
             'inscriptions' => $inscriptions,
-            'theadTus'=>$tus
+            'theadTus'=>$Vtus
         ]);
     }
 }

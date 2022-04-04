@@ -11,6 +11,29 @@ var consernedStudents_table = null;
 
 var students_list = JSON.parse(currentActivedb.getItem('students_list'));
 
+function import_students(formID) {
+    importer('import_form', formID, (data) => {
+        console.log(data);
+        $.each(data, function(key, value) {
+
+            $('#importLogs').append(
+                $('<div class="card" style="border: 1px solid"><div class="header ' + value.type + '" style="padding:8px; border-top-left-radius:5px; border-top-right-radius:5px"><h2>' + value.line + '</h2></div><div class="body">' + value.message + '</div></div>')
+            )
+        })
+
+    });
+}
+
+function downloadStudentList_themplate(formID) {
+    importer('downloadStudentList_themplate', formID, (data) => {
+        // console.log(data);
+    });
+}
+
+
+
+
+
 
 
 function add_student(formID) {

@@ -18,7 +18,6 @@ class CreateSemesterFormatsTable extends Migration
             $table->foreignId('level_format_id')->constrained()->onDelete('cascade');
             $table->string("name");
             $table->string("label");
-            $table->timestamps();
         });
     }
 

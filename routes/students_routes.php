@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Csv;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -28,3 +29,29 @@ Route::get('end_cycle_form/',[StudentController::class,'end_cyle_index'])->middl
 Route::get('end_cycle_form/get_Promotions/{currentYearID}/{l3classID}',[StudentController::class,'getPromotions'])->middleware(['auth']);
 Route::get('end_cycle_form/get_Students/{yearID}/{classID}',[StudentController::class,'getStudentsToEnd'])->middleware(['auth']);
 Route::post('end_cycle_form/end_Students_cycle/',[StudentController::class,'end_Students_cycle'])->middleware(['auth']);
+
+
+
+//import year
+//import year
+Route::get('/import_form', [
+    Csv::class,
+    'import_student_form',
+])->name('import_form')->middleware(['auth']);
+
+
+
+
+Route::post('import_form', [
+    Csv::class,
+    'saveStudents',
+])->name('saveStudents')->middleware(['auth']);
+
+
+
+Route::post('downloadStudentList_themplate', [
+    Csv::class,
+    'downloadStudentList_themplate',
+])->name('downloadStudentList_themplate')->middleware(['auth']);
+
+

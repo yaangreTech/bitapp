@@ -35,9 +35,18 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                <strong>Add new students</strong> Form
-                            </h2>
+                            <div class="col-xs-12 col-sm-6">
+                                <h2>
+                                    <strong>Add new students</strong> Form
+                                </h2>
+                            </div>
+                            <ul class="header-dropdown m-r--5">
+                                {{-- <span class="pull-right"> --}}
+                                    <a href="{{ route('import_form') }}">Multi import form</a>
+                                {{-- </span> --}}
+                            </ul>
+                           
+                        
                         </div>
                         <div class="body">
                             <form id="wizard_with_validation" class="student_form" method="POST">
@@ -52,9 +61,10 @@
                                                 <div class="input-group ">
                                                     <div class="form-group ">
                                                         <div class="form-line">
-                                                        <input id="studentID" oninput="verfierMatricule(value)" name='studentID' type="text"
-                                                            class="form-control ID" placeholder="Ex: bs00001" required>
-                                                    <span class="text-danger studentID"> </span>
+                                                            <input id="studentID" oninput="verfierMatricule(value)"
+                                                                name='studentID' type="text" class="form-control ID"
+                                                                placeholder="Ex: bs00001" required>
+                                                            <span class="text-danger studentID"> </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -109,7 +119,7 @@
                                                 <div class="input-group">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <input id="studentPhone"  name="studentPhone" type="text"
+                                                            <input id="studentPhone" name="studentPhone" type="text"
                                                                 class="form-control mobile-phone-number"
                                                                 placeholder="Ex: 00 (000) 00-00-00-00" required>
                                                         </div>
@@ -231,20 +241,24 @@
                                                     class="browser-default">
                                                     <option value="" disabled selected>Choose the Level</option>
                                                     @forelse ($departments as $department)
-                                                        @if ($department->levels->count() > 0)
-                                                            <optgroup label="{{ $department->name }}">
-                                                                @foreach ($department->levels as $level)
+                                                        <optgroup label="{{ $department->name }}">
+                                                            @forelse ($department->branches as $branch)
+                                                                @foreach ($branch->levels as $level)
                                                                     <option value="{{ $level->id }}">
-                                                                        {{ $level->name }}</option>
+                                                                        {{ $branch->name . ', ' . $level->name }}
+                                                                    </option>
                                                                 @endforeach
-                                                            </optgroup>
-                                                        @endif
+                                                            @empty
+                                                            <option value="" disabled>Choose Options for {{$department->name}}</option>
+                                                            @endforelse
+                                                        </optgroup>
                                                     @empty
+                                                        <optgroup label="No department"></optgroup>
                                                     @endforelse
                                                 </select>
                                                 <span class="text-danger studentClasse"></span>
                                             </div>
-    
+
                                             <div class="col-md-3">
                                                 <label>Promotion</label>
                                                 <select required id="studentPromotion" name="studentPromotion"
@@ -256,14 +270,14 @@
                                                     @empty
                                                         <option disabled>No promotion</option>
                                                     @endforelse
-    
-    
+
+
                                                 </select>
                                                 <span class="text-danger studentPromotion"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </fieldset>
                                 {{-- <h3>Validation</h3>
                                 <fieldset>

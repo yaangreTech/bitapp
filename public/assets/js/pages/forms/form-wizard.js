@@ -88,9 +88,13 @@ $(function() {
                 endStudents_Cycle('wizard_with_validation');
             } else if ($('#wizard_with_validation').hasClass('TU_form')) {
                 console.log(values);
-                add_tu('wizard_with_validation')
-                    // endStudents_Cycle('wizard_with_validation');
+                add_tu('wizard_with_validation');
+            } else if ($('#wizard_with_validation').hasClass('TU_form_update')) {
+                console.log(values);
+                update_tu($('#tu_id').val(), 'wizard_with_validation')
+                    // add_tu('wizard_with_validation');
             }
+
 
         }
     });

@@ -98,6 +98,8 @@
                                                 </a>
                                                 <ul class="dropdown-menu pull-right">
                                                     <li>
+                                                        
+                                                        <a href="#" data-toggle="modal" data-target="#markImporter" onClick="return true;">Import Form</a>
                                                         <a href="{{route('view_marks')}}" onClick="return true;">View Marks</a>
                                                     </li>
                                                    
@@ -113,7 +115,7 @@
                                            <span id="notif"></span>
                                         </div>
             
-                                        <table  id="marksModulusMarks_table" class="table table-bordered  mb-0">
+                                        <table  id="marksModulusMarks_table" class="table table-hover  table-bordered  mb-0">
                                             
                                             <thead id="marksModulusMarks_head">
                                                 <tr>
@@ -151,7 +153,7 @@
                                     </div>
                                     <div class="body" id="session_corps">
             
-                                        <table  id="marksModulusSession_table" class="table table-bordered  mb-0">
+                                        <table  id="marksModulusSession_table" class="table table-bordered table-hover  mb-0">
                                             <thead id="marksModulusSession_head">
                                                 {{-- <tr>
                                                    <th> <x-loading/></th>
@@ -175,6 +177,8 @@
                 </div>
             </div>
         </div>
+
+        <x-import-marks-form/>
     </section>
 
     {{-- <script type="text/javascript">

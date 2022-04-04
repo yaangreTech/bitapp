@@ -18,7 +18,6 @@ class CreateLevelFormatsTable extends Migration
             $table->string("name");
             $table->string("label");
             $table->string("cycle");
-            $table->timestamps();
         });
     }
 

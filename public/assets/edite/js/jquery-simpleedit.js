@@ -276,13 +276,20 @@ class SimpleEdit {
             let ajaxOptions = Object.assign(this.ajaxOptions, {
                 'url': url,
                 'data': data,
-                'success': (response) => {
+                'success': (retour) => {
+
+                    var response = retour > 0 || retour == true;
+
                     if (response == true) {
                         refss.length < 2 ? showToast('success', 'Updated successfully') : showToast('success', 'Added successfully');
+
+                    }
+                    if (typeof(retour) == 'number' && retour >= 1) {
+                        $(this.element).attr('data-pk', retour);
                     }
 
-                    this.handleSuccess(text, response)
                     console.log(response);
+                    this.handleSuccess(text, response)
                 },
                 'error': (response) => {
                     this.handleError(response)

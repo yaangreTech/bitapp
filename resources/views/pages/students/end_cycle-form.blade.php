@@ -50,13 +50,15 @@
                                                 @forelse ($departments as $department)
                                                     @forelse ($department->branches as $branche)
                                                         <optgroup label="{{ $department->name .'->' . $branche->name}}">
-                                                            @if ($branche->levels->where('name','L3')->first()!==null)
-                                                                <option value="{{ $branche->levels->where('name','L3')->first()->id }}">
-                                                                    {{ $branche->levels->where('name','L3')->first()->name }}
-                                                                </option>
-                                                            @else
+                                                            <?php $levels=$branche->levels->whereIn('name',['L3', 'M2']) ?>
+                                                            @forelse ($levels as $level)
+                                                            <option value="{{ $level->id }}">
+                                                                {{$branche->name}}, {{ $level->label }} ({{ $level->name }})
+                                                            </option>
+                                                            @empty
                                                             <option value="" disabled>No licence-3 Classe for the branch: <strong>{{$branche->name}}</strong></option>
-                                                            @endif 
+                                                            @endforelse
+                                                          
                                                         </optgroup>
                                                     @empty
                                                     @endforelse

@@ -12,7 +12,7 @@
                 <div class="header">
                     <div class="col-xs-12 col-sm-6">
                         <h2>
-                            <strong>Tests</strong> List
+                           [ <strong><span id="testTile"></span></strong> ]  Tests List
                         </h2>
                     </div>
                     <ul class="header-dropdown m-r--5">

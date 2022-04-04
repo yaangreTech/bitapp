@@ -2,13 +2,13 @@
     <x-slot name="custom_css">
         <style>
             .rotate_text {
-                -moz-transform: rotate(-90deg);
+                /* -moz-transform: rotate(-90deg);
                 -moz-transform-origin: center left;
                 -webkit-transform: rotate(-90deg);
                 -webkit-transform-origin: center left;
                 -o-transform: rotate(-90deg);
-                -o-transform-origin: center left;
-                position: absolute;
+                -o-transform-origin: center center; */
+                /* position: absolute; */
             }
 
             .rotated_cell {
@@ -76,7 +76,7 @@
             var average_management = JSON.parse(currentActivedb.getItem('average_management'));
             console.log(average_management);
             
-            getAverageWithSessionOf(average_management.year, average_management.semesterID);
+            // getAverageWithSessionOf(average_management.year, average_management.semesterID);
             getAverageOf(average_management.year, average_management.semesterID);
             $('.hider').hide();
             
@@ -84,14 +84,14 @@
 
             function display_with_session(checked) {
                 if (checked == true) {
-                    $('#s_semester_table').hide();
+                    // $('#s_semester_table').hide();
                     getAverageWithSessionOf(average_management.year, average_management.semesterID);
-                    $('#s_semester_with_session_table').show();
+                    // $('#s_semester_with_session_table').show();
                     
                 } else {
-                    $('#s_semester_with_session_table').hide();
+                    // $('#s_semester_with_session_table').hide();
                     getAverageOf(average_management.year, average_management.semesterID);
-                    $('#s_semester_table').show();
+                    // $('#s_semester_table').show();
                    
                 }
             }
@@ -229,7 +229,7 @@
                                     </tbody>
                                 </table>
 
-                                <table id="s_semester_with_session_table"
+                                {{-- <table id="s_semester_with_session_table"
                                     class="table table-bordered table-hover  "
                                     >
                                     <thead id="s_semester_with_session_thead">
@@ -237,7 +237,7 @@
                                     </thead>
                                     <tbody id="s_semester_with_session_tbody">
                                     </tbody>
-                                </table>
+                                </table> --}}
                             </div>
                         </div>
                     </div>

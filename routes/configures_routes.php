@@ -231,3 +231,5 @@ Route::get('/school/get_year/{id}', [
     YearController::class,
     'getYear',
 ])->middleware(['auth']);
+
+

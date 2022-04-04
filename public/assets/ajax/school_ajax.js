@@ -158,7 +158,11 @@
 
  // function to add a tu to the database
  function add_tu(formID) {
-     inserer("/school/store_tu/", formID, getAllDepartments);
+     inserer("/school/store_tu/", formID, () => {
+         getAllDepartments();
+         addedecu = [];
+         bindEcu('action');
+     });
  }
 
  // function to update a given tu
@@ -324,17 +328,35 @@
 
      tu_names = []
      tu_ECU_editparames = []
+     tu_with_ecu_editparames = []
+
 
      $.each(data.tus, function(key, tu) {
-             key == 0 && (elements += '<tr><td colspan="4" class=""> <strong class="font-bold font-20">  ' + data.level.branche.name + ', ' + data.level.label + ', ' + data.label + '</strong>  Tus and ECUs<td></tr>')
+
+             key == 0 && $('#tu_head').html('<tr><th colspan="4" class=""> <strong class="font-bold font-20">  ' + data.level.branche.name + ', ' + data.level.label + ', ' + data.label + '</strong>  Tus and ECUs<th></tr>')
              elements += '<tr class="unread group"><td colspan="4"> TU:  <strong class="font-bold font-20">' + tu.name + '</strong></td>'
-             elements += '     <td class="text-right"><button data-toggle="modal" data-target="#add_modulus" type="button" class="btn  btn-outline-info initier" onclick="initier(' + tu.id + ');bindTUname(' + tu.id + ', tu_names[' + key + '] )">'
-             elements += '     <i class="material-icons">add_circle_outline</i>'
-             elements += '      <span>new ECU</span></button>'
-             elements += '      </td>'
+                 //  elements += '     <td class="text-right"><button data-toggle="modal" data-target="#add_modulus" type="button" class="btn  btn-outline-info initier" onclick="initier(' + tu.id + ');bindTUname(' + tu.id + ', tu_names[' + key + '] )">'
+                 //  elements += '     <i class="material-icons">add_circle_outline</i>'
+                 //  elements += '      <span>new ECU</span></button>'
+                 //  elements += '      </td>'
+             elements += '<td class="right">'
+             elements += ' <a href="#" data-target="#add_TU" data-toggle="modal" onclick="$(\'#wizard_with_validation\').addClass(\'TU_form_update\');$(\'#wizard_with_validation\').removeClass(\'TU_form\');$(\'#tu_id\').val(\'' + tu.id + '\');editer(tu_with_ecu_editparames[' + key + '],\'update_tus\', \'' + tu.name + '\');" class="btn btn-tbl-edit">'
+             elements += '<i class="material-icons">create</i>'
+             elements += '</a>'
+             elements += '<a href="#" class="btn btn-tbl-delete"  onclick="delete_tu(' + tu.id + ')">'
+             elements += '<i class="material-icons">delete_forever</i>'
+             elements += '</a>'
+             elements += ' </td>'
              elements += '  </tr>'
              tu_names.push(tu.name);
+             tu_with_ecu_model = []
              $.each(tu.modulus, function(ecukey, ecu) {
+                 tu_with_ecu_model.push({
+                     module_name: ecu.name,
+                     modulus_hours: ecu.heure,
+                     modulus_credict: ecu.credict,
+                     id: ecu.id
+                 });
                  tu_ECU_editparames.push('module_name=' + ecu.name + '&modulus_credict=' + ecu.credict + '&modulus_hours=' + ecu.heure + '&ECU_TU_name=' + tu.name);
                  elements += '<tr class="unread">'
                  elements += '    <td class=""></td>'
@@ -356,7 +378,7 @@
                  elements += '    </td>'
                  elements += '</tr>'
              })
-
+             tu_with_ecu_editparames.push('^TU_classe=' + data.level.id + '&?addedecu=' + JSON.stringify(tu_with_ecu_model) + '&*TU_semester=' + tu.semester.label);
 
          })
          // $.fn.dataTable.isDataTable('#modulus_table') && modulus_table.destroy();
@@ -632,7 +654,7 @@
          $('#ECU_hours').val().length != 0 &&
          $('#ECU_credict').val().length != 0 && names.indexOf($('#ECU_name').val()) == -1) {
 
-         addedecu.unshift({
+         addedecu.push({
              module_name: $('#ECU_name').val(),
              modulus_hours: $('#ECU_hours').val(),
              modulus_credict: $('#ECU_credict').val(),
@@ -641,7 +663,7 @@
          names.push($('#ECU_name').val());
      }
      console.log(addedecu);
-     $.each(addedecu, function(key, value) {
+     $.each(addedecu.reverse(), function(key, value) {
          elements += '  <li class="clearfix m-t-10 m-b-10" style="inline">'
          elements += ' <div class="form-check m-l-10 " >'
          elements += '  <label class="form-check-label"> <input class="form-check-input"'
@@ -674,7 +696,10 @@
  }
 
  function removeECU(ecu_name) {
+
      addedecu = addedecu.filter(function(ecu) { return ecu.module_name != ecu_name })
      names = names.filter(function(name) { return name != ecu_name })
+
+
      bindEcu();
  }

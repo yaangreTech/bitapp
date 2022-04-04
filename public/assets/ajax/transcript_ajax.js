@@ -8,6 +8,9 @@ $(function() {
 var yearData = {};
 var grade_transcript_table = null;
 
+
+
+
 function saveinscID(inscID) {
     currentActivedb.setItem('inscID', inscID)
 }
@@ -176,7 +179,7 @@ function viewTranscriptData(data) {
                         var semestre_rowspan = semester.s_n_modulus + 1;
                         body_elements += '<tr>'
                         body_elements += '    <td class="center mini" rowspan="' + semestre_rowspan + '">' + semester.name + '</td>'
-                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
+                        body_elements += '    <td class=" mini" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
                         body_elements += '    <td class=" mini">' + modul.name + '</td>'
                         body_elements += '    <td class="center mini">' + modul.credict + '</td>'
                         body_elements += '    <td class="center mini">' + modul.note + '</td>'
@@ -187,7 +190,7 @@ function viewTranscriptData(data) {
                         body_elements += '</tr>'
                     } else {
                         body_elements += '<tr>'
-                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
+                        body_elements += '    <td class=" mini" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
                         body_elements += '    <td class=" mini">' + modul.name + '</td>'
                         body_elements += '    <td class="center mini">' + modul.credict + '</td>'
                         body_elements += '    <td class="center mini">' + modul.note + '</td>'

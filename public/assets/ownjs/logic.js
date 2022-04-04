@@ -34,33 +34,49 @@ $(function() {
 // }
 
 
-function editer(assosValues = '', id) {
+function editer(assosValues = '', id, tuName = "") {
     var ciclist = ["Licence 1", "Licence 2", "Licence 3", "Master 1", "Master 2"];
-    console.log(assosValues);
+    // console.log(assosValues);
     $('.update').show();
     $('.update').attr('id', id);
     $('.save').hide();
+
     $.each(assosValues.split('&'), function(key, val) {
         if (val.split('=')[0].indexOf('^') != -1) {
             $('#' + val.split('=')[0].split('^')[1]).val(val.split('=')[1]).change();
-        } else if (val.split('=')[0].indexOf('*') != -1) {
-            val = val.split('=')[1].split('_');
-            console.log(val, ciclist.indexOf(val[0]), ciclist.indexOf(val[1]));
-            // setRang(ciclist.indexOf(val[0]), ciclist.indexOf(val[1]));
-        } else {
 
+        } else if (val.split('=')[0].indexOf('*') != -1) {
+            $('#TU_semester').html('<option selected> ' + val.split('=')[1] + '</option>');
+            $('#TU_semester').attr('disabled', true);
+            $('#TU_semester').attr('id', 'hided_TU_semester');
+            // setRang(ciclist.indexOf(val[0]), ciclist.indexOf(val[1]));
+        } else if (val.split('=')[0].indexOf('?') != -1) {
+            // console.log(val.split('=')[1]);
+            addedecu = JSON.parse(val.split('=')[1]);
+            bindEcu();
+        } else if (val.split('=')[0].indexOf('%') != -1) {
+            $('#' + val.split('=')[0].split('%')[1]).val(val.split('=')[1]);
+        } else {
             $('#' + val.split('=')[0]).val(val.split('=')[1])
         }
 
     })
     setRang(0, 3);
     $('#modulus_semester').attr('disabled', true);
+    if (id == 'update_tus') {
+        $('#TU_name').val(tuName);
+        $('#TU_classe').attr('disabled', true);
+
+    }
 }
 
 $('.initier').on('click', function(e) {
     $('input').val('');
     $('.update').hide();
     $('.save').show();
+    $('#TU_classe').attr('disabled', false);
+    $('#hided_TU_semester').attr('id', 'TU_semester');
+    $('select').prop('selectedIndex', 0);
 })
 
 function initier(other = '') {
@@ -135,4 +151,19 @@ function setRang(initial, final) {
         input_values_separator: 'x'
             // values: [0, 10, 100, 1000, 10000, 100000, 1000000]
     });
+}
+
+
+function loading() {
+    return '<div class="preloader pl-size-xs">' +
+        '<div class="spinner-layer pl-blue">' +
+        '    <div class="circle-clipper left">' +
+        '        <div class="circle"></div>' +
+        '    </div>' +
+        '    <div class="circle-clipper right">' +
+        '        <div class="circle"></div>' +
+        '    </div>' +
+        '</div>' +
+        '</div>' +
+        '<span class="m-l-10">loading...</span>'
 }

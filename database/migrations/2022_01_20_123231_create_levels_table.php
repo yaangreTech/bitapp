@@ -20,6 +20,7 @@ class CreateLevelsTable extends Migration
             $table->string("label");
             $table->string("cycle");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

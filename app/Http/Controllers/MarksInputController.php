@@ -168,10 +168,13 @@ class MarksInputController extends Controller
             $inscription['average'] = $average;
             $inscription['tests'] = $notes;
         }
-
+        $page_title=Module::findOrFail($modulusID);
+        $page_title->tu->semester->semestre_name;
+        $page_title->tu->semester->level->branche->departement;
         return response()->json([
             'testList' => $Tests,
             'inscriptions' => $inscriptions,
+            'page_title'=>$page_title
         ]);
     }
     public function viewMarksModulusMarksOf($yearID, $modulusID)
@@ -236,7 +239,7 @@ class MarksInputController extends Controller
         $request->validate([
             'mark_value' => ['required', 'max:20'],
         ]);
-        $mark = Mark::insert([
+        $markID = Mark::insertGetId([
             'test_id' => $testID,
             'inscription_id' => $inscID,
             'value' => $request->mark_value,
@@ -244,7 +247,7 @@ class MarksInputController extends Controller
             'updated_at' => Carbon::now(),
         ]);
 
-        return response()->json($mark);
+        return response()->json($markID);
     }
     public function updateMarksModulusMarksOf(Request $request, $markID)
     {

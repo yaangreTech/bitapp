@@ -4,6 +4,37 @@
 
         <link href="assets/js/bundles/rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
     <link href="assets/js/bundles/rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    <style>
+    .tableFixHead {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+       
+      }
+        .tableFixHead tbody {
+        display: block;
+        width: 100%;
+        overflow: auto;
+        max-height: 500px;
+   
+      }
+      .tableFixHead thead tr {
+        display: block;
+        width: 100%;
+        
+      }
+      .tableFixHead thead {
+        display: block;
+        width: 100%;
+     
+      }
+      .tableFixHead th,
+      .tableFixHead  td {
+        /* padding: 5px 10px; */
+        width: auto;
+        /* background-color:red; */
+      }
+    </style>
     </x-slot>
     <section class="content">
         <div class="container-fluid">
@@ -108,7 +139,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="card project_widget">
                                         <div class="header">
-                                            <h2><strong>Branches </strong>Settings</h2>
+                                            <h2><strong>Options </strong>Settings</h2>
                                             <ul class="header-dropdown m-r--5">
                                                 <button data-toggle="modal" data-target="#add_branch" type="button"
                                                     class="btn  btn-outline-info initier">
@@ -236,7 +267,7 @@
                                     </h2>
                                     <ul class="header-dropdown m-r--5">
                                         <button data-toggle="modal" data-target="#add_TU" type="button"
-                                            class="btn  btn-outline-info initier">
+                                            class="btn  btn-outline-info initier" onclick="$('#wizard_with_validation').addClass('TU_form');$('#wizard_with_validation').removeClass('TU_form_update');">
                                             <i class="material-icons">
                                                 add_circle_outline</i>
                                             <span>new TU</span>
@@ -263,6 +294,9 @@
                                                 <div class="boxs mail_listing">
                                                     <div class="inbox-center table-responsive">
                                                         <table class="table table-hover">
+                                                            <thead id="tu_head">
+
+                                                            </thead>
 
                                                             <tbody id="tu_body">
                                                             </tbody>

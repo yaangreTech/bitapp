@@ -360,7 +360,7 @@ class SchoolController extends Controller
         $tu_body = [];
         $semester = Semester::findOrFail($semesterID);
         $semester->level->branche;
-        $semester->tus->load('modulus');
+        $semester->tus->load(['modulus','semester']);
         
 
         return response()->json($semester);
@@ -373,7 +373,7 @@ class SchoolController extends Controller
             'TU_semester' => ['required', 'max:255'],
             'TU_checker' => ['required'],
         ]);
-$data=false;
+        $data=false;
         $semester= Semester::findOrFail($request->TU_semester);
 
         $tuID=Tu::insertGetId([
@@ -387,16 +387,12 @@ $data=false;
                 'tu_id' =>$tuID,
                 'name'=>$ecu->module_name,
                 'credict' =>$ecu->modulus_credict,
-                'heure' =>$ecu->modulus_hours
+                'heure' =>$ecu->modulus_hours,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
         }
-        // $data = Tu::insert([
-        //     'name' => $request->TU_name,
-        //     'semester_id' => $request->TU_semester,
-        //     'created_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        // ]);
-// dd($request);
+      
         return response()->json($data);
     }
 
@@ -404,15 +400,47 @@ $data=false;
     {
         $request->validate([
             'TU_name' => ['required', 'string', 'max:255'],
-            'TU_classe' => ['required', 'max:255'],
-            'TU_semester' => ['required', 'max:255'],
+            'TU_checker' => ['required'],
         ]);
 
-        $data = Tu::findOrFail($id);
+        $data=false;
 
-        $data->name = $request->TU_name;
-        $data->semester_id = $request->TU_semester;
-        $data = $data->update();
+        $tu = Tu::findOrFail($id);
+
+        $tu->name=$request->TU_name;
+        $data=$tu->update();
+
+        $ecus=json_decode($request->TU_checker);
+    
+        $modulus_ids= $tu->modulus->pluck('id')->toArray();
+
+        // array_shift( $modulus_ids,37);
+
+        foreach ($ecus as $ecu){
+            if($ecu->id!=0){
+                $modulu=Module::findOrFail($ecu->id);
+                $modulu->name=$ecu->module_name;
+                $modulu->heure=$ecu->modulus_hours;
+                $modulu->credict=$ecu->modulus_credict;
+                $modulu->update();
+                $modulus_ids=array_diff($modulus_ids, array($ecu->id)); 
+            }else{
+                Module::insert([
+                    'tu_id' =>$id,
+                    'name'=>$ecu->module_name,
+                    'credict' =>$ecu->modulus_credict,
+                    'heure' =>$ecu->modulus_hours,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
+        }
+
+        foreach ($modulus_ids as $modulus_id){
+            $moduluTodelete=Module::findOrFail($modulus_id);
+            $moduluTodelete->delete();
+        }
+
 
         return response()->json($data);
     }

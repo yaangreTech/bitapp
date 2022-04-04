@@ -1,6 +1,7 @@
+var marks_management_modulus = JSON.parse(currentActivedb.getItem('marks_management'));
+console.log(marks_management_modulus);
 $(function() {
-    var marks_management_modulus = JSON.parse(currentActivedb.getItem('marks_management'));
-    console.log(marks_management_modulus);
+
     getModulusOf(marks_management_modulus.year, marks_management_modulus.semesterID)
 })
 var yearData = {};
@@ -62,13 +63,13 @@ function marksModulusData(data) {
                     elements += '<div class="col-md-3 col-sm-6">'
                     elements += '    <div class="pricingTable">'
                     elements += '        <h3 class="heading"></h3>'
-                    elements += '        <h3 class="heading">' + module.name + '</h3>'
+                    elements += '        <h4 class="heading">' + module.name + '</h4>'
                     elements += '            <div class="heading"> ' + module.credict + ' Credits</div>'
                     elements += '            <span class="heading">' + module.heure + ' Hours</span>'
                     elements += '        <div class="">'
                     elements += '            <ul>'
                     elements += '                <li>'
-                    elements += '                    <b>' + (module.tests.length - 2) + ' tests</b> added'
+                    elements += '                    <b>' + (module.tests.length > 2 ? module.tests.length - 2 : 0) + ' tests</b> added'
                     elements += '                </li>'
                         // elements += '                <li>'
                         // elements += '                    <b>1 tests</b> in process'
@@ -86,7 +87,7 @@ function marksModulusData(data) {
                     elements += '                    <ul class="dropdown-menu pull-right">'
                     elements += '                        <li>'
                     elements += '                            <a href="#" data-toggle="modal" data-target="#test_list"'
-                    elements += '                                onClick="getTestOf(0,' + module.id + ')">Tests</a>'
+                    elements += '                                onClick="getTestOf(0,' + module.id + ',\'' + module.name + '\')">Tests</a>'
                     elements += '                        </li>'
                     elements += '                        <li>'
                     elements += '                            <a href="add_marks"'
@@ -125,10 +126,11 @@ function addTest(value) {
     console.log(value);
     var year_id = value.split('_')[0];
     var modulus_id = value.split('_')[1];
-    inserer('/marks_modulus/store_test/' + year_id + '/' + modulus_id, 'mark_modulus_test_from');
+    inserer('/marks_modulus/store_test/' + year_id + '/' + modulus_id, 'mark_modulus_test_from', () => {
+        getTestOf(year_id, modulus_id);
+    });
     // yearData = year;
-    getTestOf(year_id, modulus_id)
-        // selectionner('/marks_modulus/get_marks_modulus_tests_of/' + year_id + '/' + modulus_id, marksModulusTestData, )
+    // selectionner('/marks_modulus/get_marks_modulus_tests_of/' + year_id + '/' + modulus_id, marksModulusTestData, )
 }
 
 function delete_test(id) {
@@ -137,11 +139,9 @@ function delete_test(id) {
     var year_id = value.split('_')[0];
     var modulus_id = value.split('_')[1];
 
-    function actinner() {
+    suprimer('/marks_modulus/delete_test/' + id, () => {
         getTestOf(year_id, modulus_id);
-    }
-
-    suprimer('/marks_modulus/delete_test/' + id, actinner);
+    });
     console.log(id);
 
 }
@@ -152,14 +152,13 @@ function updateTest(id, formID) {
     var year_id = value.split('_')[0];
     var modulus_id = value.split('_')[1];
 
-    function actinner() {
-        getTestOf(year_id, modulus_id);
-    }
 
-    modifier('/marks_modulus/update_test/' + id, formID, actinner)
+    modifier('/marks_modulus/update_test/' + id, formID, () => {
+        getTestOf(year_id, modulus_id);
+    })
 }
 
-function getTestOf(yearID, modulusID) {
+function getTestOf(yearID, modulusID, modulusName = '') {
     console.log(yearID, modulusID);
     $.ajax({
         type: "GET",
@@ -167,7 +166,10 @@ function getTestOf(yearID, modulusID) {
         url: '/school/get_year/' + yearID,
         success: function(year) {
             console.log(year);
-            selectionner('/marks_modulus/get_marks_modulus_tests_of/' + year.id + '/' + modulusID, marksModulusTestData, )
+            selectionner('/marks_modulus/get_marks_modulus_tests_of/' + year.id + '/' + modulusID, (data) => {
+                marksModulusTestData(data, modulusName);
+                getModulusOf(marks_management_modulus.year, marks_management_modulus.semesterID);
+            })
             $('.saveText').attr('id', year.id + '_' + modulusID);
             // yearData = year;
         },
@@ -179,11 +181,13 @@ function getTestOf(yearID, modulusID) {
 
 }
 
-function marksModulusTestData(data) {
+function marksModulusTestData(data, modulusName = '') {
     var elements = ''
     console.log(data);
     test_editparames = []
     var to_ratio = 0;
+
+    $('#testTile').html(modulusName);
 
     set_max = () => {
         $('#test_ration').attr('max', 100 - to_ratio);

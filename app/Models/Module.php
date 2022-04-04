@@ -7,11 +7,12 @@ use App\Models\Test;
 use App\Models\Semester;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Module extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes, CascadeSoftDeletes;
 
     protected $fillable = [
         'module_name',
@@ -21,6 +22,8 @@ class Module extends Model
         'modulus_TU',
     ];
 
+    protected $cascadeDeletes=['tests'];
+    
     public function tu(){
         return $this->belongsTo(Tu::class);
     }

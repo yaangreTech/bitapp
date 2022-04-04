@@ -7,15 +7,18 @@ use App\Models\Level;
 use App\Models\Module;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Semester extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes, CascadeSoftDeletes;
 
     // public function semestre_name() {
     //     return $this->belongsTo(Semestre_name::class);
     // }
+
+    protected $cascadeDeletes=['tus'];
 
     public function tus() {
         return $this->hasMany(Tu::class);
