@@ -82,12 +82,16 @@ class AverageController extends Controller
                     $mod['pourcentage'] = $pourcentage;
                     $mod = $mod->getAttributes();
                     array_push($les_note, $mod);
+
                     $tu_credit += $mod['credict'];
-                    $tu_ponderer += $note * $mod['credict'];
+                    $tu_ponderer +=  $mod['note'] * $mod['credict'];
+                    // echo "<script>console.log('credit=".$mod['credict']."')</script>";
                 }
 
                 $t_n_ponderer += $tu_ponderer;
                 $t_credit += $tu_credit;
+
+               
                 $tu_credit > 0
                     ? ($tu_average = round($tu_ponderer / $tu_credit, 2))
                     : ($tu_average = $tu_ponderer);
@@ -122,6 +126,8 @@ class AverageController extends Controller
             $inscription['conforme'] = $conforme->conformeOf($average);
             $inscription['t_n_average'] = $average;
             $inscription['t_n_status'] = $status;
+
+            // dd($inscription);
         }
 
         $page_title=Semester::findOrFail($semesterID);

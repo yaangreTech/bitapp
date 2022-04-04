@@ -80,12 +80,17 @@ function averageData(data) {
     head_elements3 += '    <th class="rotate"> <div class="rot">Fist Name</div></th>'
     head_elements3 += '    <th class="rotate"><div class="rot">Last Name</div> </th>'
 
-    $.each(theadModulus, function(key, mod) {
-        // console.log(mod);
-        head_elements += '    <th class="rotated_cell center nb_cell"> <div class="rota_div">' + mod.name + '</div></th>'
-        totalOfCredit += mod.credict;
-        head_elements3 += '    <th class=""> <div class="">' + mod.credict + ' cred.</div></th>'
+    $.each(theadTus, function(tukey, tu) {
+        $.each(tu.modulus, function(key, mod) {
+            // console.log(mod);
+            head_elements += '    <th class="rotated_cell center nb_cell"> <div class="rota_div">' + mod.name + '</div></th>'
+            totalOfCredit += mod.credict;
+            head_elements3 += '    <th class=""> <div class="">' + mod.credict + ' cred.</div></th>'
+        })
     })
+
+
+
     head_elements += '    <th class="rotated_cell center nb_cell"> <div class="rota_div">Total</div></th>'
     head_elements += '    <th class="rotated_cell center nb_cell"><div class="rota_div">Final Average</div></th>'
     head_elements += '    <th class="rotated_cell center nb_cell"> <div class="rota_div">Inernational grate</div></th>'
@@ -176,37 +181,49 @@ function averageData(data) {
 }
 
 function average_with_session_Data(data) {
-
     var body_elements = ''
     var head_elements = ''
+    var head_elements2 = ''
+    var head_elements3 = ''
     var theadModulus = data.theadModulus
     var theadTus = data.theadTus
     var inscriptions = data.inscriptions
-    var totalOfCredit = 0
     var failed = 0;
     var giveUp = 0;
-
+    var totalOfCredit = 0
     console.log(data);
     classe_editparames = []
 
     head_elements += '<tr> <th colspan="3" rowspan="2"></th>'
+    head_elements2 += '<tr>'
     $.each(theadTus, function(tukey, tu) {
         head_elements += ' <th class="center" colspan="' + tu.modulus.length + '">' + tu.name + '</th>'
+        head_elements2 += ' <th class="center" colspan="' + tu.modulus.length + '">' + tu.tu_credit + ' cred.</th>'
     })
     head_elements += '<th colspan="7" rowspan="2"></th> </tr>'
+    head_elements2 += '</tr>'
+    head_elements += head_elements2;
 
-    head_elements += '<tr>'
-    $.each(theadTus, function(tukey, tu) {
-        head_elements += ' <th class="center" colspan="' + tu.modulus.length + '">' + tu.tu_credit + ' cred.</th>'
-    })
-    head_elements += '</tr>'
 
     head_elements += '<tr>'
     head_elements += '    <th colspan="3" class=""><div class=""><img width="300px" src="assets/images/head_icon.png" alt="logo" class="logo-default" /></div></th>'
-    $.each(theadModulus, function(key, mod) {
-        // console.log(mod);
-        head_elements += '    <th class="rotated_cell center nb_cell"> <div class="rota_div">' + mod.name + '</div></th>'
+
+    head_elements3 += '<tr height="10px">'
+    head_elements3 += '    <th class=""><div class="">ID</div></th>'
+    head_elements3 += '    <th class="rotate"> <div class="rot">Fist Name</div></th>'
+    head_elements3 += '    <th class="rotate"><div class="rot">Last Name</div> </th>'
+
+    $.each(theadTus, function(tukey, tu) {
+        $.each(tu.modulus, function(key, mod) {
+            // console.log(mod);
+            head_elements += '    <th class="rotated_cell center nb_cell"> <div class="rota_div">' + mod.name + '</div></th>'
+            totalOfCredit += mod.credict;
+            head_elements3 += '    <th class=""> <div class="">' + mod.credict + ' cred.</div></th>'
+        })
     })
+
+
+
     head_elements += '    <th class="rotated_cell center nb_cell"> <div class="rota_div">Total</div></th>'
     head_elements += '    <th class="rotated_cell center nb_cell"><div class="rota_div">Final Average</div></th>'
     head_elements += '    <th class="rotated_cell center nb_cell"> <div class="rota_div">Inernational grate</div></th>'
@@ -216,23 +233,18 @@ function average_with_session_Data(data) {
     head_elements += '    <th class="rotated_cell center nb_cell"><div class="rota_div">Remark</div></th>'
     head_elements += '</tr>'
 
-    head_elements += '<tr height="10px">'
-    head_elements += '    <th class=""><div class="">ID</div></th>'
-    head_elements += '    <th class="rotate"> <div class="rot">Fist Name</div></th>'
-    head_elements += '    <th class="rotate"><div class="rot">Last Name</div> </th>'
-    $.each(theadModulus, function(key, mod) {
-        // console.log(mod);
-        totalOfCredit += mod.credict;
-        head_elements += '    <th class=""> <div class="">' + mod.credict + ' cred.</div></th>'
-    })
-    head_elements += '    <th class=""> <div class="">' + totalOfCredit + '</div></th>'
-    head_elements += '    <th class=""><div class=""></div></th>'
-    head_elements += '    <th class=""><div class=""></div></th>'
-    head_elements += '    <th class=""><div class=""></div></th>'
-    head_elements += '    <th class=""><div class=""></div></th>'
-    head_elements += '    <th class=""><div class=""></div></th>'
-    head_elements += '    <th class=""><div class=""></div></th>'
-    head_elements += '</tr>'
+    head_elements3 += '    <th class=""> <div class="">' + totalOfCredit + '</div></th>'
+    head_elements3 += '    <th class=""><div class=""></div></th>'
+    head_elements3 += '    <th class=""><div class=""></div></th>'
+    head_elements3 += '    <th class=""><div class=""></div></th>'
+    head_elements3 += '    <th class=""><div class=""></div></th>'
+    head_elements3 += '    <th class=""><div class=""></div></th>'
+    head_elements3 += '    <th class=""><div class=""></div></th>'
+    head_elements3 += '</tr>'
+
+    head_elements += head_elements3;
+
+
     $.each(inscriptions, function(key, insc) {
             console.log(insc);
             if (insc.t_n_status == 'Fail') {
