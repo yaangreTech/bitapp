@@ -48,7 +48,6 @@
 
     <!-- Top Bar -->
     <nav class="navbar">
-
         <x-nav-bar displayf='{{ $filtrage }}' />
     </nav>
     <!-- #Top Bar -->
@@ -57,6 +56,7 @@
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <x-left-aside />
+
         </aside>
         <!-- #END# Left Sidebar -->
 
@@ -75,8 +75,8 @@
     @if (Auth::user()->lastname == null || Auth::user()->firstname == null)
         <x-complete-profile-form />
     @endif
-
-
+    
+   
 
     {{-- Js links --}}
     <script src="assets/js/app.min.js"></script>

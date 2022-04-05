@@ -267,7 +267,7 @@
                                     </h2>
                                     <ul class="header-dropdown m-r--5">
                                         <button data-toggle="modal" data-target="#add_TU" type="button"
-                                            class="btn  btn-outline-info initier" onclick="$('#wizard_with_validation').addClass('TU_form');$('#wizard_with_validation').removeClass('TU_form_update');">
+                                            class="btn  btn-outline-info initier" onclick="$('#wizard_with_validation').addClass('TU_form');$('#wizard_with_validation').removeClass('TU_form_update');initialECU();">
                                             <i class="material-icons">
                                                 add_circle_outline</i>
                                             <span>new TU</span>

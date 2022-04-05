@@ -68,8 +68,8 @@ function getTranscript_with_session_Data(data) {
     $.each(data.inscriptions, function(key, insc) {
         body_elements += '<tr>'
         body_elements += '    <td class="center">' + insc.student.matricule + '</td>'
-        body_elements += '    <td class="center">' + insc.student.first_name + '</td>'
-        body_elements += '    <td class="center">' + insc.student.Last_name + '</td>'
+        body_elements += '    <td class="">' + insc.student.first_name + '</td>'
+        body_elements += '    <td class="">' + insc.student.Last_name + '</td>'
         $.each(insc.year_semesters, function(key, semester) {
             body_elements += '    <td class="center">' + semester.s_n_average + '</td>'
         })
@@ -112,8 +112,8 @@ function getTranscriptData(data) {
     $.each(data.inscriptions, function(key, insc) {
         body_elements += '<tr>'
         body_elements += '    <td class="center">' + insc.student.matricule + '</td>'
-        body_elements += '    <td class="center">' + insc.student.first_name + '</td>'
-        body_elements += '    <td class="center">' + insc.student.Last_name + '</td>'
+        body_elements += '    <td class="">' + insc.student.first_name + '</td>'
+        body_elements += '    <td class="">' + insc.student.Last_name + '</td>'
         $.each(insc.year_semesters, function(key, semester) {
             body_elements += '    <td class="center">' + semester.s_n_average + '</td>'
         })

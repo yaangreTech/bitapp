@@ -72,7 +72,12 @@
                         <div class="body">
                             <div class="table-responsive">
                                 <table id="grade_transcript_table" class="table table-hover table-bordered  contact_list">
-                                    <thead id="grade_transcript_head">    
+                                    <thead id="grade_transcript_head">   
+                                        <tr>
+                                            <td class="center">
+                                                <x-loading /> 
+                                            </td>
+                                        </tr>
                                     </thead>
                                     <tbody id="grade_transcript">
                                     </tbody>

@@ -74,16 +74,19 @@
                         <div class="body">
                             <div class="row">
                                 <div class="col-md-4">
+                                    <label for="ECU_name">Ecu name</label>
                                     <input type="text" id='ECU_name' class="tdl-new form-control-radious"
                                         placeholder="Enter ECU...">
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="number" id='ECU_hours' class="tdl-new form-control-radious"
-                                        placeholder="Enter ECU Hours...">
-                                </div>
-                                <div class="col-md-3">
+                                    <label for="ECU_credict">Ecu credit</label>
                                     <input type="number" id='ECU_credict' class="tdl-new form-control-radious"
                                         placeholder="Enter ECU credits...">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ECU_hours">Ecu hours</label>
+                                    <input type="number" id='ECU_hours' class="tdl-new form-control-radious"
+                                        placeholder="Enter ECU Hours...">
                                 </div>
                                 <div class="col-md-2">
                                     <button onclick="bindEcu('adding')" type="button"

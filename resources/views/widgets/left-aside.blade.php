@@ -452,15 +452,18 @@
             <hr>
             <div class="leftSideProgress">
                 <div class="progress-list m-b-10">
-                    <div class="details">
-                        <div class="title">Year</div>
-                    </div>
+                   
                     <div class="status">
-                        <span>79 %</span>
+                        {{-- <span>79 %</span> --}}
                     </div>
                     <div class="progress-s progress">
-                        <div class="progress-bar progress-bar-warning width-per-79" role="progressbar"
+                        <div class="progress-bar progress-bar-warning width-per-100" role="progressbar"
                             aria-valuenow="38" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="title">
+                            <a href="https://ytech-bf.com/" target="_blank"> Developped by <span style="color:blue">YTech</span> </a>
                         </div>
                     </div>
                 </div>

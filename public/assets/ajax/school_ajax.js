@@ -703,3 +703,11 @@
 
      bindEcu();
  }
+
+ function initialECU() {
+
+     addedecu = [];
+
+
+     bindEcu();
+ }
