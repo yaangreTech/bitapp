@@ -42,3 +42,7 @@ require __DIR__.'/documents_routes.php';
 
 // generated documents routes
 require __DIR__.'/others_routes.php';
+
+
+// generated pdf routes
+require __DIR__.'/pdf_routes.php';

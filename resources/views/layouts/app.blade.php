@@ -65,15 +65,13 @@
             <x-right-aside />
         </aside>
         <!-- #END# Right Sidebar -->
-
-
     </div>
 
     <!-- Page Content -->
     {{ $slot }}
     <!-- End page Content -->
     @if (Auth::user()->lastname == null || Auth::user()->firstname == null)
-        <x-complete-profile-form />
+        <x-complete-profile-form/>
     @endif
     
    
