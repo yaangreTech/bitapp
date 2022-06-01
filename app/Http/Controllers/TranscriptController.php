@@ -1,15 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Level;
 use App\Models\Conforme;
 use App\Models\Sessione;
 use App\Models\Inscription;
 use Illuminate\Http\Request;
 
+
 class TranscriptController extends Controller
 {
     //
+
+
+
+
     function index()
     {
         return view('pages.documents.grades');
@@ -72,8 +78,6 @@ class TranscriptController extends Controller
                     if ($tu_average < 8) {
                         $status = 'Fail';
                     }
-
-                    
                 }
                 if ($s_credit > 0) {
                     $average += $s_ponderer / $s_credit;
@@ -86,8 +90,8 @@ class TranscriptController extends Controller
                     $semester['s_n_average'] = round($s_ponderer, 2);
                 }
 
-                if($semester['s_n_average']  < 10){
-                    $status = 'Fail';  
+                if ($semester['s_n_average']  < 10) {
+                    $status = 'Fail';
                 }
 
                 $t_credit += $s_credit;
@@ -97,7 +101,7 @@ class TranscriptController extends Controller
             if ($t_credit > 0) {
                 $average = round($average / 2, 2);
             }
-            
+
             $inscription['conforme'] = $conforme->conformeOf($average);
             $inscription['t_n_average'] = $average;
             $inscription['t_n_status'] = $status;
@@ -105,12 +109,12 @@ class TranscriptController extends Controller
             // $inscription=$inscription->getAttributes();
         }
 
-        $page_title=Level::findOrFail($classID);
+        $page_title = Level::findOrFail($classID);
         $page_title->branche->departement;
         return response()->json([
             'head_element' => $head_element,
             'inscriptions' => $inscriptions,
-            'page_title' =>$page_title
+            'page_title' => $page_title
         ]);
     }
 
@@ -143,14 +147,14 @@ class TranscriptController extends Controller
                     $tu_credit = 0;
                     $tu_ponderer = 0;
                     foreach ($modules as $mod) {
-                        $sessione =new Sessione();
+                        $sessione = new Sessione();
                         $tests = $mod->tests
                             ->where('year_id', $yearID)
                             ->where('type', 'normal');
                         $note = 0;
                         if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
                             $tests = $mod->tests
-                                ->where('year_id',$inscription->year_id)
+                                ->where('year_id', $inscription->year_id)
                                 ->where('type', 'session');
                         }
                         foreach ($tests as $test) {
@@ -173,8 +177,6 @@ class TranscriptController extends Controller
                     if ($tu_average < 8) {
                         $status = 'Fail';
                     }
-
-                    
                 }
                 if ($s_credit > 0) {
                     $average += $s_ponderer / $s_credit;
@@ -187,8 +189,8 @@ class TranscriptController extends Controller
                     $semester['s_n_average'] = round($s_ponderer, 2);
                 }
 
-                if($semester['s_n_average']  < 10){
-                    $status = 'Fail';  
+                if ($semester['s_n_average']  < 10) {
+                    $status = 'Fail';
                 }
 
                 $t_credit += $s_credit;
@@ -198,7 +200,7 @@ class TranscriptController extends Controller
             if ($t_credit > 0) {
                 $average = round($average / 2, 2);
             }
-            
+
             $inscription['conforme'] = $conforme->conformeOf($average);
             $inscription['t_n_average'] = $average;
             $inscription['t_n_status'] = $status;
@@ -334,7 +336,7 @@ class TranscriptController extends Controller
 
                     if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
                         $tests = $mod->tests
-                            ->where('year_id',$inscription->year_id)
+                            ->where('year_id', $inscription->year_id)
                             ->where('type', 'session');
                     }
 

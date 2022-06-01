@@ -8,23 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 //gets current date
 $date = getDate_Fr();
 //finds the name of the image path for tcpdf
-    //name of the file executing the script's folder name
+//name of the file executing the script's folder name
 $executingScriptFolderName = dirname($_SERVER['SCRIPT_FILENAME']);
-    //name of the current folder
+//name of the current folder
 $currentFolderName = dirname(__FILE__);
-define("TCPDF_IMAGE_PATH", GetRelativePath($executingScriptFolderName, $currentFolderName)."logo.png");
+define("TCPDF_IMAGE_PATH", GetRelativePath($executingScriptFolderName, $currentFolderName) . "logo.png");
 
-    //finds the name of the image path for the html imag tag
+//finds the name of the image path for the html imag tag
 $currentFolderName = dirname(ReplacePathSeparator(__FILE__));
 $contextPath = ReplacePathSeparator($_SERVER['DOCUMENT_ROOT']);
-$HTML_IMAGE_PATH =  str_replace($contextPath, "", $currentFolderName).DIRECTORY_SEPARATOR;
-define('HTML_IMAGE_PATH', str_replace(DIRECTORY_SEPARATOR, "/", $HTML_IMAGE_PATH)."logo.png");
+$HTML_IMAGE_PATH =  str_replace($contextPath, "", $currentFolderName) . DIRECTORY_SEPARATOR;
+define('HTML_IMAGE_PATH', str_replace(DIRECTORY_SEPARATOR, "/", $HTML_IMAGE_PATH) . "logo.png");
 
 class DiplomaAttestation extends Model
 {
     use HasFactory;
 
-    
+
     /**
      * @param $student_name
      * @param $birth_date
@@ -40,7 +40,7 @@ class DiplomaAttestation extends Model
      * @param string $saveInFolder
      * @return void
      */
-   public function DiplomaAttestation($student_name, $birth_date, $location, $id, $validation_date, $domain, $mention, $field, $cote, $generation_date, $dean = "Dr W. Rodrigue KABORE", $saveInFolder = ""): void
+    public function DiplomaAttestation($student_name, $birth_date, $location, $id, $validation_date, $domain, $mention, $field, $cote, $generation_date, $dean = "Dr W. Rodrigue KABORE", $saveInFolder = ""): void
     {
         //checks whether the file must be downloaded or kept in one folder
         $download = empty($saveInFolder);
@@ -55,7 +55,7 @@ class DiplomaAttestation extends Model
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
         // set document information
-        $pdf->SetCreator(PDF_CREATOR."_YaangreTech");
+        $pdf->SetCreator(PDF_CREATOR . "_YaangreTech");
         $pdf->SetAuthor('Burkina Instute of Technology');
         $pdf->SetTitle('Attestation provisoire de diplome');
         $pdf->SetSubject('Attestation provisoire de diplome');
@@ -71,8 +71,8 @@ class DiplomaAttestation extends Model
         $pdf->SetAutoPageBreak(TRUE, -90);
 
         // set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-            require_once(dirname(__FILE__).'/lang/eng.php');
+        if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+            require_once(dirname(__FILE__) . '/lang/eng.php');
             $pdf->setLanguageArray($l);
         }
 
@@ -214,21 +214,17 @@ class DiplomaAttestation extends Model
         //sets transparency of the watermark image
         $pdf->SetAlpha(0.14);
 
-        
+
         $pdf->Image(TCPDF_IMAGE_PATH, 150, 250, 300, 100, '', '', '', false, 300, '', false, false, 0, false, true, false);
 
         // ---------------------------------------------------------
 
         //must be downloaded directly or not
-        if($download)
-        {
+        if ($download) {
             // Close and output PDF document
-            $pdf->Output('attestation_provisoire_'.$student_name.'.pdf', 'I');
-        }
-        else
-        {
-            $pdf->Output($saveInFolder.DIRECTORY_SEPARATOR.'attestation_provisoire_'.$student_name.'.pdf', 'F');
+            $pdf->Output('attestation_provisoire_' . $student_name . '.pdf', 'I');
+        } else {
+            $pdf->Output($saveInFolder . DIRECTORY_SEPARATOR . 'attestation_provisoire_' . $student_name . '.pdf', 'F');
         }
     }
-
 }

@@ -2,25 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Elibyy\TCPDF\Facades\TCPDF;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 $executingScriptFolderName = dirname($_SERVER['SCRIPT_FILENAME']);
 //name of the current folder
 $currentFolderName = dirname(__FILE__);
-define("TCPDF_IMAGE_PATH", GetRelativePath($executingScriptFolderName, $currentFolderName)."logo.png");
+define("TCPDF_IMAGE_PATH", GetRelativePath($executingScriptFolderName, $currentFolderName) . "logo.png");
 
 //finds the name of the image path for the html imag tag
 $currentFolderName = dirname(ReplacePathSeparator(__FILE__));
 $contextPath = ReplacePathSeparator($_SERVER['DOCUMENT_ROOT']);
-$HTML_IMAGE_PATH =  str_replace($contextPath, "", $currentFolderName).DIRECTORY_SEPARATOR;
-define('HTML_IMAGE_PATH', str_replace(DIRECTORY_SEPARATOR, "/", $HTML_IMAGE_PATH)."logo.png");
+$HTML_IMAGE_PATH =  str_replace($contextPath, "", $currentFolderName) . DIRECTORY_SEPARATOR;
+define('HTML_IMAGE_PATH', str_replace(DIRECTORY_SEPARATOR, "/", $HTML_IMAGE_PATH) . "logo.png");
 
 class Diploma extends Model
 {
     use HasFactory;
 
-    
+
     /**
      * @param $lang
      * @param $director_full_name
@@ -35,7 +36,7 @@ class Diploma extends Model
      * @return void
      */
 
-   public function Diploma( $lang = 'en', $director_full_name = "Dr. W. Rodrigue KABORE", $order_number, $student_id, $academic_year, $department_en, $department_fr, $option_en, $option_fr, $saveInFolder = '')
+    public function Diploma($lang = 'en', $director_full_name = "Dr. W. Rodrigue KABORE", $order_number, $student_id, $academic_year, $department_en, $department_fr, $option_en, $option_fr, $saveInFolder = '')
     {
         //checks whether the file must be downloaded or kept in one folder
         $download = empty($saveInFolder);
@@ -44,56 +45,57 @@ class Diploma extends Model
         //imports extra fonts
         $fonts = addFonts();
         extract($fonts);
-        
+
         $date_fr = getDate_Fr();
         $date_en = date('F d, Y');
-        
+
         $ministry = $lang == "en" ? "Ministry of Higher Education, Scientific Research and Innovation" : "Ministère de l'Enseignement Supérieur, de la Recherche Scientifique et de l'Innovation";
-        
+
         /** Configurations */
         // create new PDF document
         $pdf = new TCPDF("L", PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
         // set document information
-        $pdf->SetCreator(PDF_CREATOR."_YaangreTech");
-        $pdf->SetAuthor('Burkina Instute of Technology');
-        $pdf->SetTitle('Diplome');
-        $pdf->SetSubject('Diplome');
-        $pdf->SetKeywords('');
+        $pdf::SetCreator(PDF_CREATOR . "_YaangreTech");
+        $pdf::SetAuthor('Burkina Instute of Technology');
+        $pdf::SetTitle('Diplome');
+        $pdf::SetSubject('Diplome');
+        $pdf::SetKeywords('');
 
 
-        $pdf->SetFooterMargin(0);
+        $pdf::SetFooterMargin(0);
 
         //margins left, top, right, bottom
-        $pdf->SetMargins(10, 6, 10, 0);
+        $pdf::SetMargins(10, 6, 10, 0);
 
         // removes the bottom margin
-        $pdf->SetAutoPageBreak(TRUE, -90);
+        $pdf::SetAutoPageBreak(TRUE, -90);
 
 
         // set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-            require_once(dirname(__FILE__).'/lang/eng.php');
-            $pdf->setLanguageArray($l);
+        if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+            require_once(dirname(__FILE__) . '/lang/eng.php');
+            $pdf::setLanguageArray($l);
         }
-
+        $pdf::SetFont('helvetica', 'TrueTypeUnicode', '', 96);
+        $pdf::SetFont('fonts/arial_rounded_bold.ttf', 'TrueTypeUnicode', '', 96);
         //adds helvetica font
-        $helvetica = TCPDF_FONTS::addTTFfont('helvetica', 'TrueTypeUnicode', '', 96);
-        //adds rounded arial
-        $arial_rounded_bold = TCPDF_FONTS::addTTFfont('fonts/arial_rounded_bold.ttf', 'TrueTypeUnicode', '', 96);        
+        // $helvetica = TCPDF_FONTS::addTTFfont('helvetica', 'TrueTypeUnicode', '', 96);
+        // //adds rounded arial
+        // $arial_rounded_bold = TCPDF_FONTS::addTTFfont('fonts/arial_rounded_bold.ttf', 'TrueTypeUnicode', '', 96);
 
 
         //height of the page
-        $height = $pdf->getPageHeight();
+        $height = $pdf::getPageHeight();
         //width of the page
-        $width = $pdf->getPageWidth();
+        $width = $pdf::getPageWidth();
 
 
         //sets the height of a line
-        $pdf->setCellHeightRatio(1);
+        $pdf::setCellHeightRatio(1);
         // removes the horizontal rules in the header and the footer
-        $pdf->SetPrintHeader(false);
-        $pdf->SetPrintFooter(false);
+        $pdf::SetPrintHeader(false);
+        $pdf::SetPrintFooter(false);
 
 
         //content in English
@@ -145,7 +147,7 @@ class Diploma extends Model
                 </tr>
             </table>
             <br>
-            <p style="font-size: 9px; font-family: calibri; font-style: italic">N°{$order_number}BIT-ID{$student_id}</p>    
+            <p style="font-size: 9px; font-family: calibri; font-style: italic">N°{$order_number}BIT-ID{$student_id}</p>
         HTML;
 
         //content in French
@@ -196,14 +198,14 @@ class Diploma extends Model
                 </tr>
             </table>
             <br>
-            <p style="font-size: 9px; font-family: calibri; font-style: italic">N°{$order_number}BIT-ID{$student_id}</p>    
+            <p style="font-size: 9px; font-family: calibri; font-style: italic">N°{$order_number}BIT-ID{$student_id}</p>
         HTML;
 
         //chooses content according to the language
-        $content = $lang == "en" ? $content_eng : $content_fr ; 
+        $content = $lang == "en" ? $content_eng : $content_fr;
 
         // Add a page : orientation landscape
-        $pdf->AddPage();
+        $pdf::AddPage();
 
         $content = <<<HTML
             <style>
@@ -249,37 +251,34 @@ class Diploma extends Model
         HTML;
 
         //blue line configuration
-        $pdf->SetLineStyle(array('width' => 0.8, 'cap' => 'butt', 'join' => 'miter', 'solid' => 4, 'color' => array(68, 114, 196)));
+        $pdf::SetLineStyle(array('width' => 0.8, 'cap' => 'butt', 'join' => 'miter', 'solid' => 4, 'color' => array(68, 114, 196)));
         //adds rectangle line
-        $pdf->Rect(8.5, 8, $width-16, $height-17);
+        $pdf::Rect(8.5, 8, $width - 16, $height - 17);
         //scarla line configuration
-        $pdf->SetLineStyle(array('width' => 0.8, 'cap' => 'butt', 'join' => 'miter', 'solid' => 4, 'color' => array(205, 49, 103)));
+        $pdf::SetLineStyle(array('width' => 0.8, 'cap' => 'butt', 'join' => 'miter', 'solid' => 4, 'color' => array(205, 49, 103)));
         //adds rectangle line
-        $pdf->Rect(12, 12, $width-24, $height-24);
+        $pdf::Rect(12, 12, $width - 24, $height - 24);
 
 
 
         // Print text using writeHTMLCell()
-        $pdf->writeHTMLCell(0, 0, '', '', $content, 0, 1, 0, true, 'L', true);
+        $pdf::writeHTMLCell(0, 0, '', '', $content, 0, 1, 0, true, 'L', true);
 
         //sets transparency of the watermark image
-        $pdf->SetAlpha(0.14);
+        $pdf::SetAlpha(0.14);
 
-        
-        $pdf->Image(TCPDF_IMAGE_PATH, 90, 85, 1000, 180, '', '', '', false, 300, '', false, false, 0, false, true, false);
+
+        $pdf::Image(TCPDF_IMAGE_PATH, 90, 85, 1000, 180, '', '', '', false, 300, '', false, false, 0, false, true, false);
 
 
         // ---------------------------------------------------------
 
         //must be downloaded directly or not
-        if($download)
-        {
+        if ($download) {
             // Close and output PDF document
-            $pdf->Output('diploma_'.$lang.'_'.$student_id.'.pdf', 'I');
-        }
-        else
-        {
-            $pdf->Output($saveInFolder.DIRECTORY_SEPARATOR.'diploma_'.$lang.'_'.$student_id.' '.$lang.'.pdf', 'F');
+            $pdf::Output('diploma_' . $lang . '_' . $student_id . '.pdf', 'I');
+        } else {
+            $pdf::Output($saveInFolder . DIRECTORY_SEPARATOR . 'diploma_' . $lang . '_' . $student_id . ' ' . $lang . '.pdf', 'F');
         }
 
         //============================================================+

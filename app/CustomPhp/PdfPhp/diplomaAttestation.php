@@ -1,85 +1,57 @@
 <?php
-    // require '../vendor/autoload.php';
-    // require "../functions.php";
-    
-    //gets current date
-    $date = getDate_Fr();
-    //finds the name of the image path for tcpdf
-        //name of the file executing the script's folder name
-    $executingScriptFolderName = dirname($_SERVER['SCRIPT_FILENAME']);
-        //name of the current folder
-    $currentFolderName = dirname(__FILE__);
-    define("TCPDF_IMAGE_PATH", GetRelativePath($executingScriptFolderName, $currentFolderName)."logo.png");
 
-        //finds the name of the image path for the html imag tag
-    $currentFolderName = dirname(ReplacePathSeparator(__FILE__));
-    $contextPath = ReplacePathSeparator($_SERVER['DOCUMENT_ROOT']);
-    $HTML_IMAGE_PATH =  str_replace($contextPath, "", $currentFolderName).DIRECTORY_SEPARATOR;
-    define('HTML_IMAGE_PATH', str_replace(DIRECTORY_SEPARATOR, "/", $HTML_IMAGE_PATH)."logo.png");
+use Elibyy\TCPDF\Facades\TCPDF;
 
-    /**
-     * @param $student_name
-     * @param $birth_date
-     * @param $location
-     * @param $id
-     * @param $validation_date
-     * @param $domain
-     * @param $mention
-     * @param $field
-     * @param $cote
-     * @param $generation_date
-     * @param string $dean
-     * @param string $saveInFolder
-     * @return void
-     */
-    function DiplomaAttestation($student_name, $birth_date, $location, $id, $validation_date, $domain, $mention, $field, $cote, $generation_date, $dean = "Dr W. Rodrigue KABORE", $saveInFolder = ""): void
-    {
-        //checks whether the file must be downloaded or kept in one folder
-        $download = empty($saveInFolder);
-        //imports extra fonts
-        $fonts = addFonts();
-        //sets the path of the logo
-        $logoPath =  HTML_IMAGE_PATH;
-        extract($fonts);
+require_once(app_path('CustomPhp/customHelpers.php'));
 
-        /** Configurations */
-        // create new PDF document
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+function diplomaAttestation($student_name, $birth_date, $location, $id, $validation_date, $domain, $mention, $field, $cote, $generation_date, $dean = "Dr W. Rodrigue KABORE", $saveInFolder = ""): void
+{
+    //checks whether the file must be downloaded or kept in one folder
+    $download = empty($saveInFolder);
+    //sets the path of the logo
+    $logoPath = app_path('CustomPhp/PdfPhp/logo.png');
+    //imports extra fonts
+    $fonts = addFonts();
+    extract($fonts);
 
-        // set document information
-        $pdf->SetCreator(PDF_CREATOR."_YaangreTech");
-        $pdf->SetAuthor('Burkina Instute of Technology');
-        $pdf->SetTitle('Attestation provisoire de diplome');
-        $pdf->SetSubject('Attestation provisoire de diplome');
-        $pdf->SetKeywords('');
+    /** Configurations */
+    // create new PDF document
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+    // set document information
+    $pdf::SetCreator("ytech-bf.com");
+    $pdf::SetAuthor('Burkina Instute of Technology');
+    $pdf::SetTitle('Attestation provisoire de diplome');
+    $pdf::SetSubject('Attestation provisoire de diplome');
+    $pdf::SetKeywords('');
 
 
-        $pdf->SetFooterMargin(0);
+    $pdf::SetFooterMargin(0);
 
-        //margins left, top, right, bottom
-        $pdf->SetMargins(12, -5, 12, 0);
+    //margins left, top, right, bottom
+    $pdf::SetMargins(12, -5, 12, 0);
 
-        // removes the bottom margin
-        $pdf->SetAutoPageBreak(TRUE, -90);
+    // removes the bottom margin
+    $pdf::SetAutoPageBreak(TRUE, -90);
 
-        // set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-            require_once(dirname(__FILE__).'/lang/eng.php');
-            $pdf->setLanguageArray($l);
-        }
+    // set some language-dependent strings (optional)
+    if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+        require_once(dirname(__FILE__) . '/lang/eng.php');
+        $pdf::setLanguageArray($l);
+    }
 
 
-        //sets the height of a line
-        $pdf->setCellHeightRatio(1.5);
-        // removes the horizontal rules in the header and the footer
-        $pdf->SetPrintHeader(false);
-        $pdf->SetPrintFooter(false);
+    //sets the height of a line
+    $pdf::setCellHeightRatio(1.5);
+    // removes the horizontal rules in the header and the footer
+    $pdf::SetPrintHeader(false);
+    $pdf::SetPrintFooter(false);
 
-        // Add a page
-        $pdf->AddPage();
+    // Add a page
+    $pdf::AddPage();
 
-        //content of the page
-        $content = <<<HTML
+    //content of the page
+    $content = <<<HTML
 
             <style>
                 body
@@ -187,7 +159,7 @@
                         <td style="width:60%"></td>
                         <td style="width:40%;text-align:center; font-size: 15px; font-weight: bold">
                             <!--times new roman-->
-                            {$pdf->SetFont('times', '', 16, '', true)}
+                            {$pdf::SetFont('times', '', 16, '', true)}
                             <p style="text-decoration: underline;">{$dean}</p>
                         </td>
                     </tr>
@@ -201,26 +173,21 @@
             </body>
         HTML;
 
-        $pdf->writeHTMLCell(0, 0, '', '', $content, 0, 1, 0, true, 'L', true);
+    $pdf::writeHTMLCell(0, 0, '', '', $content, 0, 1, 0, true, 'L', true);
 
-        //sets transparency of the watermark image
-        $pdf->SetAlpha(0.14);
+    //sets transparency of the watermark image
+    $pdf::SetAlpha(0.14);
 
-        
-        $pdf->Image(TCPDF_IMAGE_PATH, 150, 250, 300, 100, '', '', '', false, 300, '', false, false, 0, false, true, false);
 
-        // ---------------------------------------------------------
+    $pdf::Image($logoPath, 150, 250, 300, 100, '', '', '', false, 300, '', false, false, 0, false, true, false);
 
-        //must be downloaded directly or not
-        if($download)
-        {
-            // Close and output PDF document
-            $pdf->Output('attestation_provisoire_'.$student_name.'.pdf', 'I');
-        }
-        else
-        {
-            $pdf->Output($saveInFolder.DIRECTORY_SEPARATOR.'attestation_provisoire_'.$student_name.'.pdf', 'F');
-        }
+    // ---------------------------------------------------------
+
+    //must be downloaded directly or not
+    if ($download) {
+        // Close and output PDF document
+        $pdf::Output('attestation_provisoire_' . $student_name . '.pdf', 'I');
+    } else {
+        $pdf::Output($saveInFolder . DIRECTORY_SEPARATOR . 'attestation_provisoire_' . $student_name . '.pdf', 'F');
     }
-
-?>
+}
