@@ -178,7 +178,7 @@ function viewTranscriptData(data) {
                         new_semester = -1
                         var semestre_rowspan = semester.s_n_modulus + 1;
                         body_elements += '<tr>'
-                        body_elements += '    <td class="center mini" rowspan="' + semestre_rowspan + '">' + semester.name + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + semestre_rowspan + '">' + semester.label + '</td>'
                         body_elements += '    <td class=" mini" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
                         body_elements += '    <td class=" mini">' + modul.name + '</td>'
                         body_elements += '    <td class="center mini">' + modul.credict + '</td>'
@@ -195,7 +195,7 @@ function viewTranscriptData(data) {
                         body_elements += '    <td class="center mini">' + modul.credict + '</td>'
                         body_elements += '    <td class="center mini">' + modul.note + '</td>'
                         body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_average + '</td>'
-                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_credit + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_v_credit + '</td>'
                         body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_validation + '</td>'
                         body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + (tu.conforme != null ? tu.conforme.international_Grade : '---') + '</td>'
                         body_elements += '</tr> '
@@ -217,7 +217,7 @@ function viewTranscriptData(data) {
             body_elements += '    <td class="center font-bold">' + semester.s_credit + '</td>'
             body_elements += '    <td class="center bg-white"></td>'
             body_elements += '    <td class="center font-bold">' + semester.s_n_average + '</td>'
-            body_elements += '    <td class="center font-bold">' + semester.s_credit + '</td>'
+            body_elements += '    <td class="center font-bold">' + semester.s_v_credit + '</td>'
             body_elements += '    <td class="center font-bold">' + semester.s_validation + '</td>'
             body_elements += '    <td class="center font-bold">' + (semester.conforme != null ? semester.conforme.international_Grade : '---') + '</td>'
             body_elements += '</tr>'

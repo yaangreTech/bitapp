@@ -150,7 +150,8 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="pull-right">
-                                                    Koudougou, Monday September 27th, 2021
+                                                    {{-- Koudougou, Monday September 27th, 2021 --}}
+                                                   Koudougou, {{$today}}
                                                 </div>
                                             </div>
                                             <div class="col-md-12">

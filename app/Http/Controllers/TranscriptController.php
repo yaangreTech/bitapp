@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 
 use App\Models\Level;
 use App\Models\Conforme;
@@ -23,7 +24,11 @@ class TranscriptController extends Controller
 
     function view()
     {
-        return view('pages.documents.grades_view');
+        // isoFormat('Do MMMM', 'MMMM YYYY')
+
+        // $today=Carbon::now()->isoFormat('dddd, MMMM D, YYYY');
+        $today=Carbon::now()->format('l F jS\\, Y');
+        return view('pages.documents.grades_view', compact('today'));
     }
 
     function getGradesOf($yearID, $classID)
@@ -226,8 +231,9 @@ class TranscriptController extends Controller
             $les_note = [];
             $inscription->student;
             $s_credit = 0;
+            $s_v_credit = 0;
             $s_n_modulus = 0;
-            $s_validation = 'validate';
+            $s_validation = 'Validated';
             $s_n_ponderer = 0;
             $status = 'Pass';
             $redo_mod = '';
@@ -236,8 +242,9 @@ class TranscriptController extends Controller
                 $modules = $tu->modulus;
                 $tu_average = 0;
                 $tu_credit = 0;
+                $tu_v_credit=0;
                 $tu_ponderer = 0;
-                $tu_validation = 'validate';
+                $tu_validation = 'V';
                 $tu['t_n_modulus'] = $modules->count();
                 $s_n_modulus += $modules->count();
                 foreach ($modules as $mod) {
@@ -270,26 +277,37 @@ class TranscriptController extends Controller
 
                 if ($tu_average < 8) {
                     $status = 'Fail';
-                    $tu_validation = 'Not validate';
-                    $s_validation = 'Not validate';
+                    $tu_validation = 'NV';
+                    $s_validation = 'Not Validated';
+                    $tu_v_credit=0;
+                    
                     // $redo_mod= $redo_mod.', '.$tu->name;
+                }else if($tu_average >= 8 && $tu_average < 10){
+                    $tu_validation = 'V/C';
+                    $tu_v_credit=$tu_credit;
+                }else if($tu_average >= 10){
+                    $tu_v_credit=$tu_credit;
                 }
 
                 $tu['tu_validation'] = $tu_validation;
                 $tu['tu_average'] = $tu_average;
                 $tu['conforme'] = $conforme->conformeOf($tu_average);
                 $tu['tu_credit'] = $tu_credit;
+                $tu['tu_v_credit'] = $tu_v_credit;
+
+                $s_v_credit=$s_v_credit+$tu_v_credit;
             }
             // $inscription['notes']=$les_note;
             // $semester=$semester->getAttributes();
             $semester['s_credit'] = $s_credit;
+            $semester['s_v_credit'] = $s_v_credit;
             $semester['s_n_ponderer'] = $s_n_ponderer;
             $semester['s_n_modulus'] = $s_n_modulus;
             if ($s_credit > 0) {
                 $average = round($s_n_ponderer / $s_credit, 2);
             }
             if ($average < 10) {
-                $s_validation = 'Not validate';
+                $s_validation = 'Not validated';
             }
             $semester['s_n_average'] = $average;
             $semester['s_validation'] = $s_validation;
@@ -314,8 +332,10 @@ class TranscriptController extends Controller
             $les_note = [];
             $inscription->student;
             $s_credit = 0;
+            $s_v_credit = 0;
+            
             $s_n_modulus = 0;
-            $s_validation = 'validate';
+            $s_validation = 'Validated';
             $s_n_ponderer = 0;
             $status = 'Pass';
             $redo_mod = '';
@@ -324,8 +344,10 @@ class TranscriptController extends Controller
                 $modules = $tu->modulus;
                 $tu_average = 0;
                 $tu_credit = 0;
+                $tu_v_credit = 0;
+                
                 $tu_ponderer = 0;
-                $tu_validation = 'validate';
+                $tu_validation = 'V';
                 $tu['t_n_modulus'] = $modules->count();
                 $s_n_modulus += $modules->count();
                 foreach ($modules as $mod) {
@@ -364,28 +386,46 @@ class TranscriptController extends Controller
                     ? ($tu_average = round($tu_ponderer / $tu_credit, 2))
                     : ($tu_average = $tu_ponderer);
 
+                // if ($tu_average < 8) {
+                //     $status = 'Fail';
+                //     $tu_validation = 'Not validate';
+                //     $s_validation = 'Not validate';
+                //     // $redo_mod= $redo_mod.', '.$tu->name;
+                // }
+
                 if ($tu_average < 8) {
                     $status = 'Fail';
-                    $tu_validation = 'Not validate';
-                    $s_validation = 'Not validate';
+                    $tu_validation = 'NV';
+                    $s_validation = 'Not Validated';
+                    $tu_v_credit=0;
+                    
                     // $redo_mod= $redo_mod.', '.$tu->name;
+                }else if($tu_average >= 8 && $tu_average < 10){
+                    $tu_validation = 'V/C';
+                    $tu_v_credit=$tu_credit;
+                }else if($tu_average >= 10){
+                    $tu_v_credit=$tu_credit;
                 }
 
                 $tu['tu_validation'] = $tu_validation;
                 $tu['tu_average'] = $tu_average;
                 $tu['conforme'] = $conforme->conformeOf($tu_average);
                 $tu['tu_credit'] = $tu_credit;
+                $tu['tu_v_credit'] = $tu_v_credit;
+
+                $s_v_credit=$s_v_credit+$tu_v_credit;
             }
             // $inscription['notes']=$les_note;
             // $semester=$semester->getAttributes();
             $semester['s_credit'] = $s_credit;
+            $semester['s_v_credit'] = $s_v_credit;
             $semester['s_n_ponderer'] = $s_n_ponderer;
             $semester['s_n_modulus'] = $s_n_modulus;
             if ($s_credit > 0) {
                 $average = round($s_n_ponderer / $s_credit, 2);
             }
             if ($average < 10) {
-                $s_validation = 'Not validate';
+                $s_validation = 'Not validated';
             }
             $semester['s_n_average'] = $average;
             $semester['s_validation'] = $s_validation;
