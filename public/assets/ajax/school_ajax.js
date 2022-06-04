@@ -501,7 +501,7 @@
      levels_departments_elements = '';
      modulus_departments_elements = '';
      tu_departments_elements = '';
-     branch_departement_content = '<option value="">Choose the department</option>';
+     branch_departement_content = '<option value="" selected disabled>Choose the department</option>';
      var active = '';
      var intialDepID = -1;
      department_editparames = []
