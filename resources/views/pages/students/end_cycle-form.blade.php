@@ -39,14 +39,14 @@
 
                             <form id="wizard_with_validation" class="end_cycle_students_form" method="POST">
                                 @csrf
-                                <h3>The licence-3 branch</h3>
+                                <h3>The Licence-3/Master 2 Classe</h3>
                                 <fieldset>
                                     <div class="demo-masked-input">
-                                        <label>The licence-3 branch</label>
+                                        <label>The licence-3 Classe</label>
                                         <div class="form-group">
                                             <select required id="concerned_class" name="concerned_class"
                                                 class="browser-default" onChange="getPromotions(this.value)">
-                                                <option value="" disabled selected>Choose the licence-3 Classe</option>
+                                                <option value="" disabled selected>Choose the licence-3/Master 2 Classe</option>
                                                 @forelse ($departments as $department)
                                                     @forelse ($department->branches as $branche)
                                                         <optgroup label="{{ $department->name .'->' . $branche->name}}">
@@ -56,7 +56,7 @@
                                                                 {{$branche->name}}, {{ $level->label }} ({{ $level->name }})
                                                             </option>
                                                             @empty
-                                                            <option value="" disabled>No licence-3 Classe for the branch: <strong>{{$branche->name}}</strong></option>
+                                                            <option value="" disabled>No licence-3/Master 2 Classe for the branch: <strong>{{$branche->name}}</strong></option>
                                                             @endforelse
                                                           
                                                         </optgroup>

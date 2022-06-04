@@ -443,6 +443,24 @@
 
                     </ul>
                 </li>
+                <li>
+                    <a href="#" onClick="return false;" class="menu-toggle">
+                        <span>graduated Students</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{ route('graduated') }}" id="bachelor" onClick="setActiveId('bachelor','bachelor')">
+                                <span>Bachelor</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('graduated') }}" id="master" onClick="setActiveId('master','master')">
+                                <span>Master</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
 
             </ul>
         </li>
@@ -512,6 +530,18 @@
                         'year': 0,
                         'classID': id.split('_')[id.split('_').length - 1]
                     }))
+                    break;
+                case 'bachelor':
+                    currentActivedb.setItem('graduated', JSON.stringify({
+                            'year': 0,
+                            'cycle': 'bachelor',
+                        }))
+                    break;
+                case 'master':
+                    currentActivedb.setItem('graduated', JSON.stringify({
+                            'year': 0,
+                            'cycle': 'master',
+                        }))
                     break;
                 default:
                     console.log('defau');

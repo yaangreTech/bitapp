@@ -16,7 +16,7 @@ function pdfFile(
     $student_id = 'bs00001',
     $academic_year = "2020-2021",
     $department,
-    $option,
+    $option
 ) {
     $prefName_en = $isMan ? "Mr" : "Mrs";
     $prefName_fr = $isMan ? "Mr" : "Mlle";

@@ -69,7 +69,7 @@ function marksModulusData(data) {
                     elements += '        <div class="">'
                     elements += '            <ul>'
                     elements += '                <li>'
-                    elements += '                    <b>' + (module.tests.length > 2 ? module.tests.length - 2 : 0) + ' tests</b> added'
+                        // elements += '                    <b>' + (module.tests.length > 2 ? module.tests.length - 2 : 0) + ' tests</b> added'
                     elements += '                </li>'
                         // elements += '                <li>'
                         // elements += '                    <b>1 tests</b> in process'

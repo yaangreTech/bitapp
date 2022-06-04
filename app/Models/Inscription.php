@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Year;
 use App\Models\Level;
 use App\Models\Student;
 use App\Models\Promotion;
@@ -34,6 +35,11 @@ class Inscription extends Model
     public function promotion()
     {
         return $this->belongsTo(Promotion::class);
+    }
+
+    public function year()
+    {
+        return $this->belongsTo(Year::class);
     }
 
     public function getAttributes()

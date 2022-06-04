@@ -211,7 +211,9 @@ function getDestinationClass(initialClassID) {
         success: function(lastYear) {
             console.log(lastYear);
             selectionner('/reinscription/get_destination/' + lastYear.id + '/' + initialClassID, (data) => {
-                // console.log(data);
+
+                console.log('\n');
+                console.log(data);
                 getConsernedStudentsData(data.consernedStudents);
                 bindDestination_class(data.destination_classes);
             });
@@ -259,7 +261,7 @@ function getConsernedStudentsData(consernedStudents) {
     head_elements += '</div></td></tr>'
     head_elements += '<tr><th class="center">#</th><th class="center">Matricule</th><th class="center"> First name </th><th class="center"> Last Name </th>'
     $.each(consernedStudents.head_element, function(i, semester) {
-        head_elements += '<th class="center">' + semester.semestre_name.name + ' </th>'
+        head_elements += '<th class="center">' + semester.name + ' </th>'
     })
     head_elements += '<th class="center"> Average </th><th class="center"> Notation </th><th class="center"> Statut </th></tr>'
     console.log('getConsernedStudentsData');
@@ -364,6 +366,7 @@ function bindPromotions(years_promotions) {
 }
 
 function getStudentsToEnd(yearID) {
+    console.log(yearID);
     var classID = $('#concerned_class').val();
 
     selectionner('end_cycle_form/get_Students/' + yearID + '/' + classID, (data) => {

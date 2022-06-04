@@ -6,6 +6,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\tcpfController;
 
 // pdf generation test
-Route::get('pdf', [tcpfController::class, 'pdf'])->name('pdf');
-Route::get('pdfAtestation', [tcpfController::class, 'pdfAtestation'])->name('pdfAtestation');
+Route::get('pdfDiploma/{inscription_id}/{lang}', [tcpfController::class, 'pdfDiplom'])->middleware(['auth']);
+Route::get('pdfAtestation/{inscription_id}/{lang}', [tcpfController::class, 'pdfAtestation'])->middleware(['auth']);
 Route::get('certificate', [tcpfController::class, 'certificate'])->name('certificate');

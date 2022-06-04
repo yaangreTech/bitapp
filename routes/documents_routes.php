@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GraduatedController;
 use App\Http\Controllers\TranscriptController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -20,3 +21,13 @@ Route::get('/grades_view/view_grades_with_session_of/{inscID}/', [TranscriptCont
 Route::get('certificates', function () {
     return view('pages.documents.certificates');
 })->middleware(['auth'])->name('certificates');
+
+
+Route::get('graduated-students',[GraduatedController::class, 'graduated_index'])->middleware(['auth'])->name('graduated');
+
+Route::get('bachelor-students/{year_id}', [GraduatedController::class,'getBachelorStudentsOf'])->middleware(['auth']);
+Route::get('master-students/{year_id}',[GraduatedController::class,'getMasterStudentsOf'])->middleware(['auth']);
+// Route::view('/master/{year_id}/',[GraduatedController::class,'master'])->middleware(['auth']);
+
+
+

@@ -27,7 +27,7 @@ class MarksController extends Controller
           // get the modulud of the given tu
             $modulus = $tu->modulus;
             foreach ($modulus as $modulu) {
-                $modulu->tests->where('year_id', $yearID);
+                $modulu->tests->where('year_id',$yearID);
             }
         }
         $semester->level->branche->departement;

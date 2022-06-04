@@ -15,7 +15,7 @@
                     <i class="nav-hdr-btn ti-align-left"></i>
                 </a>
             </li>
-            @if ($displayf=='true' && $years->count()>1)
+            {{-- @if ($displayf=='true' && $years->count()>1) --}}
             <li>
                    <div class="m-t-10 m-l-20" style="height: 100%;">
                     <select class="browser-default filtreur">
@@ -30,7 +30,7 @@
                    </div>
                
             </li>
-            @endif
+            {{-- @endif --}}
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="">

@@ -213,14 +213,14 @@ class StudentController extends Controller
     {
         $lastYear = Year::findOrFail($lastYearID);
         $initialClass = Level::findOrFail($initialClassID);
-
+        
         $branche = $initialClass->branche;
         $destination_classes = Level::where('branche_id', $branche->id)
-            ->where('level', '>=', $initialClass->level)
-            ->orderBy('level', 'ASC')
+            ->where('label', '>=', $initialClass->label)
+            ->orderBy('label', 'ASC')
             ->take(2)
             ->get();
-
+            // dd($destination_classes);
         $consernedStudents = $this->getConsernedStudents(
             $lastYearID,
             $initialClassID
@@ -389,10 +389,12 @@ class StudentController extends Controller
     {
         $years_promotions = [];
         $firstInscription = Inscription::all()
-            ->where('level_id', 2)
+            ->where('level_id', $l3classID)
+            ->where('status','!=','ended')
             ->first();
         $lastInscription = Inscription::all()
-            ->where('level_id', 2)
+            ->where('level_id', $l3classID)
+            ->where('status','!=','ended')
             ->last();
         if ($lastInscription != null) {
             $years_promotions = Year::with('promotion')
@@ -412,10 +414,10 @@ class StudentController extends Controller
         $branche = $classe->branche;
 
       
-         $head_elements=$classe->semesters->load('semestre_name');
+         $head_elements=$classe->semesters;
 
         $inscriptions = $classe->inscriptions->where('year_id', $yearID);
-
+// dd($inscriptions);
         foreach ($inscriptions as $inscription) {
             $conforme = new Conforme();
             $inscription->student;
@@ -428,7 +430,7 @@ class StudentController extends Controller
             $year_semester = [];
             $head_element = [];
             foreach ($semesters as $semester) {
-                $semester->semestre_name;
+                // $semester->semestre_name;
                 array_push($head_element, $semester);
                 $tus = $semester->tus;
                 $s_average = 0;
@@ -442,7 +444,7 @@ class StudentController extends Controller
                     foreach ($modules as $mod) {
                         $sessione = new Sessione();
                         $tests = $mod->tests
-                            ->where('year_id', $lastYear_id)
+                            ->where('year_id', $yearID)
                             ->where('type', 'normal');
                         $note = 0;
                         if (
@@ -522,7 +524,10 @@ class StudentController extends Controller
         foreach ($students_ids_list as $student_id) {
             $student = Student::find($student_id);
             $student->status = 'ended';
-            $student=$student->update();
+            $student->update();
+            $inscription=$student->inscriptions->last();
+            $inscription->status = 'ended';
+            $inscription->update();
             if($student==false){$data=false;}
         }
 

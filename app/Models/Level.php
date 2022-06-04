@@ -15,7 +15,7 @@ class Level extends Model
     use HasFactory, CascadeSoftDeletes;
 
     protected $cascadeDeletes = ['semesters','inscriptions' ];
-
+    protected $with = ['branche'];
     public function semesters() {
         return $this->hasMany(Semester::class);
     }
