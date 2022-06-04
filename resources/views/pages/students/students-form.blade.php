@@ -99,8 +99,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             {{-- Birthday field --}}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <b>BirthDate</b><span class="text-danger">*</span>
                                                 <div class="input-group">
                                                     <div class="form-group">
@@ -113,8 +114,22 @@
                                                 </div>
                                             </div>
 
+                                            {{-- Birthday field --}}
+                                            <div class="col-md-3">
+                                                <b>BirthPlace</b><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input id="studentBirthPlace" name="studentBirthPlace"
+                                                                type="text" class="form-control"
+                                                                placeholder="Ex: Koudougou" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             {{-- Phone number field --}}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <b>Mobile Phone Number</b><span class="text-danger">*</span>
                                                 <div class="input-group">
                                                     <div class="form-group">
@@ -129,7 +144,7 @@
                                             </div>
 
                                             {{-- Email adress Field --}}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <b>Email Address</b><span class="text-danger">*</span>
                                                 <div class="input-group">
                                                     <div class="form-group">

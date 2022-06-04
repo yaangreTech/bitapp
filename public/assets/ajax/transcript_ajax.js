@@ -231,13 +231,14 @@ function viewTranscriptData(data) {
         '<p class="">: ' + data.student.matricule + '</p>'
     );
 
-    var level = 'First';
-    data.level.name == 'L2' ? level = 'Second' : data.level == 'L3' ? level = 'Third' : level = 'First';
+    // var level = 'First';
+    // data.level.name == 'L2' ? level = 'Second' : data.level == 'L3' ? level = 'Third' : level = 'First';
 
+    // console.log(data);
     $('.promotion_ref').html(
-        '<p class=" ">Accademic Year<span class=""> : ' + level + ' year</span></p>' +
-        '<p class="">Graduation Year <span class=""> : ' + data.promotion.name.split('-')[1] + '</span></p>' +
-        '<p class="">Subject <span class=""> : ' + data.level.branche.departement.name + '</span></p>'
+        '<p class=" ">Accademic Year<span class=""> : ' + data.level.label + '</span></p>' +
+        '<p class="">Graduation Year <span class=""> : ' + (parseInt(data.year.name.split('-')[1]) + (data.level.cycle == 'licence' ? 2 : 4)) + '</span></p>' +
+        '<p class="">Subject <span class=""> : ' + data.level.branche.departement.label + '</span></p>'
     );
 
     $('#grades_view_body').html(body_elements);

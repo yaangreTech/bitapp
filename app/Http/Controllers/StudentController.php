@@ -105,6 +105,7 @@ class StudentController extends Controller
             'studentGender' => ['required'],
             'studentClasse' => ['required'],
             'studentPromotion' => ['required'],
+            'studentBirthPlace'=> ['required'],
             'studentParentFirstName' => ['required'],
             'studentParentLastName' => ['required'],
             'studentParentPhone' => ['required'],
@@ -120,6 +121,7 @@ class StudentController extends Controller
             'gender' => $request->studentGender,
             'phone' => $request->studentPhone,
             'birth_date' => $request->studentBirthDate,
+            'birth_place'=>$request->studentBirthPlace,
             'email' => $request->studentEmail,
             'promotion_id' => $request->studentPromotion,
             'created_at' => Carbon::now(),
@@ -155,6 +157,7 @@ class StudentController extends Controller
             'studentFirstName' => ['required'],
             'studentLastName' => ['required'],
             'studentBirthDate' => ['required'],
+            'studentBirthPlace'=> ['required'],
             'studentPhone' => ['required'],
             'studentEmail' => ['required'],
             'studentParentFirstName' => ['required'],
@@ -170,6 +173,7 @@ class StudentController extends Controller
         $student->first_name = $request->studentFirstName;
         $student->Last_name = $request->studentLastName;
         $student->birth_date = $request->studentBirthDate;
+        $student->birth_place = $request->studentBirthPlace;
         $student->phone = $request->studentPhone;
         $student->email = $request->studentEmail;
         $student = $student->update();
@@ -416,7 +420,7 @@ class StudentController extends Controller
       
          $head_elements=$classe->semesters;
 
-        $inscriptions = $classe->inscriptions->where('year_id', $yearID);
+        $inscriptions = $classe->inscriptions->where('year_id', $yearID)->where('status','!=','ended');
 // dd($inscriptions);
         foreach ($inscriptions as $inscription) {
             $conforme = new Conforme();

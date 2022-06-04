@@ -11,10 +11,18 @@
             <div class="modal-body ">
                 <form id='department_form'>
                     @csrf
+                    <label for="department">Departmemt label</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="text" id="dep_label" name="dep_label" class="form-control" placeholder="Ex: Computer Science">
+                        </div>
+                        <span class="text-danger department"> </span>
+                    </div>
+
                     <label for="department">Departmemt name</label>
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="text" id="department" name="department" class="form-control" placeholder="Enter the department">
+                            <input type="text" id="department" name="department" class="form-control" placeholder="Ex: CS">
                         </div>
                         <span class="text-danger department"> </span>
                     </div>

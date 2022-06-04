@@ -113,6 +113,7 @@
                                                 <table id="departement_table" class="table table-hover  ">
                                                     <thead>
                                                         <tr>
+                                                            <th class=""> Departement label </th>
                                                             <th class=""> Departement Name </th>
                                                             <th class=""> Options </th>
                                                             <th class=""> Created at </th>

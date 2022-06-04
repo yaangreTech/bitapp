@@ -118,8 +118,13 @@ class Csv extends Controller
                                     'UTF-8',
                                     'UTF-8'
                                 ),
-                                'email' => mb_convert_encoding(
+                                'birth_place' => mb_convert_encoding(
                                     $donner[6],
+                                    'UTF-8',
+                                    'UTF-8'
+                                ),
+                                'email' => mb_convert_encoding(
+                                    $donner[7],
                                     'UTF-8',
                                     'UTF-8'
                                 ),
@@ -132,30 +137,30 @@ class Csv extends Controller
                                 'student_id' => $student_id,
                                 'first_name' => ucwords(
                                     mb_convert_encoding(
-                                        $donner[7],
+                                        $donner[8],
                                         'UTF-8',
                                         'UTF-8'
                                     )
                                 ),
                                 'Last_name' => ucwords(
                                     mb_convert_encoding(
-                                        $donner[8],
+                                        $donner[9],
                                         'UTF-8',
                                         'UTF-8'
                                     )
                                 ),
                                 'type' => mb_convert_encoding(
-                                    $donner[9],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'profession' => mb_convert_encoding(
                                     $donner[10],
                                     'UTF-8',
                                     'UTF-8'
                                 ),
-                                'phone' => mb_convert_encoding(
+                                'profession' => mb_convert_encoding(
                                     $donner[11],
+                                    'UTF-8',
+                                    'UTF-8'
+                                ),
+                                'phone' => mb_convert_encoding(
+                                    $donner[12],
                                     'UTF-8',
                                     'UTF-8'
                                 ),

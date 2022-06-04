@@ -29,7 +29,7 @@
                                         class="browser-default bordered bordered-select" required>
                                         <option value="">Choose the department</option>
                                         @foreach ($departements as $department)
-                                            <option value="{{ $department->id }}">{{ $department->name }}
+                                            <option value="{{ $department->id }}">{{ $department->label }}
                                             </option>
                                         @endforeach;
                                     </select>

@@ -511,7 +511,7 @@
              active = 'active';
              intialDepID = val.id;
          }
-         department_editparames.push('department=' + val.name);
+         department_editparames.push('dep_label=' + val.label + '&department=' + val.name);
 
          // class concate
          $.each(val.branches, function(key1, option) {
@@ -546,6 +546,7 @@
              })
              //  departement concat
          elements += '<tr class="odd gradeX">'
+         elements += '<td class="">' + val.label + '</td>'
          elements += '<td class="">' + val.name + '</td>'
          elements += ' <td class=""><span class="badge bg-white">' + val.branches.length +
              ' Options</span></td>'
@@ -575,7 +576,7 @@
          elements += ' </td>'
          elements += '</tr>'
 
-         branch_departement_content += '<option value="' + val.id + '">' + val.name + '</option>'
+         branch_departement_content += '<option value="' + val.id + '">' + val.label + '</option>'
      })
 
      $.fn.dataTable.isDataTable('#departement_table') && departement_table.destroy();

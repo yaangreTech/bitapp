@@ -223,6 +223,7 @@ class TranscriptController extends Controller
         $inscription = Inscription::findOrFail($inscID);
         $level = $inscription->level;
         $inscription->promotion;
+        $inscription->year;
         $level->branche->departement;
         $semesters = $inscription->level->semesters;
         foreach ($semesters as $semester) {
@@ -324,6 +325,7 @@ class TranscriptController extends Controller
         $inscription = Inscription::findOrFail($inscID);
         $level = $inscription->level;
         $inscription->promotion;
+        $inscription->year;
         $level->branche->departement;
         $semesters = $inscription->level->semesters;
         foreach ($semesters as $semester) {

@@ -21,6 +21,7 @@ class CreateStudentsTable extends Migration
             $table->String('gender');
             $table->String('phone');
             $table->String('birth_date');
+            $table->string('birth_place')->nullable();
             $table->String('email')->unique();
             $table->String('status')->default('active');
             $table->foreignId('promotion_id')->constrained()->onDelete('cascade');

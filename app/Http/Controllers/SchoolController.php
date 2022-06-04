@@ -49,9 +49,11 @@ class SchoolController extends Controller
     {
         $request->validate([
             'department' => ['required', 'string', 'max:255'],
+            'dep_label'=>['required', 'string']
         ]);
         $data = Departement::insert([
             'name' => $request->department,
+            'label'=>$request->dep_label,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -62,11 +64,13 @@ class SchoolController extends Controller
     {
         $request->validate([
             'department' => ['required', 'string', 'max:255'],
+            'dep_label'=>['required', 'string']
         ]);
 
         $data = Departement::findOrFail($id);
 
         $data->name = $request->department;
+        $data->label=$request->dep_label;
         $data = $data->update();
 
         return response()->json($data);
@@ -271,9 +275,9 @@ class SchoolController extends Controller
                 $levels->semesters;//->load("semestre_name");
                 $levels->tus;
                 if ($current_year != null) {
-                    $classe->inscriptions->where('year_id', $current_year->id);
+                    $level->inscriptions->where('year_id', $current_year->id);
                 } else {
-                    $classe->inscriptions;
+                    $level->inscriptions;
                 }
             }
         }
