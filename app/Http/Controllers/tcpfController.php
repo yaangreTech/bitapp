@@ -28,6 +28,7 @@ class tcpfController extends Controller
     }
     public function pdfAtestation($inscription_id,$lang)
     {
+<<<<<<< Updated upstream
         $inscription = Inscription::findOrFail($inscription_id);
         $inscription->with(['student', 'level']);
 
@@ -45,6 +46,10 @@ class tcpfController extends Controller
              Carbon::now(), 
              "Dr. Rodrigue KABORE", 
              '');
+=======
+        // diplomaAttestation("Nana Jeremie", "01-01-1997", "Koudougou", 6, "01-01-2021", 'Computer Science', 'Bien', "hjhjhj", '620', '01-06-2022', "Yaro Emma", '');
+        return json_encode("The requested resource  was not found on this server");
+>>>>>>> Stashed changes
     }
     public function certificate()
     {

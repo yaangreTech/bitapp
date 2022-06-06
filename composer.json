@@ -14,7 +14,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.7",
         "league/csv": "^9.8",
-        "phpoffice/phpspreadsheet": "^1.22",
+        "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.23",
         "tecnickcom/tcpdf": "^6.4"
     },
     "require-dev": {

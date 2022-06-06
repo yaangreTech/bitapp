@@ -1,5 +1,9 @@
 <?php
 
+// use ZipArchive;
+// use RecursiveIteratorIterator;
+use Illuminate\Support\Facades\File;
+
 /************************** EXCEL FILES GENERATION EXTRA FUNCTIONS **********/
 //flattens an array
 function flatten(array $array): array
@@ -95,7 +99,7 @@ function CreateDir(String $path): void
 {
     $path = ReplacePathSeparator($path);
     if (!file_exists($path)) {
-        mkdir($path, 0777, true);
+        File::makeDirectory($path, 0777, true);
     }
 }
 
@@ -228,4 +232,25 @@ function GetRelativePath($from, $to): string
 function _define(String $constant, $value)
 {
     if (!defined($constant)) return define($constant, $value);
+}
+
+function zipAndDownload($fileName)
+{
+    $filesPath = storage_path('excelFiles');
+    $zip = new ZipArchive;
+    if ($zip->open(storage_path($fileName), ZipArchive::CREATE) === TRUE) {
+        $files = File::files($filesPath);
+        foreach ($files as $key => $value) {
+            $relativeInZipFile = basename($value);
+            $zip->addFile($value, $relativeInZipFile);
+        }
+        $zip->close();
+    }
+
+    File::delete(File::allFiles($filesPath));
+    header('Content-Type: application/zip');
+    header('Content-Disposition: attachment; filename="' . basename(storage_path($fileName)) . '"');
+    header('Content-Length: ' . filesize(storage_path($fileName)));
+    readfile(storage_path($fileName));
+    unlink(storage_path($fileName));
 }

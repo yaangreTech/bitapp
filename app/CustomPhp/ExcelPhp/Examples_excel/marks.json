@@ -1,0 +1,144 @@
+[
+  {
+    "Semester": "1st Semester",
+    "Summary": {
+      "Summary S1":
+      {
+        "TUE Credits": 30,
+        "TU Average": 14.25,
+        "Acquired Credits": 30,
+        "TU Validation": "Validate",
+        "Rating": "B"
+      }
+    },
+    "TUE Credits": 30,
+    "TU": {
+      "Langague & Communication": {
+        "TUE": ["Basic English", "Technical English", "Expression Technics"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [14.40, 14.40, 16.60],
+        "TU Average": 14.47,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "B"
+      },
+      "Mathematics 1": {
+        "TUE": ["General Algebra", "Analysis 1", "Statistics & Probabilities"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [15.70, 8.05, 12.55],
+        "TU Average": 12.10,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "C+"
+      },
+      "Physics": {
+        "TUE": ["Basic English", "Technical English", "Expression Technics"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [14.40, 14.40, 16.60],
+        "TU Average": 14.47,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "B"
+      },
+      "Computing Systems": {
+        "TUE": ["General Algebra", "Analysis 1", "Statistics & Probabilities"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [15.70, 8.05, 12.55],
+        "TU Average": 12.10,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "C+"
+      },
+      "Office tools 1": {
+        "TUE": ["Basic English", "Technical English", "Expression Technics"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [14.40, 14.40, 16.60],
+        "TU Average": 14.47,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "B"
+      },
+      "Language & Programming 1": {
+        "TUE": ["General Algebra", "Analysis 1", "Statistics & Probabilities"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [15.70, 8.05, 12.55],
+        "TU Average": 12.10,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "C+"
+      }
+
+    }
+  },
+  {
+    "Semester": "2nd Semester",
+    "Summary": {
+      "Summary S1":
+      {
+        "TUE Credits": 30,
+        "TU Average": 14.25,
+        "Acquired Credits": 30,
+        "TU Validation": "Validate",
+        "Rating": "B"
+      }
+    },
+    "TUE Credits": 30,
+    "TU": {
+      "Langague & Communication": {
+        "TUE": ["Basic English", "Technical English", "Expression Technics"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [14.40, 14.40, 16.60],
+        "TU Average": 14.47,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "B"
+      },
+      "Mathematics 1": {
+        "TUE": ["General Algebra", "Analysis 1", "Statistics & Probabilities"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [15.70, 8.05, 12.55],
+        "TU Average": 12.10,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "C+"
+      },
+      "Physics": {
+        "TUE": ["Basic English", "Technical English", "Expression Technics"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [14.40, 14.40, 16.60],
+        "TU Average": 14.47,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "B"
+      },
+      "Computing Systems": {
+        "TUE": ["General Algebra", "Analysis 1", "Statistics & Probabilities"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [15.70, 8.05, 12.55],
+        "TU Average": 12.10,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "C+"
+      },
+      "Office tools 1": {
+        "TUE": ["Basic English", "Technical English", "Expression Technics"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [14.40, 14.40, 16.60],
+        "TU Average": 14.47,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "B"
+      },
+      "Language & Programming 1": {
+        "TUE": ["General Algebra", "Analysis 1", "Statistics & Probabilities"],
+        "TUE Credits": [2, 2, 2],
+        "Grade/20": [15.70, 8.05, 12.55],
+        "TU Average": 12.10,
+        "Acquired Credits": 6,
+        "TU Validation": "Validate",
+        "Rating": "C+"
+      }
+
+    }
+  }
+]
