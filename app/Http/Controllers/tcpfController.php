@@ -24,32 +24,28 @@ class tcpfController extends Controller
         $inscription->with(['student', 'level']);
         // $today = Carbon::now()->format('l F jS\\, Y');
 
-        pdfFile($lang, "Dr. Rodrigue KABORE", $inscription->student->first_name . ' ' . $inscription->student->Last_name, strtoupper(str_split($inscription->student->gender)[0])=='M', "0003", $inscription->student->matricule, $inscription->year->name, $inscription->level->branche->departement->label, $inscription->level->branche->name);
+        pdfFile($lang, "Dr. Rodrigue KABORE", $inscription->student->first_name . ' ' . $inscription->student->Last_name, strtoupper(str_split($inscription->student->gender)[0]) == 'M', "0003", $inscription->student->matricule, $inscription->year->name, $inscription->level->branche->departement->label, $inscription->level->branche->name);
     }
-    public function pdfAtestation($inscription_id,$lang)
+    public function pdfAtestation($inscription_id, $lang)
     {
-<<<<<<< Updated upstream
         $inscription = Inscription::findOrFail($inscription_id);
         $inscription->with(['student', 'level']);
 
 
         diplomaAttestation(
-            $inscription->student->first_name . ' ' . $inscription->student->Last_name, 
-            $inscription->student->birth_date, 
-            $inscription->student->birth_place, 
-            $inscription->student->matricule, 
-            $inscription->year->name, 
+            $inscription->student->first_name . ' ' . $inscription->student->Last_name,
+            $inscription->student->birth_date,
+            $inscription->student->birth_place,
+            $inscription->student->matricule,
+            $inscription->year->name,
             $inscription->level->branche->departement->label,
-            $inscription->level->branche->departement->label, 
-             $inscription->level->branche->name, 
-             $this->getMensionOf($this->getaverege($inscription->id),$lang), 
-             Carbon::now(), 
-             "Dr. Rodrigue KABORE", 
-             '');
-=======
-        // diplomaAttestation("Nana Jeremie", "01-01-1997", "Koudougou", 6, "01-01-2021", 'Computer Science', 'Bien', "hjhjhj", '620', '01-06-2022', "Yaro Emma", '');
-        return json_encode("The requested resource  was not found on this server");
->>>>>>> Stashed changes
+            $inscription->level->branche->departement->label,
+            $inscription->level->branche->name,
+            $this->getMensionOf($this->getaverege($inscription->id), $lang),
+            Carbon::now(),
+            "Dr. Rodrigue KABORE",
+            ''
+        );
     }
     public function certificate()
     {
@@ -57,15 +53,16 @@ class tcpfController extends Controller
     }
 
 
-    public function getaverege($inscription_id){
-        $inscription=Inscription::findOrFail($inscription_id);
-        $semesters =$inscription->level->semesters;
+    public function getaverege($inscription_id)
+    {
+        $inscription = Inscription::findOrFail($inscription_id);
+        $semesters = $inscription->level->semesters;
         $conforme = new Conforme();
-            $inscription->student;
-           
-            $t_credit = 0;
-            $average = 0;
-            $head_element = [];
+        $inscription->student;
+
+        $t_credit = 0;
+        $average = 0;
+        $head_element = [];
         foreach ($semesters as $semester) {
             array_push($head_element, $semester);
             $tus = $semester->tus;
@@ -126,16 +123,17 @@ class tcpfController extends Controller
 
 
 
-    public function getMensionOf($average, $lang){
-        if($average>=10 && $average<12){
-            return ['en'=>'Passable','fr'=>'Passable' ][$lang];
-        }else if($average>=12 && $average<15){
-            return ['en'=>'Pretty Good','fr'=>'Assez Bien' ][$lang];
-        }else if($average>=15 && $average<=16){
-            return ['en'=>'Good','fr'=>'Bien' ][$lang]; 
-        }else if($average>16 && $average<=20){
-            return ['en'=>'Very Good','fr'=>'Tres Bien' ][$lang]; 
-        }else{
+    public function getMensionOf($average, $lang)
+    {
+        if ($average >= 10 && $average < 12) {
+            return ['en' => 'Passable', 'fr' => 'Passable'][$lang];
+        } else if ($average >= 12 && $average < 15) {
+            return ['en' => 'Pretty Good', 'fr' => 'Assez Bien'][$lang];
+        } else if ($average >= 15 && $average <= 16) {
+            return ['en' => 'Good', 'fr' => 'Bien'][$lang];
+        } else if ($average > 16 && $average <= 20) {
+            return ['en' => 'Very Good', 'fr' => 'Tres Bien'][$lang];
+        } else {
             return null;
         }
     }

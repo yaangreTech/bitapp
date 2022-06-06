@@ -44,12 +44,7 @@ require __DIR__ . '/documents_routes.php';
 require __DIR__ . '/others_routes.php';
 
 // pdf test
-<<<<<<< Updated upstream
 require __DIR__ . '/pdf_routes.php';
 
-=======
-require __DIR__ . '/tcpdf_test.php';
-
-// grade generation
+// Excel
 require __DIR__ . '/excel_export.php';
->>>>>>> Stashed changes
