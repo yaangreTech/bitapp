@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use ZipArchive;
+use App\Models\Year;
+use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\MarksInputController;
 
 require_once(app_path('CustomPhp/ExcelPhp/gradeReport.php'));
 require_once(app_path('CustomPhp/ExcelPhp/semesterReport.php'));
@@ -15,6 +18,7 @@ require_once(app_path('CustomPhp/customHelpers.php'));
 
 class excelExportController extends Controller
 {
+   
     public function genGrade()
     {
         $markJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
@@ -63,34 +67,99 @@ class excelExportController extends Controller
         zipAndDownload("Semester_" . $semesterNumber . "_report.zip");
     }
 
-    public function studentList()
+    public function studentList($yearID,$classID)
     {
-        $studentsJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
-        $file = fopen($studentsJson . "/studentsList.json", 'r');
-        $data = json_decode(fread($file, filesize($studentsJson . "/studentsList.json")), true);
-        fclose($file);
-        $class = "Computer Science";
-        $academicYear = "2021-2022";
-        StudentsList($data, $class, $academicYear);
+        // $studentsJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
+        // $file = fopen($studentsJson . "/studentsList.json", 'r');
+        // $data = json_decode(fread($file, filesize($studentsJson . "/studentsList.json")), true);
+        // fclose($file);
+
+        $data=[];
+        $studentController=new StudentController();
+        $json=$studentController->getStudentsOf($yearID,$classID);
+        $jsons=json_decode($json->getContent(),true);
+        $level = Level::findOrFail($classID);
+        $year = Year::findOrFail($yearID);
+       foreach ($jsons as $json){
+        // dd($json);
+           array_push($data, [
+            "ID Number"=> $json['student']['matricule'],
+            "Last Name"=> $json['student']['first_name'],
+            "First Name"=> $json['student']['Last_name'],
+            // "Graduation"=> 1990,
+            "Birth Date"=> $json['student']['birth_date'],
+            "Mail"=> $json['student']['email'],
+            "Environment"=> "BIT",
+            "Level"=> "Student",
+            "Track"=> $level->branche->departement->name
+          ]);
+       }
+
+       if(count($data)!=0){
+        $class =$level->branche->departement->label;
+        $academicYear =  $year->name;
+        StudentsList( $data, $class, $academicYear);
+       }else{
+           return back();
+       }
     }
 
-    public function subjectsGen()
+    public function subjectsGen($yearID, $modulusID,$isWithSession)
     {
-        $subjectJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
-        $file = fopen($subjectJson . "/englishData.json", 'r');
-        $data = json_decode(fread($file, filesize($subjectJson . "/englishData.json")), true);
-        fclose($file);
+        $marksInputController=new MarksInputController();
+        // $subjectJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
+        // $file = fopen($subjectJson . "/englishData.json", 'r');
+        // $data = json_decode(fread($file, filesize($subjectJson . "/englishData.json")), true);
+        // fclose($file);
 
-        $file = fopen($subjectJson . "/testsWeight.json", 'r');
-        $weight = json_decode(fread($file, filesize($subjectJson . "/testsWeight.json")), true);
-        fclose($file);
+        // $file = fopen($subjectJson . "/testsWeight.json", 'r');
+        // $weight = json_decode(fread($file, filesize($subjectJson . "/testsWeight.json")), true);
+        // fclose($file);
+        if($isWithSession==true){
+            $jsons=$marksInputController->viewMarksModulusMarks_with_session_Of($yearID, $modulusID);
 
-        $subject = "BASIC ENGLISH";
-        $teacherName = "Yanogo Yves Patrick W.";
-        $promotion = "computer science 23";
-        $academicYear = "2021-2023";
-        $headers = ["ID", "Name", "Forename", "Attendance", "Participation", "test#1", "Oral test", "Exam 1", "Exam 2", "Test #4", "Test #5", "Final Average", "International Grade", "Pass or Fail?"];
+        }else{
+            $jsons=$marksInputController->viewMarksModulusMarksOf($yearID, $modulusID);
+        }
 
+        $jsons=json_decode($jsons->getContent(),true);
+    //   dd($jsons);
+
+      $year=Year::findOrFail($yearID);
+    $data=[];
+    $weight=[];
+        $subject = $jsons['page_title']['name'];
+        $teacherName = "--------------";
+        $promotion =$jsons['page_title']['tu']['semester']['level']['branche']['departement']['label'].' '.$year->promotion->name;
+        $academicYear = $year->name;
+        // $headers = ["ID", "Name", "Forename", "Attendance", "Participation", "test#1", "Oral test", "Exam 1", "Exam 2", "Test #4", "Test #5", "Final Average", "International Grade", "Pass or Fail?"];
+       
+      
+        foreach ($jsons['inscriptions'] as $json){
+            $dataContent=[
+             
+                "ID"=> $json['student']['matricule'],
+                "Name"=>$json['student']['first_name'],
+                "Forename"=> $json['student']['Last_name'],
+            ];
+
+            foreach ($json['tests'] as $test){
+                $dataContent[$test['title']]=$test['mark']['value'];
+                $weight[$test['title']]=$test['ratio'];
+            }
+            
+
+            $dataContent["Final Average"]= $json['average'];
+            $dataContent["International Grade"]= $json['conforme']['international_Grade'];
+            $dataContent["Pass or Fail?"]= $json['status'];
+
+            // dd($dataContent);
+
+            array_push($data, $dataContent);
+        }
+        $weight=[$weight];
+        $headers=array_keys(max($data));
+        // dd($data);
         SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear);
     }
 }

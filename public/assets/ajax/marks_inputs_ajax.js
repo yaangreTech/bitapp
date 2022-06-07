@@ -82,6 +82,7 @@ function viewMarksOf(yearID, modulusID) {
             selectionner('/marks_modulus/view_marks_modulus_marks_of/' + year.id + '/' + modulusID, marksModulusMarksData_view, )
                 // $('.saveText').attr('id', year.id + '_' + modulusID);
                 // yearData = year;
+            $('#excel_it').attr('href', '/generateSubjects/' + year.id + '/' + modulusID + '/false')
         },
         error: function(error) { console.log(error); }
     });
@@ -99,6 +100,7 @@ function viewMarks_with_session_Of(yearID, modulusID) {
             selectionner('/marks_modulus/viewMarksModulusMarks_with_session_Of/' + year.id + '/' + modulusID, marksModulusMarksData_with_session_view)
                 // $('.saveText').attr('id', year.id + '_' + modulusID);
                 // yearData = year;
+            $('#excel_it').attr('href', '/generateSubjects/' + year.id + '/' + modulusID + '/true')
         },
         error: function(error) { console.log(error); }
     });

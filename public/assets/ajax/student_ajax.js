@@ -78,6 +78,9 @@ function getStudentOf(yearID, classID) {
             console.log(year);
             selectionner('/students/get_students_of/' + year.id + '/' + classID, studentData);
             yearData = year;
+
+            $('#print_list').attr('href', 'generateStudentListe/' + year.id + '/' + classID);
+
         },
         error: function(error) {
             console.log(error);

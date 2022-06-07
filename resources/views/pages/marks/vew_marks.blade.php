@@ -89,7 +89,7 @@
                                             <a href="{{route('add_marks')}}" onClick="return true;">Edit marks</a>
                                         </li>
                                         <li>
-                                            {{-- <a href="#" onClick="imprimer('list_corps')">Print</a> --}}
+                                            <a href="#"  id="excel_it">Export</a>
                                         </li>
                                     </ul>
                                 </li>

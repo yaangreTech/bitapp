@@ -68,7 +68,7 @@
                                                 onClick="setActiveId('Add_new_Students');">Add Student</a>
                                         </li>
                                         <li>
-                                            {{-- <a href="#" onClick="setActiveId('Add_new_Students');">Print list</a> --}}
+                                            <a href="#" id="print_list">Export list</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -269,17 +269,17 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //statistics
     //titles
     //part 1
-    $sheet->Write("D" . $average_row_number + 2, "Best Average");
-    $sheet->Write("D" . $average_row_number + 3, "Lowest Average");
-    $sheet->Write("D" . $average_row_number + 4, "Class Room Average");
-    $sheet->Write("D" . $average_row_number + 5, "Percentage of Success");
-    $sheet->Write("D" . $average_row_number + 6, "Percentage of Failure");
+    $sheet->Write("D" .( $average_row_number + 2), "Best Average");
+    $sheet->Write("D" . ($average_row_number + 3), "Lowest Average");
+    $sheet->Write("D" . ($average_row_number + 4), "Class Room Average");
+    $sheet->Write("D" . ($average_row_number + 5), "Percentage of Success");
+    $sheet->Write("D" . ($average_row_number + 6), "Percentage of Failure");
     //part 2
-    $sheet->Write("D" . $average_row_number + 8, "Number of students");
-    $sheet->Write("D" . $average_row_number + 9, "Number of passed");
-    $sheet->Write("D" . $average_row_number + 10, "Number of fails");
+    $sheet->Write("D" . ($average_row_number + 8), "Number of students");
+    $sheet->Write("D" . ($average_row_number + 9), "Number of passed");
+    $sheet->Write("D" . ($average_row_number + 10), "Number of fails");
     //formating
-    $sheet->SetCellsToBold('D' . ($average_row_number + 2) . ":" . "D" . $average_row_number + 10);
+    $sheet->SetCellsToBold('D' . ($average_row_number + 2) . ":" . "D" .( $average_row_number + 10));
     //values
     $finalAverageCol = $alphabet[$sheet->GetColumnIndex(2, count($alphabet), "Final Average")];
     $pass_failColIndex = $sheet->GetColumnIndex(2, count($alphabet), "Pass/Fail?");
@@ -303,25 +303,25 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $successPercentage = round((100 - $failurePercentage), 2);
 
     //part 1
-    $sheet->Write("E" . $average_row_number + 2, $bestAverage);
-    $sheet->Write("E" . $average_row_number + 3, $lowestAverage);
-    $sheet->Write("E" . $average_row_number + 4, $mean);
-    $sheet->Write("E" . $average_row_number + 5, $successPercentage . "%");
-    $sheet->Write("E" . $average_row_number + 6, $failurePercentage . "%");
+    $sheet->Write("E" . ($average_row_number + 2), $bestAverage);
+    $sheet->Write("E" . ($average_row_number + 3), $lowestAverage);
+    $sheet->Write("E" . ($average_row_number + 4), $mean);
+    $sheet->Write("E" . ($average_row_number + 5), $successPercentage . "%");
+    $sheet->Write("E" . ($average_row_number + 6), $failurePercentage . "%");
     //part 2
-    $sheet->Write("E" . $average_row_number + 8, $nbStudents);
-    $sheet->Write("E" . $average_row_number + 9, $nbStudents - $nbFails);
-    $sheet->Write("E" . $average_row_number + 10, $nbFails);
+    $sheet->Write("E" . ($average_row_number + 8), $nbStudents);
+    $sheet->Write("E" . ($average_row_number + 9), $nbStudents - $nbFails);
+    $sheet->Write("E" . ($average_row_number + 10), $nbFails);
     //formatting
-    $sheet->SetTextColor('E' . ($average_row_number + 2) . ":" . "E" . $average_row_number + 10, RED);
+    $sheet->SetTextColor('E' . ($average_row_number + 2) . ":" . "E" . ($average_row_number + 10), RED);
 
     /***** final treatments */
     //adds borders for stats
-    $sheet->SetBorders("D" . ($average_row_number + 2) . ":E" . $average_row_number + 6);
-    $sheet->SetBorders("D" . ($average_row_number + 2) . ":E" . $average_row_number + 6, "outline", "BORDER_MEDIUM");
+    $sheet->SetBorders("D" . ($average_row_number + 2) . ":E" . ($average_row_number + 6));
+    $sheet->SetBorders("D" . ($average_row_number + 2) . ":E" . ($average_row_number + 6), "outline", "BORDER_MEDIUM");
 
-    $sheet->SetBorders("D" . ($average_row_number + 8) . ":E" . $average_row_number + 10);
-    $sheet->SetBorders("D" . ($average_row_number + 8) . ":E" . $average_row_number + 10, "outline", "BORDER_MEDIUM");
+    $sheet->SetBorders("D" . ($average_row_number + 8) . ":E" . ($average_row_number + 10));
+    $sheet->SetBorders("D" . ($average_row_number + 8) . ":E" . ($average_row_number + 10), "outline", "BORDER_MEDIUM");
 
     //centers text
     $sheet->SetCenter("E" . STARTING_ROW_Se . ":" . $alphabet[$lastColIndex - 1] . ($average_row_number + 10), true, true);

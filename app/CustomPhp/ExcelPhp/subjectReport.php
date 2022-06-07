@@ -169,7 +169,7 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
                 $sheet->SetColor($alphabet[START_COL_SJ + $col] . ($currentRow + $row), SKY_BLUE_SJ);
             }
             //if the current cell record the key word "PASS"
-            if ($array[$headers[$col]] == "PASS") {
+            if (strtoupper($array[$headers[$col]]) == "PASS") {
                 $sheet->SetColor($alphabet[START_COL_SJ + $col] . ($currentRow + $row), DARK_ORANGE_SJ);
             }
         }

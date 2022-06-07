@@ -229,7 +229,7 @@ class ExcelXport
     }
 
     //*gets the cell value
-    function GetCellValue(int $col, int $row): mixed
+    function GetCellValue(int $col, int $row)
     {
         return $this->sheet->getCellByColumnAndRow($col, $row)->getValue();
     }
