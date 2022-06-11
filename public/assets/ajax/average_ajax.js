@@ -17,6 +17,8 @@ function getAverageOf(yearID, semesterID) {
             console.log(year);
             selectionner('/semester_averages/get_average_of/' + year.id + '/' + semesterID, averageData);
             // yearData = year;
+
+            $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/false');
         },
         error: function(error) {
             console.log(error);
@@ -38,6 +40,7 @@ function getAverageWithSessionOf(yearID, semesterID) {
             console.log(year);
             selectionner('/semester_averages/get_average_with_session_of/' + year.id + '/' + semesterID, average_with_session_Data);
             // yearData = year;
+            $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true');
         },
         error: function(error) {
             console.log(error);

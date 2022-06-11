@@ -160,8 +160,8 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li>
-                                            {{-- <a href="#" onClick="imprimer('nesp')">
-                                                export to Pdf</a> --}}
+                                            <a href="#" id="excel_it">
+                                                export to excel</a>
                                         </li>
                                     </ul>
                                 </li>

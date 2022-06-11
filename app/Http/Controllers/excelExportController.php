@@ -7,6 +7,7 @@ use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\AverageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MarksInputController;
 
@@ -48,14 +49,72 @@ class excelExportController extends Controller
         // peut etre appelee pour compresser et telechearger
         zipAndDownload($academicYear . "_gradeReport.zip");
     }
-    public function genSemester()
+    public function genSemester($yearID, $semesterID,$isWithSession)
     {
-        $semesterJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
+        // $semesterJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
 
-        $file = fopen($semesterJson . '/studentData.json', 'r');
-        $student_data = json_decode(fread($file, filesize($semesterJson . '/studentData.json')), true);
-        $file = fopen($semesterJson . '/headers.json', 'r');
-        $headers = json_decode(fread($file, filesize($semesterJson . '/headers.json')), true);
+        // $file = fopen($semesterJson . '/studentData.json', 'r');
+        // $student_data = json_decode(fread($file, filesize($semesterJson . '/studentData.json')), true);
+        // $file = fopen($semesterJson . '/headers.json', 'r');
+        // $headers = json_decode(fread($file, filesize($semesterJson . '/headers.json')), true);
+
+        $semesterAverages=new AverageController();
+        if($isWithSession==true){
+            $jsons=$semesterAverages->getAverage_with_session_Of($yearID, $semesterID);
+
+        }else{
+            $jsons=$semesterAverages->getAverageOf($yearID, $semesterID);
+        }
+        $jsons=json_decode($jsons->getContent(),true);
+        $headers=[];
+        $tus=[];
+        $total_credicts=0;
+        foreach($jsons['theadTus'] as $tu){
+            $modulus=[];
+            $total_credicts+=$tu['tu_credit'];
+            foreach( $tu['modulus'] as $modulu){
+                $modulus[$modulu['name']]=$modulu['credict'];
+            }
+            $tus[$tu['name']]=$modulus;
+            $modulus=[];  
+        }
+        $headers["TUS"]=$tus;
+        $headers["Total of Credits"]=$total_credicts;
+        $headers["Final Average"]= "";
+        $headers["International Grade"]= "";
+        $headers["Conversion"]= "";
+        $headers["Pass/Fail?"]= "";
+        $headers["Re-do exam"]= "";
+        $headers["Remark"]= "";
+
+
+        // dd( $jsons);
+        $student_data=[];
+        foreach($jsons['inscriptions'] as $inscription){
+            $student=[];
+           
+                  $student["id"]=$inscription['student']['matricule'];
+                  $student["Surname"]= $inscription['student']['first_name'];
+                  $student["Name"]= $inscription['student']['Last_name'];
+                foreach ($inscription['notes'] as $mod){
+                    $student[$mod["name"]]= $mod["note"];
+                }
+              
+                
+
+                $student["Total of Credits"]= $inscription["t_n_ponderer"];
+                $student["Final Average"]= $inscription["t_n_average"];
+                $student["International Grade"]= $inscription['conforme']["international_Grade"];
+                $student["Conversion"]= $inscription['conforme']["mention"];
+                $student["Pass/Fail?"]= $inscription['t_n_status'];
+                $student["Re-do exam"]= $inscription["t_n_redo_mod"];
+                $student["Remark"] = $inscription["status"];
+          
+                array_push($student_data, $student);
+        }
+
+        dd($student_data);
+
         $dir = storage_path('excelFiles');
         $className = "COMPUTER SCIENCE 22";
         $academicYear = "2019-2020";
@@ -157,9 +216,14 @@ class excelExportController extends Controller
 
             array_push($data, $dataContent);
         }
-        $weight=[$weight];
-        $headers=array_keys(max($data));
-        // dd($data);
-        SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear);
+        if(count($data)!==0){
+            $weight=[$weight];
+            $headers=array_keys(max($data));
+            // dd($data);
+            SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear);
+        }else{
+            return back();
+        }
+    
     }
 }
