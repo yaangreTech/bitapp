@@ -139,7 +139,7 @@ function averageData(data) {
         body_elements += '     <td class="center">' + (insc.conforme != null ? insc.conforme.mention : '---') + '</td>'
         body_elements += '     <td class=""><div class="badge ' + status_color + '">' + insc.t_n_status + '</div></td>'
         body_elements += '     <td class="center">' + insc.t_n_redo_mod.substring(1) + '</td>'
-        body_elements += '     <td class="center">' + (insc.student.status != 'active' ? 'Give up' : '') + '</td>'
+        body_elements += '     <td class="center">' + (insc.student.status != 'active' ? insc.student.status : '') + '</td>'
         body_elements += ' </tr>'
     })
     if (deja == -1) {
@@ -270,7 +270,7 @@ function average_with_session_Data(data) {
             body_elements += '     <td class="center">' + (insc.conforme != null ? insc.conforme.mention : '---') + '</td>'
             body_elements += '     <td class=""><div class="badge ' + status_color + '">' + insc.t_n_status + '</div></td>'
             body_elements += '     <td class="center">' + insc.t_n_redo_mod.substring(1) + '</td>'
-            body_elements += '     <td class="center">' + (insc.student.status != 'active' ? 'Give up' : '') + '</td>'
+            body_elements += '     <td class="center">' + (insc.student.status != 'active' ? insc.student.status : '') + '</td>'
             body_elements += ' </tr>'
         })
         // $.fn.dataTable.isDataTable('#s_semester_with_session_table') && s_semester_with_session_table.destroy();

@@ -89,7 +89,7 @@ function getTranscript_with_session_Data(data) {
 
     $.fn.dataTable.isDataTable('#grade_transcript_table') && grade_transcript_table.destroy();
     $('#grade_transcript_head').html(head_elements);
-    body_elements.length > 0 ? $('#grade_transcript').html(body_elements) : $('#grade_transcript').html('<tr><td colspan="7" class="center">No data available<td></tr>')
+    body_elements.length > 0 ? $('#grade_transcript').html(body_elements) : $('#grade_transcript').html('<tr><td colspan="6" class="center">No data available<td></tr>')
 
     if (body_elements.length > 0) {
         grade_transcript_table = $('#grade_transcript_table').DataTable({
@@ -140,7 +140,7 @@ function getTranscriptData(data) {
 
     $.fn.dataTable.isDataTable('#grade_transcript_table') && grade_transcript_table.destroy();
     $('#grade_transcript_head').html(head_elements);
-    body_elements.length > 0 ? $('#grade_transcript').html(body_elements) : $('#grade_transcript').html('<tr><td colspan="7" class="center">No data available<td></tr>')
+    body_elements.length > 0 ? $('#grade_transcript').html(body_elements) : $('#grade_transcript').html('<tr><td colspan="6" class="center">No data available<td></tr>')
 
     if (body_elements.length > 0) {
         grade_transcript_table = $('#grade_transcript_table').DataTable({

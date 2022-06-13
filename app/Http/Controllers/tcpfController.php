@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use diploma;
 use Carbon\Carbon;
+use App\Models\Compteur;
 use App\Models\Conforme;
 use App\Models\Sessione;
 use App\Models\Inscription;
@@ -23,8 +24,14 @@ class tcpfController extends Controller
         $inscription = Inscription::findOrFail($inscription_id);
         $inscription->with(['student', 'level']);
         // $today = Carbon::now()->format('l F jS\\, Y');
+        $deplomeoder=Compteur::firstOrCreate(['name'=>'diplome']);
+        
 
-        pdfFile($lang, "Dr. Rodrigue KABORE", $inscription->student->first_name . ' ' . $inscription->student->Last_name, strtoupper(str_split($inscription->student->gender)[0]) == 'M', "0003", $inscription->student->matricule, $inscription->year->name, $inscription->level->branche->departement->label, $inscription->level->branche->name);
+
+
+        pdfFile($lang, "Dr. Rodrigue KABORE", $inscription->student->first_name . ' ' . $inscription->student->Last_name, strtoupper(str_split($inscription->student->gender)[0]) == 'M',  $deplomeoder->value+1, $inscription->student->matricule, $inscription->year->name, $inscription->level->branche->departement->label, $inscription->level->branche->name);
+        $deplomeoder->value=$deplomeoder->value+1;
+        $deplomeoder->update();
     }
     public function pdfAtestation($inscription_id, $lang)
     {

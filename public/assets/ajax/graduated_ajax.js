@@ -44,9 +44,6 @@ function graduatedData(data) {
     console.log(data);
     // level_editparames = []
     $.each(data, function(key, insc) {
-        console.log(insc);
-
-
         elements += '<tr>'
         elements += '<td>' + insc.student.matricule + '</td>'
         elements += '<td>' + insc.student.first_name + '</td>'
@@ -87,7 +84,7 @@ function graduatedData(data) {
     // console.log(student_editparames);
     $.fn.dataTable.isDataTable('#graduated_table') && graduated_table.destroy();
 
-    elements.length > 0 ? $('#graduated_body').html(elements) : $('#graduated_body').html('<tr><td colspan="8" class="center">No Students for this class<td></tr>')
+    elements.length > 0 ? $('#graduated_body').html(elements) : $('#graduated_body').html('<tr><td colspan="6" class="center">No Students with this graduation<td></tr>')
 
     if (elements.length > 0) {
         graduated_table = $('#graduated_table').DataTable({
