@@ -121,7 +121,7 @@ function averageData(data) {
             failed += 1;
         }
 
-        if (insc.student.status != 'active') {
+        if (insc.student.status == 'Give Up') {
             giveUp += 1;
         }
 
@@ -196,7 +196,7 @@ function average_with_session_Data(data) {
     var totalOfCredit = 0
     console.log(data);
     classe_editparames = []
-
+        // Give Up
     head_elements += '<tr> <th colspan="3" rowspan="2"></th>'
     head_elements2 += '<tr>'
     $.each(theadTus, function(tukey, tu) {
@@ -253,7 +253,7 @@ function average_with_session_Data(data) {
             if (insc.t_n_status == 'Fail') {
                 failed += 1;
             }
-            if (insc.student.status != 'active') {
+            if (insc.student.status == 'Give Up') {
                 giveUp += 1;
             }
             var status_color = insc.t_n_status == 'Fail' ? 'col-red' : 'col-green'
