@@ -308,11 +308,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //statistics
     //titles
     //part 1
-<<<<<<< Updated upstream
-    $sheet->Write("D" .( $average_row_number + 2), "Best Average");
-=======
     $sheet->Write("D" . ($average_row_number + 2), "Best Average");
->>>>>>> Stashed changes
     $sheet->Write("D" . ($average_row_number + 3), "Lowest Average");
     $sheet->Write("D" . ($average_row_number + 4), "Class Room Average");
     $sheet->Write("D" . ($average_row_number + 5), "Percentage of Success");
@@ -322,11 +318,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->Write("D" . ($average_row_number + 9), "Number of passed");
     $sheet->Write("D" . ($average_row_number + 10), "Number of fails");
     //formating
-<<<<<<< Updated upstream
-    $sheet->SetCellsToBold('D' . ($average_row_number + 2) . ":" . "D" .( $average_row_number + 10));
-=======
     $sheet->SetCellsToBold('D' . ($average_row_number + 2) . ":" . "D" . ($average_row_number + 10));
->>>>>>> Stashed changes
     //values
     $finalAverageCol = $alphabet[$sheet->GetColumnIndex(4, count($alphabet), "Final Average")];
     $pass_failColIndex = $sheet->GetColumnIndex(4, count($alphabet), "Pass/Fail?");
@@ -353,13 +345,8 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->Write("E" . ($average_row_number + 2), $bestAverage);
     $sheet->Write("E" . ($average_row_number + 3), $lowestAverage);
     $sheet->Write("E" . ($average_row_number + 4), $mean);
-<<<<<<< Updated upstream
-    $sheet->Write("E" . ($average_row_number + 5), $successPercentage . "%");
-    $sheet->Write("E" . ($average_row_number + 6), $failurePercentage . "%");
-=======
     $sheet->Write("E" . ($average_row_number + 5), $successPercentage . " %");
     $sheet->Write("E" . ($average_row_number + 6), $failurePercentage . " %");
->>>>>>> Stashed changes
     //part 2
     $sheet->Write("E" . ($average_row_number + 8), $nbStudents);
     $sheet->Write("E" . ($average_row_number + 9), $nbStudents - $nbFails);
