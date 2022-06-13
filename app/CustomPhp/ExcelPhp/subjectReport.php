@@ -213,7 +213,8 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
 
     //sets columns width to auto
     $sheet->AutoSize($alphabet);
-
+    //encrypte the file
+    $sheet->EncryptSheet($fileFullName . '_' . date("d-m-Y"));
     //saves the file
     $sheet->Save($saveInFolder . $fileFullName . '.xlsx', $download);
 }

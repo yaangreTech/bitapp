@@ -1,188 +1,156 @@
 <?php
-    // require '../vendor/autoload.php';
-    // require "../functions.php";
 
-    //finds the name of the image path for tcpdf
-        //name of the file executing the script's folder name
-    $executingScriptFolderName = dirname($_SERVER['SCRIPT_FILENAME']);
-        //name of the current folder
-    $currentFolderName = dirname(__FILE__);
-    define("TCPDF_IMAGE_PATH", GetRelativePath($executingScriptFolderName, $currentFolderName)."logo.png");
+use Elibyy\TCPDF\Facades\TCPDF;
 
-        //finds the name of the image path for the html imag tag
-    $currentFolderName = dirname(ReplacePathSeparator(__FILE__));
-    $contextPath = ReplacePathSeparator($_SERVER['CONTEXT_DOCUMENT_ROOT']);
-    $HTML_IMAGE_PATH =  str_replace($contextPath, "", $currentFolderName).DIRECTORY_SEPARATOR;
-    define('HTML_IMAGE_PATH', str_replace(DIRECTORY_SEPARATOR, "/", $HTML_IMAGE_PATH)."logo.png");
+require_once(app_path('CustomPhp/customHelpers.php'));
 
-    /**
-     * @param String $director_full_name
-     * @param String $student_full_name
-     * @param int $class
-     * @param String $department
-     * @param String $option
-     * @param $school_year
-     * @param String $id
-     * @return void
-     */
-    function SchoolCertificate(String $director_full_name, String $student_full_name, int $class, String $department, String $option, $school_year, String $id, String $saveInFolder = ''): void
-    {
-        //////////////////////////////// Params
-        $date = getDate_Fr();
-        //sets the path of the logo
-        $logoPath =  HTML_IMAGE_PATH;
-        //imports extra fonts
-        $fonts = addFonts();
-        extract($fonts);
-        $download = empty($saveInFolder);
+function SchoolCertificate(String $director_full_name, String $student_full_name, int $class, String $department, String $option, $school_year, String $id, String $saveInFolder = '')
+{
+    //////////////////////////////// Params
+    $logoPath = app_path('CustomPhp/PdfPhp/logo2.png');
+    $date = getDate_Fr();
+    //imports extra fonts
+    $fonts = addFonts();
+    extract($fonts);
+    $download = empty($saveInFolder);
 
-        //list of classes
-        $classes = [
-            1 => "première année",
-            2 => "deuxième année",
-            3 => "troisième année"
-        ];
-        ///////////////////////////////
+    //list of classes
+    $classes = [
+        1 => "première année",
+        2 => "deuxième année",
+        3 => "troisième année"
+    ];
+    ///////////////////////////////
 
-        /** Configurations */
-        // create new PDF document
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    /** Configurations */
+    // create new PDF document
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-        // set document information
-        $pdf->SetCreator(PDF_CREATOR."_YaangreTech");
-        $pdf->SetAuthor('Burkina Instute of Technology');
-        $pdf->SetTitle('Certificat de scolarite');
-        $pdf->SetSubject('Certificat de scolarite');
-        $pdf->SetKeywords('');
+    // set document information
+    $pdf::SetCreator("ytech-bf.com");
+    $pdf::SetAuthor('Burkina Instute of Technology');
+    $pdf::SetTitle('Certificat de scolarite');
+    $pdf::SetSubject('Certificat de scolarite');
+    $pdf::SetKeywords('');
 
 
-        $pdf->SetFooterMargin(0);
+    $pdf::SetFooterMargin(0);
 
-        //margins left, top, right, bottom
-        $pdf->SetMargins(2, 10, 2, 0);
+    //margins left, top, right, bottom
+    $pdf::SetMargins(2, 10, 2, 0);
 
-        // removes the horizontal rules in the header and the footer
-        $pdf->SetPrintHeader(false);
-        $pdf->SetPrintFooter(false);
+    // removes the horizontal rules in the header and the footer
+    $pdf::SetPrintHeader(false);
+    $pdf::SetPrintFooter(false);
 
-        // set auto page breaks
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
-
-        // set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-            require_once(dirname(__FILE__).'/lang/eng.php');
-            $pdf->setLanguageArray($l);
-        }
+    // set auto page breaks
+    $pdf::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 
-        // Set font to times
-        $pdf->SetFont('times', '', 16, '', true);
+    // set some language-dependent strings (optional)
+    if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+        require_once(dirname(__FILE__) . '/lang/eng.php');
+        $pdf::setLanguageArray($l);
+    }
 
 
-        //sets the height of a line
-        $pdf->setCellHeightRatio(1.5);
-        // removes the horizontal rules in the header and the footer
-        $pdf->SetPrintHeader(false);
-        $pdf->SetPrintFooter(false);
+    // Set font to times
+    $pdf::SetFont('times', '', 16, '', true);
 
-        // Add a page
-        $pdf->AddPage();
 
-        // ---------------------------------------------------------
+    //sets the height of a line
+    $pdf::setCellHeightRatio(1.5);
+    // removes the horizontal rules in the header and the footer
+    $pdf::SetPrintHeader(false);
+    $pdf::SetPrintFooter(false);
 
-        /**sets the content text */
-        $content = <<<HTML
-        <div>
+    // Add a page
+    $pdf::AddPage();
+
+    // ---------------------------------------------------------
+
+    /**sets the content text */
+    $content = <<<HTML
+        <div style="font-family: 'Times New Roman'">
             <table style="padding: 2px">
                 <tr>
-                    <td style="width: 35%;">
+                    <td style="width: 50%;">
                         <img src="{$logoPath}" width="200">
                     </td>
-                    <td style="font-weight: bold; font-size: 8px;width: 65%;font-family: Calibri, 'Trebuchet MS', sans-serif; padding-top: 10px">
-                        <!-- tag i and br for putting top padding-->
-                        <i></i><br>Autorisation de création: N° 2018-00/01347/MESRSI/SG/DGESup/DIPES du 13 Septembre 2018<br>Autorisation d’ouverture: N° 2018-00001511/MESRSI/SG/DGESup/DIPES du 25 Septembre 2018
+                    <td style=" font-size: 15px;width: 50%; text-align: center; padding-top: 0px">
+                        Burkina-Faso<br>Unité-Progès-Justice
                     </td>
                 </tr>
                 <tr>
                     <td style="font-style: italic; font-size: 10px; flex: 100%;">
-                        ‘’Educating a New Generation of Leaders’’
+                    ‘’Educating a New Generation of Leaders’’
                     </td>
-                    <td></td>
                 </tr>
             </table>
-
-            <!-- adds space-->
-            <i></i>
-            <br><br>
-
+            <h3 style="text-align: center; text-decoration: underline;font-family: Colibri;">CERTIFICAT D'INSCRIPTION</h3>
             <table>
                 <tr>
-                    <td style="width: 8%"></td>
-                    <td style="width: 80%">
-                        <h3 style="text-align: center; text-decoration: underline;">CERTIFICAT DE SCOLARITE</h3>
+                    <td style="width: 3%"></td>
+                    <td style="width: 94%; font-size: 12px; text-align: left;text-indent: -5px">
 
-                        <p>
-                            Je soussigne, {$director_full_name}, Directeur Général de Burkina 
-                            Institute of Technology (BIT), atteste que l’étudiante <b>{$student_full_name}</b> est régulièrement inscrite à BIT en {$classes[$class]} de <i>{$department}</i>, option <i>Programmation</i> pour l’année académique 2020-2021 sous 
+                            Je soussigne, {$director_full_name}, Directeur Général de Burkina
+                            Institute of Technology (BIT), atteste que l’étudiante <b>{$student_full_name}</b> est régulièrement inscrite à BIT en {$classes[$class]} de <i>{$department}</i>, option <i>Programmation</i> pour l’année académique 2020-2021 sous
                             le numéro matricule : <b>{$id}</b>.
-                            <br>
-                            <br>
-                            En foi de quoi ce présent certificat lui est délivré pour servir et valoir 
+                            <div style="text-indent: 8px">
+                            En foi de quoi ce présent certificat lui est délivré pour servir et valoir
                             ce que de droit.
-                        </p>
-                        
+                            </div>
+
+
+
                         <p style="text-align: right;">
                             Koudougou, le {$date}
                         </p>
-                        <!-- adds space-->
-                        
-
-                        <p style="text-align: right;">
-                        L’Administration &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                        </p>
                     </td>
-                    <td style="width: 10%"></td>
+                    <td style="width: 3%"></td>
                 </tr>
             </table>
-            <!-- adds space-->
-            <i></i>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            
-            <div style="font-size: 10px; font-family: Calibri; text-align: center;">
-                Burkina Institute of Technology<br>
-                BP : 322 Koudougou-BF, Tél : 53111110/ 67444229, Email : <u>info@bit.bf</u>
-            </div>
-        
+
+            <table>
+                <tr>
+                    <td style="text-align: right; width: 75%; font-size: 12px;">
+                        <br>
+                        <br>
+                        L’Administration
+                    </td>
+                    <td style="width: 25%"></td>
+                </tr>
+            </table>
+
         </div>
         HTML;
 
-        // Print text using writeHTMLCell()
-        $pdf->writeHTMLCell(0, 0, '', '', $content, 0, 1, 0, true, 'J', true);
+    // Print text using writeHTMLCell()
+    $pdf::writeHTMLCell(0, 0, '', '', $content, 0, 1, 0, true, 'J', true);
+    $pdf::writeHTMLCell(0, 0, '', '-140', $content, 0, 1, 0, true, 'J', true);
 
-        // ---------------------------------------------------------
+    //gets the height of the pdf
+    $height = $pdf::getY();
+    //gets the width of the pdf
+    $width = $pdf::getPageWidth();
 
 
-        //must be downloaded directly or not
-        if($download)
-        {
-            // Close and output PDF document
-            $pdf->Output('certificat_de_scolarite_' . $student_full_name.'_'.$date . '.pdf', 'I');
-        }
-        else
-        {
-            $pdf->Output($saveInFolder.DIRECTORY_SEPARATOR.'certificat_de_scolarite_' . $student_full_name.'_'.$date . '.pdf', 'F');
-        }
+    $style = array('width' => 0.5, 'dash' => '2,2,2,2', 'phase' => 0, 'color' => array(0, 0, 0));
 
-        //============================================================+
-        // END OF FILE
-        //============================================================+
+    $pdf::Line(0, ($height / 2) + 5, $width, ($height / 2) + 5, $style);
+
+    // ---------------------------------------------------------
+
+
+    //must be downloaded directly or not
+    if ($download) {
+        // Close and output PDF document
+        $pdf::Output('certificat_de_scolarite_' . $student_full_name . '_' . $date . '.pdf', 'I');
+    } else {
+        $pdf::Output($saveInFolder . DIRECTORY_SEPARATOR . 'certificat_de_scolarite_' . $student_full_name . '_' . $date . '.pdf', 'F');
     }
-    
-?>
+
+    //============================================================+
+    // END OF FILE
+    //============================================================+
+}

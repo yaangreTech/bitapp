@@ -64,6 +64,11 @@ function getDate_Fr(): string
 
     return $date;
 }
+//gets the date in english format
+function getDate_En()
+{
+    return date('F d, Y');
+}
 
 //add extra fonts
 function addFonts(): array
@@ -253,4 +258,19 @@ function zipAndDownload($fileName)
     header('Content-Length: ' . filesize(storage_path($fileName)));
     readfile(storage_path($fileName));
     unlink(storage_path($fileName));
+}
+
+//highlights elements like xdebug
+function dd($data)
+{
+    ini_set("highlight.keyword", "#a50000;  font-weight: bolder");
+    ini_set("highlight.string", "#5825b6; font-weight: lighter; ");
+
+    ob_start();
+    highlight_string("<?php\n" . var_export($data, true) . "?>");
+$highlighted_output = ob_get_clean();
+
+$highlighted_output = str_replace(["&lt;?php", "?&gt;"], '', $highlighted_output);
+
+echo $highlighted_output;
 }

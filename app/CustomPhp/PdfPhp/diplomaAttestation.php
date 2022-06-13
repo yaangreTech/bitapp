@@ -4,7 +4,7 @@ use Elibyy\TCPDF\Facades\TCPDF;
 
 require_once(app_path('CustomPhp/customHelpers.php'));
 
-function diplomaAttestation($student_name, $birth_date, $location, $id, $validation_date, $domain, $mention, $field, $cote, $generation_date, $dean = "Dr W. Rodrigue KABORE", $saveInFolder = ""): void
+function diplomaAttestation($lang = "fr", $student_name, $birth_date, $location, $id, $validation_date, $domain, $mention, $field, $cote, $generation_date, $dean = "Dr W. Rodrigue KABORE", $saveInFolder = ""): void
 {
     //checks whether the file must be downloaded or kept in one folder
     $download = empty($saveInFolder);
@@ -50,128 +50,238 @@ function diplomaAttestation($student_name, $birth_date, $location, $id, $validat
     // Add a page
     $pdf::AddPage();
 
+    //content in french
+    $content_en = <<<HTML
+       <table>
+
+       <tr style="border: 1px solid black">
+           <td style="width: 45%;">
+               <p style="text-align: center; font-size: 12px; font-weight: bold;">
+               Ministry of Superior Education,<br>
+               Scientific Research and<br> Innovation<br>
+                   ---------------
+               </p>
+           </td>
+           <td style="width: 15%;"></td>
+           <td style="width: 40%;">
+               <p style="text-align: center">
+                   <span style="font-size: 14px; font-weight: bold">BURKINA FASO</span><br>
+                   = = = =<br>
+                   <span style="font-size: 8px; font-weight: bold">UNITY - PROGRESS - JUSTICE</span>
+               </p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width: 50%;">
+               &nbsp;
+               <img src="{$logoPath}" width="300"/>
+               <br>
+               &nbsp;
+               <span style="font-size: 9px;font-family:{$arial}">322 Koudougou, Burkina Faso // mail@bit.bf // www.bit.bf</span>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="text-align: center; font-size: 28px; font-family: {$arial_rounded_bold}; width:100%">
+               <p class="line_spacement">CERTIFICATE</p>
+           </td>
+       </tr>
+
+       <tr>
+           <td>
+               <p style="font-size: 13px">The Executive Director of Burkina Institute of Technology (BIT), the undersigned, certifies that :</p>
+               <p style="font-size: 18px; text-align: center;">$student_name</p>
+               <p style="font-size: 13px">Born on : <span style="font-family: {$arial_bold}">{$birth_date} at {$location}</span> &nbsp;&nbsp; Matricule : <span style="font-family: {$arial_bold}">{$id}</span>
+               validated in {$validation_date} the credits for obtaining the</p>
+               <p class="line_spacement" style="text-align: center; font-size: 22px; font-family: {$arial_rounded_bold};">BACHELOR'S DEGREE</p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width:20%"></td>
+           <td style="width:50%; font-size: 13px">
+               <i></i><br>
+               <span>Field : <b>{$domain}</b></span><br>
+               <span>Honours : <b>{$mention}</b></span><br>
+               <span>Speciality : <b>{$field}</b></span><br>
+               <span>Rating (Honours) : <b>{$cote}</b></span>
+           </td>
+           <td style="width:30%"></td>
+       </tr>
+
+       <tr>
+           <td style="width:100%">
+               <p style="font-size: 13px">
+                   In witness whereof, the present certificate is issued to him to serve and value what is
+                   in law.
+               </p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width:60%"></td>
+           <td style="width:40%;text-align:center;">
+               <p>Koudougou, {$generation_date}<br>
+               The Executive Director</p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width:60%"></td>
+           <td style="width:40%;text-align:center; font-size: 15px; font-weight: bold">
+               <!--times new roman-->
+               {$pdf::SetFont('times', '', 16, '', true)}
+               <br>
+               <br>
+               <p style="text-decoration: underline;">{$dean}</p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width:58%;">
+               <br>
+               <br>
+               <p style="border: 0.3px solid black; font-size: 10px">&nbsp;&nbsp;&nbsp;<u>NB</u>: <i>In case of overwriting or erasure, this certificate is void</i></p>
+           </td>
+       </tr>
+       </table>
+    HTML;
+
+
+    //content in french
+    $content_fr = <<<HTML
+       <table>
+
+       <tr style="border: 1px solid black">
+           <td style="width: 45%;">
+               <p style="text-align: center; font-size: 12px; font-weight: bold;">
+                   Ministère de l’Enseignement Supérieur,<br>
+                   de la Recherche Scientifique et de<br>
+                   l’Innovation<br>
+                   ---------------
+               </p>
+           </td>
+           <td style="width: 15%;"></td>
+           <td style="width: 40%;">
+               <p style="text-align: center">
+                   <span style="font-size: 14px; font-weight: bold">BURKINA FASO</span><br>
+                   = = = =<br>
+                   <span style="font-size: 8px; font-weight: bold">UNITÉ – PROGRÈS - JUSTICE</span>
+               </p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width: 50%;">
+               &nbsp;
+               <img src="{$logoPath}" width="300"/>
+               <br>
+               &nbsp;
+               <span style="font-size: 9px;font-family:{$arial}">322 Koudougou, Burkina Faso // mail@bit.bf // www.bit.bf</span>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="text-align: center; font-size: 28px; font-family: {$arial_rounded_bold}; width:100%">
+               <p class="line_spacement">ATTESTATION</p>
+           </td>
+       </tr>
+
+       <tr>
+           <td>
+               <p style="font-size: 13px">Le Directeur Général de Burkina Institute of Technology (BIT), soussigné atteste que :</p>
+               <p style="font-size: 18px; text-align: center;">$student_name</p>
+               <p style="font-size: 13px">Né(e) le : <span style="font-family: {$arial_bold}">{$birth_date} à {$location}</span> &nbsp;&nbsp; Matricule : <span style="font-family: {$arial_bold}">{$id}</span>
+                   a validé en {$validation_date} les crédits pour l’obtention de la</p>
+               <p class="line_spacement" style="text-align: center; font-size: 22px; font-family: {$arial_rounded_bold};">LICENCE</p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width:20%"></td>
+           <td style="width:50%; font-size: 13px">
+               <i></i><br>
+               <span>Domaine : <b>{$domain}</b></span><br>
+               <span>Mention : <b>{$mention}</b></span><br>
+               <span>Spécialité : <b>{$field}</b></span><br>
+               <span>Cote (Mention) : <b>{$cote}</b></span>
+           </td>
+           <td style="width:30%"></td>
+       </tr>
+
+       <tr>
+           <td style="width:100%">
+               <p style="font-size: 13px;">
+                   En foi de quoi, il lui est délivré la présente attestation pour servir et valeur ce que
+                   de  droit.
+               </p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width:60%"></td>
+           <td style="width:40%;text-align:center;">
+
+               <p>Koudougou, le {$generation_date}<br>Le Directeur Général</p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width:60%"></td>
+           <td style="width:40%;text-align:center; font-size: 15px; font-weight: bold">
+               <!--times new roman-->
+               {$pdf::SetFont('times', '', 16, '', true)}
+               <br>
+               <br>
+               <p style="text-decoration: underline;">{$dean}</p>
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width:62%;">
+               <br>
+               <br>
+               <p style="border: 0.3px solid black; font-size: 10px">&nbsp;&nbsp;&nbsp;<u>NB</u>: <i>En cas de surcharge ou de rature, la présente attestation est nulle</i></p>
+           </td>
+       </tr>
+       </table>
+   HTML;
+
+    //changes the content according to the set language
+    $content = strtoupper($lang) == 'EN' ? $content_en : $content_fr;
     //content of the page
     $content = <<<HTML
 
-            <style>
-                body
-                {
-                    font-family: {$arial};
-                    font-size: 11px;
-                }
-                p{
-                    text-indent: -5px;
-                }
-                ul{
-                    text-indent: 25px
-                }
-                b
-                {
-                    font-family: {$arial_bold}
-                }
-                .letter_spacement
-                {
-                    letter-spacing: -0.2px;
-                }
-                .line_spacement
-                {
-                    line-height: 13px;
-                }
-            </style>
-            <body>
-                <table>
-
-                    <tr style="border: 1px solid black">
-                        <td style="width: 45%;">
-                            <p style="text-align: center; font-size: 12px; font-weight: bold;">
-                                Ministère de l’Enseignement Supérieur,<br>
-                                de la Recherche Scientifique et de<br>
-                                l’Innovation<br>
-                                ---------------
-                            </p>
-                        </td>
-                        <td style="width: 15%;"></td>
-                        <td style="width: 40%;">
-                            <p style="text-align: center">
-                                <span style="font-size: 14px; font-weight: bold">BURKINA FASO</span><br>
-                                = = = =<br>
-                                <span style="font-size: 8px; font-weight: bold">UNITÉ – PROGRÈS - JUSTICE</span>
-                            </p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="width: 50%;">
-                            &nbsp;
-                            <img src="{$logoPath}" width="300"/>
-                            <br>
-                            &nbsp;
-                            <span style="font-size: 9px;font-family:{$arial}">322 Koudougou, Burkina Faso // mail@bit.bf // www.bit.bf</span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="text-align: center; font-size: 28px; font-family: {$arial_rounded_bold}; width:100%">
-                            <p class="line_spacement">ATTESTATION</p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <p style="font-size: 13px">Le Directeur Général de Burkina Institute of Technology (BIT), soussigné atteste que :</p>
-                            <p style="font-size: 18px; text-align: center;">$student_name</p>
-                            <p style="font-size: 13px">Né(e) le : <span style="font-family: {$arial_bold}">{$birth_date} à {$location}</span> &nbsp;&nbsp; Matricule : <span style="font-family: {$arial_bold}">{$id}</span>
-                                a validé en {$validation_date} les crédits pour l’obtention de la</p>
-                            <p class="line_spacement" style="text-align: center; font-size: 22px; font-family: {$arial_rounded_bold};">LICENCE</p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:20%"></td>
-                        <td style="width:50%; font-size: 13px">
-                            <i></i><br>
-                            <span>Domaine : <b>{$domain}</b></span><br>
-                            <span>Mention : <b>{$mention}</b></span><br>
-                            <span>Spécialité : <b>{$field}</b></span><br>
-                            <span>Cote (Mention) : <b>{$cote}</b></span>
-                        </td>
-                        <td style="width:30%"></td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:100%">
-                            <p style="font-size: 13px">
-                                En foi de quoi, il lui est délivré la présente attestation pour servir et valeur ce que
-                                de  droit
-                            </p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:60%"></td>
-                        <td style="width:40%;text-align:center;">
-                            <span>Koudougou, le {$generation_date}</span><br>
-                            <span>Le Directeur Général</span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:60%"></td>
-                        <td style="width:40%;text-align:center; font-size: 15px; font-weight: bold">
-                            <!--times new roman-->
-                            {$pdf::SetFont('times', '', 16, '', true)}
-                            <p style="text-decoration: underline;">{$dean}</p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:62%;">
-                            <p style="border: 0.3px solid black; font-size: 10px">&nbsp;&nbsp;&nbsp;<u>NB</u>: <i>En cas de surcharge ou de rature, la présente attestation est nulle</i></p>
-                        </td>
-                    </tr>
-                </table>
-            </body>
-        HTML;
+       <style>
+           body
+           {
+               font-family: {$arial};
+               font-size: 11px;
+           }
+           p{
+               text-indent: -5px;
+           }
+           ul{
+               text-indent: 25px
+           }
+           b
+           {
+               font-family: {$arial_bold}
+           }
+           .letter_spacement
+           {
+               letter-spacing: -0.2px;
+           }
+           .line_spacement
+           {
+               line-height: 13px;
+           }
+       </style>
+       <body>
+           {$content}
+       </body>
+   HTML;
 
     $pdf::writeHTMLCell(0, 0, '', '', $content, 0, 1, 0, true, 'L', true);
 
@@ -179,15 +289,16 @@ function diplomaAttestation($student_name, $birth_date, $location, $id, $validat
     $pdf::SetAlpha(0.14);
 
 
-    $pdf::Image($logoPath, 150, 250, 300, 100, '', '', '', false, 300, '', false, false, 0, false, true, false);
+    $pdf::Image(TCPDF_IMAGE_PATH, 150, 250, 300, 100, '', '', '', false, 300, '', false, false, 0, false, true, false);
 
     // ---------------------------------------------------------
 
+    $fileName = 'attestation_provisoire_' . $student_name . '_' . $lang;
     //must be downloaded directly or not
     if ($download) {
         // Close and output PDF document
-        $pdf::Output('attestation_provisoire_' . $student_name . '.pdf', 'I');
+        $pdf::Output('attestation_provisoire_' . $fileName . '.pdf', 'I');
     } else {
-        $pdf::Output($saveInFolder . DIRECTORY_SEPARATOR . 'attestation_provisoire_' . $student_name . '.pdf', 'F');
+        $pdf::Output($saveInFolder . DIRECTORY_SEPARATOR . $fileName . '.pdf', 'F');
     }
 }

@@ -1,17 +1,14 @@
 <?php
+// require '../vendor/autoload.php';
 
-// namespace App\ExcelPhp;
-
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use PhpOffice\PhpSpreadsheet\Helper\Html;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Cell\DataType;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet as Worksheets;
+use PhpOffice\PhpSpreadsheet\Helper\Html;
 
 
 class ExcelXport
@@ -25,55 +22,85 @@ class ExcelXport
     }
 
     //*write html text
-    function WriteHtml($cell, $content): void
+    function WriteHtml($cell, $content)
     {
         $html = new Html();
-        $this->Write($cell, $html->toRichTextObject($content));
+        try {
+            $this->Write($cell, $html->toRichTextObject($content));
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
-    function WordWrap(String $range = '', bool $wrap = true): void
+    function WordWrap(String $range = '', bool $wrap = true)
     {
-        $this->sheet->getStyle($range)->getAlignment()->setWrapText($wrap);
+        try {
+            $this->sheet->getStyle($range)->getAlignment()->setWrapText($wrap);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets the row height
-    function SetRowHeight(int $rowNumber, float $height): void
+    function SetRowHeight(int $rowNumber, float $height)
     {
-        $this->sheet->getRowDimension($rowNumber)->setRowHeight($height, 'pt');
+        try {
+            $this->sheet->getRowDimension($rowNumber)->setRowHeight($height, 'pt');
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets the column width
-    function SetColumnWidth(String $column, float $width): void
+    function SetColumnWidth(String $column, float $width)
     {
-        $this->sheet->getColumnDimension($column)->setWidth($width);
+        try {
+            $this->sheet->getColumnDimension($column)->setWidth($width);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets a cell to bold
-    function SetCellsToBold(String $range): void
+    function SetCellsToBold(String $range)
     {
-        $this->sheet->getStyle($range)->getFont()->setBold(true);
+        try {
+            $this->sheet->getStyle($range)->getFont()->setBold(true);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets a cell in to italic
-    function SetCellsToItalic(String $range): void
+    function SetCellsToItalic(String $range)
     {
-        $this->sheet->getStyle($range)->getFont()->setItalic(true);
+        try {
+            $this->sheet->getStyle($range)->getFont()->setItalic(true);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*changes the rotation of the text
 
-    /**
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
-     */
-    function Rotate(String $range, float $rotation): void
+
+    function Rotate(String $range, float $rotation)
     {
-        $this->sheet->getStyle($range)->getAlignment()->setTextRotation($rotation);
+        try {
+            $this->sheet->getStyle($range)->getAlignment()->setTextRotation($rotation);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets the size of the text
-    function SetFontSize(String $range, int $size): void
+    function SetFontSize(String $range, int $size)
     {
-        $this->sheet->getStyle($range)->getFont()->setSize($size);
+        try {
+            $this->sheet->getStyle($range)->getFont()->setSize($size);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //* merges a range of cell
@@ -81,13 +108,17 @@ class ExcelXport
     /**
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
-    function MergeCells(String $range): void
+    function MergeCells(String $range)
     {
-        $this->sheet->mergeCells($range);
+        try {
+            $this->sheet->mergeCells($range);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets the borders to a range of cells
-    function SetBorders(String $range, $type = 'allBorders', $borderStyle = 'BORDER_THIN'): void
+    function SetBorders(String $range, $type = 'allBorders', $borderStyle = 'BORDER_THIN')
     {
         $style = [
             'borders' => [
@@ -101,10 +132,14 @@ class ExcelXport
             $style['borders'][$type]['borderStyle'] = BORDER::BORDER_DOTTED;
         }
 
-        $this->sheet->getStyle($range)->applyFromArray($style);
+        try {
+            $this->sheet->getStyle($range)->applyFromArray($style);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
-    function SetAlignment(String $range, String $vertically = 'bottom', String $horizontally = "left"): void
+    function SetAlignment(String $range, String $vertically = 'bottom', String $horizontally = "left")
     {
         $alignment = ['alignment' => []];
         //for vertical alignment
@@ -130,70 +165,107 @@ class ExcelXport
                 $alignment['alignment']['horizontal'] = Alignment::HORIZONTAL_LEFT;
         }
 
-        $this->sheet->getStyle($range)->applyFromArray($alignment);
+        try {
+            $this->sheet->getStyle($range)->applyFromArray($alignment);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*changes the alignment to center
-    function SetCenter(String $range, bool $vertically = false, bool $horizontally = false): void
+    function SetCenter(String $range, bool $vertically = false, bool $horizontally = false)
     {
+        try {
+            if ($vertically) {
+                $vertically = 'center';
+            }
 
-        if ($vertically) {
-            $vertically = 'center';
+            if ($horizontally) {
+                $horizontally = 'center';
+            }
+
+            $this->SetAlignment($range, $vertically, $horizontally);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
         }
-
-        if ($horizontally) {
-            $horizontally = 'center';
-        }
-
-        $this->SetAlignment($range, $vertically, $horizontally);
     }
     //*writes into a cell
-    function Write(String $cell, $data): void
+    function Write(String $cell, $data)
     {
-        $this->sheet->setCellValue($cell, $data);
+        try {
+            $this->sheet->setCellValue($cell, $data);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*creates an excel file
-    function Save(String $fileName, $download = false): void
+    function Save(String $fileName, $download = false)
     {
         $writer = new Xlsx($this->spreadsheet);
-        if ($download) {
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment; filename="' . urlencode($fileName) . '"');
-            $writer->save('php://output');
-        } else {
-            $writer->save($fileName);
+        try {
+            if ($download) {
+                header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                header('Content-Disposition: attachment; filename="' . urlencode($fileName) . '"');
+                $writer->save('php://output');
+            } else {
+                $writer->save($fileName);
+            }
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
         }
     }
 
     //*sets the color to a range of cells
-    function SetColor(String $range, String $hexa): void
+    function SetColor(String $range, String $hexa)
     {
-        $this->sheet->getStyle($range)->getFill()
-            ->setFillType(Fill::FILL_SOLID)
-            ->getStartColor()->setARGB($hexa);
+        try {
+            $this->sheet->getStyle($range)->getFill()
+                ->setFillType(Fill::FILL_SOLID)
+                ->getStartColor()->setARGB($hexa);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets the color of the text
-    function SetTextColor(String $range, String $hexa): void
+    function SetTextColor(String $range, String $hexa)
     {
-        $styleArray = [
-            'font' =>
-            [
-                'color' => array('rgb' => $hexa)
-            ]
-        ];
-        $this->sheet->getStyle($range)->applyFromArray($styleArray);
+        try {
+            $styleArray = [
+                'font' =>
+                [
+                    'color' => array('rgb' => $hexa)
+                ]
+            ];
+            $this->sheet->getStyle($range)->applyFromArray($styleArray);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*returns the number of the last row
-    function GetLastRowIndex(): int
+    function GetLastRowIndex()
     {
-        return $this->sheet->getHighestRow();
+        try {
+            return $this->sheet->getHighestRow();
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
+    }
+
+    //*returns the number of the last row
+    function GetLastColIndex()
+    {
+        try {
+            return $this->sheet->getHighestColumn();
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*adds image to a cell
-    function SetImage(String $cell, String $path, String $image_name, $image_size = [], float $offsetX = 0,  float $offsetY = 0, float $direction = 0, float $rotation = 0, bool $visibleShadow = false): void
+    function SetImage(String $cell, String $path, String $image_name, $image_size = [], float $offsetX = 0,  float $offsetY = 0, float $direction = 0, float $rotation = 0, bool $visibleShadow = false)
     {
         $fullPath = $path . DIRECTORY_SEPARATOR . $image_name;
         $drawing = new Drawing();
@@ -208,73 +280,171 @@ class ExcelXport
         $drawing->getShadow()->setVisible($visibleShadow);
         $drawing->getShadow()->setDirection($direction);
         //
-        if (!empty($image_size)) {
-            $drawing->setWidthAndHeight($image_size[0], $image_size[1]);
+        try {
+            if (!empty($image_size)) {
+                $drawing->setWidthAndHeight($image_size[0], $image_size[1]);
+            }
+            $drawing->setWorksheet($this->sheet);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
         }
-        $drawing->setWorksheet($this->sheet);
     }
 
     //*get the index of a column according to a cell value
-    function GetColumnIndex(int $row, int $lastColIndex, String $cellValue): int
+    function GetColumnIndex(int $row, int $lastColIndex, String $cellValue)
     {
-        //row starts at 1 and column at 1, if cols starts at 0, it will retrieve the last col
-        $index = 0;
-        for ($i = 1; $i < $lastColIndex; $i++) {
-            if ($this->GetCellValue($i, $row) == $cellValue) {
-                $index = $i;
-                break;
+        try {
+            //row starts at 1 and column at 1, if cols starts at 0, it will retrieve the last col
+            $index = 0;
+            for ($i = 1; $i < $lastColIndex; $i++) {
+                if ($this->GetCellValue($i, $row) == $cellValue) {
+                    $index = $i;
+                    break;
+                }
             }
+            return $index - 1;
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
         }
-        return $index - 1;
     }
 
     //*gets the cell value
     function GetCellValue(int $col, int $row)
     {
-        return $this->sheet->getCellByColumnAndRow($col, $row)->getValue();
+        try {
+            return $this->sheet->getCellByColumnAndRow($col, $row)->getValue();
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*gets value from a range of cells
-    function GetRangeValues($range): array
+    function GetRangeValues($range)
     {
-        return $this->sheet->rangeToArray($range, "");
+        try {
+            return $this->sheet->rangeToArray($range, "");
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*freeze pane
-    function FreezePane($col, $row): void
+    function FreezePane($col, $row)
     {
-        $this->sheet->freezePaneByColumnAndRow($col, $row);
+        try {
+            $this->sheet->freezePaneByColumnAndRow($col, $row);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets the name of the sheet
-    function RenameSheet(String $name): void
+    function RenameSheet(String $name)
     {
-        $this->sheet->setTitle($name);
+        try {
+            $this->sheet->setTitle($name);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets a column size to auto
-    function SetColumnWidthAuto($col): void
+    function SetColumnWidthAuto($col)
     {
-        $this->sheet->getColumnDimension($col)->setAutoSize(true);
+        try {
+            $this->sheet->getColumnDimension($col)->setAutoSize(true);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*sets a range of column width to auto
-    function AutoSize($colRange): void
+    function AutoSize($colRange)
     {
-        for ($i = 0; $i < count($colRange); $i++) {
-            $this->SetColumnWidthAuto($colRange[$i]);
+        try {
+            for ($i = 0; $i < count($colRange); $i++) {
+                $this->SetColumnWidthAuto($colRange[$i]);
+            }
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
         }
     }
 
     //*gets the instance
     function GetInstance()
     {
-        return $this->spreadsheet;
+        try {
+            return $this->spreadsheet;
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     //*function to set printable area
     function SetPrintingArea(String $range)
     {
-        $this->sheet->getPageSetup()->setPrintArea($range);
+        try {
+            $this->sheet->getPageSetup()->setPrintArea($range);
+        } catch (Exception $e) {
+            $this->GetExceptionMessage($e);
+        }
+    }
+
+    //*function to set all sheet content to string
+    function SetAllContentToString()
+    {
+        $highestRow = $this->GetLastRowIndex();
+        $highestCol = $this->GetLastColIndex();
+        for ($row = 1; $row <= $highestRow; $row++) {
+            for ($col = 1; $col <= $highestCol; $col++) {
+                $cell = $this->sheet->getCellByColumnAndRow($col, $row);
+                $value = $cell->getValue();
+                var_export($value);
+                $cell->setValueExplicit($value, is_string($value) ? DataType::TYPE_STRING : DataType::TYPE_NUMERIC);
+            }
+        }
+    }
+
+    //*function to encrypt the sheet
+    function EncryptSheet($password)
+    {
+        //dd($this->sheet->getProtection());
+        $this->sheet->getProtection()->setPassword($password);
+        $this->sheet->getProtection()->setSheet(true);
+        $this->sheet->getProtection()->setSort(true);
+        $this->sheet->getProtection()->setInsertRows(true);
+        $this->sheet->getProtection()->setFormatCells(true);
+    }
+
+    private function GetExceptionMessage($errors)
+    {
+        $err_message = $errors->getMessage();
+
+        //gets the trace=>all files and linked function detaails about exception
+        $err_trace = $errors->getTrace();
+        //checks weither $err_trace is an array and not empty
+        if (is_array($err_trace) and !empty($err_trace)) {
+            //adds the origin file where the errors occurs
+            $err_message .= ' origins from : ' . $err_trace[0]['file'] . PHP_EOL;
+            //adds the origin line of the file where the errors occurs
+            $err_message .= ' on line : ' . $err_trace[0]['line'] . PHP_EOL;
+            //adds the origin function causing the errors
+            $err_message .= ' by function : `' . $err_trace[1]['function'] . '`' . PHP_EOL;
+            //adds the line of the file where the function is called
+            $err_message .= ' called at line : ' . $err_trace[1]['line'] . PHP_EOL;
+            //adds the  of the file where the function is called
+            $err_message .= ' in the file : ' . $err_trace[1]['file'] . PHP_EOL;
+        }
+
+        //adds the current date
+        $err_message .= " at " . date('m/d/Y h:i:s') . PHP_EOL;
+        //recording errors for improving
+        $exeception_err_log = fopen(__DIR__ . DIRECTORY_SEPARATOR . 'exeception_err_log.txt', 'a+');
+        //breaklines
+        $err_message = $err_message . PHP_EOL;
+        //append the error at the end of the file
+        fwrite($exeception_err_log, $err_message);
+        //closes the file
+        fclose($exeception_err_log);
     }
 }

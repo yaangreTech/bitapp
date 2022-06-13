@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use diploma;
 use Carbon\Carbon;
 use App\Models\Compteur;
 use App\Models\Conforme;
 use App\Models\Sessione;
 use App\Models\Inscription;
-use Illuminate\Http\Request;
-use Elibyy\TCPDF\Facades\TCPDF;
 
 // require "./diplom.php";
 require_once(app_path('CustomPhp/PdfPhp/diplom.php'));
 require_once(app_path('CustomPhp/PdfPhp/diplomaAttestation.php'));
 require_once(app_path('CustomPhp/PdfPhp/internshipCertificate.php'));
+require_once(app_path('CustomPhp/PdfPhp/schoolCertificate.php'));
 
 class tcpfController extends Controller
 {

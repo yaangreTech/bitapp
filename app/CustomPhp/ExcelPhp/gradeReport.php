@@ -316,7 +316,7 @@ function GradeReport($data, $studentId, $studentSurname, $studentName, $class, $
     $lastRow = $sheet->GetLastRowIndex() + 1;
     //sets the logo
     $sheet->MergeCells($alphabet[START_COL - 1] . $lastRow . ':' . $alphabet[START_COL + 5 - 3] . ($lastRow + 3));
-    $sheet->SetImage($alphabet[START_COL - 1] . $lastRow, PHPSPREADSHEET_IMAGE_PATH, 'logo.png', [800, 50], 0, 10);
+    $sheet->SetImage($alphabet[START_COL - 1] . $lastRow, PHPSPREADSHEET_IMAGE_PATH, 'logo.png', [900, 80], 0, 10);
 
     //Burkina Faso
     $html = "<b><font size='22'>B</font>URKINA <font size='22'>F</font>ASO<br>Ministry of Higher Education, Scientific<br>Research and Innovation</b>";
@@ -538,5 +538,6 @@ function GradeReport($data, $studentId, $studentSurname, $studentName, $class, $
     //sets printing area of the sheet
     $lastRow = $sheet->GetLastRowIndex();
     $sheet->SetPrintingArea($alphabet[START_COL - 1] . STARTING_ROW . ":" . $alphabet[$lastColIndex] . $lastRow);
+    $sheet->EncryptSheet($fileName . '_' . date("d-m-Y"));
     $sheet->save($saveInFolder . $fileName . ".xlsx", $download);
 }

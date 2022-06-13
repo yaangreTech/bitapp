@@ -24,7 +24,7 @@ function pdfFile(
     //checks whether the file must be downloaded or kept in one folder
     $download = empty($saveInFolder);
     //sets the path of the logo
-    $logoPath = app_path('CustomPhp/PdfPhp/logo.png');
+    $logoPath = app_path('CustomPhp/PdfPhp/logo2.png');
     //imports extra fonts
     $fonts = addFonts();
     extract($fonts);
@@ -219,7 +219,7 @@ function pdfFile(
                 {$ministry}
                 <br><br>
                 <!--sizes will be changed accoding to the new logo added-->
-                <img src="{$logoPath}" height="42.7" width="281.02"/>
+                <img src="{$logoPath}" height="40.7" width="200.02"/>
             </p>
             <table>
                 <tr>
@@ -246,10 +246,10 @@ function pdfFile(
     $pdf::writeHTMLCell(0, 0, '', '', $content, 0, 1, 0, true, 'L', true);
 
     //sets transparency of the watermark image
-    $pdf::SetAlpha(0.14);
+    $pdf::SetAlpha(0.1);
 
 
-    $pdf::Image($logoPath, 90, 85, 1000, 180, '', '', '', false, 300, '', false, false, 0, false, true, false);
+    $pdf::Image($logoPath, 90, 85, 1000, 180);
 
 
     // ---------------------------------------------------------
