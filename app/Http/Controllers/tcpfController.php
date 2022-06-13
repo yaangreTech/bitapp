@@ -17,6 +17,23 @@ require_once(app_path('CustomPhp/PdfPhp/schoolCertificate.php'));
 class tcpfController extends Controller
 {
 
+        
+    public function generateCertificate( $inscID){
+
+        $inscription = Inscription::findOrFail($inscID);
+        $inscription->with(['student', 'level']);
+        
+        SchoolCertificate(
+            'Dr Rodrigue KABORE', 
+            $inscription->student->first_name . ' ' . $inscription->student->Last_name,
+            $inscription->level->name, 
+            $inscription->level->branche->departement->label,
+            $inscription->level->branche->name, 
+            $inscription->year->name,
+            $inscription->student->matricule
+        );
+    }
+
     public function pdfDiplom($inscription_id, $lang)
     {
         $inscription = Inscription::findOrFail($inscription_id);
@@ -31,6 +48,7 @@ class tcpfController extends Controller
         $deplomeoder->value=$deplomeoder->value+1;
         $deplomeoder->update();
     }
+
     public function pdfAtestation($inscription_id, $lang)
     {
         $inscription = Inscription::findOrFail($inscription_id);
@@ -38,6 +56,7 @@ class tcpfController extends Controller
 
 
         diplomaAttestation(
+            $lang,
             $inscription->student->first_name . ' ' . $inscription->student->Last_name,
             $inscription->student->birth_date,
             $inscription->student->birth_place,
@@ -52,6 +71,7 @@ class tcpfController extends Controller
             ''
         );
     }
+
     public function certificate()
     {
         InternshipCertificate('dvjdviodvoidvuiodyvhudyvduivydvuiyvdivdyviuvyviudvdyvdiuvyduivdyuvidvhdiuvhdioveujieyvuetyey7vtev8y', 'Nana Jeremie');

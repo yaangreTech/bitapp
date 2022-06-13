@@ -134,6 +134,9 @@ function studentData(data) {
         elements += '                    <a href="#" data-toggle="modal" data-target="#student_info" onClick="viewStudentInfos(' + insc.id + ')">View infos</a>'
         elements += '                </li>'
         elements += '                <li>'
+        elements += '                    <a href="school-certificate/' + insc.id + '" target="_blank" >school cert...</a>'
+        elements += '                </li>'
+        elements += '                <li>'
         elements += '                    <a href="#" data-toggle="modal" data-target="#update_student" onclick="editer(student_editparames[' + key + '],' + insc.id + ')">Editer</a>'
         elements += '                </li>'
         if (insc.status == 'active') {
@@ -149,9 +152,7 @@ function studentData(data) {
         elements += '                <li>'
         elements += '                    <a href="#" onClick="delete_student(' + insc.id + ')">Delete</a>'
         elements += '                </li>'
-        elements += '                <li>'
-        elements += '                    <a href="#" onClick="return false;">school cert...</a>'
-        elements += '                </li>'
+
         elements += '            </ul>'
         elements += '        </li>'
         elements += '     </ul>'

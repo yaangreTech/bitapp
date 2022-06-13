@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use ZipArchive;
 use App\Models\Year;
 use App\Models\Level;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -20,6 +21,11 @@ require_once(app_path('CustomPhp/customHelpers.php'));
 class excelExportController extends Controller
 {
    
+
+
+    
+
+
     public function genGrade()
     {
         $markJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
@@ -49,7 +55,7 @@ class excelExportController extends Controller
         // peut etre appelee pour compresser et telechearger
         zipAndDownload($academicYear . "_gradeReport.zip");
     }
-    public function genSemester($yearID, $semesterID,$isWithSession)
+    public function genSemester($yearID, $semesterID, $isWithSession)
     {
         // $semesterJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
 
@@ -90,6 +96,7 @@ class excelExportController extends Controller
 
         // dd( $jsons);
         $student_data=[];
+        $cp=0;
         foreach($jsons['inscriptions'] as $inscription){
             $student=[];
            
@@ -113,12 +120,15 @@ class excelExportController extends Controller
                 array_push($student_data, $student);
         }
 
-        dd($student_data);
+        // dd( $headers,$student_data);
 
         $dir = storage_path('excelFiles');
-        $className = "COMPUTER SCIENCE 22";
-        $academicYear = "2019-2020";
-        $semesterNumber = 1;
+
+        $semester=Semester::find($semesterID);
+        $className = $semester->level->branche->departement->label;
+        //  "COMPUTER SCIENCE 22";
+        $academicYear = Year::find($yearID)->name;
+        $semesterNumber = explode(" ",$semester->label)[1];
         SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $dir . DIRECTORY_SEPARATOR);
 
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload

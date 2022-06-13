@@ -4,7 +4,7 @@ use Elibyy\TCPDF\Facades\TCPDF;
 
 require_once(app_path('CustomPhp/customHelpers.php'));
 
-function SchoolCertificate(String $director_full_name, String $student_full_name, int $class, String $department, String $option, $school_year, String $id, String $saveInFolder = '')
+function SchoolCertificate(String $director_full_name, String $student_full_name, String $class, String $department, String $option, $school_year, String $id, String $saveInFolder = '')
 {
     //////////////////////////////// Params
     $logoPath = app_path('CustomPhp/PdfPhp/logo2.png');
@@ -16,9 +16,11 @@ function SchoolCertificate(String $director_full_name, String $student_full_name
 
     //list of classes
     $classes = [
-        1 => "première année",
-        2 => "deuxième année",
-        3 => "troisième année"
+        'L1' => "première année",
+        'L2' => "deuxième année",
+        'L3' => "troisième année",
+        'M1' => "Quatrième année",
+        'M2' => "Cinquième année",
     ];
     ///////////////////////////////
 
@@ -94,7 +96,7 @@ function SchoolCertificate(String $director_full_name, String $student_full_name
                     <td style="width: 94%; font-size: 12px; text-align: left;text-indent: -5px">
 
                             Je soussigne, {$director_full_name}, Directeur Général de Burkina
-                            Institute of Technology (BIT), atteste que l’étudiante <b>{$student_full_name}</b> est régulièrement inscrite à BIT en {$classes[$class]} de <i>{$department}</i>, option <i>Programmation</i> pour l’année académique 2020-2021 sous
+                            Institute of Technology (BIT), atteste que l’étudiante <b>{$student_full_name}</b> est régulièrement inscrite à BIT en {$classes[$class]} de <i>{$department}</i>, option <i>{$option}</i> pour l’année académique {$school_year} sous
                             le numéro matricule : <b>{$id}</b>.
                             <div style="text-indent: 8px">
                             En foi de quoi ce présent certificat lui est délivré pour servir et valoir

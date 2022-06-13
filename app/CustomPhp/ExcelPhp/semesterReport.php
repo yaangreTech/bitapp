@@ -28,16 +28,16 @@ if (!define('LITE_DARK', '272822')) {
     define('LITE_DARK', '272822');
 }
 // 5 index of the col F + 1 as it is an index, all starts from 0
-if (!define("START_COL_Se", 4)) {
-    define("START_COL_Se", 4);
+if (!define("START_COL_SE", 4)) {
+    define("START_COL_SE", 4);
 }
 //starting row for writing data
-if (!define('STARTING_ROW_Se', 4)) {
-    define('STARTING_ROW_Se', 4);
+if (!define('STARTING_ROW_SE', 6)) {
+    define('STARTING_ROW_SE', 6);
 }
 //defines ordinal numbers from cardinal
-if (!define("CARDINAL_NUMBERS_Se", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH"])) {
-    define("CARDINAL_NUMBERS_Se", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH"]);
+if (!define("CARDINAL_NUMBERS_SE", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH",7=>"SEVEN",8=>"EIGHT",9=>"NINE",10=>"TEN"])) {
+    define("CARDINAL_NUMBERS_SE", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH",7=>"SEVEN",8=>"EIGHT",9=>"NINE",10=>"TEN"]);
 }
 
 
@@ -59,7 +59,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //name of the sheet
     $sheetName = "SEMESTER " . $semesterNumber;
     //ordinal number of the semester
-    $semesterNumber = CARDINAL_NUMBERS[$semesterNumber];
+    $semesterNumber = CARDINAL_NUMBERS_SE[$semesterNumber];
     //file name
     $fileFullName = $className . "_" . $semesterNumber . "_SEMESTER_" . $academicYear;
 
@@ -109,7 +109,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //merges cells
     $sheet->MergeCells('A1:D1');
     //index of the last row
-    $lastColIndex = START_COL + $nbColHeaders;
+    $lastColIndex = START_COL_SE + $nbColHeaders;
     $sheet->MergeCells($alphabet[$lastColIndex - 1 - 1] . '1:' . $alphabet[$lastColIndex - 1] . '1');
     $sheet->MergeCells('F1:' . $alphabet[$lastColIndex - 3 - 1] . '1');
 
@@ -154,18 +154,18 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->SetCenter("A4", false, true);
 
     //rotates text of headers
-    $sheet->Rotate('E4:' . $alphabet[START_COL + $total_numbers_of_rows_to_rotate - 1] . '4', 90);
+    $sheet->Rotate('E4:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '4', 90);
     //centers vertically cells text of headers
-    $sheet->SetCenter('E4:' . $alphabet[START_COL + $total_numbers_of_rows_to_rotate - 1] . '4', false, true);
+    $sheet->SetCenter('E4:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '4', false, true);
     //sets text to bold: cells of headers
-    $sheet->SetCellsToBold('E4:' . $alphabet[START_COL + $total_numbers_of_rows_to_rotate - 1] . '4');
+    $sheet->SetCellsToBold('E4:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '4');
     //sets text to italic: cells of modulus
-    $sheet->SetCellsToItalic('E4:' . $alphabet[START_COL + $total_numbers_of_rows_to_set_in_italic - 1] . '4');
+    $sheet->SetCellsToItalic('E4:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_set_in_italic - 1] . '4');
     //sets text to bold: cells of name, last name and number of credits
-    $sheet->SetCellsToBold('A5:' . $alphabet[START_COL + $total_numbers_of_rows_to_rotate - 1] . '5');
+    $sheet->SetCellsToBold('A5:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '5');
 
     //adds the name of the TU and the total of credits
-    $current_index = START_COL;
+    $current_index = START_COL_SE;
     foreach ($tus_modules as $tu => $value) {
         $sheet->Write($alphabet[$current_index] . '2', $tu);
         //sums the values of each corresponding TU
@@ -185,8 +185,8 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //increases the height of the row 2
     $sheet->SetRowHeight(2, 30);
     //merges cells
-    $sheet->MergeCells($alphabet[0] . '2' . ':' . $alphabet[START_COL - 1] . '3');
-    $sheet->MergeCells($alphabet[START_COL + $total_numbers_of_rows_to_set_in_italic] . '2' . ':' . $alphabet[START_COL + $total_numbers_of_rows_to_rotate - 1] . '3');
+    $sheet->MergeCells($alphabet[0] . '2' . ':' . $alphabet[START_COL_SE - 1] . '3');
+    $sheet->MergeCells($alphabet[START_COL_SE + $total_numbers_of_rows_to_set_in_italic] . '2' . ':' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '3');
 
     //destroyes the variables
     unset($current_index);
@@ -194,26 +194,26 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //adds and formats headers text
     foreach ($finalHeaders as $key => $value) {
         $key_index = array_search($key, $keys);
-        $sheet->Write($alphabet[$key_index + START_COL] . '4', $key);
-        $sheet->Write($alphabet[$key_index + START_COL] . '5', $value);
+        $sheet->Write($alphabet[$key_index + START_COL_SE] . '4', $key);
+        $sheet->Write($alphabet[$key_index + START_COL_SE] . '5', $value);
         //center horizontally the 2nd row
-        $sheet->SetCenter($alphabet[$key_index + START_COL] . '5', false, true);
+        $sheet->SetCenter($alphabet[$key_index + START_COL_SE] . '5', false, true);
 
         //sets default the background color for other extra data => row for credits
-        $sheet->SetColor($alphabet[$key_index + START_COL] . '5', 'ffd9d9d9');
+        $sheet->SetColor($alphabet[$key_index + START_COL_SE] . '5', 'ffd9d9d9');
 
         //if the current element is in the list of modules
         if (in_array($value, array_values($modules))) {
             //sets the color for the module
-            $sheet->SetColor($alphabet[$key_index + START_COL] . '4', SKY_BLUE);
+            $sheet->SetColor($alphabet[$key_index + START_COL_SE] . '4', SKY_BLUE);
             //sets the color for the number of credits
-            $sheet->SetColor($alphabet[$key_index + START_COL] . '5', SKY_BLUE);
+            $sheet->SetColor($alphabet[$key_index + START_COL_SE] . '5', SKY_BLUE);
         }
 
         //when the extra data header is equal to 'Total of Credits' or 'Final Average'
         if (in_array($key, ['Total of Credits', 'Final Average'])) {
             //set the background color
-            $sheet->SetColor($alphabet[$key_index + START_COL] . '5', 'ffc4bd97');
+            $sheet->SetColor($alphabet[$key_index + START_COL_SE] . '5', 'ffc4bd97');
         }
     }
 
@@ -233,8 +233,8 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->Write('D5', ' Name');
 
     /****************** Other rows from row 6 **************** */
-    $col = START_COL - 4;
-    $row = STARTING_ROW;
+    $col = START_COL_SE - 4;
+    $row = STARTING_ROW_SE;
     for ($index = 0; $index < $nbStudents; $index++) {
         //adds the No
         $sheet->Write($alphabet[$col] . $row, $index + 1);
@@ -250,7 +250,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
             $col++;
         }
         $row++;
-        $col = START_COL - 4;
+        $col = START_COL_SE - 4;
     }
 
     //index of the last row
@@ -259,23 +259,24 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
 
     //sets the cells of Final Average
     $averageColIndex = $sheet->GetColumnIndex(4, count($alphabet), 'Final Average');
-    $sheet->SetCellsToBold($alphabet[$averageColIndex] . STARTING_ROW . ":" . $alphabet[$averageColIndex] . $lastRowIndex);
+    // dd($averageColIndex);
+    $sheet->SetCellsToBold($alphabet[$averageColIndex] . STARTING_ROW_SE . ":" . $alphabet[$averageColIndex] . $lastRowIndex);
 
     //sets the color of the text in to red (column `International Grade`)
     $InternationalGradeIndex = $sheet->GetColumnIndex(4, count($alphabet), 'International Grade');
-    $sheet->SetTextColor($alphabet[$InternationalGradeIndex] . STARTING_ROW . ":" . $alphabet[$InternationalGradeIndex] . $lastRowIndex, RED);
+    $sheet->SetTextColor($alphabet[$InternationalGradeIndex] . STARTING_ROW_SE . ":" . $alphabet[$InternationalGradeIndex] . $lastRowIndex, RED);
 
     //sets the background color of columns of 'Remark', 'Re-do exam'
     $remarkColIndex = $sheet->GetColumnIndex(4, count($alphabet), 'Remark');
     $redoExamColIndex = $sheet->GetColumnIndex(4, count($alphabet), 'Re-do exam');
-    $sheet->SetColor($alphabet[$remarkColIndex] . STARTING_ROW . ":" . $alphabet[$redoExamColIndex] . $lastRowIndex, RED);
+    $sheet->SetColor($alphabet[$remarkColIndex] . STARTING_ROW_SE . ":" . $alphabet[$redoExamColIndex] . $lastRowIndex, RED);
 
     //Pass or fail?
     $pass_of_fail_colIndex = $sheet->GetColumnIndex(4, count($alphabet), 'Pass/Fail?');
-    for ($row = STARTING_ROW; $row <= $lastRowIndex; $row++) {
+    for ($row = STARTING_ROW_SE; $row <= $lastRowIndex; $row++) {
         $value = $sheet->GetCellValue($pass_of_fail_colIndex + 1, $row);
         $color = "";
-        if (in_array($value, ["", "PASS"])) {
+        if (in_array($value, ["", "PASS","Pass"])) {
             $color = "ff" . GREEN; //adds alpha to the color
         } else {
             $color = "ff" . RED; //adds alpha to the color
@@ -292,10 +293,10 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //finds the last module column index
     $lastModuleColIndex = $sheet->GetColumnIndex(4, count($alphabet), array_keys($modules)[$total_numbers_of_rows_to_set_in_italic - 1]);
     //calculates the average of each subject
-    for ($col = START_COL + 1; $col <= $lastModuleColIndex + 1; $col++) //the function get index removes 1 and returns the result
+    for ($col = START_COL_SE + 1; $col <= $lastModuleColIndex + 1; $col++) //the function get index removes 1 and returns the result
     {
         $total = 0;
-        for ($row = STARTING_ROW; $row <= $lastRowIndex; $row++) {
+        for ($row = STARTING_ROW_SE; $row <= $lastRowIndex; $row++) {
             $total += floatval($sheet->GetCellValue($col, $row));
         }
         $sheet->Write($alphabet[$col - 1] . $average_row_number, $total / $nbStudents);
@@ -325,10 +326,10 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //**increases the size of the column */
     $sheet->SetColumnWidth($alphabet[$pass_failColIndex], 20);
     //**sets its text weight to bold */
-    $sheet->SetcellsToBold($alphabet[$pass_failColIndex] . STARTING_ROW . ":" . $alphabet[$pass_failColIndex] . $lastRowIndex);
+    $sheet->SetcellsToBold($alphabet[$pass_failColIndex] . STARTING_ROW_SE . ":" . $alphabet[$pass_failColIndex] . $lastRowIndex);
     $pass_failCol = $alphabet[$pass_failColIndex];
-    $averages = flatten($sheet->GetRangeValues($finalAverageCol . STARTING_ROW . ':' . $finalAverageCol . $lastRowIndex));
-    $pass_failResults = flatten($sheet->GetRangeValues($pass_failCol . STARTING_ROW . ':' . $pass_failCol . $lastRowIndex));
+    $averages = flatten($sheet->GetRangeValues($finalAverageCol . STARTING_ROW_SE . ':' . $finalAverageCol . $lastRowIndex));
+    $pass_failResults = flatten($sheet->GetRangeValues($pass_failCol . STARTING_ROW_SE . ':' . $pass_failCol . $lastRowIndex));
     $nbFails = array_count_values($pass_failResults)['FAIL'] ?? 0;
     //retrieves the best average
     $bestAverage = round(max($averages), 2);
@@ -363,17 +364,20 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->SetBorders("D" . ($average_row_number + 8) . ":E" . ($average_row_number + 10), "outline", "BORDER_MEDIUM");
 
     //centers text
-    $sheet->SetCenter("E" . STARTING_ROW . ":" . $alphabet[$lastColIndex - 1] . ($average_row_number + 10), true, true);
-    $sheet->SetCenter("A" . STARTING_ROW . ":A" . ($average_row_number + 10), true, true);
+    $sheet->SetCenter("E" . STARTING_ROW_SE . ":" . $alphabet[$lastColIndex - 1] . ($average_row_number + 10), true, true);
+    $sheet->SetCenter("A" . STARTING_ROW_SE . ":A" . ($average_row_number + 10), true, true);
 
     //freezes the headers
     $sheet->FreezePane(1, 2);
 
     //deals with rows where the student fails
-    for ($row = STARTING_ROW; $row <= $average_row_number + 10; $row++) {
+    for ($row = STARTING_ROW_SE; $row <= $average_row_number + 10; $row++) {
         //if the student dont pass the semester, he fails
         $value = $sheet->GetCellValue($conversionColIndex + 1, $row);
-        if ($value == "Not passed") {
+        $value2 = $sheet->GetCellValue($pass_of_fail_colIndex + 1, $row);
+        // $value2 = "Fail";
+        //dd(!in_array($value2, ["", "PASS","Pass"]));
+        if (!in_array($value2, ["", "PASS","Pass"])) {
             $sheet->SetColor("A" . $row, 'ff' . RED); //adds alpha to the bg color
             $sheet->SetColor("E" . $row . ":" . $alphabet[$lastColIndex - 1] . $row, 'ff' . RED); //adds alpha to the bg color
             $sheet->SetTextColor($alphabet[$InternationalGradeIndex] . $row, LITE_DARK);

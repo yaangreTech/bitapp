@@ -289,7 +289,7 @@ function diplomaAttestation($lang = "fr", $student_name, $birth_date, $location,
     $pdf::SetAlpha(0.14);
 
 
-    $pdf::Image(TCPDF_IMAGE_PATH, 150, 250, 300, 100, '', '', '', false, 300, '', false, false, 0, false, true, false);
+    $pdf::Image( $logoPath, 150, 250, 300, 100, '', '', '', false, 300, '', false, false, 0, false, true, false);
 
     // ---------------------------------------------------------
 
