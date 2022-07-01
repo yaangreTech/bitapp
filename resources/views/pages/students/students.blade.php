@@ -40,10 +40,6 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">Student list</a>
                             </li>
-                            <li class="breadcrumb-item bcrumb-2">
-                                <a href="#" onClick="return false;">CS</a>
-                            </li>
-                            <li class="breadcrumb-item active">CS1</li>
                         </ul>
                     </div>
                 </div>
@@ -54,8 +50,9 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>CS1 </strong> List
+                                <strong class="page-title"></strong> Student list
                             </h2>
+                          
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"

@@ -161,15 +161,16 @@
                                                 </div>
                                             </div>
                                         </div> --}}
-                                            <div class="col-md-12">
-                                                <button id="{{ Auth::user()->id }}"
-                                                    onclick="modifier('/profile/'+this.id,'update_profile',null)"
-                                                    class="btn btn-primary btn-round">Save Changes</button>
-                                            </div>
+                                           
 
                                         </div>
                                     </div>
                                 </form>
+                                <div class="col-md-12">
+                                    <button id="{{ Auth::user()->id }}"
+                                        onclick="modifier('/profile/'+this.id,'update_profile', null, true);"
+                                        class="btn btn-primary btn-round">Save Changes</button>
+                                </div>
                             </div>
                         </div>
                     </div>

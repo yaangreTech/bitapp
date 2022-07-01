@@ -1,5 +1,7 @@
 var marks_management_modulus = JSON.parse(currentActivedb.getItem('marks_management'));
 console.log(marks_management_modulus);
+
+var bruch = 1;
 $(function() {
 
     getModulusOf(marks_management_modulus.year, marks_management_modulus.semesterID)
@@ -115,9 +117,10 @@ function marksModulusData(data) {
         })
         // $('.page-title').html(data.level.name + ' > ' + data.semestre_name.name)
         // var breadcrumb = data.level.branche.departement.name.
-
-    setBreadcrumb(data.level.name + '&' + data.name, data.level.branche.departement.name + '&' + data.level.name + '&' + data.name);
-
+    if (bruch == 1) {
+        setBreadcrumb(data.level.name + '&' + data.name, data.level.branche.departement.name + '&' + data.level.name + '&' + data.name);
+        bruch = -1;
+    }
     elements.length > 0 ? $('#marks_modulus').html(elements) : $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No Modulus for this level Semester</h3></div>');
 
 }

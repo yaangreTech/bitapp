@@ -98,7 +98,7 @@ function studentData(data) {
     var elements = ''
     console.log(data);
     student_editparames = []
-    $.each(data, function(key, insc) {
+    $.each(data.inscriptions, function(key, insc) {
         student_editparames.push('studentID=' + insc.student.matricule +
             '&studentFirstName=' + insc.student.first_name +
             '&studentLastName=' + insc.student.Last_name +
@@ -159,6 +159,12 @@ function studentData(data) {
         elements += '    </td>'
         elements += '</tr>'
     });
+
+
+    setBreadcrumb(
+        data.page_title.branche.name + '&' + data.page_title.label,
+        data.page_title.branche.departement.name + '&' + data.page_title.branche.name + '&' + data.page_title.name
+    );
     console.log(student_editparames);
     $.fn.dataTable.isDataTable('#students_table') && students_table.destroy();
 

@@ -7,12 +7,15 @@ use App\Models\Compteur;
 use App\Models\Conforme;
 use App\Models\Sessione;
 use App\Models\Inscription;
+use App\Http\Controllers\TranscriptController;
 
 // require "./diplom.php";
 require_once(app_path('CustomPhp/PdfPhp/diplom.php'));
 require_once(app_path('CustomPhp/PdfPhp/diplomaAttestation.php'));
 require_once(app_path('CustomPhp/PdfPhp/internshipCertificate.php'));
 require_once(app_path('CustomPhp/PdfPhp/schoolCertificate.php'));
+require_once(app_path('CustomPhp/PdfPhp/gradeTranscript.php'));
+require_once(app_path('CustomPhp/PdfPhp/grateTranscriptMpdf.php'));
 
 class tcpfController extends Controller
 {
@@ -77,6 +80,19 @@ class tcpfController extends Controller
         InternshipCertificate('dvjdviodvoidvuiodyvhudyvduivydvuiyvdivdyviuvyviudvdyvdiuvyduivdyuvidvhdiuvhdioveujieyvuetyey7vtev8y', 'Nana Jeremie');
     }
 
+    public function generateGade($inscription_id, $with_session=true, $lang='en'){
+        
+    $today=Carbon::now()->format('l F jS\\, Y');
+    $transcriptcontroller=new TranscriptController();
+        if($with_session){
+            document($lang = "en",$today,  json_decode($transcriptcontroller->viewGrades_with_session_Of($inscription_id)->getContent(),false));
+            // grateTranscript($lang = "en",$today,  json_decode($transcriptcontroller->viewGrades_with_session_Of($inscription_id)->getContent(),false), $saveInFolder = ""); 
+        }else{
+            document($lang = "en",$today, json_decode($transcriptcontroller->viewGradesOf($inscription_id)->getContent(),false));
+            // grateTranscript($lang = "en",$today, json_decode($transcriptcontroller->viewGradesOf($inscription_id)->getContent(),false) , $saveInFolder = ""); 
+            
+        } 
+    }
 
     public function getaverege($inscription_id)
     {

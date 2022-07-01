@@ -16,11 +16,7 @@
     var marksRef = JSON.parse(currentActivedb.getItem('marksRef'));
     console.log(marksRef);
             viewMarksOf(marksRef.year, marksRef.modulusID)
-            
-
           function  display_with_session(checked){
-           
-
               if(checked == true){
                 viewMarks_with_session_Of(marksRef.year, marksRef.modulusID);
               }else{

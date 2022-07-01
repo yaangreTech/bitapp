@@ -14,6 +14,9 @@ $(function() {
         console.log('without filter');
     }
 
+
+
+
 })
 
 
@@ -137,21 +140,21 @@ function setBreadcrumb(titles = '', breadcrumIitems = '') {
 }
 
 
-function setRang(initial, final) {
-    $("#levels_range").ionRangeSlider({
-        type: "double",
-        grid: true,
-        from: initial,
-        to: final,
-        values: [
-            "Licence 1", "Licence 2",
-            "Licence 3", "Master 1",
-            "Master 2"
-        ],
-        input_values_separator: 'x'
-            // values: [0, 10, 100, 1000, 10000, 100000, 1000000]
-    });
-}
+// function setRang(initial, final) {
+//     $("#levels_range").ionRangeSlider({
+//         type: "double",
+//         grid: true,
+//         from: initial,
+//         to: final,
+//         values: [
+//             "Licence 1", "Licence 2",
+//             "Licence 3", "Master 1",
+//             "Master 2"
+//         ],
+//         input_values_separator: 'x'
+//             // values: [0, 10, 100, 1000, 10000, 100000, 1000000]
+//     });
+// }
 
 
 function loading() {
@@ -166,4 +169,17 @@ function loading() {
         '</div>' +
         '</div>' +
         '<span class="m-l-10">loading...</span>'
+}
+
+
+
+function yeardataMapper(value) {
+    console.log(value);
+    // $('#start_date').on('change', function(e){
+    //     console.log($('#start_date').val())
+    // }
+    // )
+    $('#start_date').val((new Date(value).toISOString().split('T')[0]));
+    $('#year_name').val((new Date(value).getFullYear()) + '-' + (new Date(value).getFullYear() + 1))
+    $('#promotion_name').val('Promotion-' + (new Date(value).getFullYear() + 3))
 }

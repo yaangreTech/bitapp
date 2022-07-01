@@ -1,19 +1,5 @@
 <div class="menu">
     <ul class="list">
-        {{-- <li>
-            <div class="sidebar-profile clearfix">
-                <div class="profile-img">
-                    <img src="assets/images/loug.png" alt="profile">
-                </div>
-                <div class="profile-info">
-                    <h3>Sanou Lougoudoro</h3>
-                    
-                    <p>Welcome Admin sanou !</p>
-                </div>
-            </div>
-        </li> --}}
-        {{-- <li class="header">Navigation</li> --}}
-
         <li>
             <a href="{{ route('dashboard') }}" id="Dashboard" onClick="setActiveId('Dashboard')">
                 <i class="menu-icon ti-home"></i>
@@ -154,7 +140,8 @@
         </li>
 
         {{-- Marks management menus --}}
-        <li>
+        @if (Auth::user()->right->title != 'isCh')
+        <li >
             <a href="#" onClick="return false;" class="menu-toggle">
                 <i class="menu-icon ti-marker-alt"></i>
                 <span>Marks management</span>
@@ -252,7 +239,7 @@
                 @endforelse
             </ul>
         </li>
-
+    @endif
 
         {{-- genarated average management menus --}}
         <li>
@@ -262,7 +249,7 @@
             </a>
             <ul class="ml-menu">
                 @forelse ($departements as $departement)
-                    @if (Auth::user()->right->title == 'isAdmin')
+                    @if (Auth::user()->right->title == 'isAdmin'||Auth::user()->right->title == 'isCh')
                         <li>
                             <a href="#" onClick="return false;" class="menu-toggle">
                                 <span>{{ $departement->name }}</span>
@@ -368,7 +355,7 @@
                     </a>
                     <ul class="ml-menu">
                         @forelse ($departements as $departement)
-                            @if (Auth::user()->right->title == 'isAdmin')
+                            @if (Auth::user()->right->title == 'isAdmin' ||Auth::user()->right->title == 'isCh')
                                 <li>
                                     <a href="#" onClick="return false;" class="menu-toggle">
                                         <span>{{ $departement->name }}</span>
@@ -458,7 +445,6 @@
                                 <span>Master</span>
                             </a>
                         </li>
-
                     </ul>
                 </li>
 
@@ -523,8 +509,6 @@
                     }))
                     break;
                 case 'grade_transcript':
-                    // grade transcript part
-                    // console.log(id);
                     console.log(id.split('_')[id.split('_').length - 1]);
                     currentActivedb.setItem('grade_transcript', JSON.stringify({
                         'year': 0,

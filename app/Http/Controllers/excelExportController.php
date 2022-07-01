@@ -55,6 +55,7 @@ class excelExportController extends Controller
         // peut etre appelee pour compresser et telechearger
         zipAndDownload($academicYear . "_gradeReport.zip");
     }
+    
     public function genSemester($yearID, $semesterID, $isWithSession)
     {
         // $semesterJson = app_path('CustomPhp/ExcelPhp/Examples_excel');

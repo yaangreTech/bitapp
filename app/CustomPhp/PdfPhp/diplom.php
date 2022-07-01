@@ -19,7 +19,7 @@ function pdfFile(
     $option
 ) {
     $prefName_en = $isMan ? "Mr" : "Mrs";
-    $prefName_fr = $isMan ? "Mr" : "Mlle";
+    $prefName_fr = $isMan ? "M" : "Mlle";
     $saveInFolder = /*public_path()*/ '';
     //checks whether the file must be downloaded or kept in one folder
     $download = empty($saveInFolder);

@@ -43,10 +43,6 @@
                             <li class="breadcrumb-item bcrumb-2">
                                 <a href="#" onClick="return false;">grade transcripts</a>
                             </li>
-                            {{-- <li class="breadcrumb-item bcrumb-2">
-                                <a href="#" onClick="return false;">CS</a>
-                            </li>
-                            <li class="breadcrumb-item active">cs 1</li> --}}
                         </ul>
                     </div>
                 </div>

@@ -208,19 +208,16 @@ class Csv extends Controller
 
     public function downloadStudentList_themplate(Request $request)
     {
-        $file = public_path() . '/themplate/studentList_themplate.csv';
 
-        $headers = ['Content-Type: text/csv'];
+        $csv = Writer::createFromFileObject(new SplTempFileObject());
+        $csv->setDelimiter(';');
 
-        if (file_exists($file)) {
-            return \Response::download(
-                $file,
-                'studentList_themplate.csv',
-                $headers
-            );
-        } else {
-            echo 'File not found.';
-        }
+        $csv->setOutputBOM(Reader::BOM_UTF8);
+
+        $csv->insertAll([['sep=;'],['ID','Name','Forename','Gender','Phone','Birthdate','Birthplace','Email','ParentName','ParentForename','Parent_type','Parent_profession','ParentPhone']]);
+
+
+        $csv->output('studentList_themplate.csv');
     }
 
  

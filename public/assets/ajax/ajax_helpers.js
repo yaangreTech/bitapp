@@ -119,7 +119,7 @@ function suprimer(url, nexAction = null, loader = false) {
 // Modification
 function modifier(url, formID, nexAction = null, loader = false) {
     var values = $('#' + formID).serialize();
-    console.log(values);
+    // console.log(values);
     keys.forEach(element => {
         $('.' + element).html('');
     });

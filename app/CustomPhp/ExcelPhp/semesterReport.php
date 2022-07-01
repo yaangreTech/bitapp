@@ -331,6 +331,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $averages = flatten($sheet->GetRangeValues($finalAverageCol . STARTING_ROW_SE . ':' . $finalAverageCol . $lastRowIndex));
     $pass_failResults = flatten($sheet->GetRangeValues($pass_failCol . STARTING_ROW_SE . ':' . $pass_failCol . $lastRowIndex));
     $nbFails = array_count_values($pass_failResults)['FAIL'] ?? 0;
+    $nbFails += array_count_values($pass_failResults)['Fail'] ?? 0;
     //retrieves the best average
     $bestAverage = round(max($averages), 2);
     //retrieves the lowest average

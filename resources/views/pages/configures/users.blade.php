@@ -103,6 +103,12 @@
                                                             <br />of {{ $user->department->name }}
                                                         </p>
                                                     @endif
+                                                    @if ($user->right->title == 'isCh')
+                                                    <p>
+                                                        Head of Scolarity
+                                                        <br />of BIT
+                                                    </p>
+                                                @endif
 
 
                                                     <div>

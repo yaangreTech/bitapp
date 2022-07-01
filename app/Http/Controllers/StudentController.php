@@ -77,7 +77,12 @@ class StudentController extends Controller
         foreach ($inscriptions as $inscription) {
             $inscription->student->parent;
         }
-        return response()->json($inscriptions);
+        $level=Level::findOrFail($classID);
+        $level->branche->departement;
+        return response()->json([
+        'page_title'=> $level,
+            'inscriptions'=>$inscriptions
+        ]);
     }
 
     public function viewStudentsInfo($inscID)
@@ -106,11 +111,11 @@ class StudentController extends Controller
             'studentClasse' => ['required'],
             'studentPromotion' => ['required'],
             'studentBirthPlace'=> ['required'],
-            'studentParentFirstName' => ['required'],
-            'studentParentLastName' => ['required'],
-            'studentParentPhone' => ['required'],
-            'studentParentProfession' => ['required'],
-            'studentParentType' => ['required'],
+            // 'studentParentFirstName' => ['required'],
+            // 'studentParentLastName' => ['required'],
+            // 'studentParentPhone' => ['required'],
+            // 'studentParentProfession' => ['required'],
+            // 'studentParentType' => ['required'],
             // 'year_id'=>['required'],
         ]);
 
@@ -160,11 +165,11 @@ class StudentController extends Controller
             'studentBirthPlace'=> ['required'],
             'studentPhone' => ['required'],
             'studentEmail' => ['required'],
-            'studentParentFirstName' => ['required'],
-            'studentParentLastName' => ['required'],
-            'studentParentPhone' => ['required'],
-            'studentParentProfession' => ['required'],
-            'studentParentType' => ['required'],
+            // 'studentParentFirstName' => ['required'],
+            // 'studentParentLastName' => ['required'],
+            // 'studentParentPhone' => ['required'],
+            // 'studentParentProfession' => ['required'],
+            // 'studentParentType' => ['required'],
         ]);
 
         $inscription = Inscription::findOrFail($id);

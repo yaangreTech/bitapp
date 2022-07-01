@@ -46,10 +46,12 @@
                                         <div class="form-group form-float">
                                             <label for="year_date">Start date</label>
                                             <div class="form-line">
-                                                <input type="text"  name='start_date'  id="start_date" 
-                                                value='{{date('Y-m-d')}}' 
-                                                class=" form-control"
-                                                    placeholder="Please choose a date..." required readonly>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input name='start_date'  id="start_date" onchange="yeardataMapper(this.value)"   type="text" class="datepicker form-control"
+                                                            placeholder="Please choose a date..." required>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                       
@@ -57,15 +59,15 @@
                                             <div class="col-md-6 form-group form-float">
                                                 <label for="Year_label">Year label</label>
                                                 <div class="form-line">
-                                                    <input id="year_name" name="year_name" type="text" value="{{date('Y').'-'.(date('Y')+1)}}" name="Year_label" class="form-control"
+                                                    <input id="year_name" name="year_name" type="text" value="" name="Year_label" class="form-control"
                                                         placeholder="Year label" required readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 form-group form-float">
                                                 <label for="promotion_name">Promotion name</label>
                                                 <div class="form-line">
-                                                    <input id="promotion_name" name='promotion_name' value="{{'Promotion-'.(date('Y')+3)}}"  type="text" name="promotion_name" class="form-control"
-                                                        placeholder="Promotion name*" required>
+                                                    <input id="promotion_name" name='promotion_name' value=""  type="text" name="promotion_name" class="form-control"
+                                                        placeholder="Promotion name" required readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -88,5 +90,8 @@
             </div> --}}
         </div>
     </div>
+    <script>
+     
+    </script>
 </div>
 
