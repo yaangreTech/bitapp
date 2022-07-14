@@ -49,8 +49,10 @@ class Csv extends Controller
         try {
             $csv->addStreamFilter('convert.iconv.ISO-8859-15/UTF-8');
 
-            $csv->setHeaderOffset(0);
+            $csv->setDelimiter($this->detectDelimiter($request->ficher1));
 
+            // $csv->setHeaderOffset(0);
+            
             $retour = [
                 [
                     'line' => 'Malformed error',
@@ -60,131 +62,77 @@ class Csv extends Controller
                 ],
             ];
 
-            $header = $csv->getHeader(); //returns the CSV header record
-            $records = $csv->getRecords();
+            $csv->setHeaderOffset(0);
+            $header = $csv->getHeader(); 
+            
+            //returns the CSV header record
+            $records = $csv->getRecords(['ID','Name','Forename','Gender','Phone','Birthdate','Birthplace','Email','ParentName','ParentForename','Parent_type','Parent_profession','ParentPhone']);
 
-            $tableau = [];
+        
             $current_year = Year::all()->last();
-            if (count(explode(';', $header[0])) >= 12) {
+            if (count( $header) >= 12 && $header==['ID','Name','Forename','Gender','Phone','Birthdate','Birthplace','Email','ParentName','ParentForename','Parent_type','Parent_profession','ParentPhone']) {
                 $retour = [];
-                foreach ($records as $cs) {
-                    foreach ($cs as $c) {
-                        // print_r(explode(';', $c));
-                        $donner = explode(';', $c);
-
+                foreach ($records as $donner) {
+                    
                         $studentM = Student::where(
-                            'matricule',
-                            mb_convert_encoding($donner[0], 'UTF-8', 'UTF-8')
+                            'matricule',$donner['ID'], 
                         )->first();
-                        $studentE = Student::where(
-                            'email',
-                            mb_convert_encoding($donner[6], 'UTF-8', 'UTF-8')
-                        )->first();
-                        // dd($studentM);
+                        $studentE = Student::where('email',$donner['Email'])->first();
+                       
 
                         if ($studentM == null and $studentE == null) {
-                            $student_id = Student::insertGetId([
-                                'matricule' => mb_convert_encoding(
-                                    $donner[0],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'first_name' => ucwords(
-                                    mb_convert_encoding(
-                                        $donner[1],
-                                        'UTF-8',
-                                        'UTF-8'
-                                    )
-                                ),
-                                'Last_name' => ucwords(
-                                    mb_convert_encoding(
-                                        $donner[2],
-                                        'UTF-8',
-                                        'UTF-8'
-                                    )
-                                ),
-                                'gender' => mb_convert_encoding(
-                                    $donner[3],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'phone' => mb_convert_encoding(
-                                    $donner[4],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'birth_date' => mb_convert_encoding(
-                                    $donner[5],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'birth_place' => mb_convert_encoding(
-                                    $donner[6],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'email' => mb_convert_encoding(
-                                    $donner[7],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'promotion_id' => $request->studentPromotion,
-                                'created_at' => Carbon::now(),
-                                'updated_at' => Carbon::now(),
-                            ]);
+                            try {
 
-                            $parent = Parente::insert([
-                                'student_id' => $student_id,
-                                'first_name' => ucwords(
-                                    mb_convert_encoding(
-                                        $donner[8],
-                                        'UTF-8',
-                                        'UTF-8'
-                                    )
-                                ),
-                                'Last_name' => ucwords(
-                                    mb_convert_encoding(
-                                        $donner[9],
-                                        'UTF-8',
-                                        'UTF-8'
-                                    )
-                                ),
-                                'type' => mb_convert_encoding(
-                                    $donner[10],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'profession' => mb_convert_encoding(
-                                    $donner[11],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'phone' => mb_convert_encoding(
-                                    $donner[12],
-                                    'UTF-8',
-                                    'UTF-8'
-                                ),
-                                'created_at' => Carbon::now(),
-                                'updated_at' => Carbon::now(),
-                            ]);
-
-                            $inscription = Inscription::insert([
-                                'promotion_id' => $request->studentPromotion,
-                                'student_id' => $student_id,
-                                'level_id' => $request->studentClasse,
-                                'year_id' => $current_year->id,
-                                'created_at' => Carbon::now(),
-                                'updated_at' => Carbon::now(),
-                            ]);
-
-                            array_unshift($retour, [
-                                'line' => 'Student with ID: ' . $donner[0],
-                                'type' => 'bg-green',
-                                'message' => 'succesffuly inserted',
-                            ]);
+                                $student_id = Student::insertGetId([
+                                    'matricule' =>mb_convert_encoding($donner['ID'],'UTF-8'),
+                                    'first_name' => ucwords(mb_convert_encoding($donner['Name'],'UTF-8')),
+                                    'Last_name' =>  ucwords(mb_convert_encoding($donner['Forename'],'UTF-8')),
+                                    'gender' => ucwords(mb_convert_encoding($donner['Gender'],'UTF-8')),
+                                    'phone' =>  mb_convert_encoding($donner['Phone'],'UTF-8'),
+                                    'birth_date' => mb_convert_encoding($donner['Birthdate'],'UTF-8'),
+                                    'birth_place' => ucwords(mb_convert_encoding($donner['Birthplace'],'UTF-8')),
+                                    'email' => mb_convert_encoding($donner['Email'],'UTF-8'),
+                                    'promotion_id' => $request->studentPromotion,
+                                    'created_at' => Carbon::now(),
+                                    'updated_at' => Carbon::now(),
+                                ]);
+    
+                                $parent = Parente::insert([
+                                    'student_id' => $student_id,
+                                    'first_name' => ucwords(mb_convert_encoding($donner['ParentName'],'UTF-8')),
+                                    'Last_name' =>  ucwords(mb_convert_encoding($donner['ParentForename'],'UTF-8')),
+                                    'type' =>  ucwords(mb_convert_encoding($donner['Parent_type'],'UTF-8')),
+                                    'profession' => ucwords(mb_convert_encoding($donner['Parent_profession'],'UTF-8')),
+                                    'phone' =>  mb_convert_encoding($donner['ParentPhone'],'UTF-8'),
+                                    'created_at' => Carbon::now(),
+                                    'updated_at' => Carbon::now(),
+                                ]);
+    
+                                $inscription = Inscription::insert([
+                                    'promotion_id' => $request->studentPromotion,
+                                    'student_id' => $student_id,
+                                    'level_id' => $request->studentClasse,
+                                    'year_id' => $current_year->id,
+                                    'created_at' => Carbon::now(),
+                                    'updated_at' => Carbon::now(),
+                                ]);
+    
+                                array_unshift($retour, [
+                                    'line' => 'Student with ID: ' . mb_convert_encoding($donner['ID'],'UTF-8'),
+                                    'type' => 'bg-green',
+                                    'message' => 'succesffuly inserted',
+                                ]);
+                            } catch (\Throwable $th) {
+                                array_unshift($retour, [
+                                    'line' => 'Student with ID: ' . mb_convert_encoding($donner['ID'],'UTF-8'),
+                                    'type' => 'bg-red',
+                                    'message' => 'Not inserted, Please verify your data',
+                                ]);
+                            }
+                        
                         } else {
                             array_unshift($retour, [
-                                'line' => 'Student with ID: ' . $donner[0],
+                                'line' => 'Student with ID: ' . mb_convert_encoding($donner['ID'],'UTF-8'),
                                 'type' => 'bg-red',
                                 'message' =>
                                     'Not inserted, ID or email duplication',
@@ -192,13 +140,14 @@ class Csv extends Controller
                         }
                     }
                 }
-            }
+            
         } catch (\Exception $e) {
+            // dd($e);
             $retour = [
                 [
                     'line' => 'Empty File',
                     'type' => 'bg-red',
-                    'message' => 'The file is empty! Please fill it and retry',
+                    'message' => 'The file is empty Or a cell data is malformed! Please fill it and retry',
                 ],
             ];
         }
@@ -212,9 +161,10 @@ class Csv extends Controller
         $csv = Writer::createFromFileObject(new SplTempFileObject());
         $csv->setDelimiter(';');
 
-        $csv->setOutputBOM(Reader::BOM_UTF8);
+       
 
-        $csv->insertAll([['sep=;'],['ID','Name','Forename','Gender','Phone','Birthdate','Birthplace','Email','ParentName','ParentForename','Parent_type','Parent_profession','ParentPhone']]);
+        $csv->insertOne(['sep=;',]);
+        $csv->insertOne( ['ID','Name','Forename','Gender','Phone','Birthdate','Birthplace','Email','ParentName','ParentForename','Parent_type','Parent_profession','ParentPhone']);
 
 
         $csv->output('studentList_themplate.csv');
@@ -231,7 +181,6 @@ class Csv extends Controller
         $csv = Writer::createFromFileObject(new SplTempFileObject());
         $csv->setDelimiter(';');
 
-        $csv->setOutputBOM(Reader::BOM_UTF8);
         $year = Year::all()->last();
         $modulus = Module::findOrFail($modulusID);
         // $modulus->tu->semester->level->branche;
@@ -266,20 +215,22 @@ class Csv extends Controller
 
         // dd($csv);
 
-        $csv->output(
-            $modulus->tu->semester->level->branche->name .
-                '-' .
-                $modulus->tu->semester->level->label .
-                '-' .
-                $modulus->tu->semester->label .
-                '-' .
-                $modulus->tu->name .
-                '-' .
-                $modulus->name .
-                '-' .
-                $year->name .
-                '.csv'
-        );
+        $fileName=$modulus->tu->semester->level->branche->name .
+        '-' .
+        $modulus->tu->semester->level->label .
+        '-' .
+        $modulus->tu->semester->label .
+        '-' .
+        $modulus->tu->name .
+        '-' .
+        $modulus->name .
+        '-' .
+        $year->name .
+        '.csv';
+
+        $fileName=str_replace('/','Or',$fileName);
+
+        $csv->output($fileName);
     }
 
     public function detectDelimiter($csvFile)
@@ -353,6 +304,7 @@ class Csv extends Controller
                                             $mark=Mark::where('test_id', $test->id)->where('inscription_id',$insc->id)->first();
                                     
                                            if($record[$test->title]!="" && is_float(floatval( join('.', explode(',', $record[$test->title]))))){
+                                           if(floatval( join('.', explode(',', $record[$test->title])))>=0 && floatval( join('.', explode(',', $record[$test->title])))<=20){
                                             if($mark!=null){
                                                 $mark->value=floatval(join('.',explode(',', $record[$test->title])));
                                                 $mark=$mark->update();
@@ -379,6 +331,14 @@ class Csv extends Controller
                                                 ]);
 
                                             }
+                                           }else{
+                                            array_push($record, [
+                                                'line' => 'Student with ID '.$record['ID'].','.$test->title.' mark Not inserted !',
+                                                'type' => 'bg-red',
+                                                'message' =>
+                                                    'Mark is higher than 20 Or lower then 0',
+                                            ]);
+                                           }
                                            }else{
                                             array_push($retour, [
                                                 'line' => 'Student with ID '.$record['ID'].','.$test->title.' mark Not inserted !',

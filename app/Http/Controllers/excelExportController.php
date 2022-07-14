@@ -5,6 +5,7 @@ use ZipArchive;
 use App\Models\Year;
 use App\Models\Level;
 use App\Models\Semester;
+use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -66,11 +67,14 @@ class excelExportController extends Controller
         // $headers = json_decode(fread($file, filesize($semesterJson . '/headers.json')), true);
 
         $semesterAverages=new AverageController();
-        if($isWithSession==true){
+        if($isWithSession=='true'){
+           
             $jsons=$semesterAverages->getAverage_with_session_Of($yearID, $semesterID);
-
+          
         }else{
+           
             $jsons=$semesterAverages->getAverageOf($yearID, $semesterID);
+        
         }
         $jsons=json_decode($jsons->getContent(),true);
         $headers=[];
@@ -148,10 +152,14 @@ class excelExportController extends Controller
         $studentController=new StudentController();
         $json=$studentController->getStudentsOf($yearID,$classID);
         $jsons=json_decode($json->getContent(),true);
+        // dd($jsons);
         $level = Level::findOrFail($classID);
         $year = Year::findOrFail($yearID);
-       foreach ($jsons as $json){
+
+      
+       foreach ($jsons['inscriptions'] as $json){
         // dd($json);
+        // dd( '$json');
            array_push($data, [
             "ID Number"=> $json['student']['matricule'],
             "Last Name"=> $json['student']['first_name'],
@@ -163,14 +171,17 @@ class excelExportController extends Controller
             "Level"=> "Student",
             "Track"=> $level->branche->departement->name
           ]);
+        
        }
 
        if(count($data)!=0){
         $class =$level->branche->departement->label;
         $academicYear =  $year->name;
+        // dd($level );
         StudentsList( $data, $class, $academicYear);
        }else{
            return back();
+        //    dd($level );
        }
     }
 
@@ -185,7 +196,7 @@ class excelExportController extends Controller
         // $file = fopen($subjectJson . "/testsWeight.json", 'r');
         // $weight = json_decode(fread($file, filesize($subjectJson . "/testsWeight.json")), true);
         // fclose($file);
-        if($isWithSession==true){
+        if($isWithSession=='true'){
             $jsons=$marksInputController->viewMarksModulusMarks_with_session_Of($yearID, $modulusID);
 
         }else{
@@ -193,9 +204,16 @@ class excelExportController extends Controller
         }
 
         $jsons=json_decode($jsons->getContent(),true);
+
+     
     //   dd($jsons);
 
       $year=Year::findOrFail($yearID);
+
+      if(count($jsons)>0){
+        $year =Promotion::findOrFail($jsons['inscriptions'][0]['promotion_id'])->year;
+      }
+      
     $data=[];
     $weight=[];
         $subject = $jsons['page_title']['name'];
@@ -224,14 +242,17 @@ class excelExportController extends Controller
             $dataContent["Pass or Fail?"]= $json['status'];
 
             // dd($dataContent);
-
+          
             array_push($data, $dataContent);
         }
-        if(count($data)!==0){
+        if(count($data)!=0 && count($weight)!=0){
+            
             $weight=[$weight];
             $headers=array_keys(max($data));
             // dd($data);
+          
             SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear);
+            // dd($data);
         }else{
             return back();
         }

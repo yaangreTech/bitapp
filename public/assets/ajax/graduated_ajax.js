@@ -6,8 +6,8 @@ function getbachelorstudents(yearID) {
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log('minteneant');
-            console.log(year);
+            // console.log('minteneant');
+            // // console.log(year);
             selectionner('/bachelor-students/' + year.id, graduatedData);
             // yearData = year;
         },
@@ -25,8 +25,8 @@ function getmasterstudents(yearID) {
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log('minteneant');
-            console.log(year);
+            // console.log('minteneant');
+            // console.log(year);
             selectionner('/master-students/' + year.id, graduatedData);
             // yearData = year;
         },
@@ -41,8 +41,8 @@ function getmasterstudents(yearID) {
 function graduatedData(data) {
 
     var elements = ''
-    console.log(data);
-    // level_editparames = []
+        // console.log(data);
+        // level_editparames = []
     $.each(data, function(key, insc) {
         elements += '<tr>'
         elements += '<td>' + insc.student.matricule + '</td>'

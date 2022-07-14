@@ -47,6 +47,7 @@ function inserer(url, formID, nexAction = null, loader = false) {
                         keys.push(key);
                         $('.' + key).html(val);
                     })
+                    console.log(error.responseJSON.errors);
                 },
                 success: function(data) {
                     // executer en cas de succes
@@ -97,7 +98,7 @@ function suprimer(url, nexAction = null, loader = false) {
             }).then((result) => {
                 /* Read more about handling dismissals below */
                 if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
+                    // console.log('I was closed by the timer')
                     $.ajax({
                         type: "GET",
                         dataType: "JSON",
@@ -198,7 +199,7 @@ function desactiver(url, nexAction = null, loader = false) {
             }).then((result) => {
                 /* Read more about handling dismissals below */
                 if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
+                    // console.log('I was closed by the timer')
                     $.ajax({
                         type: "GET",
                         dataType: "JSON",
@@ -248,7 +249,7 @@ function activer(url, nexAction = null, loader = false) {
             }).then((result) => {
                 /* Read more about handling dismissals below */
                 if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
+                    // console.log('I was closed by the timer')
                     $.ajax({
                         type: "GET",
                         dataType: "JSON",
@@ -292,7 +293,7 @@ function importer(url, formID, nexAction = null, loader = false) {
         document.forms.import_form
     );
 
-    console.log(values);
+    // console.log(values);
     keys.forEach(element => {
         $('.' + element).html('');
     });

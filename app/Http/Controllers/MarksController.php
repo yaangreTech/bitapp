@@ -141,7 +141,7 @@ class MarksController extends Controller
             ]);
             
           
-            if($total_ratio+$request->test_ration-$test->ratio<100){
+            if($total_ratio+$request->test_ration-$test->ratio<=100){
 
                 $test->type = $request->test_type;
                 $test->title = $request->test_label;

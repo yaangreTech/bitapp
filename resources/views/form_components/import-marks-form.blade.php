@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body ">
-                <form id="templateTypefom" method='post' action="">
+                <form id="templateTypefom" method='post'>
                     @csrf
                     <input type="text" name="xxx" hidden/>
                 </form>

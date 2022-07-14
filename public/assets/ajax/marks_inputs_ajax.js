@@ -1,6 +1,6 @@
 $(function() {
     var marksRef = JSON.parse(currentActivedb.getItem('marksRef'));
-    console.log(marksRef);
+    // console.log(marksRef);
 
     $('#markImporter').on('hidden.bs.modal', function() {
         location.reload();
@@ -29,7 +29,7 @@ function submitwithType(type) {
     $('#templateTypefom').attr('action', 'download_marks_form_themplate/' + marksRef.modulusID + '/' + type);
     // document.forms["templateTypefom"].submit();
 
-    console.log($('#templateTypefom').attr('action'));
+    // console.log($('#templateTypefom').attr('action'));
     $('#templateTypefom').submit()
 }
 
@@ -38,13 +38,13 @@ var marksModulusSession_table = null;
 var marksModulusMarks_with_session_table = null;
 // marks
 function getMarksOf(yearID, modulusID) {
-    console.log(yearID, modulusID);
+    // console.log(yearID, modulusID);
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log(year);
+            // console.log(year);
             selectionner('/marks_modulus/get_marks_modulus_marks_of/' + year.id + '/' + modulusID, marksModulusMarksData, )
                 // $('.saveText').attr('id', year.id + '_' + modulusID);
                 // yearData = year;
@@ -55,13 +55,13 @@ function getMarksOf(yearID, modulusID) {
 }
 
 function getSessionMarksOf(yearID, modulusID) {
-    console.log(yearID, modulusID);
+    // console.log(yearID, modulusID);
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log(year);
+            // console.log(year);
             selectionner('/marks_modulus/get_marks_modulus_session_mark_of/' + year.id + '/' + modulusID, marksModulusSessionMarksData, )
                 // $('.saveText').attr('id', year.id + '_' + modulusID);
                 // yearData = year;
@@ -72,13 +72,13 @@ function getSessionMarksOf(yearID, modulusID) {
 }
 
 function viewMarksOf(yearID, modulusID) {
-    console.log(yearID, modulusID);
+    // console.log(yearID, modulusID);
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log(year);
+            // console.log(year);
             selectionner('/marks_modulus/view_marks_modulus_marks_of/' + year.id + '/' + modulusID, marksModulusMarksData_view, )
                 // $('.saveText').attr('id', year.id + '_' + modulusID);
                 // yearData = year;
@@ -90,13 +90,13 @@ function viewMarksOf(yearID, modulusID) {
 }
 
 function viewMarks_with_session_Of(yearID, modulusID) {
-    console.log(yearID, modulusID);
+    // console.log(yearID, modulusID);
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log(year);
+            // console.log(year);
             selectionner('/marks_modulus/viewMarksModulusMarks_with_session_Of/' + year.id + '/' + modulusID, marksModulusMarksData_with_session_view)
                 // $('.saveText').attr('id', year.id + '_' + modulusID);
                 // yearData = year;
@@ -111,7 +111,7 @@ var brochur = 0;
 function marksModulusMarksData_view(data) {
     // console.log(data);
     var tbody_elements = ''
-    console.log(data);
+        // console.log(data);
     test_editparames = []
     var t_pourcentage = 0;
     var thead_elements = ' <tr><th colspan="2" class="center"><span class="page-title">' + data.page_title.name + '</span></th>'
@@ -146,12 +146,12 @@ function marksModulusMarksData_view(data) {
         tbody_elements += '</tr>'
     })
 
-    console.log('tbody_elements');
+    // console.log('tbody_elements');
 
     brochur == 0 && setBreadcrumb(
         /* data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
         data.page_title.name,
-        data.page_title.tu.semester.level.branche.departement.name + '&' + data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.name + '&' + data.page_title.tu.name + '&' + data.page_title.name
+        data.page_title.tu.semester.level.branche.departement.name + '&&&' + data.page_title.tu.semester.level.name + '&&&' + data.page_title.tu.semester.name + '&&&' + data.page_title.tu.name + '&&&' + data.page_title.name
     );
     brochur = 1;
 
@@ -161,7 +161,7 @@ function marksModulusMarksData_view(data) {
     if (data.testList != null && thead_elements.length > 0) {
         $('#marksModulusMarks_head').html(thead_elements)
         tbody_elements.length > 0 ? $('#marksModulusMarks_body').html(tbody_elements) : $('#list_corps').html('<div><h3 class="align-center">No Students in this level</h3></div>');
-        console.log('fini');
+        // console.log('fini');
     } else {
         $('#list_corps').html('<div><h3 class="align-center">No Test for this modulus</h3></div>');
     }
@@ -172,9 +172,9 @@ function marksModulusMarksData_view(data) {
 }
 
 function marksModulusMarksData_with_session_view(data) {
-    console.log(data);
+    // console.log(data);
     var tbody_elements = ''
-    console.log(data);
+        // console.log(data);
     test_editparames = []
     var t_pourcentage = 0;
     var thead_elements = ' <tr><th colspan="2" class="center"><span class="page-title">' + data.page_title.name + ' [with Session]</span></th>'
@@ -225,7 +225,7 @@ function marksModulusMarksData_with_session_view(data) {
     if (data.testList != null && thead_elements.length > 0) {
         $('#marksModulusMarks_head').html(thead_elements)
         tbody_elements.length > 0 ? $('#marksModulusMarks_body').html(tbody_elements) : null;
-        console.log('fini');
+        // console.log('fini');
     } else {
         // $('#list_corps').html('<div><h3 class="align-center">No Test for this modulus</h3></div>');
     }
@@ -242,7 +242,7 @@ function marksModulusMarksData_with_session_view(data) {
 function marksModulusMarksData(data) {
     var thead_elements = ' <tr><th>Matricule</th><th>Full name</th>'
     var tbody_elements = ''
-    console.log(data);
+        // console.log(data);
     var total_ratio = 0;
     test_editparames = []
     $.each(data.testList, function(key, test) {
@@ -271,7 +271,7 @@ function marksModulusMarksData(data) {
     setBreadcrumb(
         /* data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
         data.page_title.name,
-        data.page_title.tu.semester.level.branche.departement.name + '&' + data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.name + '&' + data.page_title.tu.name + '&' + data.page_title.name
+        data.page_title.tu.semester.level.branche.departement.name + '&&&' + data.page_title.tu.semester.level.name + '&&&' + data.page_title.tu.semester.name + '&&&' + data.page_title.tu.name + '&&&' + data.page_title.name
     );
 
     $.fn.dataTable.isDataTable('#marksModulusMarks_table') && marksModulusMarks_table.destroy();
@@ -279,7 +279,7 @@ function marksModulusMarksData(data) {
     if (data.testList != null) {
         $('#marksModulusMarks_head').html(thead_elements)
         tbody_elements.length > 0 ? $('#marksModulusMarks_body').html(tbody_elements) : $('#list_corps').html('<div><h3 class="align-center">No Students in this level</h3></div>');
-        console.log('fini');
+        // console.log('fini');
     } else {
         $('#list_corps').html('<div><h3 class="align-center">No Test for this modulus</h3></div>');
     }
@@ -287,7 +287,7 @@ function marksModulusMarksData(data) {
     // $(document).ready(function() {
     $('.editable_el').simpleedit({
         error: function(response) {
-            console.log(response.msg)
+            // console.log(response.msg)
         }
     })
     $('.editable_el').css('cursor', 'pointer')
@@ -344,7 +344,7 @@ function marksModulusSessionMarksData(data) {
     if (data.testList != null) {
         $('#marksModulusSession_head').html(thead_elements)
         tbody_elements.length > 0 ? $('#marksModulusSession_body').html(tbody_elements) : $('#session_corps').html('<div><h3 class="align-center">No Students in Session for this modulus</h3></div>');
-        console.log('fini');
+        // console.log('fini');
     } else {
         $('#session_corps').html('<div><h3 class="align-center">No Session for this modulus</h3></div>');
     }
@@ -352,7 +352,7 @@ function marksModulusSessionMarksData(data) {
     // $(document).ready(function() {
     $('.editable_el').simpleedit({
         error: function(response) {
-            console.log(response.msg)
+            // console.log(response.msg)
         }
     })
     $('.editable_el').css('cursor', 'pointer')

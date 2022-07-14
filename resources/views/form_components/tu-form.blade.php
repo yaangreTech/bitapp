@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body ">
                 <form id="wizard_with_validation" class="" method="POST">
-                    <h3>Tu references</h3>
+                    <h3>Tu references and its references</h3>
                     <fieldset>
                         <div class="form-group">
                             <div class="form-line">
@@ -60,33 +60,29 @@
                                 </div>
                             </div>
                         </div>
-                    </fieldset>
-                    <h3>Tu ECU</h3>
-                    <fieldset>
-                        {{-- <div class="form-group" style="position: absolute;"> --}}
-                        {{-- <div class="form-line"> --}}
-                        <input type="text" class="form-control" style="position: absolute; width:0px; height:0px"
+            
+                        {{-- liaison --}}
+                            <input type="text" class="form-control" style="position: absolute; width:0px; height:0px"
                             name="TU_checker" id="TU_checker" required>
                             <input type="text" class="form-control" style="position: absolute; width:0px; height:0px"
                             id="tu_id">
-                        {{-- </div> --}}
-                        {{-- </div> --}}
+
                         <div class="body">
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="ECU_name">Ecu name</label>
-                                    <input type="text" id='ECU_name' class="tdl-new form-control-radious"
-                                        placeholder="Enter ECU...">
+                                    <input type="text" id='ECU_name' class="tdl-new form-control"
+                                        placeholder="Ex: English 1">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="ECU_credict">Ecu credit</label>
-                                    <input type="number" id='ECU_credict' class="tdl-new form-control-radious"
-                                        placeholder="Enter ECU credits...">
+                                    <input type="number" id='ECU_credict' class="tdl-new form-control"
+                                        placeholder="Ex: 6">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="ECU_hours">Ecu hours</label>
-                                    <input type="number" id='ECU_hours' class="tdl-new form-control-radious"
-                                        placeholder="Enter ECU Hours...">
+                                    <input type="number" id='ECU_hours' class="tdl-new form-control"
+                                        placeholder="Ex: 120">
                                 </div>
                                 <div class="col-md-2">
                                     <button onclick="bindEcu('adding')" type="button"
@@ -95,18 +91,12 @@
                             </div>
                             <div class="tdl-content" style="max-height: 200px !important; overflow-y: scroll;">
                                 <ul id="modList" class="to-do-list ui-sortable" style="">
-
-
                                 </ul>
                             </div>
-
                         </div>
                     </fieldset>
                 </form>
-
-
             </div>
-
         </div>
     </div>
 </div>

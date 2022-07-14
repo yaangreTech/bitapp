@@ -13,7 +13,7 @@ var students_list = JSON.parse(currentActivedb.getItem('students_list'));
 
 function import_students(formID) {
     importer('import_form', formID, (data) => {
-        console.log(data);
+        // console.log(data);
         $.each(data, function(key, value) {
 
             $('#importLogs').append(
@@ -48,19 +48,19 @@ function update_student(id, formID) {
 }
 
 function delete_student(id) {
-    console.log(id);
+    // console.log(id);
     suprimer('/students/delete_student/' + id, null, true);
     // console.log(id);
 }
 
 function desable_student(id) {
-    console.log(id);
+    // console.log(id);
     desactiver('/students/disable_student/' + id, null, true);
     // console.log(id);
 }
 
 function enable_student(id) {
-    console.log(id);
+    // console.log(id);
     activer('/students/enable_student/' + id, null, true);
     // console.log(id);
 }
@@ -74,8 +74,8 @@ function getStudentOf(yearID, classID) {
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log('minteneant');
-            console.log(year);
+            // console.log('minteneant');
+            // console.log(year);
             selectionner('/students/get_students_of/' + year.id + '/' + classID, studentData);
             yearData = year;
 
@@ -83,7 +83,7 @@ function getStudentOf(yearID, classID) {
 
         },
         error: function(error) {
-            console.log(error);
+            // console.log(error);
             $('#students_table').html('<tr><td  class="center">No School year<br/><span class="font-bold">Please Create a school year before !!!</span><td></tr>')
         }
     });
@@ -96,20 +96,26 @@ function viewStudentInfos(inscID) {
 
 function studentData(data) {
     var elements = ''
-    console.log(data);
+        // console.log(data);
     student_editparames = []
-    $.each(data.inscriptions, function(key, insc) {
-        student_editparames.push('studentID=' + insc.student.matricule +
-            '&studentFirstName=' + insc.student.first_name +
-            '&studentLastName=' + insc.student.Last_name +
-            '&studentBirthDate=' + insc.student.birth_date +
-            '&studentPhone=' + insc.student.phone +
-            '&studentEmail=' + insc.student.email +
-            '&studentParentFirstName=' + insc.student.parent.first_name +
-            '&studentParentLastName=' + insc.student.parent.Last_name +
-            '&studentParentPhone=' + insc.student.parent.phone +
-            '&^studentParentProfession=' + insc.student.parent.profession +
-            '&^studentParentType=' + insc.student.parent.type);
+    inscriptions = data.inscriptions;
+    clef = -1
+    $.each(inscriptions, function(index, insc) {
+        clef++;
+        // alert(index)
+        student_editparames.push(
+            'studentID=' + insc.student.matricule +
+            '&&&studentFirstName=' + insc.student.first_name +
+            '&&&studentLastName=' + insc.student.Last_name +
+            '&&&studentBirthDate=' + insc.student.birth_date +
+            '&&&studentPhone=' + insc.student.phone +
+            '&&&studentEmail=' + insc.student.email +
+            '&&&studentParentFirstName=' + insc.student.parent.first_name +
+            '&&&studentParentLastName=' + insc.student.parent.Last_name +
+            '&&&studentParentPhone=' + insc.student.parent.phone +
+            '&&&^studentParentProfession=' + insc.student.parent.profession +
+            '&&&^studentParentType=' + insc.student.parent.type
+        );
 
         var defStatus = 'active';
         elements += '<tr>'
@@ -137,7 +143,7 @@ function studentData(data) {
         elements += '                    <a href="school-certificate/' + insc.id + '" target="_blank" >school cert...</a>'
         elements += '                </li>'
         elements += '                <li>'
-        elements += '                    <a href="#" data-toggle="modal" data-target="#update_student" onclick="editer(student_editparames[' + key + '],' + insc.id + ')">Editer</a>'
+        elements += '                    <a href="#" data-toggle="modal" data-target="#update_student" onclick="editer(student_editparames[' + clef + '],' + insc.id + ')">Editer</a>'
         elements += '                </li>'
         if (insc.status == 'active') {
             elements += '                <li>'
@@ -162,10 +168,10 @@ function studentData(data) {
 
 
     setBreadcrumb(
-        data.page_title.branche.name + '&' + data.page_title.label,
-        data.page_title.branche.departement.name + '&' + data.page_title.branche.name + '&' + data.page_title.name
+        data.page_title.branche.name + '&&&' + data.page_title.label,
+        data.page_title.branche.departement.name + '&&&' + data.page_title.branche.name + '&&&' + data.page_title.name
     );
-    console.log(student_editparames);
+    // console.log(student_editparames[0]);
     $.fn.dataTable.isDataTable('#students_table') && students_table.destroy();
 
     elements.length > 0 ? $('#student_body').html(elements) : $('#student_body').html('<tr><td colspan="8" class="center">No Students for this class<td></tr>')
@@ -178,7 +184,7 @@ function studentData(data) {
 }
 
 function vew_studentData(inscription) {
-    console.log(inscription);
+    // console.log(inscription);
     $('.s_matricule').html(inscription.student.matricule)
     $('.s_promotion').html(inscription.promotion.name)
     $('.s_classe').html(inscription.level.label)
@@ -200,9 +206,9 @@ function vew_studentData(inscription) {
 function verfierMatricule(value, compare = '') {
     // console.log(value);
     // var value = $(this).val()
-    console.log(value);
+    // console.log(value);
     if (value.length >= 7) {
-        console.log(value);
+        // console.log(value);
         selectionner('/students/verify_matricule/' + value, (data) => {
             data != false && $('.studentID').html('this id already exists')
         });
@@ -213,17 +219,17 @@ function verfierMatricule(value, compare = '') {
 
 
 function getDestinationClass(initialClassID) {
-    console.log(initialClassID);
+    // console.log(initialClassID);
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: '/school/get_year/-1',
         success: function(lastYear) {
-            console.log(lastYear);
+            // console.log(lastYear);
             selectionner('/reinscription/get_destination/' + lastYear.id + '/' + initialClassID, (data) => {
 
-                console.log('\n');
-                console.log(data);
+                // console.log('\n');
+                // console.log(data);
                 getConsernedStudentsData(data.consernedStudents);
                 bindDestination_class(data.destination_classes);
             });
@@ -251,8 +257,8 @@ function bind_action_to_important() {
 
 function getConsernedStudentsData(consernedStudents) {
     students_ids = []
-    console.log(consernedStudents);
-    // console.log(data);
+        // console.log(consernedStudents);
+        // console.log(data);
     var body_elements = '';
     var head_elements = '<tr style="height:50px"><td colspan="3" class="" >  <span id="conteur"></span> Students selected</td> <td colspan="6" ><div class="pull-right demo-switch"> '
 
@@ -274,8 +280,8 @@ function getConsernedStudentsData(consernedStudents) {
         head_elements += '<th class="center">' + semester.name + ' </th>'
     })
     head_elements += '<th class="center"> Average </th><th class="center"> Notation </th><th class="center"> Statut </th></tr>'
-    console.log('getConsernedStudentsData');
-    // console.log(data);
+        // console.log('getConsernedStudentsData');
+        // console.log(data);
     $.each(consernedStudents.inscriptions, function(key, insc) {
         body_elements += '<tr>'
         body_elements += '<td class="tbl-checkbox">'
@@ -321,7 +327,7 @@ function getConsernedStudentsData(consernedStudents) {
             students_ids = students_ids.filter(function(students_id) { return students_id != id })
         }
 
-        console.log(checked, id);
+        // console.log(checked, id);
         $('#conteur').html(students_ids.length);
 
         students_ids.length > 0 ? $('#students_ids').val(students_ids.join('_')) : $('#students_ids').val('');
@@ -355,7 +361,7 @@ function getPromotions(l3classID) {
         success: function(currentYear) {
             // console.log(lastYear);
             selectionner('end_cycle_form/get_Promotions/' + currentYear.id + '/' + l3classID, (data) => {
-                console.log(data);
+                // console.log(data);
                 // getConsernedStudentsData(data.consernedStudents);
                 bindPromotions(data);
             });
@@ -376,11 +382,11 @@ function bindPromotions(years_promotions) {
 }
 
 function getStudentsToEnd(yearID) {
-    console.log(yearID);
+    // console.log(yearID);
     var classID = $('#concerned_class').val();
 
     selectionner('end_cycle_form/get_Students/' + yearID + '/' + classID, (data) => {
-        console.log(data);
+        // console.log(data);
         getConsernedStudentsData(data);
     });
 }

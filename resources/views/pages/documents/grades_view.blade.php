@@ -14,11 +14,18 @@
             console.log(inscID);
             console.log('inscID');
             viewTranscriptOf(inscID);
+           $('#imprimegrate').attr('href','grade-transcript-file/'+inscID+'/false/en');
            function display_with_session(checked){
+            $('#imprimegrate').attr('href','grade-transcript-file/'+inscID+'/'+checked+'/en');
             if(checked == true){
+                
                 viewTranscript_with_session_Of(inscID);
+               
             }else{
                 viewTranscriptOf(inscID);  
+                imprimegrate=function(){
+                    alert('oki')
+                }
             }
            }
         </script>
@@ -48,17 +55,19 @@
                                         <h3>
                                             <b>Grade Transcripts</b>
                                            
-
-                                            <button onClick="imprimer('notes')" type="button"
+                                            <a href="" id="imprimegrate" target="_blank">
+                                                <button id="imprimegrate" type="button"
                                                 class="btn pull-right btn-border-radius btn-outline-info">
                                                 <i class="material-icons">print</i>
-                                                <span>PRINT...</span>
+                                                <span>Export to pdf</span>
                                             </button>
+                                            </a>
+                                           
                                         </h3>
-                                        <div class="form-check m-l-10 " style="position: absolute; right: 150px;top:5px;">
+                                        <div class="form-check m-l-10 " style="position: absolute; right: 170px;top:5px;">
                                 
                                             <label class="form-check-label">
-                                                <input onChange="display_with_session(this.checked)" class="form-check-input" type="checkbox"
+                                                <input  onChange="display_with_session(this.checked)" class="form-check-input" type="checkbox"
                                                     name="acceptTerms" required> With session
                                                 <span class="form-check-sign">
                                                     <span class="check"></span>
@@ -82,7 +91,7 @@
                                             <div class="col-md-12">
                                                 <div class="pull-left">
                                                     <address>
-                                                        <img src="assets/images/head_icon.png" alt="logo"
+                                                        <img width="250" src="assets/images/head_icon.png" alt="logo"
                                                             class="logo-default" />
                                                     </address>
                                                 </div>

@@ -10,6 +10,7 @@ use App\Models\Branche;
 use App\Models\Departement;
 use App\Models\Inscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -35,12 +36,50 @@ class DashboardController extends Controller
         // get all active users from the database
         $users = User::all()->where('status', 'active');
 
- 
+
 
         // return of the dashboard view + variables
         return view(
             'dashboard',
-            compact('year', 'options' ,'departments', 'levels', 'students', 'users')
+            compact('year', 'options', 'departments', 'levels', 'students', 'users')
         );
+    }
+
+    public function getChartDetails()
+    {
+        $deps = [];
+        $levs = [];
+        $seriesdata = [];
+
+
+        $departments = Departement::all();
+        $levelforms = DB::select('select * from level_formats');
+
+        $lastyear = Year::get()->last();
+
+        if ($lastyear) {
+
+            foreach ($levelforms as $levelform) {
+                array_push($levs, $levelform->label);
+            }
+            foreach ($departments as $department) {
+                $deptseries = [];
+                array_push($deps, $department->label);
+                foreach ($levelforms as $levelform) {
+                    $level_ids = Level::where('name', $levelform->name)->whereIn(
+                        'branche_id',
+                        Branche::where('departement_id', $department->id)
+                            ->select('id')
+                            ->pluck('id')
+                    )->select('id')->pluck('id');
+
+                    array_push($deptseries, Inscription::whereIn('level_id', $level_ids)->where('year_id', $lastyear->id)->count());
+                }
+
+                array_push($seriesdata, ['name' => $department->label, 'data' => $deptseries]);
+            }
+        }
+
+        return response()->json(['deps'=>$deps, 'levs'=>$levs, 'seriesdata'=>$seriesdata]);
     }
 }

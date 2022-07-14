@@ -16,7 +16,7 @@ function update_Year(id, formID) {
 }
 
 function delete_Year(id) {
-    console.log(id);
+    // console.log(id);
     suprimer('/school/delete_year/' + id, null, true);
     // console.log(id);
 }

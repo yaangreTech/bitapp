@@ -1,21 +1,21 @@
 'use strict';
-$(function () {
-    desktopChart1();
+$(function() {
+    // desktopChart1();
     desktopChart2();
-    initBedgeChart();
-    chart1();
-    chart2();
+    // initBedgeChart();
+    // chart1();
+    // chart2();
 });
 //Charts
 function desktopChart1() {
     /* Shadow */
     var draw = Chart.controllers.line.prototype.draw;
     Chart.controllers.line = Chart.controllers.line.extend({
-        draw: function () {
+        draw: function() {
             draw.apply(this, arguments);
             var ctx = this.chart.chart.ctx;
             var originalStroke = ctx.stroke
-            ctx.stroke = function () {
+            ctx.stroke = function() {
                 ctx.save();
                 ctx.shadowColor = '#000';
                 ctx.shadowBlur = 20;
@@ -113,99 +113,140 @@ function desktopChart1() {
         }
     });
 }
+
 function desktopChart2() {
 
     /* Bar Graph */
-    $("#echart_graph_line").css("height", "300")
+    $("#echart_graph_line").css("height", "340")
     var chart = document.getElementById('echart_graph_line');
     var barChart = echarts.init(chart);
 
-    barChart.setOption({
 
-        tooltip: {
-            trigger: "axis"
-        },
-        legend: {
-            data: ["Income", "Expense"],
-            textStyle: {
-                color: '#9aa0ac'
+    selectionner('/dashboard/get-chart-details', (response) => {
+        barChart.setOption({
+            tooltip: {
+                trigger: "axis"
             },
-        },
-        toolbox: {
-            show: !1
-        },
-        calculable: !1,
-        xAxis: [{
-            type: "category",
-            axisLabel: {
-                color: '#9aa0ac'
-            },
-            data: ["2000", "2001", "2002", "2003", "2004", "2005"]
-        }],
-        yAxis: [{
-            type: "value",
-            axisLabel: {
-                color: '#9aa0ac'
-            },
-        }],
-        series: [{
-            name: "Income",
-            type: "bar",
-            data: [22, 54, 37, 23, 25.6, 76],
-            markPoint: {
-                data: [{
-                    type: "max",
-                    name: "???"
-                }, {
-                    type: "min",
-                    name: "???"
-                }]
-            },
-            markLine: {
-                data: [{
-                    type: "average",
-                    name: "???"
-                }]
-            }
-        }, {
-            name: "Expense",
-            type: "bar",
-            data: [35, 45, 47, 10, 35, 70],
-            markPoint: {
-                data: [{
-                    name: "Income",
-                    value: 182.2,
-                    xAxis: 7,
-                    yAxis: 183
-                }, {
-                    name: "Expense",
-                    value: 2.3,
-                    xAxis: 11,
-                    yAxis: 3
-                }]
-            },
-            markLine: {
-                data: [{
-                    type: "average",
-                    name: "???"
-                }]
-            }
-        }],
-        color: ['#85C14D', '#7D7D7D']
+            legend: {
+                data: response.deps,
+                textStyle: {
+                    color: '#9aa0ac'
+                },
 
+            },
+            toolbox: {
+                show: !1
+            },
+            calculable: !1,
+            xAxis: [{
+                type: "category",
+                axisLabel: {
+                    color: '#9aa0ac'
+                },
+                data: response.levs,
+                name: 'Studies levels'
+            }],
+            yAxis: [{
+                type: "value",
+                axisLabel: {
+                    color: '#9aa0ac'
+                },
+                name: 'Numbers of students'
+            }],
+            series: generateseries(response.seriesdata),
+            color: ['#85C14D', '#C4AC9B', '#648787', '#FB9C74']
+
+        });
     });
+    // barChart.setOption({
+
+    //     tooltip: {
+    //         trigger: "axis"
+    //     },
+    //     legend: {
+    //         data: ["Income", "Expense"],
+    //         textStyle: {
+    //             color: '#9aa0ac'
+    //         },
+    //     },
+    //     toolbox: {
+    //         show: !1
+    //     },
+    //     calculable: !1,
+    //     xAxis: [{
+    //         type: "category",
+    //         axisLabel: {
+    //             color: '#9aa0ac'
+    //         },
+    //         data: ["Licence 1", "Licence 2", "Licence 3", "Master 1", "Master 2"]
+    //     }],
+    //     yAxis: [{
+    //         type: "value",
+    //         axisLabel: {
+    //             color: '#9aa0ac'
+    //         },
+    //     }],
+    //     series: [{
+    //             name: "Income",
+    //             type: "bar",
+    //             data: [22, 54, 37, 23, 25.6],
+    //             markPoint: {
+    //                 data: [{
+    //                     type: "max",
+    //                     name: "???"
+    //                 }, {
+    //                     type: "min",
+    //                     name: "???"
+    //                 }]
+    //             },
+    //             markLine: {
+    //                 data: [{
+    //                     type: "average",
+    //                     name: "???"
+    //                 }]
+    //             }
+    //         },
+    //         {
+    //             name: "Expense",
+    //             type: "bar",
+    //             data: [35, 45, 47, 10, 35],
+    //             markPoint: {
+    //                 data: [{
+    //                     name: "Income",
+    //                     value: 182.2,
+    //                     xAxis: 7,
+    //                     yAxis: 183
+    //                 }, {
+    //                     name: "Expense",
+    //                     value: 2.3,
+    //                     xAxis: 11,
+    //                     yAxis: 3
+    //                 }]
+    //             },
+    //             markLine: {
+    //                 data: [{
+    //                     type: "average",
+    //                     name: "???"
+    //                 }]
+    //             }
+    //         }
+    //     ],
+    //     color: ['#85C14D', '#7D7D7D']
+
+    // });
 
 
 }
+
 function initBedgeChart() {
 
     var draw = Chart.controllers.line.prototype.draw;
     Chart.controllers.line = Chart.controllers.line.extend({
-        draw: function () {
+        draw: function() {
             draw.apply(this, arguments);
             var ctx = this.chart.chart.ctx;
             var originalStroke = ctx.stroke
-            ctx.stroke = function () {
+            ctx.stroke = function() {
                 ctx.save();
                 ctx.shadowColor = '#acaeaf';
                 ctx.shadowBlur = 10;
@@ -374,6 +415,7 @@ function initBedgeChart() {
         }
     });
 }
+
 function chart1() {
     var options = {
         chart: {
@@ -420,8 +462,8 @@ function chart1() {
             title: {
                 text: '$ (thousands)',
                 style: {
-                	color: '#9aa0ac'
-            	}
+                    color: '#9aa0ac'
+                }
             },
             labels: {
                 style: {
@@ -436,7 +478,7 @@ function chart1() {
         },
         tooltip: {
             y: {
-                formatter: function (val) {
+                formatter: function(val) {
                     return "$ " + val + " thousands"
                 }
             }
@@ -485,8 +527,8 @@ function chart2() {
             title: {
                 text: '$ (thousands)',
                 style: {
-                	color: '#9aa0ac'
-            	}
+                    color: '#9aa0ac'
+                }
             },
             labels: {
                 style: {
@@ -505,4 +547,31 @@ function chart2() {
 
     chart.render();
 
+}
+
+function generateseries(serdata) {
+    var series = [];
+    serdata.forEach(element => {
+        series.push({
+            name: element.name,
+            type: "bar",
+            data: element.data,
+            markPoint: {
+                data: [{
+                    type: "max",
+                    name: "???"
+                }, {
+                    type: "min",
+                    name: "???"
+                }]
+            },
+            markLine: {
+                data: [{
+                    type: "average",
+                    name: "???"
+                }]
+            }
+        })
+    });
+    return series;
 }

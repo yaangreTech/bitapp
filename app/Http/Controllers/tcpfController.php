@@ -80,15 +80,15 @@ class tcpfController extends Controller
         InternshipCertificate('dvjdviodvoidvuiodyvhudyvduivydvuiyvdivdyviuvyviudvdyvdiuvyduivdyuvidvhdiuvhdioveujieyvuetyey7vtev8y', 'Nana Jeremie');
     }
 
-    public function generateGade($inscription_id, $with_session=true, $lang='en'){
+    public function generateGade($inscription_id, $with_session='true', $lang='en'){
         
     $today=Carbon::now()->format('l F jS\\, Y');
     $transcriptcontroller=new TranscriptController();
-        if($with_session){
-            document($lang = "en",$today,  json_decode($transcriptcontroller->viewGrades_with_session_Of($inscription_id)->getContent(),false));
+        if($with_session=='true'){
+            document($lang,$today,  json_decode($transcriptcontroller->viewGrades_with_session_Of($inscription_id)->getContent(),false));
             // grateTranscript($lang = "en",$today,  json_decode($transcriptcontroller->viewGrades_with_session_Of($inscription_id)->getContent(),false), $saveInFolder = ""); 
         }else{
-            document($lang = "en",$today, json_decode($transcriptcontroller->viewGradesOf($inscription_id)->getContent(),false));
+            document($lang,$today, json_decode($transcriptcontroller->viewGradesOf($inscription_id)->getContent(),false));
             // grateTranscript($lang = "en",$today, json_decode($transcriptcontroller->viewGradesOf($inscription_id)->getContent(),false) , $saveInFolder = ""); 
             
         } 

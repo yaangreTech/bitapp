@@ -15,21 +15,26 @@ require_once(app_path('CustomPhp/ExcelPhp/excel.php'));
  */
 function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear, $saveInFolder = ''): void
 {
+   
     $download = empty($saveInFolder);
     //new Excel object
     $sheet = new ExcelXport();
     //list of alphabet characters
     $alphabet = Alphabet();
+    
     //reorders the elements following the same orders as for headers
     $weight = SortAccordingToAList($weight, $headers);
+    // dd($weight);
     $weight = $weight[0];
+    // dd('ok');
     //reorders the elements following the same orders as for headers
     $data = SortAccordingToAList($data, $headers);
     //list of tests
+    
     $tests = array_keys($weight);
     //name of the file
     $fileFullName = "Subject Report " . $promotion . " " . $academicYear;
-
+   
     // start column
     define("START_COL_SJ", 1);
     //starting row for writing data

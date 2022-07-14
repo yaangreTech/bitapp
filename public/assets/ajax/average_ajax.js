@@ -7,14 +7,14 @@ var s_semester_with_session_table = null
 var deja = -1;
 
 function getAverageOf(yearID, semesterID) {
-    console.log(s_semester_table);
+    // console.log(s_semester_table);
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log('minteneant');
-            console.log(year);
+            // console.log('minteneant');
+            // console.log(year);
             selectionner('/semester_averages/get_average_of/' + year.id + '/' + semesterID, averageData);
             // yearData = year;
 
@@ -30,14 +30,14 @@ function getAverageOf(yearID, semesterID) {
 
 function getAverageWithSessionOf(yearID, semesterID) {
 
-    console.log(s_semester_table);
+    // console.log(s_semester_table);
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log('minteneant');
-            console.log(year);
+            // console.log('minteneant');
+            // console.log(year);
             selectionner('/semester_averages/get_average_with_session_of/' + year.id + '/' + semesterID, average_with_session_Data);
             // yearData = year;
             $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true');
@@ -61,7 +61,7 @@ function averageData(data) {
     var failed = 0;
     var giveUp = 0;
     var totalOfCredit = 0
-    console.log(data);
+        // console.log(data);
     classe_editparames = []
 
     head_elements += '<tr> <th colspan="3" rowspan="2"></th>'
@@ -116,7 +116,7 @@ function averageData(data) {
 
 
     $.each(inscriptions, function(key, insc) {
-        console.log(insc);
+        // console.log(insc);
         if (insc.t_n_status == 'Fail') {
             failed += 1;
         }
@@ -145,8 +145,8 @@ function averageData(data) {
     if (deja == -1) {
         setBreadcrumb(
             /* data.page_title.tu.semester.classe.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
-            data.page_title.level.name + '&' + data.page_title.name,
-            data.page_title.level.branche.departement.name + '&' + data.page_title.level.name + '&' + data.page_title.name
+            data.page_title.level.name + '&&&' + data.page_title.name,
+            data.page_title.level.branche.departement.name + '&&&' + data.page_title.level.name + '&&&' + data.page_title.name
         );
         deja = 1;
     }
@@ -179,7 +179,7 @@ function averageData(data) {
     $('.failed').html(failed);
     $('.give_up').html(giveUp);
 
-    console.log(s_semester_table);
+    // console.log(s_semester_table);
 
 }
 
@@ -194,7 +194,7 @@ function average_with_session_Data(data) {
     var failed = 0;
     var giveUp = 0;
     var totalOfCredit = 0
-    console.log(data);
+        // console.log(data);
     classe_editparames = []
         // Give Up
     head_elements += '<tr> <th colspan="3" rowspan="2"></th>'
@@ -249,7 +249,7 @@ function average_with_session_Data(data) {
 
 
     $.each(inscriptions, function(key, insc) {
-            console.log(insc);
+            // console.log(insc);
             if (insc.t_n_status == 'Fail') {
                 failed += 1;
             }
@@ -300,5 +300,5 @@ function average_with_session_Data(data) {
     $('.failed').html(failed);
     $('.give_up').html(giveUp);
 
-    console.log(s_semester_table);
+    // console.log(s_semester_table);
 }

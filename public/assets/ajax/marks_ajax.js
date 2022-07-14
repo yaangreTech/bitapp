@@ -1,5 +1,5 @@
 var marks_management_modulus = JSON.parse(currentActivedb.getItem('marks_management'));
-console.log(marks_management_modulus);
+// console.log(marks_management_modulus);
 
 var bruch = 1;
 $(function() {
@@ -30,8 +30,8 @@ function getModulusOf(yearID, semesterID) {
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log('minteneant');
-            console.log(year);
+            // console.log('minteneant');
+            // console.log(year);
             selectionner('/marks_modulus/get_marks_modulus_of/' + year.id + '/' + semesterID, marksModulusData);
             // yearData = year;
         },
@@ -45,7 +45,7 @@ function getModulusOf(yearID, semesterID) {
 
 function marksModulusData(data) {
     var elements = ''
-    console.log(data);
+        // console.log(data);
     level_editparames = []
     $.each(data.tus, function(key, tu) {
             elements += '<li class="">'
@@ -118,7 +118,7 @@ function marksModulusData(data) {
         // $('.page-title').html(data.level.name + ' > ' + data.semestre_name.name)
         // var breadcrumb = data.level.branche.departement.name.
     if (bruch == 1) {
-        setBreadcrumb(data.level.name + '&' + data.name, data.level.branche.departement.name + '&' + data.level.name + '&' + data.name);
+        setBreadcrumb(data.level.name + '&&&' + data.name, data.level.branche.departement.name + '&&&' + data.level.name + '&&&' + data.name);
         bruch = -1;
     }
     elements.length > 0 ? $('#marks_modulus').html(elements) : $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No Modulus for this level Semester</h3></div>');
@@ -126,7 +126,7 @@ function marksModulusData(data) {
 }
 
 function addTest(value) {
-    console.log(value);
+    // console.log(value);
     var year_id = value.split('_')[0];
     var modulus_id = value.split('_')[1];
     inserer('/marks_modulus/store_test/' + year_id + '/' + modulus_id, 'mark_modulus_test_from', () => {
@@ -138,20 +138,20 @@ function addTest(value) {
 
 function delete_test(id) {
     var value = $('.saveText').attr('id');
-    console.log(value);
+    // console.log(value);
     var year_id = value.split('_')[0];
     var modulus_id = value.split('_')[1];
 
     suprimer('/marks_modulus/delete_test/' + id, () => {
         getTestOf(year_id, modulus_id);
     });
-    console.log(id);
+    // console.log(id);
 
 }
 
 function updateTest(id, formID) {
     var value = $('.saveText').attr('id');
-    console.log(value);
+    // console.log(value);
     var year_id = value.split('_')[0];
     var modulus_id = value.split('_')[1];
 
@@ -162,13 +162,13 @@ function updateTest(id, formID) {
 }
 
 function getTestOf(yearID, modulusID, modulusName = '') {
-    console.log(yearID, modulusID);
+    // console.log(yearID, modulusID);
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log(year);
+            // console.log(year);
             selectionner('/marks_modulus/get_marks_modulus_tests_of/' + year.id + '/' + modulusID, (data) => {
                 marksModulusTestData(data, modulusName);
                 getModulusOf(marks_management_modulus.year, marks_management_modulus.semesterID);
@@ -186,7 +186,7 @@ function getTestOf(yearID, modulusID, modulusName = '') {
 
 function marksModulusTestData(data, modulusName = '') {
     var elements = ''
-    console.log(data);
+        // console.log(data);
     test_editparames = []
     var to_ratio = 0;
 
@@ -205,7 +205,7 @@ function marksModulusTestData(data, modulusName = '') {
         if (test.type == 'normal') {
             to_ratio += test.ratio;
         }
-        test_editparames.push('^test_type=' + test.type + '&^test_label=' + test.title + '&test_ration=' + test.ratio);
+        test_editparames.push('^test_type=' + test.type + '&&&^test_label=' + test.title + '&&&test_ration=' + test.ratio);
         elements += '<tr>'
         elements += '    <td class="tbl-checkbox">'
         elements += '        <label>'

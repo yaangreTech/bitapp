@@ -5,8 +5,7 @@
      dispStatus = -1;
      $('#TU_semester').attr('disabled', true);
      $('#modulus_TU').attr('disabled', true);
-     setRang(0, 1);
-     console.log(rangeInput);
+     // console.log(rangeInput);
 
 
  })
@@ -48,7 +47,7 @@
 
  // function to add new branch
  function add_branch(formID) {
-     console.log($('#' + formID).serialize());
+     // console.log($('#' + formID).serialize());
      inserer("/school/store_branch", formID, getAllDepartments);
  }
 
@@ -76,7 +75,7 @@
  }
 
  function bindfinalLevlesData(data) {
-     console.log(data);
+     // console.log(data);
      var element = ' <option value="" disabled selected>Choose the final level</option>'
      $.each(data, function(key, value) {
          element += '<option value="' + value.id + '">' + value.label + '</option>'
@@ -167,7 +166,7 @@
 
  // function to update a given tu
  function update_tu(id, formID) {
-     console.log(id, formID);
+     // console.log(id, formID);
      modifier("/school/update_tu/" + id, formID, getAllDepartments);
      // console.log(id);
  }
@@ -192,7 +191,7 @@
  }
 
  function bindSemesterData(data) {
-     console.log(data);
+     // console.log(data);
      var element = ' <option value="" disabled selected>Choose the Semester</option>'
      $.each(data, function(key, value) {
          element += '<option value="' + value.id + '">' + value.name + '</option>'
@@ -211,12 +210,12 @@
  //  }
 
  function add_modulus(tuID, formID) {
-     console.log(tuID);
+     // console.log(tuID);
      inserer("/school/store_modulus/" + tuID, formID, getAllDepartments);
  }
 
  function update_modulus(id, formID) {
-     console.log(id, formID);
+     // console.log(id, formID);
      modifier("/school/update_modulus/" + id, formID, getAllDepartments);
      // console.log(id);
  }
@@ -268,7 +267,7 @@
          elements += '<tr class="unread group"><td colspan="6">' + department.name + '</td></tr>'
          department.branches.length > 0 ?
              $.each(department.branches, function(branchkey, branche) {
-                 branche_editparames.push('branch_name=' + branche.name + '&^branch_departement=' + branche.departement_id + '&^branch_i_level=' + branche.departement_id + '&^branch_f_level=' + branche.departement_id);
+                 branche_editparames.push('branch_name=' + branche.name + '&&&^branch_departement=' + branche.departement_id + '&&&^branch_i_level=' + branche.departement_id + '&&&^branch_f_level=' + branche.departement_id);
                  elements += '<tr class="unread">'
                  elements += '    <td class="tbl-checkbox">'
                  elements += '        <label class="form-check-label">'
@@ -318,12 +317,12 @@
              elements += '<tr class="unread"><td colspan="6" class="center"> No Branch for the Department: <strong class="font-bold">' + department.name + '</strong></td></tr>'
      })
      $('#branches_body').html(elements);
-     console.log(TU_classe_content);
+     //  console.log(TU_classe_content);
      $('#TU_classe').html(TU_classe_content);
  }
 
  function tuData(data) {
-     console.log(data);
+     //  console.log(data);
      var elements = ''
 
      tu_names = []
@@ -333,7 +332,7 @@
 
      $.each(data.tus, function(key, tu) {
 
-             key == 0 && $('#tu_head').html('<tr><th colspan="4" class=""> <strong class="font-bold font-20">  ' + data.level.branche.name + ', ' + data.level.label + ', ' + data.label + '</strong>  Tus and ECUs<th></tr>')
+
              elements += '<tr class="unread group"><td colspan="4"> TU:  <strong class="font-bold font-20">' + tu.name + '</strong></td>'
                  //  elements += '     <td class="text-right"><button data-toggle="modal" data-target="#add_modulus" type="button" class="btn  btn-outline-info initier" onclick="initier(' + tu.id + ');bindTUname(' + tu.id + ', tu_names[' + key + '] )">'
                  //  elements += '     <i class="material-icons">add_circle_outline</i>'
@@ -357,7 +356,7 @@
                      modulus_credict: ecu.credict,
                      id: ecu.id
                  });
-                 tu_ECU_editparames.push('module_name=' + ecu.name + '&modulus_credict=' + ecu.credict + '&modulus_hours=' + ecu.heure + '&ECU_TU_name=' + tu.name);
+                 tu_ECU_editparames.push('module_name=' + ecu.name + '&&&modulus_credict=' + ecu.credict + '&&&modulus_hours=' + ecu.heure + '&&&ECU_TU_name=' + tu.name);
                  elements += '<tr class="unread">'
                  elements += '    <td class=""></td>'
                  elements += '    <td class="tbl-checkbox left">'
@@ -378,11 +377,11 @@
                  elements += '    </td>'
                  elements += '</tr>'
              })
-             tu_with_ecu_editparames.push('^TU_classe=' + data.level.id + '&?addedecu=' + JSON.stringify(tu_with_ecu_model) + '&*TU_semester=' + tu.semester.label);
+             tu_with_ecu_editparames.push('^TU_classe=' + data.level.id + '&&&?addedecu=' + JSON.stringify(tu_with_ecu_model) + '&&&*TU_semester=' + tu.semester.label);
 
          })
          // $.fn.dataTable.isDataTable('#modulus_table') && modulus_table.destroy();
-
+     $('#tu_head').html('<tr><th colspan="4" class=""> <strong class="font-bold font-20">  ' + data.level.branche.name + ', ' + data.level.label + ', ' + data.label + '</strong>  Tus and ECUs<th></tr>')
      elements.length != 0 ? $('#tu_body').html(elements) : $('#tu_body').html('<div class="center" style="height:100px;">No TU for:  <strong class="font-bold">' + data.level.branche.name + ', ' + data.level.label + ', ' + data.label + '</strong><div>');
 
      // modulus_table = $('#modulus_table').DataTable({
@@ -511,11 +510,11 @@
              active = 'active';
              intialDepID = val.id;
          }
-         department_editparames.push('dep_label=' + val.label + '&department=' + val.name);
+         department_editparames.push('dep_label=' + val.label + '&&&department=' + val.name);
 
          // class concate
          $.each(val.branches, function(key1, option) {
-                 console.log('option');
+                 // console.log('option');
                  // levels_departments_elements += ' <li class="classe_menu ' + active + '"><a href="#" id="cm' + option.id + '"  onclick="display_Classes_of(this.id);" title="' + option.name + '">' + option.name + '<span class="pull-right badge bg-orange">' + option.levels.length + '</span></a></li> ';
 
                  // tu concat
@@ -600,7 +599,6 @@
 
      $('.collapsible').collapsible();
 
-     setRang(0, 1);
  }
 
 
@@ -663,7 +661,7 @@
          });
          names.push($('#ECU_name').val());
      }
-     console.log(addedecu);
+     // console.log(addedecu);
      $.each(addedecu.reverse(), function(key, value) {
          elements += '  <li class="clearfix m-t-10 m-b-10" style="inline">'
          elements += ' <div class="form-check m-l-10 " >'

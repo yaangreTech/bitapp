@@ -6,7 +6,7 @@
         <script src="assets/js/chart.min.js"></script>
         {{-- customs --}}
         <script src="assets/js/bundles/echart/echarts.js"></script>
-        <script src="assets/js/bundles/apexcharts/apexcharts.min.js"></script>
+        {{-- <script src="assets/js/bundles/apexcharts/apexcharts.min.js"></script> --}}
         <script src="assets/js/pages/index.js"></script>
     </x-slot>
 
@@ -110,65 +110,13 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <strong>Revenue</strong> Report
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="#" onClick="return false;">Action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="recent-report__chart">
-                                <canvas id="desktop-chart1"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                <strong>Revenue</strong> Report
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="#" onClick="return false;">Action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onClick="return false;">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                <strong>Detail</strong>  of the distribution of students</h2>
                         </div>
                         <div class="body">
                             <div class="recent-report__chart">
@@ -177,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </section>
 

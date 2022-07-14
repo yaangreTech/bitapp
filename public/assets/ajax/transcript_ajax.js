@@ -21,8 +21,8 @@ function getTranscriptOf(yearID, classID) {
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log('minteneant');
-            console.log(year);
+            // console.log('minteneant');
+            // console.log(year);
             selectionner('/grades/get_grades_of/' + year.id + '/' + classID, getTranscriptData);
             // yearData = year;
         },
@@ -40,8 +40,8 @@ function getTranscript_with_session_Of(yearID, classID) {
         dataType: "JSON",
         url: '/school/get_year/' + yearID,
         success: function(year) {
-            console.log('minteneant');
-            console.log(year);
+            // console.log('minteneant');
+            // console.log(year);
             selectionner('/grades/getGrades_with_session_Of/' + year.id + '/' + classID, getTranscript_with_session_Data);
             // yearData = year;
         },
@@ -56,15 +56,15 @@ function getTranscript_with_session_Of(yearID, classID) {
 
 
 function getTranscript_with_session_Data(data) {
-    console.log(data);
+    // console.log(data);
     var body_elements = ''
     var head_elements = '<tr><th class="center">Matricule</th><th class="center"> First name </th><th class="center"> Last Name </th>'
     $.each(data.head_element, function(i, semester) {
         head_elements += '<th class="center">' + semester.name + ' </th>'
     })
     head_elements += '<th class="center"> Average </th><th class="center"> Notation </th><th class="center"> Statut </th><th class="center"> Action </th></tr>'
-    console.log('getTranscriptData');
-    console.log(data);
+        // console.log('getTranscriptData');
+        // console.log(data);
     $.each(data.inscriptions, function(key, insc) {
         body_elements += '<tr>'
         body_elements += '    <td class="center">' + insc.student.matricule + '</td>'
@@ -100,15 +100,15 @@ function getTranscript_with_session_Data(data) {
 
 
 function getTranscriptData(data) {
-    console.log(data);
+    // console.log(data);
     var body_elements = ''
     var head_elements = '<tr><th class="center">Matricule</th><th class="center"> First name </th><th class="center"> Last Name </th>'
     $.each(data.head_element, function(i, semester) {
         head_elements += '<th class="center">' + semester.name + ' </th>'
     })
     head_elements += '<th class="center"> Average </th><th class="center"> Notation </th><th class="center"> Statut </th><th class="center"> Action </th></tr>'
-    console.log('getTranscriptData');
-    console.log(data);
+        // console.log('getTranscriptData');
+        // console.log(data);
     $.each(data.inscriptions, function(key, insc) {
         body_elements += '<tr>'
         body_elements += '    <td class="center">' + insc.student.matricule + '</td>'
@@ -133,8 +133,8 @@ function getTranscriptData(data) {
 
     setBreadcrumb(
         /* data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
-        data.page_title.name + '&' + 'Grade transcripts',
-        data.page_title.branche.departement.name + '&' + data.page_title.name
+        data.page_title.name + '&&&' + 'Grade transcripts',
+        data.page_title.branche.departement.name + '&&&' + data.page_title.name
     );
 
 
@@ -151,19 +151,19 @@ function getTranscriptData(data) {
 
 
 function viewTranscriptOf(inscID) {
-    console.log('kkkk', inscID);
+    // console.log('kkkk', inscID);
     selectionner('/grades_view/view_grades_of/' + inscID, viewTranscriptData);
 }
 
 
 function viewTranscript_with_session_Of(inscID) {
-    console.log('kkkk', inscID);
+    // console.log('kkkk', inscID);
     selectionner('/grades_view/view_grades_with_session_of/' + inscID, viewTranscriptData);
 }
 
 function viewTranscriptData(data) {
-    console.log('viewTranscriptData');
-    console.log(data);
+    // console.log('viewTranscriptData');
+    // console.log(data);
     body_elements = ''
     var new_semester = 1
         // semesters = data.semesters;
@@ -178,13 +178,13 @@ function viewTranscriptData(data) {
                         new_semester = -1
                         var semestre_rowspan = semester.s_n_modulus + 1;
                         body_elements += '<tr>'
-                        body_elements += '    <td class="center mini" rowspan="' + semestre_rowspan + '">' + semester.label + '</td>'
+                        body_elements += '    <td class="center mini"  style="text-rotate:90" rowspan="' + semestre_rowspan + '">' + semester.label + '</td>'
                         body_elements += '    <td class=" mini" rowspan="' + tu.t_n_modulus + '">' + tu.name + '</td>'
                         body_elements += '    <td class=" mini">' + modul.name + '</td>'
                         body_elements += '    <td class="center mini">' + modul.credict + '</td>'
                         body_elements += '    <td class="center mini">' + modul.note + '</td>'
                         body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_average + '</td>'
-                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_credit + '</td>'
+                        body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_v_credit + '</td>'
                         body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + tu.tu_validation + '</td>'
                         body_elements += '    <td class="center mini" rowspan="' + tu.t_n_modulus + '">' + (tu.conforme != null ? tu.conforme.international_Grade : '---') + '</td>'
                         body_elements += '</tr>'

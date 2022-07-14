@@ -38,13 +38,14 @@ $(function() {
 
 
 function editer(assosValues = '', id, tuName = "") {
-    var ciclist = ["Licence 1", "Licence 2", "Licence 3", "Master 1", "Master 2"];
+    // console.log(assosValues, id, tuName);
+
     // console.log(assosValues);
     $('.update').show();
     $('.update').attr('id', id);
     $('.save').hide();
 
-    $.each(assosValues.split('&'), function(key, val) {
+    $.each(assosValues.split('&&&'), function(key, val) {
         if (val.split('=')[0].indexOf('^') != -1) {
             $('#' + val.split('=')[0].split('^')[1]).val(val.split('=')[1]).change();
 
@@ -64,7 +65,7 @@ function editer(assosValues = '', id, tuName = "") {
         }
 
     })
-    setRang(0, 3);
+
     $('#modulus_semester').attr('disabled', true);
     if (id == 'update_tus') {
         $('#TU_name').val(tuName);
@@ -122,8 +123,8 @@ function toUp(string) {
 }
 
 function setBreadcrumb(titles = '', breadcrumIitems = '') {
-    titles = titles.split('&');
-    breadcrumIitems = breadcrumIitems.split('&');
+    titles = titles.split('&&&');
+    breadcrumIitems = breadcrumIitems.split('&&&');
     var s_titles = '';
     $.each(titles, function(index, title) {
         s_titles += title;

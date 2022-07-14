@@ -21,6 +21,9 @@ Route::get('/', function () {
 // Route::get('/', [AuthenticatedSessionController::class, 'create'])->middleware('guest');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard/get-chart-details', [DashboardController::class, 'getChartDetails'])->middleware(['auth']);
+
+
 
 // Auth routes
 require __DIR__ . '/auth.php';

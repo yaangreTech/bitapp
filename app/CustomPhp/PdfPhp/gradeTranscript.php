@@ -248,6 +248,7 @@ $newcontent=<<<HTML
         
     
     </section>
+    
 HTML;
 
     //changes the content according to the set language

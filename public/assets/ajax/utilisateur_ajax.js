@@ -16,19 +16,19 @@ function update_User(id, formID) {
 }
 
 function delete_User(id) {
-    console.log(id);
+    // console.log(id);
     suprimer('/school/delete_user/' + id, null, true);
     // console.log(id);
 }
 
 function desable_User(id) {
-    console.log(id);
+    // console.log(id);
     desactiver('/school/desable_user/' + id, null, true);
     // console.log(id);
 }
 
 function enable_User(id) {
-    console.log(id);
+    // console.log(id);
     activer('/school/enable_user/' + id, null, true);
     // console.log(id);
 }
@@ -38,7 +38,7 @@ function verifier_email(email) {
 }
 
 function verifier_logic(data) {
-    console.log(data);
+    // console.log(data);
     jQuery.isEmptyObject(data) ? $('.email').html('') : $('.email').html('this email esit');
 
 }
