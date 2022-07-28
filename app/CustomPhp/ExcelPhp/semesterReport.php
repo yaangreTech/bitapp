@@ -2,56 +2,55 @@
 
 require_once(app_path('CustomPhp/ExcelPhp/excel.php'));
 
+
 //finds the name of the image path for tcpdf
 //name of the file executing the script's folder name
 $executingScriptFolderName = dirname($_SERVER['SCRIPT_FILENAME']);
 //name of the current folder
 $currentFolderName = dirname(__FILE__);
-if (!define("PHPSPREADSHEET_IMAGE_PATH_", GetRelativePath($executingScriptFolderName, $currentFolderName))) {
-    define("PHPSPREADSHEET_IMAGE_PATH_", GetRelativePath($executingScriptFolderName, $currentFolderName));
-}
+_define("PHPSPREADSHEET_IMAGE_PATH", GetRelativePath($executingScriptFolderName, $currentFolderName));
 
 //creation of constant variables
-if (!define('GREEN', "00cc6a")) {
-    define('GREEN', "00cc6a");
-}
-if (!define('RED', "ff033c")) {
-    define('RED', "ff033c");
-}
-if (!define('LITE_YELLOW', 'fffcf7b6')) {
-    define('LITE_YELLOW', 'fffcf7b6');
-}
-if (!define('SKY_BLUE', 'ffb8cce4')) {
-    define('SKY_BLUE', 'ffb8cce4');
-}
-if (!define('LITE_DARK', '272822')) {
-    define('LITE_DARK', '272822');
-}
-// 5 index of the col F + 1 as it is an index, all starts from 0
-if (!define("START_COL_SE", 4)) {
-    define("START_COL_SE", 4);
-}
-//starting row for writing data
-if (!define('STARTING_ROW_SE', 6)) {
-    define('STARTING_ROW_SE', 6);
-}
-//defines ordinal numbers from cardinal
-if (!define("CARDINAL_NUMBERS_SE", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH",7=>"SEVEN",8=>"EIGHT",9=>"NINE",10=>"TEN"])) {
-    define("CARDINAL_NUMBERS_SE", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH",7=>"SEVEN",8=>"EIGHT",9=>"NINE",10=>"TEN"]);
-}
+_define('GREEN', "00cc6a");
+_define('RED', "ff033c");
+_define('LITE_YELLOW', 'fffcf7b6');
+_define('SKY_BLUE', 'ffb8cce4');
+_define('LITE_DARK', '272822');
+_define('LITE_GREY', 'ffE9E9E9');
 
+//defines constants for the tus, tue, and tu code
+_define("TUS", "TUS");
+_define("TUE", "TUE");
+_define("TU_CODE", "TU CODE");
+
+//starting column to write data
+_define("STARTING_COL", 1);
+//starting row for writing data
+_define('STARTING_ROW', 2);
+//starting row for inserting data related to students (in cols axis)
+_define("SD_STARTING_COL", 5);
+//starting row for inserting data related to students (in rows axis)
+_define("SD_STARTING_ROW", 22);
+//defines ordinal numbers from cardinal
+_define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH",7=>"SEVEN",8=>"EIGHT",9=>"NINE",10=>"TEN"]);
 
 /**
  * @param array $headers
  * @param array $student_data
- * @param $className
- * @param $semesterNumber
- * @param $academicYear
+ * @param string $className
+ * @param string $semesterNumber
+ * @param string $academicYear
+ * @param string $session
+ * @param string $trainingArea
+ * @param string $mention
+ * @param string $speciality
+ * @param string $classPromotion
+ * @param string $semesterId
  * @param string $saveInFolder
  * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $saveInFolder = ''): void
+function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $saveInFolder = ''): void
 {
     $download = empty($saveInFolder);
     $sheet = new ExcelXport();
@@ -59,341 +58,313 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //name of the sheet
     $sheetName = "SEMESTER " . $semesterNumber;
     //ordinal number of the semester
-    $semesterNumber = CARDINAL_NUMBERS_SE[$semesterNumber];
+    $semesterNumber = CARDINAL_NUMBERS[$semesterNumber];
     //file name
     $fileFullName = $className . "_" . $semesterNumber . "_SEMESTER_" . $academicYear;
 
+
     //extra header columns
-    $extra_headers = array_slice($headers, count($headers) - 7);
+    $extra_headers = [];
     //list of tus and their modules
-    $tus_modules = array_slice($headers, 0, count($headers) - 7);
-    //retrieves the first key of the array | by default it must be `TUS` and the only one key, thus the terme `TUS` could be replaced by another world
+    $tus_modules = [];
+    foreach ($headers as $key=>$value)
+    {
+        if(is_array($value))
+        {
+            $tus_modules[$key]=$value;
+        }
+        else
+        {
+            $extra_headers[$key]=$value;
+        }
+    }
+    //retrieves the first key of the array | by default it must be `TUS` and the only one key, thus the term `TUS` could be replaced by another word
     $tus_modules = $tus_modules[array_key_first($tus_modules)];
+    $tempo = array_map(null, $tus_modules);
 
-    //modules | reteieves the name of the modules and their credits
-    $modules = array_reduce($tus_modules, function ($previous, $current) {
-        return $previous + $current;
-    }, []);
+    //modules | retrieves the name of the modules and their credits
+    $modules = [];
+    foreach ($tempo as $key => $value)
+    {
+        if(is_array($value))
+        {
+            $value = $value[TUE];
+            $modules = $modules+$value;
+        }
+    }
 
-    $headers = $modules + $extra_headers;
+
+
+    $final_headers = $modules + $extra_headers;
 
     //puts the array of student data in the correct order (following the order of the modules and the extra header)
-    $student_data = SortAccordingToAList($student_data, ["id", "Surname", "Name", ...array_keys($headers)]);
+    $student_data = SortAccordingToAList($student_data, ["id", "Surname", "Name", ...array_keys($final_headers)]);
 
 
     //the number of columns that the data in the header will occupy
-    $nbColHeaders = count($extra_headers) + count($modules);
+    $nbColHeaders = count($final_headers);
 
     //the number of students
     $nbStudents = count($student_data);
 
-    //gets alphabetical chars in a array
+    //gets alphabetical chars in an array
+    global $alphabet;
     $alphabet = range('A', 'Z');
     //adds more strings to the alphabets like AA, AB, AC, ...
     foreach (range('A', 'Z') as $char) {
         $alphabet[] = 'A' . $char;
     }
 
-    /***********************on top of headers: 1st row ************************************/
-    //sets the width of the 4th column
-    $sheet->SetColumnWidth($alphabet[3], 30);
-    //sets the width of the 3th column
-    $sheet->SetColumnWidth($alphabet[2], 25);
-    //sets the height of the first row
-    $sheet->setRowHeight(1, 40);
-    //centers horizontally and vertically
-    $sheet->SetCenter(1, true, true);
-    //sets the font size of the text
-    $sheet->SetFontSize('A1:AZ1', 18);
+    //returns the corresponding column by reducing automatically by 1 to the passed index
+    $alph = function($index) use ($alphabet) {return $alphabet[$index - 1];};
 
-    //merges cells
-    $sheet->MergeCells('A1:D1');
-    //index of the last row
-    $lastColIndex = START_COL_SE + $nbColHeaders;
-    $sheet->MergeCells($alphabet[$lastColIndex - 1 - 1] . '1:' . $alphabet[$lastColIndex - 1] . '1');
-    $sheet->MergeCells('F1:' . $alphabet[$lastColIndex - 3 - 1] . '1');
+    //creates a cell reference
+    $ref = function($colIndex, $rowindex) use ($alph) {return $alph($colIndex).$rowindex;};
 
-    //set text of first row to bold
-    $sheet->SetCellsToBold('A1:' . $alphabet[$lastColIndex - 1] . '1');
 
-    $sheet->Write('A1', 'CLASS: ' . strtoupper($className));
-    $sheet->Write('F1', $semesterNumber . ' SEMESTER GRADE REPORT SHEET');
-    $sheet->Write($alphabet[$lastColIndex - 1 - 1] . '1', 'ACADEMIC YEAR: ' . $academicYear);
 
-    //sets the width of the 4th column
-    $sheet->SetColumnWidth($alphabet[$lastColIndex - 1 - 1], 50);
+     //  LOGO AND THE ACADEMIC YEAR'S SECTION
 
-    //sets colors
-    $sheet->SetColor('A1', LITE_YELLOW);
-    $sheet->SetColor('F1', SKY_BLUE);
-    $sheet->SetColor($alphabet[$lastColIndex - 1 - 1] . '1', LITE_YELLOW);
+     //sets the logo
+     $sheet->SetImage($ref(2, STARTING_ROW), PHPSPREADSHEET_IMAGE_PATH, 'logo.png', [920, 120], 0, 0);
 
-    /*************** 2nd and 3rd rows ****************** */
+     //academic year
+    $start = $ref(15, STARTING_ROW);
+    $end = $ref(20, STARTING_ROW);
+    $sheet->Write($start, "ACADEMIC YEAR: ".$academicYear);
+    $sheet->MergeCells($start.":".$end);
+    $sheet->SetCenter($start, $end, true, true);
+    $sheet->SetCellsToBold($start.":".$end);
 
-    //final headers data
-    $finalHeaders = $modules + $extra_headers;
+    // minutes of deliberation
+    $start = $ref(7, STARTING_ROW+5);
+    $end = $ref(11, STARTING_ROW+5);
+    $sheet->Write($start, "Minutes of deliberation");
+    $sheet->MergeCells($start.":".$end);
+    $sheet->SetCenter($start, $end, true, true);
+    $sheet->SetCellsToBold($start.":".$end);
+    $sheet->UnderlineText($start.":".$end);
+    $sheet->SetRowHeight(STARTING_ROW+5, 22);
+    $sheet->SetFontSize($start.":".$end, 18);
+
+    $lastRow = $sheet->GetLastRowIndex();
+    $lastRow = $lastRow+2;
+    $temp = $lastRow;
+    //minutes of deliberation data
+    /*manages labels*/
+    $labelCol = 8;
+    $sheet->Write($ref($labelCol, $lastRow++), "Session: ");
+    $sheet->Write($ref($labelCol, $lastRow++), "Training area: ");
+    $sheet->Write($ref($labelCol, $lastRow++), "Mention: ");
+    $sheet->Write($ref($labelCol, $lastRow++), "Speciality:	");
+    $sheet->Write($ref($labelCol, $lastRow++), "Class promotion: ");
+    $sheet->Write($ref($labelCol, $lastRow++), "Semester Id: ");
+    $range = $ref($labelCol, $temp).":".$ref($labelCol, $lastRow);
+    $sheet->UnderlineText($range);
+    $sheet->SetCellsToItalic($range);
+    $sheet->SetCellsToBold($range);
+    /*manages values*/
+    $valueCol = 10;
+    $sheet->Write($ref($valueCol, $temp++), $session);
+    $sheet->Write($ref($valueCol, $temp++), $trainingArea);
+    $sheet->Write($ref($valueCol, $temp++), $mention);
+    $sheet->Write($ref($valueCol, $temp++), $speciality);
+    $sheet->Write($ref($valueCol, $temp++), $classPromotion);
+    $sheet->Write($ref($valueCol, $temp++), $semesterId);
+
+
 
     //gets the keys of the data of the header
-    $keys = array_keys($finalHeaders);
+    $keys = array_keys($headers);
 
     //total numbers of rows to put in italic
-    $total_numbers_of_rows_to_set_in_italic = count($modules);
+    $total_numbers_of_cols_to_set_in_italic = count($modules)+1;// + 1 due to `Training Unit Elements (TUE)` additional column
     //total numbers of rows to rotate to 90deg
-    $total_numbers_of_rows_to_rotate = count($finalHeaders);
+    $total_numbers_of_cols_to_rotate = count($headers);
 
-    //merges cells from A2 to C2
-    $sheet->MergeCells('A4:C4');
-    //sets the height of the 2nd row
-    $sheet->setRowHeight(4, 150);
-
-    //sets the logo
-    $sheet->SetImage('A4', PHPSPREADSHEET_IMAGE_PATH, 'logo.png', [880, 90], 0, 10);
-    //write the slogan for the logo
-    $sheet->Write('A4', '‘’Educating a New Generation of Leaders‘’');
-    //centers content
-    $sheet->SetCenter("A4", false, true);
-
-    //rotates text of headers
-    $sheet->Rotate('E4:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '4', 90);
-    //centers vertically cells text of headers
-    $sheet->SetCenter('E4:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '4', false, true);
-    //sets text to bold: cells of headers
-    $sheet->SetCellsToBold('E4:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '4');
-    //sets text to italic: cells of modulus
-    $sheet->SetCellsToItalic('E4:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_set_in_italic - 1] . '4');
-    //sets text to bold: cells of name, last name and number of credits
-    $sheet->SetCellsToBold('A5:' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '5');
+    //index of the last col
+    $lastColIndex = SD_STARTING_COL - 1 + $nbColHeaders;
 
     //adds the name of the TU and the total of credits
-    $current_index = START_COL_SE;
-    foreach ($tus_modules as $tu => $value) {
-        $sheet->Write($alphabet[$current_index] . '2', $tu);
-        //sums the values of each corresponding TU
-        $sheet->Write($alphabet[$current_index] . '3', array_sum(array_values($value)));
-        //number of modules
-        $n_modules = count($value);
-        //merges cells
-        $sheet->MergeCells($alphabet[$current_index] . '2' . ':' . $alphabet[$current_index + $n_modules - 1] . '2');
-        $sheet->MergeCells($alphabet[$current_index] . '3' . ':' . $alphabet[$current_index + $n_modules - 1] . '3');
-        //centers cells content
-        $sheet->SetCenter($alphabet[$current_index] . '2' . ':' . $alphabet[$current_index + $n_modules - 1] . '3', true, true);
-        $sheet->SetCellsToBold($alphabet[$current_index] . '2' . ':' . $alphabet[$current_index + $n_modules - 1] . '3');
-        //sets the background of the cells
-        $sheet->SetColor($alphabet[$current_index] . '2' . ':' . $alphabet[$current_index + $n_modules - 1] . '3', LITE_GREY);
-        $current_index += $n_modules;
+    $lastRow = $sheet->GetLastRowIndex();
+    $lastRow++;
+    //adds the tue with their credits and the extra headers
+    //headers description
+    $final_headers_desc = ["Training Units (TU)", "TU Code", "TU Credits", "Training Unit Elements (TUE)", "TUE Credits"];
+    foreach($final_headers_desc as $keys => $value)
+    {
+        $range = $ref(SD_STARTING_COL-1, $keys+$lastRow);
+        $sheet->Write($range, $value);
+        $sheet->SetCellsToBold($range);
+        $sheet->SetCellsToItalic($range);
+        $sheet->SetCenter($range, true);
     }
-    //increases the height of the row 2
-    $sheet->SetRowHeight(2, 30);
-    //merges cells
-    $sheet->MergeCells($alphabet[0] . '2' . ':' . $alphabet[START_COL_SE - 1] . '3');
-    $sheet->MergeCells($alphabet[START_COL_SE + $total_numbers_of_rows_to_set_in_italic] . '2' . ':' . $alphabet[START_COL_SE + $total_numbers_of_rows_to_rotate - 1] . '3');
+    $tu_col = 5;
+    $tu_unit_row = $lastRow;
+    $tu_code_row = 1+$lastRow;
+    $tu_credit_row = 2+$lastRow;
+    $sheet->SetRowHeight($tu_unit_row, 40);
+    foreach($tus_modules as $tu => $value)
+    {
+        $sheet->Write($ref($tu_col, $tu_unit_row), $tu);
+        $sheet->Write($ref($tu_col, $tu_code_row), $value[TU_CODE]);
+        //sums the values of each corresponding TU
+        $sheet->Write($ref($tu_col, $tu_credit_row), array_sum(array_values($value[TUE])));
+        //number of modules
+        $n_modules = count($value[TUE]);
+        //merges cells
+        $sheet->MergeCells($ref($tu_col, $tu_unit_row).':'.$ref($tu_col + $n_modules - 1, $tu_unit_row));
+        $sheet->MergeCells($ref($tu_col, $tu_code_row).':'.$ref($tu_col + $n_modules - 1, $tu_code_row));
+        $sheet->MergeCells($ref($tu_col, $tu_credit_row).':'.$ref($tu_col + $n_modules - 1, $tu_credit_row));
+        //centers cells content
+        $sheet->SetCenter($ref($tu_col, $tu_unit_row).':'.$ref($tu_col + $n_modules - 1, $tu_credit_row), true, true);
+        $sheet->SetCellsToBold($ref($tu_col, $tu_unit_row).':'.$ref($tu_col + $n_modules - 1, $tu_credit_row));
+        //sets the background of the cells
+        $sheet->SetColor($ref($tu_col, $tu_unit_row).':'.$ref($tu_col + $n_modules - 1, $tu_credit_row), LITE_GREY);
+        $tu_col += $n_modules;
+    }
 
-    //destroyes the variables
-    unset($current_index);
+    // UNUSED CELLS MERGING
+    $sheet->MergeCells($ref(STARTING_COL, $lastRow).":".$ref(SD_STARTING_COL-2, $lastRow+count($final_headers_desc)-1));
+    $sheet->MergeCells($ref($lastColIndex-count($extra_headers)+1, $lastRow).":".$ref($lastColIndex, $tu_credit_row));
 
-    //adds and formats headers text
-    foreach ($finalHeaders as $key => $value) {
-        $key_index = array_search($key, $keys);
-        $sheet->Write($alphabet[$key_index + START_COL_SE] . '4', $key);
-        $sheet->Write($alphabet[$key_index + START_COL_SE] . '5', $value);
+    $lastRow = $sheet->GetLastRowIndex() - 2;//-2 due to the gap created
+    $lastRow++;
+    $tue_row = $lastRow;
+    $tue_credit_row = 1+$lastRow;
+    $key_index = 0;
+    $sheet->SetRowHeight($tue_row, 120);
+    foreach($final_headers as $key => $value)
+    {
+        $tue_col_Ref = $ref($key_index + SD_STARTING_COL, $tue_row);
+        $tue_credit_col_Ref = $ref($key_index + SD_STARTING_COL, $tue_credit_row);
+        //formats the TUE
+        $sheet->Write($tue_col_Ref, $key);
+        $sheet->SetCellsToBold($tue_col_Ref);
+        $sheet->Rotate($tue_col_Ref, 90);
+        if(in_array($key, array_keys($modules))){$sheet->SetCellsToItalic($tue_col_Ref);}
+        $sheet->SetCenter($tue_col_Ref, false, true);
+
+        //formats the credits row
+        $sheet->Write($tue_credit_col_Ref, $value);
+        $sheet->SetCellsToBold($tue_col_Ref);
         //center horizontally the 2nd row
-        $sheet->SetCenter($alphabet[$key_index + START_COL_SE] . '5', false, true);
-
-        //sets default the background color for other extra data => row for credits
-        $sheet->SetColor($alphabet[$key_index + START_COL_SE] . '5', 'ffd9d9d9');
+        $sheet->SetCenter($tue_credit_col_Ref, false, true);
 
         //if the current element is in the list of modules
-        if (in_array($value, array_values($modules))) {
+        if(in_array($value, array_values($modules)))
+        {
             //sets the color for the module
-            $sheet->SetColor($alphabet[$key_index + START_COL_SE] . '4', SKY_BLUE);
+            $sheet->SetColor($tue_col_Ref, SKY_BLUE);
             //sets the color for the number of credits
-            $sheet->SetColor($alphabet[$key_index + START_COL_SE] . '5', SKY_BLUE);
+            $sheet->SetColor($tue_credit_col_Ref, SKY_BLUE);
         }
-
-        //when the extra data header is equal to 'Total of Credits' or 'Final Average'
-        if (in_array($key, ['Total of Credits', 'Final Average'])) {
-            //set the background color
-            $sheet->SetColor($alphabet[$key_index + START_COL_SE] . '5', 'ffc4bd97');
-        }
+        $key_index++;
     }
 
-    //sets the width of the "conversion" column
-    $conversionColIndex = $sheet->GetColumnIndex(4, $lastColIndex, "Conversion");
-    $sheet->SetColumnWidth($alphabet[$conversionColIndex], 30);
-
-    //Number of row
-    $sheet->Write('A5', 'N°');
-    //resizes the width of the column for the orders numbers
-    $sheet->SetColumnWidth('A', 3);
+    //the student data headers
+    $lastRow = $sheet->GetLastRowIndex();
+    $lastRow++;
+    $sheet->Write($ref(STARTING_COL, $lastRow), 'N°');
+    $sheet->SetColumnWidth($alph(STARTING_COL), 5);
     //ID's column
-    $sheet->Write('B5', 'ID');
+    $sheet->Write($ref(STARTING_COL+1, $lastRow), 'ID');
+    $sheet->SetColumnWidth($alph(STARTING_COL+1), 12);
     //Surname
-    $sheet->Write('C5', 'Surname');
+    $sheet->Write($ref(STARTING_COL+2, $lastRow), 'Surname');
+    $sheet->SetColumnWidth($alph(STARTING_COL+2), 15);
     //last name
-    $sheet->Write('D5', ' Name');
+    $sheet->Write($ref(STARTING_COL+3, $lastRow), ' Name');
+    //formats the currents headers
+    $range = $ref(STARTING_COL, $lastRow).':'.$ref(STARTING_COL+3, $lastRow);
+    $sheet->SetColumnWidth($alph(STARTING_COL+3), 28);
+    $sheet->SetCenter($range, true, true);
+    $sheet->SetCellsToBold($range);
+    //merges the remaining cells
+    $sheet->MergeCells($ref(SD_STARTING_COL, $lastRow).':'.$ref($lastColIndex, $lastRow));
 
-    /****************** Other rows from row 6 **************** */
-    $col = START_COL_SE - 4;
-    $row = STARTING_ROW_SE;
-    for ($index = 0; $index < $nbStudents; $index++) {
+
+    // STUDENT DATA
+    $col = STARTING_COL;
+    $lastRow = $sheet->GetLastRowIndex();
+    $lastRow++;
+    $row = $lastRow;
+    for($index = 0; $index < $nbStudents; $index++)
+    {
         //adds the No
-        $sheet->Write($alphabet[$col] . $row, $index + 1);
+        $no_cellRef = $ref(STARTING_COL, $row);
+        $sheet->Write($no_cellRef, $index+1);
+        $sheet->SetCenter($no_cellRef, false, true);
         $col++;
-        foreach ($student_data[$index] as $key => $value) {
+        foreach($student_data[$index] as $key => $value)
+        {
             //replaces , by .
             $value = str_replace(',', '.', $value);
-            if (is_numeric($value)) {
+            if(is_numeric($value))
+            {
                 $value = floatval($value);
             }
-            //write student data in the excel file
-            $sheet->Write($alphabet[$col] . $row, $value);
+            //write student data in the Excel file
+            $sheet->Write($ref($col, $row), $value);
             $col++;
         }
         $row++;
-        $col = START_COL_SE - 4;
+        $col = STARTING_COL;
     }
+
+    // FOOTER
 
     //index of the last row
-    $lastRowIndex = $sheet->GetLastRowIndex();
+    $lastRow = $sheet->GetLastRowIndex();
+    $lastRow++;
+    //MEMBERS OD THE JURY
+    $cellRef = $ref(STARTING_COL+2, $lastRow+7);
+    $sheet->Write($cellRef, "The members of the Jury");
+    $sheet->SetCellsToBold($cellRef);
+    $sheet->UnderlineText($cellRef);
 
+    //DATE OF DELIBERATION
+    $cellRef = $ref(STARTING_COL+$nbColHeaders/2, $lastRow+5);
+    $sheet->Write($cellRef, "Date of deliberation: ".getDate_En());
+    $sheet->SetCellsToBold($cellRef);
+    $sheet->UnderlineText($cellRef);
 
-    //sets the cells of Final Average
-    $averageColIndex = $sheet->GetColumnIndex(4, count($alphabet), 'Final Average');
-    // dd($averageColIndex);
-    $sheet->SetCellsToBold($alphabet[$averageColIndex] . STARTING_ROW_SE . ":" . $alphabet[$averageColIndex] . $lastRowIndex);
+    //DATE OF DELIBERATION
+    $cellRef = $ref(STARTING_COL+$nbColHeaders/2, $lastRow+7);
+    $sheet->Write($cellRef, "The President of the Jury");
+    $sheet->SetCellsToBold($cellRef);
+    $sheet->UnderlineText($cellRef);
 
-    //sets the color of the text in to red (column `International Grade`)
-    $InternationalGradeIndex = $sheet->GetColumnIndex(4, count($alphabet), 'International Grade');
-    $sheet->SetTextColor($alphabet[$InternationalGradeIndex] . STARTING_ROW_SE . ":" . $alphabet[$InternationalGradeIndex] . $lastRowIndex, RED);
-
-    //sets the background color of columns of 'Remark', 'Re-do exam'
-    $remarkColIndex = $sheet->GetColumnIndex(4, count($alphabet), 'Remark');
-    $redoExamColIndex = $sheet->GetColumnIndex(4, count($alphabet), 'Re-do exam');
-    $sheet->SetColor($alphabet[$remarkColIndex] . STARTING_ROW_SE . ":" . $alphabet[$redoExamColIndex] . $lastRowIndex, RED);
-
-    //Pass or fail?
-    $pass_of_fail_colIndex = $sheet->GetColumnIndex(4, count($alphabet), 'Pass/Fail?');
-    for ($row = STARTING_ROW_SE; $row <= $lastRowIndex; $row++) {
-        $value = $sheet->GetCellValue($pass_of_fail_colIndex + 1, $row);
-        $color = "";
-        if (in_array($value, ["", "PASS","Pass"])) {
-            $color = "ff" . GREEN; //adds alpha to the color
-        } else {
-            $color = "ff" . RED; //adds alpha to the color
-        }
-        $sheet->SetColor($alphabet[$pass_of_fail_colIndex] . $row, $color);
-    }
-
-    //sets borders to writen cells
-    $sheet->SetBorders('A1:' . $alphabet[4 + $total_numbers_of_rows_to_rotate - 1] . $lastRowIndex);
-
-    //Average per subject
-    $average_row_number = ($lastRowIndex + 2);
-    $sheet->Write('D' . $average_row_number, 'Average per Subject');
-    //finds the last module column index
-    $lastModuleColIndex = $sheet->GetColumnIndex(4, count($alphabet), array_keys($modules)[$total_numbers_of_rows_to_set_in_italic - 1]);
-    //calculates the average of each subject
-    for ($col = START_COL_SE + 1; $col <= $lastModuleColIndex + 1; $col++) //the function get index removes 1 and returns the result
+    // LAST UPDATES
+    // wordwraps cells
+    $range = $ref(STARTING_COL, $tu_unit_row).":".$ref($lastColIndex, $lastRow-1);
+    $sheet->WordWrap($range);
+    // add border to cells
+    $sheet->SetBorders($range);
+    // centers the content about marks
+    $sheet->SetCenter($range, true, true);
+    //increases the size of the last column
+    $sheet->SetColumnWidth($alph($lastColIndex), 16);
+    // makes the text bold for "Semester average", "Semester validation (Validated (V) /Not Validated (NV)", "Credits earned"
+    $sheet->SetCellsToBold($ref($lastColIndex-3, SD_STARTING_ROW).":".$ref($lastColIndex-1, $lastRow-1));
+    // green cell when validated
+    for($i = SD_STARTING_ROW; $i <= $lastRow; $i++)
     {
-        $total = 0;
-        for ($row = STARTING_ROW_SE; $row <= $lastRowIndex; $row++) {
-            $total += floatval($sheet->GetCellValue($col, $row));
-        }
-        $sheet->Write($alphabet[$col - 1] . $average_row_number, $total / $nbStudents);
-    }
-    //sets the bg color of average cell to lite blue
-    $sheet->SetColor("D" . $average_row_number . ":" . $alphabet[$lastModuleColIndex] . $average_row_number, SKY_BLUE);
-    $sheet->SetBorders("D" . $average_row_number . ":" . $alphabet[$lastModuleColIndex] . $average_row_number);
-    $sheet->SetBorders("D" . $average_row_number . ":" . $alphabet[$lastModuleColIndex] . $average_row_number, "outline", "BORDER_MEDIUM");
-
-    //statistics
-    //titles
-    //part 1
-    $sheet->Write("D" . ($average_row_number + 2), "Best Average");
-    $sheet->Write("D" . ($average_row_number + 3), "Lowest Average");
-    $sheet->Write("D" . ($average_row_number + 4), "Class Room Average");
-    $sheet->Write("D" . ($average_row_number + 5), "Percentage of Success");
-    $sheet->Write("D" . ($average_row_number + 6), "Percentage of Failure");
-    //part 2
-    $sheet->Write("D" . ($average_row_number + 8), "Number of students");
-    $sheet->Write("D" . ($average_row_number + 9), "Number of passed");
-    $sheet->Write("D" . ($average_row_number + 10), "Number of fails");
-    //formating
-    $sheet->SetCellsToBold('D' . ($average_row_number + 2) . ":" . "D" . ($average_row_number + 10));
-    //values
-    $finalAverageCol = $alphabet[$sheet->GetColumnIndex(4, count($alphabet), "Final Average")];
-    $pass_failColIndex = $sheet->GetColumnIndex(4, count($alphabet), "Pass/Fail?");
-    //**increases the size of the column */
-    $sheet->SetColumnWidth($alphabet[$pass_failColIndex], 20);
-    //**sets its text weight to bold */
-    $sheet->SetcellsToBold($alphabet[$pass_failColIndex] . STARTING_ROW_SE . ":" . $alphabet[$pass_failColIndex] . $lastRowIndex);
-    $pass_failCol = $alphabet[$pass_failColIndex];
-    $averages = flatten($sheet->GetRangeValues($finalAverageCol . STARTING_ROW_SE . ':' . $finalAverageCol . $lastRowIndex));
-    $pass_failResults = flatten($sheet->GetRangeValues($pass_failCol . STARTING_ROW_SE . ':' . $pass_failCol . $lastRowIndex));
-    $nbFails = array_count_values($pass_failResults)['FAIL'] ?? 0;
-    $nbFails += array_count_values($pass_failResults)['Fail'] ?? 0;
-    //retrieves the best average
-    $bestAverage = round(max($averages), 2);
-    //retrieves the lowest average
-    $lowestAverage = round(min($averages), 2);
-    //retrieves the mean of averages
-    $mean = round((array_sum($averages) / $nbStudents), 2);
-    //retrieves the percentage of failure
-    $failurePercentage = round((($nbFails / $nbStudents) * 100), 2);
-    //retrieves the percentage of success
-    $successPercentage = round((100 - $failurePercentage), 2);
-
-    //part 1
-    $sheet->Write("E" . ($average_row_number + 2), $bestAverage);
-    $sheet->Write("E" . ($average_row_number + 3), $lowestAverage);
-    $sheet->Write("E" . ($average_row_number + 4), $mean);
-    $sheet->Write("E" . ($average_row_number + 5), $successPercentage . " %");
-    $sheet->Write("E" . ($average_row_number + 6), $failurePercentage . " %");
-    //part 2
-    $sheet->Write("E" . ($average_row_number + 8), $nbStudents);
-    $sheet->Write("E" . ($average_row_number + 9), $nbStudents - $nbFails);
-    $sheet->Write("E" . ($average_row_number + 10), $nbFails);
-    //formatting
-    $sheet->SetTextColor('E' . ($average_row_number + 2) . ":" . "E" . ($average_row_number + 10), RED);
-
-    /***** final treatments */
-    //adds borders for stats
-    $sheet->SetBorders("D" . ($average_row_number + 2) . ":E" . ($average_row_number + 6));
-    $sheet->SetBorders("D" . ($average_row_number + 2) . ":E" . ($average_row_number + 6), "outline", "BORDER_MEDIUM");
-
-    $sheet->SetBorders("D" . ($average_row_number + 8) . ":E" . ($average_row_number + 10));
-    $sheet->SetBorders("D" . ($average_row_number + 8) . ":E" . ($average_row_number + 10), "outline", "BORDER_MEDIUM");
-
-    //centers text
-    $sheet->SetCenter("E" . STARTING_ROW_SE . ":" . $alphabet[$lastColIndex - 1] . ($average_row_number + 10), true, true);
-    $sheet->SetCenter("A" . STARTING_ROW_SE . ":A" . ($average_row_number + 10), true, true);
-
-    //freezes the headers
-    $sheet->FreezePane(1, 2);
-
-    //deals with rows where the student fails
-    for ($row = STARTING_ROW_SE; $row <= $average_row_number + 10; $row++) {
-        //if the student dont pass the semester, he fails
-        $value = $sheet->GetCellValue($conversionColIndex + 1, $row);
-        $value2 = $sheet->GetCellValue($pass_of_fail_colIndex + 1, $row);
-        // $value2 = "Fail";
-        //dd(!in_array($value2, ["", "PASS","Pass"]));
-        if (!in_array($value2, ["", "PASS","Pass"])) {
-            $sheet->SetColor("A" . $row, 'ff' . RED); //adds alpha to the bg color
-            $sheet->SetColor("E" . $row . ":" . $alphabet[$lastColIndex - 1] . $row, 'ff' . RED); //adds alpha to the bg color
-            $sheet->SetTextColor($alphabet[$InternationalGradeIndex] . $row, LITE_DARK);
+        $value = $sheet->GetCellValue($lastColIndex-2, $i);
+        if(strtoupper($value)=="V")
+        {
+            $sheet->SetColor($ref($lastColIndex-2, $i), 'ff'.GREEN);
         }
     }
 
-    //wordwraps all the file cells
-    $sheet->WordWrap("A1:" . $alphabet[$lastColIndex] . $sheet->GetLastRowIndex());
+    //  XLS FILE CREATION AND SAVING'S SECTION
 
-    //encrypte the file
+    //encrypts the file
     //the password = filename + _ + current data in php according to the following format day-month-full year
-    $sheet->EncryptSheet($fileFullName . '_' . date("d-m-Y"));
-
+    $sheet->EncryptSheet($fileFullName.'_'.date("d-m-Y"));
+    //renames the sheet
     $sheet->RenameSheet($sheetName);
 
-    //saves the file
+     //saves the file
     $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
 }
