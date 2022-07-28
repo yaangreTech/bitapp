@@ -130,6 +130,8 @@ class excelExportController extends Controller
         $dir = storage_path('excelFiles');
 
         $semester=Semester::find($semesterID);
+        //add of semester id
+        $semester_id = $semester->id;
         $className = $semester->level->branche->departement->label;
         //  "COMPUTER SCIENCE 22";
         $academicYear = Year::find($yearID)->name;

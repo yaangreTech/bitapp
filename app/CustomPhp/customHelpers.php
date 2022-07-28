@@ -236,7 +236,7 @@ function GetRelativePath($from, $to): string
 
 function _define(String $constant, $value)
 {
-    if (!defined($constant)) return define($constant, $value);
+    return !defined($constant) ? define($constant, $value): null;
 }
 
 function zipAndDownload($fileName)
