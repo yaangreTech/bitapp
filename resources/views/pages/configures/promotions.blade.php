@@ -15,6 +15,18 @@
         <!-- Custom Js -->
         <script src="assets/ajax/promotion_ajax.js"></script>
         {{-- <script src="assets/js/pages/forms/form-wizard.js"></script> --}}
+
+        <script>
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: '/school/get_year/0',
+                success: function(year) {},
+                error: function(error) {
+                    // console.log(error);
+                    $('.vrai').html(emptyYear());
+            }})
+        </script>
     </x-slot>
 
     <section class="content">
@@ -79,7 +91,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                    <div class="card">
+                    <div class="card vrai">
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-hover js-basic-example contact_list">

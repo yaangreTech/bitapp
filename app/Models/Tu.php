@@ -17,6 +17,7 @@ class Tu extends Model
         'TU_name',
         'TU_classe',
         'TU_semester',
+        'TU_code'
     ];
     
     protected $cascadeDeletes=['modulus'];

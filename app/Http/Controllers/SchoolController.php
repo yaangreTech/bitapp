@@ -6,6 +6,7 @@ use App\Models\Tu;
 use Carbon\Carbon;
 use App\Models\Year;
 use App\Models\Level;
+use App\Models\Manage;
 use App\Models\Module;
 use App\Models\Branche;
 use App\Models\Semester;
@@ -13,6 +14,7 @@ use App\Models\Departement;
 use App\Models\Level_format;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class SchoolController extends Controller
 {
@@ -23,7 +25,7 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        $shool_departments = Departement::all();
+        // $shool_departments = Departement::all();
     return view('pages.configures.school' /*,compact('shool_departments')*/);
     }
 
@@ -33,6 +35,9 @@ class SchoolController extends Controller
     {
         // dd('ddd');
         $departments = Departement::all();
+        if(Auth::user()->right->title == 'isHd'){
+            $departments = Departement::where('id', '=', Manage::where('user_id', '=',Auth::user()->id)->orderBy('id','desc')->first()->departement_id)->get();
+        }
         foreach ($departments as $department) {
             $department->levels;
             $department->branches;
@@ -94,6 +99,9 @@ class SchoolController extends Controller
     {
         // dd('ddd');
         $departments = Departement::all();
+        if(Auth::user()->right->title == 'isHd'){
+            $departments = Departement::where('id', '=', Manage::where('user_id', '=',Auth::user()->id)->orderBy('id','desc')->first()->departement_id)->get();
+        }
         foreach ($departments as $department) {
             $department->branches;
             foreach ($department->branches as $branch) {
@@ -376,12 +384,14 @@ class SchoolController extends Controller
             'TU_name' => ['required', 'string', 'max:255'],
             'TU_semester' => ['required', 'max:255'],
             'TU_checker' => ['required'],
+            'TU_code'=> ['required', 'string', 'max:255', 'unique:tus'],
         ]);
         $data=false;
         $semester= Semester::findOrFail($request->TU_semester);
 
         $tuID=Tu::insertGetId([
             'semester_id'=>$semester->id,
+            'code'=>$request->TU_code,
             'name'=>$request->TU_name
         ]);
 
@@ -404,6 +414,7 @@ class SchoolController extends Controller
     {
         $request->validate([
             'TU_name' => ['required', 'string', 'max:255'],
+            'TU_code'=> ['required', 'string', 'max:255','unique:tus'],
             'TU_checker' => ['required'],
         ]);
 
@@ -412,6 +423,7 @@ class SchoolController extends Controller
         $tu = Tu::findOrFail($id);
 
         $tu->name=$request->TU_name;
+        $tu->code=$request->TU_code;
         $data=$tu->update();
 
         $ecus=json_decode($request->TU_checker);

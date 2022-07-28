@@ -140,5 +140,16 @@
         <script src="assets/js/table.min.js"></script>
         <!-- Custom Js -->
         <script src="assets/js/pages/tables/jquery-datatable.js"></script>
+        <script>
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: '/school/get_year/0',
+                success: function(year) {},
+                error: function(error) {
+                    // console.log(error);
+                    $('.card').html(emptyYear());
+            }})
+        </script>
     </x-slot>
 </x-app-layout>

@@ -63,6 +63,7 @@
                     <div class="card">
                         <div class="profile-tab-box">
                             <div class="p-l-20">
+                                @if(Auth::user()->right->title == 'isAdmin')
                                 <ul class="nav ">
                                     <li class="nav-item tab-all">
                                         <a class="nav-link active show" href="#m_Departements"
@@ -88,12 +89,20 @@
                                             Settings</a>
                                     </li> --}}
                                 </ul>
+                                @elseif(Auth::user()->right->title == 'isHd')
+                                <ul class="nav ">
+                                    <li class="nav-item tab-all p-l-20">
+                                        <a class="nav-link active show" href="#m_TU" data-toggle="tab">TU && ECU Settings</a>
+                                    </li>
+                                </ul>
+                                @endif
+                              
                             </div>
                         </div>
                     </div>
                     <div class="tab-content">
                         {{-- departments views --}}
-                        <div role="tabpanel" class="tab-pane active" id="m_Departements" aria-expanded="true">
+                        <div role="tabpanel" class="tab-pane @if(Auth::user()->right->title == 'isAdmin') active @endif" id="m_Departements" aria-expanded="true">
                             <div class="row clearfix">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="card project_widget">
@@ -260,7 +269,7 @@
                         </div> --}}
 
                         {{-- tus view --}}
-                        <div role="tabpanel" class="tab-pane" id="m_TU" aria-expanded="false">
+                        <div role="tabpanel" class="tab-pane @if(Auth::user()->right->title == 'isHd') active @endif" id="m_TU" aria-expanded="false">
                             <div class="card">
                                 <div class="header">
                                     <h2>
@@ -282,7 +291,7 @@
                                             <div class="card">
                                                 <div class="body">
                                                     <div id="mail-nav">
-                                                        <h3 type="button" class="">Departements</h3>
+                                                        <h3 type="button" class="">Options</h3>
                                                         <ul class="collapsible tu_departments">
                                                             {{--  --}}
                                                         </ul>

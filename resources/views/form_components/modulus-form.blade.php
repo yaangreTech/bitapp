@@ -35,7 +35,7 @@
                                     <div class='input-group'>
                                         <div class="form-line">
                                             <input type="number" id="modulus_credict" name="modulus_credict"
-                                                class="form-control" placeholder="Enter the Credict">
+                                                class="form-control center" placeholder="Enter the Credict">
                                         </div>
                                         {{-- <span class="input-group-addon">Credits</span> --}}
                                     </div>
@@ -49,7 +49,7 @@
                                     <div class="input-group">
                                         <div class="form-line">
                                             <input type="number" id="modulus_hours" name="modulus_hours"
-                                                class="form-control" placeholder="Enter the Hours">
+                                                class="form-control center" placeholder="Enter the Hours">
                                         </div>
                                         {{-- <span class="input-group-addon">Hours</span> --}}
                                     </div>

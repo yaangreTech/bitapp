@@ -4,6 +4,7 @@ $(function() {
     // dispStatus = -1;
     // $('#modulus_semester').attr('disabled', true);
 
+
 })
 var yearData = {};
 var students_table = null;
@@ -84,7 +85,8 @@ function getStudentOf(yearID, classID) {
         },
         error: function(error) {
             // console.log(error);
-            $('#students_table').html('<tr><td  class="center">No School year<br/><span class="font-bold">Please Create a school year before !!!</span><td></tr>')
+            $('.card').html(emptyYear());
+            // $('#students_table').html('<tr><td  class="center">No School year<br/><span class="font-bold">Please Create a school year before !!!</span><td></tr>')
         }
     });
 
@@ -367,7 +369,8 @@ function getPromotions(l3classID) {
             });
         },
         error: function(error) {
-            console.log(error);
+            // console.log(error);
+            $('.card').html(emptyYear());
         }
     });
 

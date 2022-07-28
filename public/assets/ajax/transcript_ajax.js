@@ -27,7 +27,8 @@ function getTranscriptOf(yearID, classID) {
             // yearData = year;
         },
         error: function(error) {
-            console.log(error);
+            $('.card').html(emptyYear());
+            // console.log(error);
             // $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No School year<br/><span class="font-bold">Please Create a school year before !!!</span></h3></div>')
         }
     });
@@ -46,7 +47,8 @@ function getTranscript_with_session_Of(yearID, classID) {
             // yearData = year;
         },
         error: function(error) {
-            console.log(error);
+            // console.log(error);
+            $('.card').html(emptyYear());
             // $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No School year<br/><span class="font-bold">Please Create a school year before !!!</span></h3></div>')
         }
     });

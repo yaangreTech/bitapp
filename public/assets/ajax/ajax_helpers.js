@@ -344,3 +344,8 @@ function importer(url, formID, nexAction = null, loader = false) {
 
 
 }
+
+function emptyYear() {
+    html = `<div class="text-bold" style="font-size:20px;font-weight: bold;height:250px;display:flex; align-items:center;justify-content:center;">No school year yet !!!</div>`
+    return html;
+}

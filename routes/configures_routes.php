@@ -8,14 +8,14 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // for school page
 Route::get('school', [SchoolController::class, 'index'])
-    ->middleware(['auth', 'isAdmin'])
+    ->middleware(['auth'])
     ->name('school');
 
 // For school=> department
 Route::post('/school/store_department', [
     SchoolController::class,
     'storeDepartment',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::get('/school/get_departments', [
     SchoolController::class,
@@ -24,135 +24,135 @@ Route::get('/school/get_departments', [
 Route::post('/school/update_department/{id}', [
     SchoolController::class,
     'updateDepartment',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/delete_department/{id}', [
     SchoolController::class,
     'deleteDepartment',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/destroy_department/{id}', [
     SchoolController::class,
     'destroyDepartment',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 // For school=> Branches
 Route::post('/school/store_branch', [
     SchoolController::class,
     'storeBranch',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/get_branchs', [
     SchoolController::class,
     'getBranchs',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::post('/school/update_branch/{id}', [
     SchoolController::class,
     'updateBranch',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/delete_branch/{id}', [
     SchoolController::class,
     'deleteBranch',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/destroy_branch/{id}', [
     SchoolController::class,
     'destroyBranch',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::get('/school/bind_levels_of/{initalID}', [
     SchoolController::class,
     'bind_levels_of',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 
 // For school=> Semester
 Route::post('/school/store_semester', [
     SchoolController::class,
     'storeSemester',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::get('/school/get_semesters', [
     SchoolController::class,
     'getSemesters',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::post('/school/update_semester/{id}', [
     SchoolController::class,
     'updateSemester',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::get('/school/delete_semester/{id}', [
     SchoolController::class,
     'deleteSemester',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::get('/school/destroy_semester/{id}', [
     SchoolController::class,
     'destroySemester',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 // For school=> Classe
 Route::post('/school/store_classe', [
     SchoolController::class,
     'storeClasse',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::get('/school/get_classe_sof/{depID}', [
     SchoolController::class,
     'getClassesOf',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::post('/school/update_classe/{id}', [
     SchoolController::class,
     'updateClasse',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::get('/school/delete_classe/{id}', [
     SchoolController::class,
     'deleteClasse',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 Route::get('/school/destroy_classe/{id}', [
     SchoolController::class,
     'destroyClasse',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 // for tu
 Route::get('/school/get_tu_of/{classID}', [
     SchoolController::class,
     'getTuOf',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::post('/school/store_tu', [
     SchoolController::class,
     'storeTu',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::post('/school/update_tu/{id}', [
     SchoolController::class,
     'updateTu',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/delete_tu/{id}', [
     SchoolController::class,
     'deleteTu',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/bind_semester_of/{classID}', [
     SchoolController::class,
     'bindSemestersOf',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 // For school=>Modulus
 Route::post('/school/store_modulus/{tuID}', [
     SchoolController::class,
     'storeModulus',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/get_modulud_of/{classID}', [
     SchoolController::class,
     'getModulusOf',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::post('/school/update_modulus/{id}', [
     SchoolController::class,
     'updateModulus',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/delete_modulus/{id}', [
     SchoolController::class,
     'deleteModulus',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 Route::get('/school/destroy_modulus/{id}', [
     SchoolController::class,
     'destroyModulus',
@@ -160,7 +160,7 @@ Route::get('/school/destroy_modulus/{id}', [
 Route::get('/school/bind_tu_of/{classID}', [
     SchoolController::class,
     'bindTuOf',
-])->middleware(['auth', 'isAdmin']);
+])->middleware(['auth']);
 
 // for users page
 Route::get('users', [UtilisateurController::class, 'index'])

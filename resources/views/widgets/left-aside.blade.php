@@ -34,6 +34,19 @@
                     </li>
                 </ul>
             </li>
+        @elseif(Auth::user()->right->title == 'isHd')
+            <li>
+                <a href="#" onClick="return false;" class="menu-toggle">
+                    <i class="menu-icon ti-settings"></i>
+                    <span>Configuration</span>
+                </a>
+                <ul class="ml-menu">
+                    <li>
+                        <a href="{{ route('school') }}" id="School" onClick="setActiveId('School')">Tus and ECU
+                            Settings</a>
+                    </li>
+                </ul>
+            </li>
         @endif
         {{-- Students management menus --}}
         <li>

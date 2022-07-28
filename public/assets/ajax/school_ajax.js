@@ -333,7 +333,8 @@
      $.each(data.tus, function(key, tu) {
 
 
-             elements += '<tr class="unread group"><td colspan="4"> TU:  <strong class="font-bold font-20">' + tu.name + '</strong></td>'
+             elements += '<tr class="unread group"><td colspan="3"> TU:  <strong class="font-bold font-20">' + tu.name + '</strong></td>'
+             elements += '<td > code:  <span class="badge bg-white p-10"><strong class="font-bold font-20 text-danger">' + tu.code + '</strong></span></td>'
                  //  elements += '     <td class="text-right"><button data-toggle="modal" data-target="#add_modulus" type="button" class="btn  btn-outline-info initier" onclick="initier(' + tu.id + ');bindTUname(' + tu.id + ', tu_names[' + key + '] )">'
                  //  elements += '     <i class="material-icons">add_circle_outline</i>'
                  //  elements += '      <span>new ECU</span></button>'
@@ -377,7 +378,7 @@
                  elements += '    </td>'
                  elements += '</tr>'
              })
-             tu_with_ecu_editparames.push('^TU_classe=' + data.level.id + '&&&?addedecu=' + JSON.stringify(tu_with_ecu_model) + '&&&*TU_semester=' + tu.semester.label);
+             tu_with_ecu_editparames.push('^TU_classe=' + data.level.id + '&&&?addedecu=' + JSON.stringify(tu_with_ecu_model) + '&&&*TU_semester=' + tu.semester.label + '&&&TU_code=' + tu.code);
 
          })
          // $.fn.dataTable.isDataTable('#modulus_table') && modulus_table.destroy();

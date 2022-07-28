@@ -11,16 +11,34 @@
                 <form id="wizard_with_validation" class="" method="POST">
                     <h3>Tu references and its references</h3>
                     <fieldset>
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" id="TU_name" name="TU_name" class="form-control"
-                                    placeholder="Enter the TU Name" required>
+                        <div class="row">
+                        <div class="col-md-6" style="margin-bottom: 0px;important">
+                            <label for="TU_classe">Tu name</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="TU_name" name="TU_name" class="form-control"
+                                        placeholder="Enter the TU Name" required>
+                                </div>
+                                <span class="TU_name  text-danger"></span>
                             </div>
-                            <span class="TU_name  text-danger"></span>
+                        </div>
+                        
+                        <div class="col-md-6" style="margin-bottom: 0px;important">
+                            <label for="TU_classe">Tu Code</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="TU_code" name="TU_code" class="form-control"
+                                        placeholder="Enter the TU code" required>
+                                </div>
+                                <span class="TU_code  text-danger"></span>
+                            </div>
                         </div>
 
+                        </div>
+                     
+
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="margin-bottom: 0px;important">
                                 <label for="TU_classe">Level</label>
                                 <div class="form-group">
                                     <div class="form-line">
@@ -47,7 +65,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="margin-bottom: 0px;important">
                                 <label for="clasS">Semester</label>
                                 <div class="form-group">
                                     <div class="form-line">
@@ -69,27 +87,27 @@
 
                         <div class="body">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4" style="margin-bottom: 0px;important">
                                     <label for="ECU_name">Ecu name</label>
                                     <input type="text" id='ECU_name' class="tdl-new form-control"
                                         placeholder="Ex: English 1">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3" style="margin-bottom: 0px;important">
                                     <label for="ECU_credict">Ecu credit</label>
-                                    <input type="number" id='ECU_credict' class="tdl-new form-control"
+                                    <input type="number" id='ECU_credict' class="tdl-new form-control center"
                                         placeholder="Ex: 6">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3" style="margin-bottom: 0px;important">
                                     <label for="ECU_hours">Ecu hours</label>
-                                    <input type="number" id='ECU_hours' class="tdl-new form-control"
+                                    <input type="number" id='ECU_hours' class="tdl-new form-control center"
                                         placeholder="Ex: 120">
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" style="margin-bottom: 0px;important">
                                     <button onclick="bindEcu('adding')" type="button"
                                         class="btn btn-outline-info waves-effect pull-right">add</button>
                                 </div>
                             </div>
-                            <div class="tdl-content" style="max-height: 200px !important; overflow-y: scroll;">
+                            <div class="tdl-content" style="max-height: 175px !important; overflow-y: scroll;">
                                 <ul id="modList" class="to-do-list ui-sortable" style="">
                                 </ul>
                             </div>

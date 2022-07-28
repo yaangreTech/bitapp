@@ -21,7 +21,8 @@ function getAverageOf(yearID, semesterID) {
             $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/false');
         },
         error: function(error) {
-            console.log(error);
+            // console.log(error);
+            $('.card').html(emptyYear());
             // $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No School year<br/><span class="font-bold">Please Create a school year before !!!</span></h3></div>')
         }
     });
@@ -43,7 +44,8 @@ function getAverageWithSessionOf(yearID, semesterID) {
             $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true');
         },
         error: function(error) {
-            console.log(error);
+            // console.log(error);
+            $('.card').html(emptyYear());
             // $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No School year<br/><span class="font-bold">Please Create a school year before !!!</span></h3></div>')
         }
     });
