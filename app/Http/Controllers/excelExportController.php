@@ -86,7 +86,8 @@ class excelExportController extends Controller
             foreach( $tu['modulus'] as $modulu){
                 $modulus[$modulu['name']]=$modulu['credict'];
             }
-            $tus[$tu['name']]=$modulus;
+            $tus[$tu['name']]['TUE']=$modulus;
+            $tus[$tu['name']]['TU CODE']= $tu['code'];
             $modulus=[];  
         }
         $headers["TUS"]=$tus;
@@ -136,7 +137,11 @@ class excelExportController extends Controller
         //  "COMPUTER SCIENCE 22";
         $academicYear = Year::find($yearID)->name;
         $semesterNumber = explode(" ",$semester->label)[1];
-        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $dir . DIRECTORY_SEPARATOR);
+        // dd(substr(explode('-',Year::find($yearID)->promotion->name)[1],2));
+        // dd($student_data,$headers);
+        $session=$isWithSession=='true'?'Catch-up':'Normal';
+        // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
+        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
 
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger

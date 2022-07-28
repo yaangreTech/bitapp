@@ -172,6 +172,13 @@ function loading() {
         '<span class="m-l-10">loading...</span>'
 }
 
+function simplify(text, max) {
+    var data = text;
+    if (text.length > max) {
+        data = text.substr(0, max - 3) + '...'
+    }
+    return data;
+}
 
 
 function yeardataMapper(value) {

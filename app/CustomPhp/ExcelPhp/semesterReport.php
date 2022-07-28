@@ -34,6 +34,7 @@ _define("SD_STARTING_ROW", 22);
 //defines ordinal numbers from cardinal
 _define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH",7=>"SEVEN",8=>"EIGHT",9=>"NINE",10=>"TEN"]);
 
+
 /**
  * @param array $headers
  * @param array $student_data
@@ -52,6 +53,7 @@ _define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FO
  */
 function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $saveInFolder = ''): void
 {
+
     $download = empty($saveInFolder);
     $sheet = new ExcelXport();
 
@@ -143,7 +145,9 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->MergeCells($start.":".$end);
     $sheet->SetCenter($start, $end, true, true);
     $sheet->SetCellsToBold($start.":".$end);
+    
     $sheet->UnderlineText($start.":".$end);
+    // dd('oooooo');
     $sheet->SetRowHeight(STARTING_ROW+5, 22);
     $sheet->SetFontSize($start.":".$end, 18);
 
