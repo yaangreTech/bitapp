@@ -298,9 +298,9 @@ class ExcelXport
             //row starts at 1 and column at 1, if cols starts at 0, it will retrieve the last col
             $index = 0;
             for ($i = 1; $i < $lastColIndex; $i++) {
-               
+
                 if ($this->GetCellValue($i, $row) == $cellValue) {
-                   
+
                     $index = $i;
                     // dd($index);
 
@@ -419,6 +419,19 @@ class ExcelXport
         $this->sheet->getProtection()->setSort(true);
         $this->sheet->getProtection()->setInsertRows(true);
         $this->sheet->getProtection()->setFormatCells(true);
+    }
+
+    //*function to underline text
+    function UnderlineText($range): void
+    {
+        try
+        {
+            $this->sheet->getStyle($range)->getFont()->setUnderline(true);
+        }
+        catch (Exception $e)
+        {
+            $this->GetExceptionMessage($e);
+        }
     }
 
     private function GetExceptionMessage($errors)
