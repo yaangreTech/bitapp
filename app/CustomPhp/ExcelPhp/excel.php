@@ -434,6 +434,46 @@ class ExcelXport
         }
     }
 
+    //*function to create a new spreadsheet
+    function CreateSpreadsheet(): void
+    {
+        try
+        {
+            $this->spreadsheet->createSheet();
+        }
+        catch (Exception $e)
+        {
+            $this->GetExceptionMessage($e);
+        }
+    }
+
+    //*function to change the index of the sheet
+    function SetSheetIndex(int $index): void
+    {
+        try
+        {
+            $this->spreadsheet->setActiveSheetIndex($index);
+        }
+        catch (Exception $e)
+        {
+            $this->GetExceptionMessage($e);
+        }
+    }
+
+    //*function to copy the content of a sheet in to a spreadsheet
+    function CopySheet($spreadsheet, int $index): void
+    {
+        try
+        {
+            $this->spreadsheet->addExternalSheet($spreadsheet, $index);
+        }
+        catch (Exception $e)
+        {
+            $this->GetExceptionMessage($e);
+        }
+    }
+
+
     private function GetExceptionMessage($errors)
     {
         $err_message = $errors->getMessage();

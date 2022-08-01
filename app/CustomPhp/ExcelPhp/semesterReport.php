@@ -52,7 +52,7 @@ _define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FO
  * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $saveInFolder = ''): void
+function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $returnSheet = true, $saveInFolder = '')
 {
 
     $download = empty($saveInFolder);
@@ -146,9 +146,9 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->MergeCells($start.":".$end);
     $sheet->SetCenter($start, $end, true, true);
     $sheet->SetCellsToBold($start.":".$end);
-    
+
     $sheet->UnderlineText($start.":".$end);
-    
+
     $sheet->SetRowHeight(STARTING_ROW_SR+5, 22);
     $sheet->SetFontSize($start.":".$end, 18);
 
@@ -306,7 +306,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
             // if($key=='Pass/Fail?'){
             //     $value=$value=='Pass'?'V':'NV';
             // }
-           
+
             //replaces , by .
             $value = str_replace(',', '.', $value);
             if(is_numeric($value))
@@ -379,6 +379,14 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //renames the sheet
     $sheet->RenameSheet($sheetName);
 
-     //saves the file
-    $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
+     if(!$returnSheet)
+     {
+         //saves the file
+         $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
+     }
+     else
+     {
+         return $sheet;
+     }
+
 }
