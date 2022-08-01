@@ -26,7 +26,8 @@ _define("TU_CODE", "TU CODE");
 //starting column to write data
 _define("STARTING_COL", 1);
 //starting row for writing data
-_define('STARTING_ROW', 2);
+_define('STARTING_ROW_SR', 2);
+// dd(STARTING_ROW_sr);
 //starting row for inserting data related to students (in cols axis)
 _define("SD_STARTING_COL", 5);
 //starting row for inserting data related to students (in rows axis)
@@ -128,27 +129,27 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
      //  LOGO AND THE ACADEMIC YEAR'S SECTION
 
      //sets the logo
-     $sheet->SetImage($ref(2, STARTING_ROW), PHPSPREADSHEET_IMAGE_PATH, 'logo.png', [920, 120], 0, 0);
+     $sheet->SetImage($ref(2, STARTING_ROW_SR), PHPSPREADSHEET_IMAGE_PATH, 'logo.png', [920, 120], 0, 0);
 
      //academic year
-    $start = $ref(15, STARTING_ROW);
-    $end = $ref(20, STARTING_ROW);
+    $start = $ref(15, STARTING_ROW_SR);
+    $end = $ref(20, STARTING_ROW_SR);
     $sheet->Write($start, "ACADEMIC YEAR: ".$academicYear);
     $sheet->MergeCells($start.":".$end);
     $sheet->SetCenter($start, $end, true, true);
     $sheet->SetCellsToBold($start.":".$end);
 
     // minutes of deliberation
-    $start = $ref(7, STARTING_ROW+5);
-    $end = $ref(11, STARTING_ROW+5);
+    $start = $ref(7, STARTING_ROW_SR+5);
+    $end = $ref(11, STARTING_ROW_SR+5);
     $sheet->Write($start, "Minutes of deliberation");
     $sheet->MergeCells($start.":".$end);
     $sheet->SetCenter($start, $end, true, true);
     $sheet->SetCellsToBold($start.":".$end);
     
     $sheet->UnderlineText($start.":".$end);
-    // dd('oooooo');
-    $sheet->SetRowHeight(STARTING_ROW+5, 22);
+    
+    $sheet->SetRowHeight(STARTING_ROW_SR+5, 22);
     $sheet->SetFontSize($start.":".$end, 18);
 
     $lastRow = $sheet->GetLastRowIndex();
@@ -188,7 +189,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
 
     //index of the last col
     $lastColIndex = SD_STARTING_COL - 1 + $nbColHeaders;
-
+    // dd('oooooo');
     //adds the name of the TU and the total of credits
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
@@ -302,6 +303,10 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         $col++;
         foreach($student_data[$index] as $key => $value)
         {
+            // if($key=='Pass/Fail?'){
+            //     $value=$value=='Pass'?'V':'NV';
+            // }
+           
             //replaces , by .
             $value = str_replace(',', '.', $value);
             if(is_numeric($value))
@@ -355,9 +360,14 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     for($i = SD_STARTING_ROW; $i <= $lastRow; $i++)
     {
         $value = $sheet->GetCellValue($lastColIndex-2, $i);
-        if(strtoupper($value)=="V")
+
+
+        if(strtoupper($value)=="PASS")
         {
             $sheet->SetColor($ref($lastColIndex-2, $i), 'ff'.GREEN);
+            $sheet->Write($ref($lastColIndex-2, $i),'V');
+        }elseif(strtoupper($value)=="FAIL") {
+            $sheet->Write($ref($lastColIndex-2, $i),'NV');
         }
     }
 
