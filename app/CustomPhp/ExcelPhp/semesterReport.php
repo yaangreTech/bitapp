@@ -52,7 +52,7 @@ _define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FO
  * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $returnSheet = true, $saveInFolder = '')
+function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $saveInFolder = '')
 {
 
     $download = empty($saveInFolder);
@@ -376,17 +376,12 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //encrypts the file
     //the password = filename + _ + current data in php according to the following format day-month-full year
     $sheet->EncryptSheet($fileFullName.'_'.date("d-m-Y"));
+
     //renames the sheet
     $sheet->RenameSheet($sheetName);
 
-     if(!$returnSheet)
-     {
-         //saves the file
-         $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
-     }
-     else
-     {
-         return $sheet;
-     }
+     //saves the file
+     $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
+
 
 }

@@ -141,15 +141,27 @@ class excelExportController extends Controller
         // dd($student_data,$headers);
         $session=$isWithSession=='true'?'Catch-up':'Normal';
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
-        //normal sheet for all students
-        $allStudents = SemesterReport($headers, $student_data, $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId);
-        //special for student that must redo some exams
 
+        //normal sheet for all students
+<<<<<<< Updated upstream
+        $allStudents = SemesterReport($headers, $student_data, $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId);
+=======
+        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
+>>>>>>> Stashed changes
+        //special for student that must redo some exams
+        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
+        //proclamation file
+        //Proclamation($academicYear, $sessionType, $className, $semester, $message, $data, $juryMembers, $juryPresident);
+
+
+<<<<<<< Updated upstream
         //NB: The name of the sheets must change
         $redoExams = SemesterReport($headers, $student_data, $className, 2, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId);
         $allStudents->CopySheet(clone $redoExams->sheet , 1);
         $allStudents->Save("Semester_" . $semesterNumber  . '.xlsx');
 
+=======
+>>>>>>> Stashed changes
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
         
