@@ -297,9 +297,9 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         $sheet->SetCenter($no_cellRef, false, true);
         $col++;
         foreach ($student_data[$index] as $key => $value) {
-            if ($key == 'Semester validation (Validated (V) /Not Validated (NV)') {
-                $value = strtoupper($value)  == 'PASS' ? 'V' : 'NV';
-            }
+            // if ($key == 'Semester validation (Validated (V) /Not Validated (NV)') {
+            //     $value = strtoupper($value)  == 'PASS' ? 'V' : 'NV';
+            // }
 
             //replaces , by .
             $value = str_replace(',', '.', $value);
@@ -354,12 +354,12 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         $value = $sheet->GetCellValue($lastColIndex - 5, $i);
 
 
-        // if (strtoupper($value) == "PASS") {
-        //     $sheet->SetColor($ref($lastColIndex - 5, $i), 'ff' . GREEN);
-        //     $sheet->Write($ref($lastColIndex - 5, $i), 'V');
-        // } elseif (strtoupper($value) == "FAIL") {
-        //     $sheet->Write($ref($lastColIndex - 5, $i), 'NV');
-        // }
+        if (strtoupper($value) == "PASS") {
+            $sheet->SetColor($ref($lastColIndex - 5, $i), 'ff' . GREEN);
+            $sheet->Write($ref($lastColIndex - 5, $i), 'V');
+        } elseif (strtoupper($value) == "FAIL") {
+            $sheet->Write($ref($lastColIndex - 5, $i), 'NV');
+        }
     }
 
     //  XLS FILE CREATION AND SAVING'S SECTION
