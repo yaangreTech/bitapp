@@ -1,6 +1,8 @@
 <?php
 require('excel.php');
-require("../functions.php");
+
+// require("../functions.php");
+require("../customHelpers.php");
 
 //starting row
 _define("STARTING_ROW_", 2);
@@ -45,7 +47,9 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     $alph = function($index) use ($alphabet) {return $alphabet[$index - 1];};
 
     //creates a cell reference
+
     $ref = function($colIndex, $rowindex) use ($alph) {return $alph($colIndex) . $rowindex;};
+
 
     //last column index
     $lastColIndex = STARTING_COL_+TOTAL_N_COLS;
@@ -239,4 +243,5 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     //saves the file
     $sheet->Save($fileFullName . '.xlsx', true);
 }
+
 

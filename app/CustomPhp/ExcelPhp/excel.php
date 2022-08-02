@@ -582,7 +582,9 @@ Class ExcelXport
     {
         try
         {
+
             $this->spreadsheet->addSheet($spreadsheet, $index);
+
         }
         catch (Exception $e)
         {

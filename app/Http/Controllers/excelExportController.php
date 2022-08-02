@@ -144,12 +144,15 @@ class excelExportController extends Controller
         //normal sheet for all students
         $allStudents = SemesterReport($headers, $student_data, $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId);
         //special for student that must redo some exams
+
         //NB: The name of the sheets must change
         $redoExams = SemesterReport($headers, $student_data, $className, 2, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId);
         $allStudents->CopySheet(clone $redoExams->sheet , 1);
         $allStudents->Save("Semester_" . $semesterNumber  . '.xlsx');
+
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
+        
         zipAndDownload("Semester_" . $semesterNumber . "_report.zip");
     }
 

@@ -9,6 +9,7 @@
             </div>
             <div class="modal-body ">
                 <form id="wizard_with_validation" class="" method="POST">
+                    @csrf
                     <h3>Tu references and its references</h3>
                     <fieldset>
                         <div class="row">
