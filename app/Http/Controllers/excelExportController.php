@@ -97,7 +97,6 @@ class excelExportController extends Controller
         $headers["Credits earned"] = "";
         $headers["International Grade"] = "";
         $headers["Grade"] = "";
-
         $headers["Re-do exam"] = "";
         $headers["Remark"] = "";
 
@@ -122,12 +121,11 @@ class excelExportController extends Controller
             $student["Total weighted scores"] = $inscription["t_n_ponderer"];
             $student["Semester average"] = $inscription["t_n_average"];
             $student["Semester validation (Validated (V) /Not Validated (NV)"] = $inscription['t_n_status'];
-            $student["Credits earned"] = $inscription["validate_tue"];
             $student["International Grade"] = $inscription['conforme']["international_Grade"];
             $student["Grade"] = $inscription['conforme']["mention"];
             $student["Re-do exam"] = substr($inscription["t_n_redo_mod"], 1);
-            $student["Remark"] = $inscription["status"] == "active" ? "" : $inscription["status"];
-
+            $student["Remark"] = $inscription["status"];
+            $student["Credits earned"] = $inscription["validate_tue"];
 
             array_push($student_data, $student);
 
