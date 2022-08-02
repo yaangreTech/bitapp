@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use ZipArchive;
 use App\Models\Year;
 use App\Models\Level;
@@ -66,146 +67,142 @@ class excelExportController extends Controller
         // $file = fopen($semesterJson . '/headers.json', 'r');
         // $headers = json_decode(fread($file, filesize($semesterJson . '/headers.json')), true);
 
-        $semesterAverages=new AverageController();
-        if($isWithSession=='true'){
+        $semesterAverages = new AverageController();
+        if ($isWithSession == 'true') {
 
-            $jsons=$semesterAverages->getAverage_with_session_Of($yearID, $semesterID);
+            $jsons = $semesterAverages->getAverage_with_session_Of($yearID, $semesterID);
+        } else {
 
-        }else{
-
-            $jsons=$semesterAverages->getAverageOf($yearID, $semesterID);
-
+            $jsons = $semesterAverages->getAverageOf($yearID, $semesterID);
         }
-        $jsons=json_decode($jsons->getContent(),true);
-        $headers=[];
-        $tus=[];
-        $total_credicts=0;
-        foreach($jsons['theadTus'] as $tu){
-            $modulus=[];
-            $total_credicts+=$tu['tu_credit'];
-            foreach( $tu['modulus'] as $modulu){
-                $modulus[$modulu['name']]=$modulu['credict'];
+        $jsons = json_decode($jsons->getContent(), true);
+        $headers = [];
+        $tus = [];
+        $total_credicts = 0;
+        foreach ($jsons['theadTus'] as $tu) {
+            $modulus = [];
+            $total_credicts += $tu['tu_credit'];
+            foreach ($tu['modulus'] as $modulu) {
+                $modulus[$modulu['name']] = $modulu['credict'];
             }
-            $tus[$tu['name']]['TUE']=$modulus;
-            $tus[$tu['name']]['TU CODE']= $tu['code'];
-            $modulus=[];
+            $tus[$tu['name']]['TUE'] = $modulus;
+            $tus[$tu['name']]['TU CODE'] = $tu['code'];
+            $modulus = [];
         }
-        $headers["TUS"]=$tus;
-        $headers["Total of Credits"]=$total_credicts;
-        $headers["Final Average"]= "";
-        $headers["International Grade"]= "";
-        $headers["Conversion"]= "";
-        $headers["Pass/Fail?"]= "";
-        $headers["Re-do exam"]= "";
-        $headers["Remark"]= "";
+        $headers["TUS"] = $tus;
+        $headers["Total of Credits"] = $total_credicts;
+        $headers["Final Average"] = "";
+        $headers["International Grade"] = "";
+        $headers["Conversion"] = "";
+        $headers["Pass/Fail?"] = "";
+        $headers["Re-do exam"] = "";
+        $headers["Remark"] = "";
 
 
         // dd( $jsons);
-        $student_data=[];
-        $cp=0;
-        foreach($jsons['inscriptions'] as $inscription){
-            $student=[];
+        $student_data = [];
+        $cp = 0;
+        foreach ($jsons['inscriptions'] as $inscription) {
+            $student = [];
 
-                  $student["id"]=$inscription['student']['matricule'];
-                  $student["Surname"]= $inscription['student']['first_name'];
-                  $student["Name"]= $inscription['student']['Last_name'];
-                foreach ($inscription['notes'] as $mod){
-                    $student[$mod["name"]]= $mod["note"];
-                }
+            $student["id"] = $inscription['student']['matricule'];
+            $student["Surname"] = $inscription['student']['first_name'];
+            $student["Name"] = $inscription['student']['Last_name'];
+            foreach ($inscription['notes'] as $mod) {
+                $student[$mod["name"]] = $mod["note"];
+            }
 
 
 
-                $student["Total of Credits"]= $inscription["t_n_ponderer"];
-                $student["Final Average"]= $inscription["t_n_average"];
-                $student["International Grade"]= $inscription['conforme']["international_Grade"];
-                $student["Conversion"]= $inscription['conforme']["mention"];
-                $student["Pass/Fail?"]= $inscription['t_n_status'];
-                $student["Re-do exam"]= $inscription["t_n_redo_mod"];
-                $student["Remark"] = $inscription["status"];
+            $student["Total of Credits"] = $inscription["t_n_ponderer"];
+            $student["Final Average"] = $inscription["t_n_average"];
+            $student["International Grade"] = $inscription['conforme']["international_Grade"];
+            $student["Conversion"] = $inscription['conforme']["mention"];
+            $student["Pass/Fail?"] = $inscription['t_n_status'];
+            $student["Re-do exam"] = $inscription["t_n_redo_mod"];
+            $student["Remark"] = $inscription["status"];
 
-                array_push($student_data, $student);
+            array_push($student_data, $student);
         }
 
         // dd( $headers,$student_data);
 
         $dir = storage_path('excelFiles');
 
-        $semester=Semester::find($semesterID);
+        $semester = Semester::find($semesterID);
         //add of semester id
         $semester_id = $semester->id;
         $className = $semester->level->branche->departement->label;
         //  "COMPUTER SCIENCE 22";
         $academicYear = Year::find($yearID)->name;
-        $semesterNumber = explode(" ",$semester->label)[1];
+        $semesterNumber = explode(" ", $semester->label)[1];
         // dd(substr(explode('-',Year::find($yearID)->promotion->name)[1],2));
         // dd($student_data,$headers);
-        $session=$isWithSession=='true'?'Catch-up':'Normal';
+        $session = $isWithSession == 'true' ? 'Catch-up' : 'Normal';
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
         //normal sheet for all students
-        $allStudents = SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
+        $allStudents = SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, $dir . DIRECTORY_SEPARATOR);
         //special for student that must redo some exams
 
         //NB: The name of the sheets must change
-        $redoExams = SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
-        
-        $allStudents->CopySheet(clone $redoExams->sheet , 1);
-       
+        $redoExams = SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, $dir . DIRECTORY_SEPARATOR);
+
+        $allStudents->CopySheet(clone $redoExams->sheet, 1);
+
         $allStudents->Save("Semester_" . $semesterNumber  . '.xlsx');
-       
+
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
         // dd($allStudents);
-       return zipAndDownload("Semester_" . $semesterNumber . "_report.zip");
-
+        return zipAndDownload("Semester_" . $semesterNumber . "_report.zip");
     }
 
-    public function studentList($yearID,$classID)
+    public function studentList($yearID, $classID)
     {
         // $studentsJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
         // $file = fopen($studentsJson . "/studentsList.json", 'r');
         // $data = json_decode(fread($file, filesize($studentsJson . "/studentsList.json")), true);
         // fclose($file);
 
-        $data=[];
-        $studentController=new StudentController();
-        $json=$studentController->getStudentsOf($yearID,$classID);
-        $jsons=json_decode($json->getContent(),true);
+        $data = [];
+        $studentController = new StudentController();
+        $json = $studentController->getStudentsOf($yearID, $classID);
+        $jsons = json_decode($json->getContent(), true);
         // dd($jsons);
         $level = Level::findOrFail($classID);
         $year = Year::findOrFail($yearID);
 
 
-       foreach ($jsons['inscriptions'] as $json){
-        // dd($json);
-        // dd( '$json');
-           array_push($data, [
-            "ID Number"=> $json['student']['matricule'],
-            "Last Name"=> $json['student']['first_name'],
-            "First Name"=> $json['student']['Last_name'],
-            // "Graduation"=> 1990,
-            "Birth Date"=> $json['student']['birth_date'],
-            "Mail"=> $json['student']['email'],
-            "Environment"=> "BIT",
-            "Level"=> "Student",
-            "Track"=> $level->branche->departement->name
-          ]);
+        foreach ($jsons['inscriptions'] as $json) {
+            // dd($json);
+            // dd( '$json');
+            array_push($data, [
+                "ID Number" => $json['student']['matricule'],
+                "Last Name" => $json['student']['first_name'],
+                "First Name" => $json['student']['Last_name'],
+                // "Graduation"=> 1990,
+                "Birth Date" => $json['student']['birth_date'],
+                "Mail" => $json['student']['email'],
+                "Environment" => "BIT",
+                "Level" => "Student",
+                "Track" => $level->branche->departement->name
+            ]);
+        }
 
-       }
-
-       if(count($data)!=0){
-        $class =$level->branche->departement->label;
-        $academicYear =  $year->name;
-        // dd($level );
-        StudentsList( $data, $class, $academicYear);
-       }else{
-           return back();
-        //    dd($level );
-       }
+        if (count($data) != 0) {
+            $class = $level->branche->departement->label;
+            $academicYear =  $year->name;
+            // dd($level );
+            StudentsList($data, $class, $academicYear);
+        } else {
+            return back();
+            //    dd($level );
+        }
     }
 
-    public function subjectsGen($yearID, $modulusID,$isWithSession)
+    public function subjectsGen($yearID, $modulusID, $isWithSession)
     {
-        $marksInputController=new MarksInputController();
+        $marksInputController = new MarksInputController();
         // $subjectJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
         // $file = fopen($subjectJson . "/englishData.json", 'r');
         // $data = json_decode(fread($file, filesize($subjectJson . "/englishData.json")), true);
@@ -214,66 +211,64 @@ class excelExportController extends Controller
         // $file = fopen($subjectJson . "/testsWeight.json", 'r');
         // $weight = json_decode(fread($file, filesize($subjectJson . "/testsWeight.json")), true);
         // fclose($file);
-        if($isWithSession=='true'){
-            $jsons=$marksInputController->viewMarksModulusMarks_with_session_Of($yearID, $modulusID);
-
-        }else{
-            $jsons=$marksInputController->viewMarksModulusMarksOf($yearID, $modulusID);
+        if ($isWithSession == 'true') {
+            $jsons = $marksInputController->viewMarksModulusMarks_with_session_Of($yearID, $modulusID);
+        } else {
+            $jsons = $marksInputController->viewMarksModulusMarksOf($yearID, $modulusID);
         }
 
-        $jsons=json_decode($jsons->getContent(),true);
+        $jsons = json_decode($jsons->getContent(), true);
 
 
-    //   dd($jsons);
+        //   dd($jsons);
 
-      $year=Year::findOrFail($yearID);
+        $year = Year::findOrFail($yearID);
 
-      if(count($jsons)>0){
-        $year =Promotion::findOrFail($jsons['inscriptions'][0]['promotion_id'])->year;
-      }
+        if (count($jsons) > 0) {
+            $year = Promotion::findOrFail($jsons['inscriptions'][0]['promotion_id'])->year;
+        }
 
-    $data=[];
-    $weight=[];
+        $data = [];
+        $weight = [];
         $subject = $jsons['page_title']['name'];
         $teacherName = "--------------";
-        $promotion =$jsons['page_title']['tu']['semester']['level']['branche']['departement']['label'].' '.$year->promotion->name;
+        $promotion = $jsons['page_title']['tu']['semester']['level']['branche']['departement']['label'] . ' ' . $year->promotion->name;
         $academicYear = $year->name;
         // $headers = ["ID", "Name", "Forename", "Attendance", "Participation", "test#1", "Oral test", "Exam 1", "Exam 2", "Test #4", "Test #5", "Final Average", "International Grade", "Pass or Fail?"];
 
 
-        foreach ($jsons['inscriptions'] as $json){
-            $dataContent=[
+        foreach ($jsons['inscriptions'] as $json) {
+            $dataContent = [
 
-                "ID"=> $json['student']['matricule'],
-                "Name"=>$json['student']['first_name'],
-                "Forename"=> $json['student']['Last_name'],
+                "ID" => $json['student']['matricule'],
+                "Name" => $json['student']['first_name'],
+                "Forename" => $json['student']['Last_name'],
             ];
 
-            foreach ($json['tests'] as $test){
-                $dataContent[$test['title']]=$test['mark']['value'];
-                $weight[$test['title']]=$test['ratio'];
+            foreach ($json['tests'] as $test) {
+                $dataContent[$test['title']] = $test['mark']['value'];
+                $weight[$test['title']] = $test['ratio'];
             }
 
 
-            $dataContent["Final Average"]= $json['average'];
-            $dataContent["International Grade"]= $json['conforme']['international_Grade'];
-            $dataContent["Pass or Fail?"]= $json['status'];
+            $dataContent["Final Average"] = $json['average'];
+            $dataContent["International Grade"] = $json['conforme']['international_Grade'];
+            $dataContent["Pass or Fail?"] = $json['status'];
 
             // dd($dataContent);
 
             array_push($data, $dataContent);
         }
-        if(count($data)!=0 && count($weight)!=0){
+        if (count($data) != 0 && count($weight) != 0) {
 
-            $weight=[$weight];
-            $headers=array_keys(max($data));
+            $weight = [$weight];
+            $headers = array_keys(max($data));
             // dd($data);
 
             SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear);
             // dd($data);
-        }else{
+        } else {
             return back();
         }
-
     }
 }
