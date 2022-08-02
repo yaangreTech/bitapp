@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conforme;
 use App\Models\Semester;
 use App\Models\Sessione;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AverageController extends Controller
@@ -16,14 +17,14 @@ class AverageController extends Controller
 
     // function to get students average from the database
     public function getAverageOf($yearID, $semesterID)
-    {   
+    {
         // get the semester
         $semester = Semester::findOrFail($semesterID);
 
         // modulus to buid the table head later
         $theadModulus = $semester->modulus;
 
-        // get all tus of the semester 
+        // get all tus of the semester
         $Vtus = $semester->tus->load('modulus');
 
         // all inscription of the level for the given year
@@ -38,8 +39,8 @@ class AverageController extends Controller
             $conforme = new Conforme();
 
             // tus to calculate the year
-         
-           
+
+
             $tus = $semester->tus;
 
             // variable to save all marks of a students
@@ -60,6 +61,7 @@ class AverageController extends Controller
             $redo_mod_ = '';
             $average = 0;
             foreach ($tus as $tu) {
+                $validate_tue = 0;
                 $modules = $tu->modulus;
                 $tu_average = 0;
                 $tu_credit = 0;
@@ -91,7 +93,7 @@ class AverageController extends Controller
                 $t_n_ponderer += $tu_ponderer;
                 $t_credit += $tu_credit;
 
-               
+
                 $tu_credit > 0
                     ? ($tu_average = round($tu_ponderer / $tu_credit, 2))
                     : ($tu_average = $tu_ponderer);
@@ -99,13 +101,15 @@ class AverageController extends Controller
                 if ($tu_average < 8) {
                     $status = 'Fail';
                     $redo_mod = $redo_mod . ', ' . $tu->name;
+                } else {
+                    $validate_tue = $validate_tue + $tu_credit;
                 }
 
-                if (/*$tu_average >= 8 && */ $tu_average < 10) {
+                if (/*$tu_average >= 8 && */$tu_average < 10) {
                     $redo_mod_ = $redo_mod_ . ', ' . $tu->name;
                 }
 
-                $tu['tu_credit']=$tu_credit;
+                $tu['tu_credit'] = $tu_credit;
             }
             $inscription['notes'] = $les_note;
             $inscription['t_credit'] = $t_credit;
@@ -126,18 +130,19 @@ class AverageController extends Controller
             $inscription['conforme'] = $conforme->conformeOf($average);
             $inscription['t_n_average'] = $average;
             $inscription['t_n_status'] = $status;
+            $inscription['validate_tue'] = $validate_tue;
 
             // dd($inscription);
         }
 
-        $page_title=Semester::findOrFail($semesterID);
+        $page_title = Semester::findOrFail($semesterID);
         $page_title->level->branche->departement;
 
         return response()->json([
             'theadModulus' => $theadModulus,
             'inscriptions' => $inscriptions,
-            'page_title'=>$page_title,
-            'theadTus'=>  $Vtus 
+            'page_title' => $page_title,
+            'theadTus' =>  $Vtus
         ]);
     }
 
@@ -163,6 +168,7 @@ class AverageController extends Controller
             $redo_mod_ = '';
             $average = 0;
             foreach ($tus as $tu) {
+                $validate_tue = 0;
                 $modules = $tu->modulus;
                 $tu_average = 0;
                 $tu_credit = 0;
@@ -172,11 +178,11 @@ class AverageController extends Controller
                     $tests = $mod->tests
                         ->where('year_id', $yearID)
                         ->where('type', 'normal');
-                        // dd($sessione->has_Session_mark(
-                        //     $yearID,
-                        //     $mod->id,
-                        //     $inscription->id
-                        // ));
+                    // dd($sessione->has_Session_mark(
+                    //     $yearID,
+                    //     $mod->id,
+                    //     $inscription->id
+                    // ));
                     if (
                         $sessione->has_Session_mark(
                             $mod->id,
@@ -187,8 +193,6 @@ class AverageController extends Controller
                         $tests = $mod->tests
                             ->where('year_id', $yearID)
                             ->where('type', 'session');
-
-                            
                     }
                     $note = 0;
                     $pourcentage = 0;
@@ -217,17 +221,19 @@ class AverageController extends Controller
                 if ($tu_average < 8) {
                     $status = 'Fail';
                     $redo_mod = $redo_mod . ', ' . $tu->name;
+                } else {
+                    $validate_tue = $validate_tue + $tu_credit;
                 }
 
-                if (/*$tu_average >= 8 && */ $tu_average < 10) {
+                if (/*$tu_average >= 8 && */$tu_average < 10) {
                     $redo_mod_ = $redo_mod_ . ', ' . $tu->name;
                 }
-                $tu['tu_credit']=$tu_credit;
-
+                $tu['tu_credit'] = $tu_credit;
             }
             $inscription['notes'] = $les_note;
             $inscription['t_credit'] = $t_credit;
             $inscription['t_n_ponderer'] = round($t_n_ponderer, 2);
+            $inscription['validate_tue'] = $validate_tue;
 
             if ($t_credit > 0) {
                 $average = round($t_n_ponderer / $t_credit, 2);
@@ -248,7 +254,7 @@ class AverageController extends Controller
         return response()->json([
             'theadModulus' => $theadModulus,
             'inscriptions' => $inscriptions,
-            'theadTus'=>$Vtus
+            'theadTus' => $Vtus
         ]);
     }
 }
