@@ -173,9 +173,7 @@ class excelExportController extends Controller
         //     "Yanogo Yves Wengundi Patrick"
         // ], "Dr Kabore W. Rodrigue");
         Proclamation($academicYear, $session, $semester->level->branche->name, $className . "_" . $academicYear, $semester->label . '(' . $semester->name . ')', "After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:", $pv_data,  [
-            "Nana Jeremie",
-            "Sanou Lougoudoro",
-            "Yanogo Yves Wengundi Patrick"
+    
         ], "Dr Kabore W. Rodrigue", $dir . DIRECTORY_SEPARATOR);
 
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
