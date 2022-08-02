@@ -124,7 +124,7 @@ class excelExportController extends Controller
             $student["International Grade"] = $inscription['conforme']["international_Grade"];
             $student["Grade"] = $inscription['conforme']["mention"];
             $student["Re-do exam"] = substr($inscription["t_n_redo_mod"], 1);
-            $student["Remark"] = $inscription["status"];
+            $student["Remark"] = $inscription["status"]=='active'?"":$inscription["status"];
             $student["Credits earned"] = $inscription["validate_tue"];
 
             array_push($student_data, $student);

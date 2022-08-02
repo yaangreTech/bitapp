@@ -60,8 +60,9 @@ class AverageController extends Controller
             $redo_mod = '';
             $redo_mod_ = '';
             $average = 0;
+            $validate_tue = 0;
             foreach ($tus as $tu) {
-                $validate_tue = 0;
+                // $tu_validete=0;
                 $modules = $tu->modulus;
                 $tu_average = 0;
                 $tu_credit = 0;
@@ -167,8 +168,9 @@ class AverageController extends Controller
             $redo_mod = '';
             $redo_mod_ = '';
             $average = 0;
+            $validate_tue = 0;
             foreach ($tus as $tu) {
-                $validate_tue = 0;
+               
                 $modules = $tu->modulus;
                 $tu_average = 0;
                 $tu_credit = 0;
