@@ -1,0 +1,37 @@
+[
+  {
+    "REGISTRATION NUMBER": "bs0001",
+    "NAME": "Oudraogo",
+    "FORENAMES": "Mahamoudou",
+    "SEX": "M",
+    "RATING": "12.5"
+  },
+  {
+    "REGISTRATION NUMBER": "bs0002",
+    "NAME": "Zidwemba",
+    "FORENAMES": "Marie ALice Alimatou",
+    "SEX": "F",
+    "RATING": "14.75"
+  },
+  {
+    "REGISTRATION NUMBER": "bs0003",
+    "NAME": "Kouraogo",
+    "FORENAMES": "Noel Isidore Wendbenedo",
+    "SEX": "M",
+    "RATING": "13"
+  },
+  {
+    "REGISTRATION NUMBER": "bs0004",
+    "NAME": "Simpore",
+    "FORENAMES": "Oumarou",
+    "SEX": "M",
+    "RATING": "10.5"
+  },
+  {
+    "REGISTRATION NUMBER": "bs0004",
+    "NAME": "Ido",
+    "FORENAMES": "Boutie Yasmine",
+    "SEX": "F",
+    "RATING": "11.5"
+  }
+]

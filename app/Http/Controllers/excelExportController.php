@@ -142,19 +142,14 @@ class excelExportController extends Controller
         $session=$isWithSession=='true'?'Catch-up':'Normal';
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
         //normal sheet for all students
-        $allStudents = SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, true, $dir . DIRECTORY_SEPARATOR);
+        $allStudents = SemesterReport($headers, $student_data, $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId);
         //special for student that must redo some exams
-        
-        $redoExams = SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, true, $dir . DIRECTORY_SEPARATOR);
-        
-        //new excel spreadsheet
-        $spreadSheet = new \ExcelXport();
-        $spreadSheet->CreateSpreadsheet();
-        
-        $spreadSheet->SetSheetIndex(1);
-        
-        $spreadSheet->CopySheet($redoExams, 1);
-        // dd('ok');
+
+        //NB: The name of the sheets must change
+        $redoExams = SemesterReport($headers, $student_data, $className, 2, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId);
+        $allStudents->CopySheet(clone $redoExams->sheet , 1);
+        $allStudents->Save("Semester_" . $semesterNumber  . '.xlsx');
+
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
         

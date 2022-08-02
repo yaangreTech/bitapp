@@ -1,7 +1,9 @@
 <?php
 require('excel.php');
+
 // require("../functions.php");
 require("../customHelpers.php");
+
 //starting row
 _define("STARTING_ROW_", 2);
 //starting col
@@ -45,7 +47,9 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     $alph = function($index) use ($alphabet) {return $alphabet[$index - 1];};
 
     //creates a cell reference
-    $ref = function($colIndex, $rowindex) use ($alph) {return $alph($colIndex).$rowindex;};
+
+    $ref = function($colIndex, $rowindex) use ($alph) {return $alph($colIndex) . $rowindex;};
+
 
     //last column index
     $lastColIndex = STARTING_COL_+TOTAL_N_COLS;
@@ -240,12 +244,4 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     $sheet->Save($fileFullName . '.xlsx', true);
 }
 
-$msg = "After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:";
-$juryMembers = [
-    "Nana Jeremie",
-    "Sanou Lougoudoro",
-    "Yanogo Yves Wengundi Patrick"
-];
-$file = fopen('data.json', 'r');
-$data = json_decode(fread($file, filesize('data.json')), true);
-Proclamation("2021-2022", "Normal", "Electrical Engineering", "L2S2", $msg, $data, $juryMembers, "Dr Kabore W. Rodrigue");
+
