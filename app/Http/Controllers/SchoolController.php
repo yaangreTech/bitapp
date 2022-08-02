@@ -380,13 +380,18 @@ class SchoolController extends Controller
 
     public function storeTu(Request $request)
     {
+     
         $request->validate([
             'TU_name' => ['required', 'string', 'max:255'],
             'TU_semester' => ['required', 'max:255'],
             'TU_checker' => ['required'],
-            'TU_code'=> ['required', 'string', 'max:255', 'unique:tus'],
+            'TU_code'=> ['required', 'string', 'max:255'],
         ]);
+
+        // dd($request);
         $data=false;
+
+        
         $semester= Semester::findOrFail($request->TU_semester);
 
         $tuID=Tu::insertGetId([
@@ -394,7 +399,7 @@ class SchoolController extends Controller
             'code'=>$request->TU_code,
             'name'=>$request->TU_name
         ]);
-
+        
         $ecus=json_decode($request->TU_checker);
         foreach($ecus as $ecu){
             $data=Module::insert([
@@ -406,7 +411,7 @@ class SchoolController extends Controller
                 'updated_at' => Carbon::now(),
             ]);
         }
-      
+        
         return response()->json($data);
     }
 

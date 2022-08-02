@@ -144,14 +144,20 @@ class excelExportController extends Controller
         //normal sheet for all students
         $allStudents = SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, true, $dir . DIRECTORY_SEPARATOR);
         //special for student that must redo some exams
+        
         $redoExams = SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, true, $dir . DIRECTORY_SEPARATOR);
+        
         //new excel spreadsheet
         $spreadSheet = new \ExcelXport();
         $spreadSheet->CreateSpreadsheet();
+        
         $spreadSheet->SetSheetIndex(1);
+        
         $spreadSheet->CopySheet($redoExams, 1);
+        // dd('ok');
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
+        
         zipAndDownload("Semester_" . $semesterNumber . "_report.zip");
     }
 

@@ -465,6 +465,7 @@ class ExcelXport
     {
         try
         {
+            // dd('ok',$spreadsheet);
             $this->spreadsheet->addExternalSheet($spreadsheet, $index);
         }
         catch (Exception $e)
