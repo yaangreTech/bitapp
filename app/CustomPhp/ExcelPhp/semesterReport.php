@@ -33,7 +33,7 @@ _define("SD_STARTING_COL", 5);
 //starting row for inserting data related to students (in rows axis)
 _define("SD_STARTING_ROW", 22);
 //defines ordinal numbers from cardinal
-_define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH", 7 => "SEVEN", 8 => "EIGHT", 9 => "NINE", 10 => "TEN"]);
+_define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH",7=>"SEVEN",8=>"EIGHT",9=>"NINE",10=>"TEN"]);
 
 
 /**
@@ -49,9 +49,10 @@ _define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FO
  * @param string $classPromotion
  * @param string $semesterId
  * @param string $saveInFolder
+ * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $saveInFolder = '')
+function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $returnSheet = true,$cle='normal', $saveInFolder = '')
 {
 
     $download = empty($saveInFolder);
@@ -69,11 +70,15 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $extra_headers = [];
     //list of tus and their modules
     $tus_modules = [];
-    foreach ($headers as $key => $value) {
-        if (is_array($value)) {
-            $tus_modules[$key] = $value;
-        } else {
-            $extra_headers[$key] = $value;
+    foreach ($headers as $key=>$value)
+    {
+        if(is_array($value))
+        {
+            $tus_modules[$key]=$value;
+        }
+        else
+        {
+            $extra_headers[$key]=$value;
         }
     }
     //retrieves the first key of the array | by default it must be `TUS` and the only one key, thus the term `TUS` could be replaced by another word
@@ -82,10 +87,12 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
 
     //modules | retrieves the name of the modules and their credits
     $modules = [];
-    foreach ($tempo as $key => $value) {
-        if (is_array($value)) {
+    foreach ($tempo as $key => $value)
+    {
+        if(is_array($value))
+        {
             $value = $value[TUE];
-            $modules = $modules + $value;
+            $modules = $modules+$value;
         }
     }
 
@@ -112,45 +119,41 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     }
 
     //returns the corresponding column by reducing automatically by 1 to the passed index
-    $alph = function ($index) use ($alphabet) {
-        return $alphabet[$index - 1];
-    };
+    $alph = function($index) use ($alphabet) {return $alphabet[$index - 1];};
 
     //creates a cell reference
-    $ref = function ($colIndex, $rowindex) use ($alph) {
-        return $alph($colIndex) . $rowindex;
-    };
+    $ref = function($colIndex, $rowindex) use ($alph) {return $alph($colIndex).$rowindex;};
 
 
 
-    //  LOGO AND THE ACADEMIC YEAR'S SECTION
+     //  LOGO AND THE ACADEMIC YEAR'S SECTION
 
-    //sets the logo
-    $sheet->SetImage($ref(2, STARTING_ROW_SR), PHPSPREADSHEET_IMAGE_PATH, 'logo.png', [920, 120], 0, 0);
+     //sets the logo
+     $sheet->SetImage($ref(2, STARTING_ROW_SR), PHPSPREADSHEET_IMAGE_PATH, 'logo.png', [920, 120], 0, 0);
 
-    //academic year
+     //academic year
     $start = $ref(15, STARTING_ROW_SR);
     $end = $ref(20, STARTING_ROW_SR);
-    $sheet->Write($start, "ACADEMIC YEAR: " . $academicYear);
-    $sheet->MergeCells($start . ":" . $end);
+    $sheet->Write($start, "ACADEMIC YEAR: ".$academicYear);
+    $sheet->MergeCells($start.":".$end);
     $sheet->SetCenter($start, $end, true, true);
-    $sheet->SetCellsToBold($start . ":" . $end);
+    $sheet->SetCellsToBold($start.":".$end);
 
     // minutes of deliberation
-    $start = $ref(7, STARTING_ROW_SR + 5);
-    $end = $ref(11, STARTING_ROW_SR + 5);
+    $start = $ref(7, STARTING_ROW_SR+5);
+    $end = $ref(11, STARTING_ROW_SR+5);
     $sheet->Write($start, "Minutes of deliberation");
-    $sheet->MergeCells($start . ":" . $end);
+    $sheet->MergeCells($start.":".$end);
     $sheet->SetCenter($start, $end, true, true);
-    $sheet->SetCellsToBold($start . ":" . $end);
+    $sheet->SetCellsToBold($start.":".$end);
 
-    $sheet->UnderlineText($start . ":" . $end);
+    $sheet->UnderlineText($start.":".$end);
 
-    $sheet->SetRowHeight(STARTING_ROW_SR + 5, 22);
-    $sheet->SetFontSize($start . ":" . $end, 18);
+    $sheet->SetRowHeight(STARTING_ROW_SR+5, 22);
+    $sheet->SetFontSize($start.":".$end, 18);
 
     $lastRow = $sheet->GetLastRowIndex();
-    $lastRow = $lastRow + 2;
+    $lastRow = $lastRow+2;
     $temp = $lastRow;
     //minutes of deliberation data
     /*manages labels*/
@@ -161,7 +164,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->Write($ref($labelCol, $lastRow++), "Speciality:	");
     $sheet->Write($ref($labelCol, $lastRow++), "Class promotion: ");
     $sheet->Write($ref($labelCol, $lastRow++), "Semester Id: ");
-    $range = $ref($labelCol, $temp) . ":" . $ref($labelCol, $lastRow);
+    $range = $ref($labelCol, $temp).":".$ref($labelCol, $lastRow);
     $sheet->UnderlineText($range);
     $sheet->SetCellsToItalic($range);
     $sheet->SetCellsToBold($range);
@@ -180,7 +183,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $keys = array_keys($headers);
 
     //total numbers of rows to put in italic
-    $total_numbers_of_cols_to_set_in_italic = count($modules) + 1; // + 1 due to `Training Unit Elements (TUE)` additional column
+    $total_numbers_of_cols_to_set_in_italic = count($modules)+1;// + 1 due to `Training Unit Elements (TUE)` additional column
     //total numbers of rows to rotate to 90deg
     $total_numbers_of_cols_to_rotate = count($headers);
 
@@ -193,8 +196,9 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //adds the tue with their credits and the extra headers
     //headers description
     $final_headers_desc = ["Training Units (TU)", "TU Code", "TU Credits", "Training Unit Elements (TUE)", "TUE Credits"];
-    foreach ($final_headers_desc as $keys => $value) {
-        $range = $ref(SD_STARTING_COL - 1, $keys + $lastRow);
+    foreach($final_headers_desc as $keys => $value)
+    {
+        $range = $ref(SD_STARTING_COL-1, $keys+$lastRow);
         $sheet->Write($range, $value);
         $sheet->SetCellsToBold($range);
         $sheet->SetCellsToItalic($range);
@@ -202,10 +206,11 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     }
     $tu_col = 5;
     $tu_unit_row = $lastRow;
-    $tu_code_row = 1 + $lastRow;
-    $tu_credit_row = 2 + $lastRow;
+    $tu_code_row = 1+$lastRow;
+    $tu_credit_row = 2+$lastRow;
     $sheet->SetRowHeight($tu_unit_row, 40);
-    foreach ($tus_modules as $tu => $value) {
+    foreach($tus_modules as $tu => $value)
+    {
         $sheet->Write($ref($tu_col, $tu_unit_row), $tu);
         $sheet->Write($ref($tu_col, $tu_code_row), $value[TU_CODE]);
         //sums the values of each corresponding TU
@@ -213,37 +218,36 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         //number of modules
         $n_modules = count($value[TUE]);
         //merges cells
-        $sheet->MergeCells($ref($tu_col, $tu_unit_row) . ':' . $ref($tu_col + $n_modules - 1, $tu_unit_row));
-        $sheet->MergeCells($ref($tu_col, $tu_code_row) . ':' . $ref($tu_col + $n_modules - 1, $tu_code_row));
-        $sheet->MergeCells($ref($tu_col, $tu_credit_row) . ':' . $ref($tu_col + $n_modules - 1, $tu_credit_row));
+        $sheet->MergeCells($ref($tu_col, $tu_unit_row).':'.$ref($tu_col + $n_modules - 1, $tu_unit_row));
+        $sheet->MergeCells($ref($tu_col, $tu_code_row).':'.$ref($tu_col + $n_modules - 1, $tu_code_row));
+        $sheet->MergeCells($ref($tu_col, $tu_credit_row).':'.$ref($tu_col + $n_modules - 1, $tu_credit_row));
         //centers cells content
-        $sheet->SetCenter($ref($tu_col, $tu_unit_row) . ':' . $ref($tu_col + $n_modules - 1, $tu_credit_row), true, true);
-        $sheet->SetCellsToBold($ref($tu_col, $tu_unit_row) . ':' . $ref($tu_col + $n_modules - 1, $tu_credit_row));
+        $sheet->SetCenter($ref($tu_col, $tu_unit_row).':'.$ref($tu_col + $n_modules - 1, $tu_credit_row), true, true);
+        $sheet->SetCellsToBold($ref($tu_col, $tu_unit_row).':'.$ref($tu_col + $n_modules - 1, $tu_credit_row));
         //sets the background of the cells
-        $sheet->SetColor($ref($tu_col, $tu_unit_row) . ':' . $ref($tu_col + $n_modules - 1, $tu_credit_row), LITE_GREY);
+        $sheet->SetColor($ref($tu_col, $tu_unit_row).':'.$ref($tu_col + $n_modules - 1, $tu_credit_row), LITE_GREY);
         $tu_col += $n_modules;
     }
 
     // UNUSED CELLS MERGING
-    $sheet->MergeCells($ref(STARTING_COL, $lastRow) . ":" . $ref(SD_STARTING_COL - 2, $lastRow + count($final_headers_desc) - 1));
-    $sheet->MergeCells($ref($lastColIndex - count($extra_headers) + 1, $lastRow) . ":" . $ref($lastColIndex, $tu_credit_row));
+    $sheet->MergeCells($ref(STARTING_COL, $lastRow).":".$ref(SD_STARTING_COL-2, $lastRow+count($final_headers_desc)-1));
+    $sheet->MergeCells($ref($lastColIndex-count($extra_headers)+1, $lastRow).":".$ref($lastColIndex, $tu_credit_row));
 
-    $lastRow = $sheet->GetLastRowIndex() - 2; //-2 due to the gap created
+    $lastRow = $sheet->GetLastRowIndex() - 2;//-2 due to the gap created
     $lastRow++;
     $tue_row = $lastRow;
-    $tue_credit_row = 1 + $lastRow;
+    $tue_credit_row = 1+$lastRow;
     $key_index = 0;
     $sheet->SetRowHeight($tue_row, 120);
-    foreach ($final_headers as $key => $value) {
+    foreach($final_headers as $key => $value)
+    {
         $tue_col_Ref = $ref($key_index + SD_STARTING_COL, $tue_row);
         $tue_credit_col_Ref = $ref($key_index + SD_STARTING_COL, $tue_credit_row);
         //formats the TUE
         $sheet->Write($tue_col_Ref, $key);
         $sheet->SetCellsToBold($tue_col_Ref);
         $sheet->Rotate($tue_col_Ref, 90);
-        if (in_array($key, array_keys($modules))) {
-            $sheet->SetCellsToItalic($tue_col_Ref);
-        }
+        if(in_array($key, array_keys($modules))){$sheet->SetCellsToItalic($tue_col_Ref);}
         $sheet->SetCenter($tue_col_Ref, false, true);
 
         //formats the credits row
@@ -253,7 +257,8 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         $sheet->SetCenter($tue_credit_col_Ref, false, true);
 
         //if the current element is in the list of modules
-        if (in_array($value, array_values($modules))) {
+        if(in_array($value, array_values($modules)))
+        {
             //sets the color for the module
             $sheet->SetColor($tue_col_Ref, SKY_BLUE);
             //sets the color for the number of credits
@@ -268,20 +273,20 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->Write($ref(STARTING_COL, $lastRow), 'N°');
     $sheet->SetColumnWidth($alph(STARTING_COL), 5);
     //ID's column
-    $sheet->Write($ref(STARTING_COL + 1, $lastRow), 'ID');
-    $sheet->SetColumnWidth($alph(STARTING_COL + 1), 12);
+    $sheet->Write($ref(STARTING_COL+1, $lastRow), 'ID');
+    $sheet->SetColumnWidth($alph(STARTING_COL+1), 12);
     //Surname
-    $sheet->Write($ref(STARTING_COL + 2, $lastRow), 'Surname');
-    $sheet->SetColumnWidth($alph(STARTING_COL + 2), 15);
+    $sheet->Write($ref(STARTING_COL+2, $lastRow), 'Surname');
+    $sheet->SetColumnWidth($alph(STARTING_COL+2), 15);
     //last name
-    $sheet->Write($ref(STARTING_COL + 3, $lastRow), ' Name');
+    $sheet->Write($ref(STARTING_COL+3, $lastRow), ' Name');
     //formats the currents headers
-    $range = $ref(STARTING_COL, $lastRow) . ':' . $ref(STARTING_COL + 3, $lastRow);
-    $sheet->SetColumnWidth($alph(STARTING_COL + 3), 28);
+    $range = $ref(STARTING_COL, $lastRow).':'.$ref(STARTING_COL+3, $lastRow);
+    $sheet->SetColumnWidth($alph(STARTING_COL+3), 28);
     $sheet->SetCenter($range, true, true);
     $sheet->SetCellsToBold($range);
     //merges the remaining cells
-    $sheet->MergeCells($ref(SD_STARTING_COL, $lastRow) . ':' . $ref($lastColIndex, $lastRow));
+    $sheet->MergeCells($ref(SD_STARTING_COL, $lastRow).':'.$ref($lastColIndex, $lastRow));
 
 
     // STUDENT DATA
@@ -289,20 +294,23 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
     $row = $lastRow;
-    for ($index = 0; $index < $nbStudents; $index++) {
+    for($index = 0; $index < $nbStudents; $index++)
+    {
         //adds the No
         $no_cellRef = $ref(STARTING_COL, $row);
-        $sheet->Write($no_cellRef, $index + 1);
+        $sheet->Write($no_cellRef, $index+1);
         $sheet->SetCenter($no_cellRef, false, true);
         $col++;
-        foreach ($student_data[$index] as $key => $value) {
+        foreach($student_data[$index] as $key => $value)
+        {
             // if($key=='Pass/Fail?'){
             //     $value=$value=='Pass'?'V':'NV';
             // }
 
             //replaces , by .
             $value = str_replace(',', '.', $value);
-            if (is_numeric($value)) {
+            if(is_numeric($value))
+            {
                 $value = floatval($value);
             }
             //write student data in the Excel file
@@ -319,26 +327,26 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
     //MEMBERS OD THE JURY
-    $cellRef = $ref(STARTING_COL + 2, $lastRow + 7);
+    $cellRef = $ref(STARTING_COL+2, $lastRow+7);
     $sheet->Write($cellRef, "The members of the Jury");
     $sheet->SetCellsToBold($cellRef);
     $sheet->UnderlineText($cellRef);
 
     //DATE OF DELIBERATION
-    $cellRef = $ref(STARTING_COL + $nbColHeaders / 2, $lastRow + 5);
-    $sheet->Write($cellRef, "Date of deliberation: " . getDate_En());
+    $cellRef = $ref(STARTING_COL+$nbColHeaders/2, $lastRow+5);
+    $sheet->Write($cellRef, "Date of deliberation: ".getDate_En());
     $sheet->SetCellsToBold($cellRef);
     $sheet->UnderlineText($cellRef);
 
     //DATE OF DELIBERATION
-    $cellRef = $ref(STARTING_COL + $nbColHeaders / 2, $lastRow + 7);
+    $cellRef = $ref(STARTING_COL+$nbColHeaders/2, $lastRow+7);
     $sheet->Write($cellRef, "The President of the Jury");
     $sheet->SetCellsToBold($cellRef);
     $sheet->UnderlineText($cellRef);
 
     // LAST UPDATES
     // wordwraps cells
-    $range = $ref(STARTING_COL, $tu_unit_row) . ":" . $ref($lastColIndex, $lastRow - 1);
+    $range = $ref(STARTING_COL, $tu_unit_row).":".$ref($lastColIndex, $lastRow-1);
     $sheet->WordWrap($range);
     // add border to cells
     $sheet->SetBorders($range);
@@ -347,17 +355,19 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //increases the size of the last column
     $sheet->SetColumnWidth($alph($lastColIndex), 16);
     // makes the text bold for "Semester average", "Semester validation (Validated (V) /Not Validated (NV)", "Credits earned"
-    $sheet->SetCellsToBold($ref($lastColIndex - 3, SD_STARTING_ROW) . ":" . $ref($lastColIndex - 1, $lastRow - 1));
+    $sheet->SetCellsToBold($ref($lastColIndex-3, SD_STARTING_ROW).":".$ref($lastColIndex-1, $lastRow-1));
     // green cell when validated
-    for ($i = SD_STARTING_ROW; $i <= $lastRow; $i++) {
-        $value = $sheet->GetCellValue($lastColIndex - 2, $i);
+    for($i = SD_STARTING_ROW; $i <= $lastRow; $i++)
+    {
+        $value = $sheet->GetCellValue($lastColIndex-2, $i);
 
 
-        if (strtoupper($value) == "PASS") {
-            $sheet->SetColor($ref($lastColIndex - 2, $i), 'ff' . GREEN);
-            $sheet->Write($ref($lastColIndex - 2, $i), 'V');
-        } elseif (strtoupper($value) == "FAIL") {
-            $sheet->Write($ref($lastColIndex - 2, $i), 'NV');
+        if(strtoupper($value)=="PASS")
+        {
+            $sheet->SetColor($ref($lastColIndex-2, $i), 'ff'.GREEN);
+            $sheet->Write($ref($lastColIndex-2, $i),'V');
+        }elseif(strtoupper($value)=="FAIL") {
+            $sheet->Write($ref($lastColIndex-2, $i),'NV');
         }
     }
 
@@ -366,12 +376,18 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //encrypts the file
     //the password = filename + _ + current data in php according to the following format day-month-full year
     $sheet->EncryptSheet($fileFullName.'_'.date("d-m-Y"));
-
     //renames the sheet
     $sheet->RenameSheet($sheetName);
+    // $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
 
-     //saves the file
-     $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
-
+     if(!$returnSheet)
+     {
+         //saves the file
+         $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName.'_'.$cle . '.xlsx', $download);
+     }
+     else
+     {
+         return $sheet;
+     }
 
 }

@@ -385,7 +385,7 @@ class SchoolController extends Controller
             'TU_name' => ['required', 'string', 'max:255'],
             'TU_semester' => ['required', 'max:255'],
             'TU_checker' => ['required'],
-            'TU_code'=> ['required', 'string', 'max:255'],
+            // 'TU_code'=> ['required', 'string', 'max:255'],
         ]);
 
         // dd($request);
@@ -419,7 +419,7 @@ class SchoolController extends Controller
     {
         $request->validate([
             'TU_name' => ['required', 'string', 'max:255'],
-            'TU_code'=> ['required', 'string', 'max:255','unique:tus'],
+            // 'TU_code'=> ['required', 'string', 'max:255','unique:tus'],
             'TU_checker' => ['required'],
         ]);
 

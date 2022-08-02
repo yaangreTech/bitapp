@@ -1,8 +1,8 @@
 <?php
-require('excel.php');
+require_once(app_path('CustomPhp/ExcelPhp/excel.php'));
 
 // require("../functions.php");
-require("../customHelpers.php");
+require_once(app_path("CustomPhp/customHelpers.php"));
 
 //starting row
 _define("STARTING_ROW_", 2);
@@ -25,12 +25,13 @@ _define("THEADERS", ["REGISTRATION NUMBER"=>2, "NAME"=>2, "FORENAMES"=>4, "SEX"=
  * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function Proclamation(string $academicYear, string $sessionType="Normal", string $class, string $semester, string $message, array $data, array $juryMembers, string $juryPresident)
+function Proclamation(string $academicYear, string $sessionType="Normal",$identity="", string $class, string $semester, string $message, array $data, array $juryMembers, string $juryPresident,$saveInFolder='')
 {
+    $download = empty($saveInFolder);
     //spreadsheet object
     $sheet = new ExcelXport();
     //name of the sheet
-    $sheetName = $class. " " . $semester;
+    $sheetName = $class. '_'.$identity.'_' . $semester.'_PV-deliberation';
     //ordinal number of the semester
     //file name
     $fileFullName = $class . "_" . $semester . "_" . $academicYear;
@@ -42,7 +43,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     foreach (range('A', 'Z') as $char) {
         $alphabet[] = 'A' . $char;
     }
-
+    
     //returns the corresponding column by reducing automatically by 1 to the passed index
     $alph = function($index) use ($alphabet) {return $alphabet[$index - 1];};
 
@@ -53,7 +54,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
 
     //last column index
     $lastColIndex = STARTING_COL_+TOTAL_N_COLS;
-
+   
     //ACADEMIC YEAR
     $cellRef = $ref($lastColIndex-2, STARTING_ROW_);
     $sheet->Write($cellRef, "Academic year: ".$academicYear);
@@ -119,7 +120,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     $sheet->SetRowHeight($lastRow, 20);
     $sheet->SetFontSize($range, 16);
     $sheet->SetCellsToBold($range);
-
+   
     //MESSAGE
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow += 3;
@@ -161,6 +162,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     //gets the last element of the THEADERS
     $sortAccordingTo = $titles[count(THEADERS)-1];
     //sorts students data according to their averages
+    
     uasort($data, function($prev, $next) use ($sortAccordingTo){return $next[$sortAccordingTo] - $prev[$sortAccordingTo];});
     foreach ($data as $row => $value)
     {
@@ -184,7 +186,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
             }
         }
     }
-
+   
     // ADD BORDERS
     $lastRow = $sheet->GetLastRowIndex();
     $range = $ref(STARTING_COL_, $bordersToFixFirstRow).":".$ref($lastColIndex, $lastRow);
@@ -216,6 +218,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     $sheet->UnderlineText($cellRef);
     $sheet->SetCellsToBold($cellRef);
     //inserts the different members of the jury
+
     foreach ($juryMembers as $key => $value)
     {
         $sheet->Write($ref($juryMembersCol, $juryRow+1+$key), $value);
@@ -233,15 +236,20 @@ function Proclamation(string $academicYear, string $sessionType="Normal", string
     $sheet->SetCellsToBold($cellRef);
 
 
+  
 
     //  XLS FILE CREATION AND SAVING'S SECTION
     //encrypts the file
     //the password = filename + _ + current data in php according to the following format day-month-full year
+    // dd($fileFullName.'_'.date("d-m-Y"));
     $sheet->EncryptSheet($fileFullName.'_'.date("d-m-Y"));
+  
     //renames the sheet
     $sheet->RenameSheet($sheetName);
+    $sheet->Save( $saveInFolder . DIRECTORY_SEPARATOR . $sheetName. '.xlsx', false);
+    // return $sheet;
     //saves the file
-    $sheet->Save($fileFullName . '.xlsx', true);
+    // $sheet->Save($fileFullName . '.xlsx', true);
 }
 
 

@@ -19,6 +19,7 @@ require_once(app_path('CustomPhp/ExcelPhp/semesterReport.php'));
 require_once(app_path('CustomPhp/ExcelPhp/studentsList.php'));
 require_once(app_path('CustomPhp/ExcelPhp/subjectReport.php'));
 require_once(app_path('CustomPhp/customHelpers.php'));
+require_once(app_path('CustomPhp\ExcelPhp\proclamation.php'));
 
 class excelExportController extends Controller
 {
@@ -101,6 +102,8 @@ class excelExportController extends Controller
 
         // dd( $jsons);
         $student_data = [];
+        $session_student_data=[];
+        $pv_data=[];
         $cp = 0;
         foreach ($jsons['inscriptions'] as $inscription) {
             $student = [];
@@ -123,6 +126,18 @@ class excelExportController extends Controller
             $student["Remark"] = $inscription["status"];
 
             array_push($student_data, $student);
+
+            if(!empty($inscription["t_n_redo_mod"])){
+                array_push($session_student_data, $student);
+            }
+
+            array_push($pv_data,[
+                "REGISTRATION NUMBER"=> $inscription['student']['matricule'],
+                "NAME"=> $inscription['student']['first_name'],
+                "FORENAMES"=> $inscription['student']['Last_name'],
+                "SEX"=> $inscription['student']['gender'],
+                "RATING"=> $inscription["t_n_average"]
+            ]);
         }
 
         // dd( $headers,$student_data);
@@ -142,16 +157,31 @@ class excelExportController extends Controller
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
 
         //normal sheet for all students
-        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
+        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, false,'normal',$dir . DIRECTORY_SEPARATOR);
+  
         //special for student that must redo some exams
-        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
+        SemesterReport($headers, $session_student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, false,'session-list',$dir . DIRECTORY_SEPARATOR);
+
+        
+        // dd($semesterNumber);
         //proclamation file
-        //Proclamation($academicYear, $sessionType, $className, $semester, $message, $data, $juryMembers, $juryPresident);
+        // dd($academicYear, $session, $className, $semester, "After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:", $pv_data,  [
+        //     "Nana Jeremie",
+        //     "Sanou Lougoudoro",
+        //     "Yanogo Yves Wengundi Patrick"
+        // ], "Dr Kabore W. Rodrigue");
+        Proclamation($academicYear, $session, $semester->level->branche->name , $className . "_" . $academicYear, $semester->label.'('.$semester->name.')', "After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:", $pv_data,  [
+            "Nana Jeremie",
+            "Sanou Lougoudoro",
+            "Yanogo Yves Wengundi Patrick"
+        ], "Dr Kabore W. Rodrigue",$dir . DIRECTORY_SEPARATOR);
 
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
 
+        // dd($semesterNumber);
         zipAndDownload("Semester_" . $semesterNumber . "_report.zip");
+       
     }
 
     public function studentList($yearID, $classID)
