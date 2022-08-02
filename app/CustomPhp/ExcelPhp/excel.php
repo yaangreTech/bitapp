@@ -1,17 +1,19 @@
 <?php
-// require '../vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Helper\Html;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 
-class ExcelXport
+Class ExcelXport
 {
     public $sheet = null;
     public $spreadsheet = null;
@@ -25,18 +27,24 @@ class ExcelXport
     function WriteHtml($cell, $content)
     {
         $html = new Html();
-        try {
+        try
+        {
             $this->Write($cell, $html->toRichTextObject($content));
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
 
-    function WordWrap(String $range = '', bool $wrap = true)
+    function WordWrap(String $range='', bool $wrap = true)
     {
-        try {
+        try
+        {
             $this->sheet->getStyle($range)->getAlignment()->setWrapText($wrap);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -44,9 +52,12 @@ class ExcelXport
     //*sets the row height
     function SetRowHeight(int $rowNumber, float $height)
     {
-        try {
+        try
+        {
             $this->sheet->getRowDimension($rowNumber)->setRowHeight($height, 'pt');
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -54,9 +65,12 @@ class ExcelXport
     //*sets the column width
     function SetColumnWidth(String $column, float $width)
     {
-        try {
+        try
+        {
             $this->sheet->getColumnDimension($column)->setWidth($width);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -64,9 +78,12 @@ class ExcelXport
     //*sets a cell to bold
     function SetCellsToBold(String $range)
     {
-        try {
+        try
+        {
             $this->sheet->getStyle($range)->getFont()->setBold(true);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -74,9 +91,12 @@ class ExcelXport
     //*sets a cell in to italic
     function SetCellsToItalic(String $range)
     {
-        try {
+        try
+        {
             $this->sheet->getStyle($range)->getFont()->setItalic(true);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -86,9 +106,12 @@ class ExcelXport
 
     function Rotate(String $range, float $rotation)
     {
-        try {
+        try
+        {
             $this->sheet->getStyle($range)->getAlignment()->setTextRotation($rotation);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -96,9 +119,12 @@ class ExcelXport
     //*sets the size of the text
     function SetFontSize(String $range, int $size)
     {
-        try {
+        try
+        {
             $this->sheet->getStyle($range)->getFont()->setSize($size);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -110,9 +136,12 @@ class ExcelXport
      */
     function MergeCells(String $range)
     {
-        try {
+        try
+        {
             $this->sheet->mergeCells($range);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -128,13 +157,22 @@ class ExcelXport
             ]
         ];
 
-        if ($borderStyle == 'BORDER_DOTTED') {
+        if($borderStyle == 'BORDER_DOTTED')
+        {
             $style['borders'][$type]['borderStyle'] = BORDER::BORDER_DOTTED;
         }
+        elseif ($borderStyle == "BORDER_DOUBLE")
+        {
+            $style['borders'][$type]['borderStyle'] = BORDER::BORDER_DOUBLE;
+        }
 
-        try {
+
+        try
+        {
             $this->sheet->getStyle($range)->applyFromArray($style);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -143,7 +181,8 @@ class ExcelXport
     {
         $alignment = ['alignment' => []];
         //for vertical alignment
-        switch ($vertically) {
+        switch ($vertically)
+        {
             case 'top':
                 $alignment['alignment']['vertical'] = Alignment::VERTICAL_TOP;
                 break;
@@ -154,7 +193,8 @@ class ExcelXport
                 $alignment['alignment']['vertical'] = Alignment::VERTICAL_BOTTOM;
         }
         //for horizontal alignment
-        switch ($horizontally) {
+        switch ($horizontally)
+        {
             case 'right':
                 $alignment['alignment']['horizontal'] = Alignment::HORIZONTAL_RIGHT;
                 break;
@@ -165,36 +205,48 @@ class ExcelXport
                 $alignment['alignment']['horizontal'] = Alignment::HORIZONTAL_LEFT;
         }
 
-        try {
+        try
+        {
             $this->sheet->getStyle($range)->applyFromArray($alignment);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
+
     }
 
     //*changes the alignment to center
     function SetCenter(String $range, bool $vertically = false, bool $horizontally = false)
     {
-        try {
-            if ($vertically) {
+        try
+        {
+            if($vertically)
+            {
                 $vertically = 'center';
             }
 
-            if ($horizontally) {
+            if($horizontally)
+            {
                 $horizontally = 'center';
             }
 
             $this->SetAlignment($range, $vertically, $horizontally);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
     //*writes into a cell
     function Write(String $cell, $data)
     {
-        try {
+        try
+        {
             $this->sheet->setCellValue($cell, $data);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -203,27 +255,37 @@ class ExcelXport
     function Save(String $fileName, $download = false)
     {
         $writer = new Xlsx($this->spreadsheet);
-        try {
-            if ($download) {
+        try
+        {
+            if($download)
+            {
                 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-                header('Content-Disposition: attachment; filename="' . urlencode($fileName) . '"');
+                header('Content-Disposition: attachment; filename="'. $fileName.'"');
                 $writer->save('php://output');
-            } else {
+            }
+            else
+            {
                 $writer->save($fileName);
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
+
     }
 
     //*sets the color to a range of cells
     function SetColor(String $range, String $hexa)
     {
-        try {
+        try
+        {
             $this->sheet->getStyle($range)->getFill()
                 ->setFillType(Fill::FILL_SOLID)
                 ->getStartColor()->setARGB($hexa);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -231,15 +293,18 @@ class ExcelXport
     //*sets the color of the text
     function SetTextColor(String $range, String $hexa)
     {
-        try {
+        try
+        {
             $styleArray = [
-                'font' =>
-                [
-                    'color' => array('rgb' => $hexa)
-                ]
+                'font'=>
+                    [
+                        'color' => array('rgb' => $hexa)
+                    ]
             ];
             $this->sheet->getStyle($range)->applyFromArray($styleArray);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -247,9 +312,12 @@ class ExcelXport
     //*returns the number of the last row
     function GetLastRowIndex()
     {
-        try {
+        try
+        {
             return $this->sheet->getHighestRow();
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -257,9 +325,12 @@ class ExcelXport
     //*returns the number of the last row
     function GetLastColIndex()
     {
-        try {
+        try
+        {
             return $this->sheet->getHighestColumn();
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -267,7 +338,7 @@ class ExcelXport
     //*adds image to a cell
     function SetImage(String $cell, String $path, String $image_name, $image_size = [], float $offsetX = 0,  float $offsetY = 0, float $direction = 0, float $rotation = 0, bool $visibleShadow = false)
     {
-        $fullPath = $path . DIRECTORY_SEPARATOR . $image_name;
+        $fullPath = $path.DIRECTORY_SEPARATOR.$image_name;
         $drawing = new Drawing();
         $drawing->setName($fullPath);
         $drawing->setDescription('');
@@ -280,12 +351,16 @@ class ExcelXport
         $drawing->getShadow()->setVisible($visibleShadow);
         $drawing->getShadow()->setDirection($direction);
         //
-        try {
-            if (!empty($image_size)) {
+        try
+        {
+            if(!empty($image_size))
+            {
                 $drawing->setWidthAndHeight($image_size[0], $image_size[1]);
             }
             $drawing->setWorksheet($this->sheet);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -293,22 +368,22 @@ class ExcelXport
     //*get the index of a column according to a cell value
     function GetColumnIndex(int $row, int $lastColIndex, String $cellValue)
     {
-        // var_dump($lastColIndex);
-        try {
+        try
+        {
             //row starts at 1 and column at 1, if cols starts at 0, it will retrieve the last col
             $index = 0;
-            for ($i = 1; $i < $lastColIndex; $i++) {
-
-                if ($this->GetCellValue($i, $row) == $cellValue) {
-
+            for($i = 1; $i < $lastColIndex; $i++)
+            {
+                if($this->GetCellValue($i, $row) == $cellValue)
+                {
                     $index = $i;
-                    // dd($index);
-
                     break;
                 }
             }
             return $index - 1;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -316,9 +391,12 @@ class ExcelXport
     //*gets the cell value
     function GetCellValue(int $col, int $row)
     {
-        try {
+        try
+        {
             return $this->sheet->getCellByColumnAndRow($col, $row)->getValue();
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -326,9 +404,12 @@ class ExcelXport
     //*gets value from a range of cells
     function GetRangeValues($range)
     {
-        try {
+        try
+        {
             return $this->sheet->rangeToArray($range, "");
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -336,9 +417,12 @@ class ExcelXport
     //*freeze pane
     function FreezePane($col, $row)
     {
-        try {
+        try
+        {
             $this->sheet->freezePaneByColumnAndRow($col, $row);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -346,9 +430,12 @@ class ExcelXport
     //*sets the name of the sheet
     function RenameSheet(String $name)
     {
-        try {
+        try
+        {
             $this->sheet->setTitle($name);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -356,9 +443,12 @@ class ExcelXport
     //*sets a column size to auto
     function SetColumnWidthAuto($col)
     {
-        try {
+        try
+        {
             $this->sheet->getColumnDimension($col)->setAutoSize(true);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -366,11 +456,15 @@ class ExcelXport
     //*sets a range of column width to auto
     function AutoSize($colRange)
     {
-        try {
-            for ($i = 0; $i < count($colRange); $i++) {
+        try
+        {
+            for($i = 0; $i < count($colRange); $i++)
+            {
                 $this->SetColumnWidthAuto($colRange[$i]);
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -378,9 +472,14 @@ class ExcelXport
     //*gets the instance
     function GetInstance()
     {
-        try {
-            return $this->spreadsheet;
-        } catch (Exception $e) {
+        die(get_class($this->spreadsheet->addSheet($this->sheet)));
+        try
+        {
+            $this->spreadsheet->addSheet($this->sheet);
+            //return new $this->spreadsheet->addSheet();
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -388,9 +487,12 @@ class ExcelXport
     //*function to set printable area
     function SetPrintingArea(String $range)
     {
-        try {
+        try
+        {
             $this->sheet->getPageSetup()->setPrintArea($range);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $this->GetExceptionMessage($e);
         }
     }
@@ -400,12 +502,14 @@ class ExcelXport
     {
         $highestRow = $this->GetLastRowIndex();
         $highestCol = $this->GetLastColIndex();
-        for ($row = 1; $row <= $highestRow; $row++) {
-            for ($col = 1; $col <= $highestCol; $col++) {
+        for($row = 1; $row <= $highestRow; $row++)
+        {
+            for($col = 1; $col <= $highestCol; $col++)
+            {
                 $cell = $this->sheet->getCellByColumnAndRow($col, $row);
                 $value = $cell->getValue();
                 var_export($value);
-                $cell->setValueExplicit($value, is_string($value) ? DataType::TYPE_STRING : DataType::TYPE_NUMERIC);
+                $cell->setValueExplicit($value, is_string($value)? DataType::TYPE_STRING: DataType::TYPE_NUMERIC);
             }
         }
     }
@@ -427,6 +531,19 @@ class ExcelXport
         try
         {
             $this->sheet->getStyle($range)->getFont()->setUnderline(true);
+        }
+        catch (Exception $e)
+        {
+            $this->GetExceptionMessage($e);
+        }
+    }
+
+    //* function to indent the content of a cell
+    function Indent($range, $indent = 1):void
+    {
+        try
+        {
+            $this->sheet->getStyle($range)->getAlignment()->setIndent($indent);
         }
         catch (Exception $e)
         {
@@ -461,18 +578,17 @@ class ExcelXport
     }
 
     //*function to copy the content of a sheet in to a spreadsheet
-    function CopySheet($spreadsheet, int $index): void
+    function CopySheet($spreadsheet, int $index)
     {
         try
         {
-            $this->spreadsheet->addExternalSheet($spreadsheet, $index);
+            $this->spreadsheet->addSheet($spreadsheet, $index);
         }
         catch (Exception $e)
         {
             $this->GetExceptionMessage($e);
         }
     }
-
 
     private function GetExceptionMessage($errors)
     {
@@ -481,28 +597,30 @@ class ExcelXport
         //gets the trace=>all files and linked function detaails about exception
         $err_trace = $errors->getTrace();
         //checks weither $err_trace is an array and not empty
-        if (is_array($err_trace) and !empty($err_trace)) {
+        if (is_array($err_trace) AND !empty($err_trace))
+        {
             //adds the origin file where the errors occurs
-            $err_message .= ' origins from : ' . $err_trace[0]['file'] . PHP_EOL;
+            $err_message .= ' origins from : '.$err_trace[0]['file'].PHP_EOL;
             //adds the origin line of the file where the errors occurs
-            $err_message .= ' on line : ' . $err_trace[0]['line'] . PHP_EOL;
+            $err_message .= ' on line : '.$err_trace[0]['line'].PHP_EOL;
             //adds the origin function causing the errors
-            $err_message .= ' by function : `' . $err_trace[1]['function'] . '`' . PHP_EOL;
+            $err_message .= ' by function : `'.$err_trace[1]['function'].'`'.PHP_EOL;
             //adds the line of the file where the function is called
-            $err_message .= ' called at line : ' . $err_trace[1]['line'] . PHP_EOL;
+            $err_message .= ' called at line : '.$err_trace[1]['line'].PHP_EOL;
             //adds the  of the file where the function is called
-            $err_message .= ' in the file : ' . $err_trace[1]['file'] . PHP_EOL;
+            $err_message .= ' in the file : '.$err_trace[1]['file'].PHP_EOL;
         }
 
         //adds the current date
-        $err_message .= " at " . date('m/d/Y h:i:s') . PHP_EOL;
+        $err_message .= " at ".date('m/d/Y h:i:s').PHP_EOL;
         //recording errors for improving
-        $exeception_err_log = fopen(__DIR__ . DIRECTORY_SEPARATOR . 'exeception_err_log.txt', 'a+');
+        $exeception_err_log = fopen(__DIR__.DIRECTORY_SEPARATOR.'exeception_err_log.txt', 'a+');
         //breaklines
-        $err_message = $err_message . PHP_EOL;
+        $err_message = $err_message.PHP_EOL;
         //append the error at the end of the file
         fwrite($exeception_err_log, $err_message);
         //closes the file
         fclose($exeception_err_log);
     }
 }
+
