@@ -48,11 +48,21 @@ class MarksController extends Controller
         $total_ratio=0;
         $modulu = Module::findOrFail($modulusID);
         // condition if the test is for session
+        $request->validate([
+            'test_type' => ['required'],
+        ]);
         if ($request->test_type == 'session') {
-            $request->validate([
-                'test_type' => ['required'],
-            ]);
+           
 
+            // dd([
+            //     'module_id' => $modulusID,
+            //     'year_id' => $yearID,
+            //     'type' => $request->test_type,
+            //     'title' => $request->test_type,
+            //     'ratio' => 100,
+            //     // 'created_at' => Carbon::now(),
+            //     // 'updated_at' => Carbon::now(),
+            // ]);
             $test = Test::insert([
                 'module_id' => $modulusID,
                 'year_id' => $yearID,
@@ -66,7 +76,6 @@ class MarksController extends Controller
         // if the test is not a session => if it is normal
         else {
             $request->validate([
-                'test_type' => ['required'],
                 'test_label' => ['required'],
                 'test_ration' => ['required'],
             ]);

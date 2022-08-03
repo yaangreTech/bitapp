@@ -153,15 +153,42 @@ class TranscriptController extends Controller
                     $tu_ponderer = 0;
                     foreach ($modules as $mod) {
                         $sessione = new Sessione();
-                        $tests = $mod->tests
+                        $note = 0;
+
+                        // ====================================
+                        $tests=[];
+                        $normal_tests = $mod->tests
                             ->where('year_id', $yearID)
                             ->where('type', 'normal');
-                        $note = 0;
+                        
+                        $sessions_tests=[];
+                        $note_normal= 0;
+                        $note_Session= 0;
+
                         if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
-                            $tests = $mod->tests
+                            $sessions_tests = $mod->tests
                                 ->where('year_id', $inscription->year_id)
                                 ->where('type', 'session');
                         }
+                        foreach ($normal_tests as $sessions_test) {
+                            if($sessions_test->markOf($inscription->id)!=null) {
+                                $note_normal += ($sessions_test->markOf($inscription->id)['value'] * $sessions_test->ratio) / 100;
+                            }
+                        }
+
+                        foreach ($sessions_tests as $sessions_test) {
+                            if($sessions_test->markOf($inscription->id)!=null) {
+                                $sessions_test += ($sessions_test->markOf($inscription->id)['value'] * $sessions_test->ratio) / 100;
+                            }
+                        }
+                        $tests=$sessions_tests;
+                       
+
+                        if($note_normal>$note_Session){
+                            $tests=$normal_tests;
+                        }
+                        // ===================================
+                       
                         foreach ($tests as $test) {
                             $mark = $test->markOf($inscription->id);
                             if ($mark != null) {
@@ -354,9 +381,9 @@ class TranscriptController extends Controller
                 $s_n_modulus += $modules->count();
                 foreach ($modules as $mod) {
                     $sessione = new Sessione();
-                    $tests = $mod->tests
-                        ->where('year_id', $inscription->year_id)
-                        ->where('type', 'normal');
+                    // $tests = $mod->tests
+                    //     ->where('year_id', $inscription->year_id)
+                    //     ->where('type', 'normal');
 
                     if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
                         $tests = $mod->tests
@@ -366,6 +393,45 @@ class TranscriptController extends Controller
 
                     $note = 0;
                     $pourcentage = 0;
+
+
+                     // ====================================
+                     $tests=[];
+                     $normal_tests = $mod->tests
+                         ->where('year_id', $inscription->year_id)
+                         ->where('type', 'normal');
+                     
+                     $sessions_tests=[];
+                     $note_normal= 0;
+                     $note_Session= 0;
+
+                     if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
+                         $sessions_tests = $mod->tests
+                             ->where('year_id', $inscription->year_id)
+                             ->where('type', 'session');
+                     }
+                     foreach ($normal_tests as $sessions_test) {
+                         if($sessions_test->markOf($inscription->id)!=null) {
+                             $note_normal += ($sessions_test->markOf($inscription->id)['value'] * $sessions_test->ratio) / 100;
+                         }
+                     }
+
+                     foreach ($sessions_tests as $sessions_test) {
+                         if($sessions_test->markOf($inscription->id)!=null) {
+                             $sessions_test += ($sessions_test->markOf($inscription->id)['value'] * $sessions_test->ratio) / 100;
+                         }
+                     }
+
+                     $tests=$sessions_tests;
+                     if($note_normal>$note_Session){
+                        $tests=$normal_tests;
+                    }
+                     // ===================================
+
+
+
+
+
                     foreach ($tests as $test) {
                         $mark = $test->markOf($inscription->id);
                         if ($mark != null) {
