@@ -173,7 +173,7 @@ class excelExportController extends Controller
         //     "Sanou Lougoudoro",
         //     "Yanogo Yves Wengundi Patrick"
         // ], "Dr Kabore W. Rodrigue");
-        Proclamation($academicYear, $session, $semester->level->branche->name, $className . "_" . $academicYear, $semester->label . '(' . $semester->name . ')', "After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:", $pv_data,  [], "Dr Kabore W. Rodrigue", $dir . DIRECTORY_SEPARATOR);
+        Proclamation($academicYear, $session, $semester->level->branche->name, $className . "_" . $academicYear, $semester->label . '(' . $semester->name . ')', "After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:", $pv_data,  [], "", $dir . DIRECTORY_SEPARATOR);
 
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
@@ -237,9 +237,12 @@ class excelExportController extends Controller
         // $weight = json_decode(fread($file, filesize($subjectJson . "/testsWeight.json")), true);
         // fclose($file);
         if ($isWithSession == 'true') {
+          
             $jsons = $marksInputController->viewMarksModulusMarks_with_session_Of($yearID, $modulusID);
+            
         } else {
             $jsons = $marksInputController->viewMarksModulusMarksOf($yearID, $modulusID);
+           
         }
 
         $jsons = json_decode($jsons->getContent(), true);
@@ -275,7 +278,11 @@ class excelExportController extends Controller
                 $weight[$test['title']] = $test['ratio'];
             }
 
+            // if(count($json['tests'])==1){
+            //     $dataContent['isSessionNote']
+            // }
 
+           
             $dataContent["Final Average"] = $json['average'];
             $dataContent["International Grade"] = $json['conforme']['international_Grade'];
             $dataContent["Pass or Fail?"] = $json['status'];
@@ -288,9 +295,9 @@ class excelExportController extends Controller
 
             $weight = [$weight];
             $headers = array_keys(max($data));
+            // dd(count($jsons['testList']));
             // dd($data);
-
-            SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear);
+            SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear,"",count($jsons['testList']));
             // dd($data);
         } else {
             return back();

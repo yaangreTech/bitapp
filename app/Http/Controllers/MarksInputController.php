@@ -137,15 +137,65 @@ class MarksInputController extends Controller
             $sessione =new Sessione();
             $inscription->student;
             $notes = [];
-            $tests_ = $Tests;
+            // ==============================================
+
+            $tests_=[];
+            // $normal_tests = $mod->tests
+            //     ->where('year_id', $inscription->year_id)
+            //     ->where('type', 'normal');
+            
+            $sessions_tests=[];
+            $note_normal= 0;
+            $note_Session= 0;
+            // ===========================================
+
+
+
+
+            $normal_tests = $module->tests
+            ->where('year_id', $yearID)
+            ->where('type', 'normal');
+
             if($sessione->has_Session_mark($module->id,$inscription->id)){
-                $tests_ = $module->tests
+                $sessions_tests = $module->tests
                 ->where('year_id', $yearID)
                 ->where('type', 'session');
             }
             $average = 0;
             $t_pourcentage = 0;
             $status = 'Pass';
+        // ====================================
+       
+
+        // if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
+        //     $sessions_tests = $mod->tests
+        //         ->where('year_id', $inscription->year_id)
+        //         ->where('type', 'session');
+        // }
+        foreach ($normal_tests as $normal_test) {
+            // if($sessions_test->markOf($inscription->id)!=null) {
+                $note_normal += ($normal_test->markOf($inscription->id)['value'] * $normal_test->ratio) / 100;
+            // }
+        }
+
+        foreach ($sessions_tests as $sessions_test) {
+            if($sessions_test->markOf($inscription->id)!=null) {
+                $note_Session += ($sessions_test->markOf($inscription->id)['value'] * $sessions_test->ratio) / 100;
+            }
+        }
+
+        $tests_=$sessions_tests;
+        if($note_normal>$note_Session){
+           $tests_=$normal_tests;
+       }
+        // ===================================
+
+
+
+
+
+
+
             foreach ($tests_ as $test) {
                 if ($test->markOf($inscription->id) != null) {
                     $test['mark'] = $test

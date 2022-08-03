@@ -7,7 +7,7 @@ $(function() {
 })
 var yearData = {};
 var grade_transcript_table = null;
-
+var marksModulusMarks_table = null;
 
 
 
@@ -167,6 +167,7 @@ function viewTranscriptData(data) {
     // console.log('viewTranscriptData');
     // console.log(data);
     body_elements = ''
+        // list_corps
     var new_semester = 1
         // semesters = data.semesters;
     $.each(data.level.semesters, function(semester_index, semester) {
@@ -243,8 +244,15 @@ function viewTranscriptData(data) {
         '<p class="">Subject <span class=""> : ' + data.level.branche.departement.label + '</span></p>'
     );
 
-    $('#grades_view_body').html(body_elements);
+    // $.fn.dataTable.isDataTable('#marksModulusMarks_table') && students_table.destroy();
 
+    $('#grades_view_body').html(body_elements);
+    // console.log('opppppppppppppppppppppppppppppppp');
+    // if (body_elements.length > 0) {
+    //     marksModulusMarks_table = $('#marksModulusMarks_table').DataTable({
+    //         responsive: true,
+    //     });
+    // }
     $('.secon_hide').hide();
     $('.first_hide').show();
 

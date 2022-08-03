@@ -13,8 +13,9 @@ require_once(app_path('CustomPhp/ExcelPhp/excel.php'));
  * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear, $saveInFolder = ''): void
+function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear, $saveInFolder = '', $nbrTest): void
 {
+    // dd($nbrTest);
    
     $download = empty($saveInFolder);
     //new Excel object
@@ -28,9 +29,10 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     $weight = $weight[0];
     // dd('ok');
     //reorders the elements following the same orders as for headers
-    $data = SortAccordingToAList($data, $headers);
+   
+    $data = SortAccordingToAList($data, [...$headers, "session"]);
     //list of tests
-    
+    // dd($data);
     $tests = array_keys($weight);
     //name of the file
     $fileFullName = "Subject Report " . $promotion . " " . $academicYear;
@@ -162,23 +164,49 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     //next row
     $lastRow = $sheet->GetLastRowIndex();
     $currentRow = $lastRow + 2; //+2 due the merged row
+
     for ($row = 0; $row < count($data); $row++) {
+        
         $array = $data[$row];
+        
+        
         //writes order number
         $sheet->Write($alphabet[START_COL_SJ - 1] . ($currentRow + $row), $row + 1);
+        $temoin = 0;
         for ($col = 0; $col < count($headers); $col++) {
-            $sheet->Write($alphabet[START_COL_SJ + $col] . ($currentRow + $row), $array[$headers[$col]]);
-            //if the current value is for a test
+           
+            // }
             if (in_array($headers[$col], $tests)) {
+                
+                if($temoin==0){
+                    $sheet->Write($alphabet[START_COL_SJ + $col] . ($currentRow + $row), $array[$headers[$col]]);
+                }
+                // dd($headers[$col]);
+                if($headers[$col]=="Attendance" AND isset($array['session'])){
+                    $temoin = 1;
+                    $sheet->MergeCells($alphabet[START_COL_SJ + $col] . ($currentRow + $row) . ":" . $alphabet[START_COL_SJ + $nbrTest] . ($currentRow + $row));
+                   
+
+                }
+                
                 //changes the background of the cell
                 $sheet->SetColor($alphabet[START_COL_SJ + $col] . ($currentRow + $row), SKY_BLUE_SJ);
+                
+            }
+            if(!in_array($headers[$col], $tests)){
+                $sheet->Write($alphabet[START_COL_SJ + $col] . ($currentRow + $row), $array[$headers[$col]]);
             }
             //if the current cell record the key word "PASS"
             if (strtoupper($array[$headers[$col]]) == "PASS") {
                 $sheet->SetColor($alphabet[START_COL_SJ + $col] . ($currentRow + $row), DARK_ORANGE_SJ);
             }
+            
+        
         }
+        
     }
+
+
 
     //last row
     $lastRow = $sheet->GetLastRowIndex();

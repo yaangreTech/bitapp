@@ -177,25 +177,54 @@ class AverageController extends Controller
                 $tu_ponderer = 0;
                 foreach ($modules as $mod) {
                     $sessione = new Sessione();
-                    $tests = $mod->tests
-                        ->where('year_id', $yearID)
-                        ->where('type', 'normal');
+                    $tests = [];
                     // dd($sessione->has_Session_mark(
                     //     $yearID,
                     //     $mod->id,
                     //     $inscription->id
                     // ));
-                    if (
-                        $sessione->has_Session_mark(
-                            $mod->id,
-                            $inscription->id
-                        )
-                    ) {
+     // ====================================
+   
+     $normal_tests = $mod->tests
+            ->where('year_id', $yearID)
+            ->where('type', 'normal');
+     
+     $sessions_tests=[];
+     $note_normal= 0;
+     $note_Session= 0;
 
-                        $tests = $mod->tests
-                            ->where('year_id', $yearID)
-                            ->where('type', 'session');
-                    }
+    //  if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
+    //      $sessions_tests = $mod->tests
+    //          ->where('year_id', $inscription->year_id)
+    //          ->where('type', 'session');
+    //  }
+
+
+     if ($sessione->has_Session_mark($mod->id,$inscription->id)) {
+        $sessions_tests = $mod->tests->where('year_id', $yearID)->where('type', 'session');
+    }
+     foreach ($normal_tests as $normal_test) {
+        //  if($sessions_test->markOf($inscription->id)!=null) {
+             $note_normal += ($normal_test->markOf($inscription->id)['value'] * $normal_test->ratio) / 100;
+        //  }
+     }
+
+     foreach ($sessions_tests as $sessions_test) {
+         if($sessions_test->markOf($inscription->id)!=null) {
+             $note_Session += ($sessions_test->markOf($inscription->id)['value'] * $sessions_test->ratio) / 100;
+         }
+     }
+
+     $tests=$sessions_tests;
+
+     if($note_normal>$note_Session){
+        $tests=$normal_tests;
+    }
+     // ===================================
+
+
+
+                    
                     $note = 0;
                     $pourcentage = 0;
                     foreach ($tests as $test) {

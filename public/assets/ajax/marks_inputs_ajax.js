@@ -7,6 +7,10 @@ $(function() {
     })
 })
 
+var marksModulusMarks_table = null;
+var marksModulusSession_table = null;
+var marksModulusMarks_with_session_table = null;
+
 // function updateMarkRef(action) {
 //     var marksRef = JSON.parse(currentActivedb.getItem('marksRef'));
 //     marksRef.action = action;
@@ -33,9 +37,7 @@ function submitwithType(type) {
     $('#templateTypefom').submit()
 }
 
-var marksModulusMarks_table = null;
-var marksModulusSession_table = null;
-var marksModulusMarks_with_session_table = null;
+
 // marks
 function getMarksOf(yearID, modulusID) {
     // console.log(yearID, modulusID);
@@ -216,7 +218,7 @@ function marksModulusMarksData_with_session_view(data) {
             tbody_elements += '    <td class="actions"><div class="badge ' + (insc.status == 'Fail' ? 'col-red' : 'col-green') + '">' + insc.status + '</div></td>'
             tbody_elements += '</tr>'
         })
-        // console.log(tbody_elements);
+        // console.log('tbody_elements');
 
 
     // $.fn.dataTable.isDataTable('#marksModulusMarks_with_session_table') && marksModulusMarks_with_session_table.destroy();
@@ -231,9 +233,9 @@ function marksModulusMarksData_with_session_view(data) {
     }
 
 
-    marksModulusMarks_table = $('#marksModulusMarks_table').DataTable({
-        responsive: true,
-    });
+    // marksModulusMarks_table = $('#marksModulusMarks_table').DataTable({
+    //     responsive: true,
+    // });
     // marksModulusMarks_with_session_table = $('#marksModulusMarks_with_session_table').DataTable({
     //     responsive: true,
     // });
