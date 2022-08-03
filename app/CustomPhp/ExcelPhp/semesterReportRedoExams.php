@@ -24,7 +24,7 @@ _define("TUE", "TUE");
 _define("TU_CODE", "TU CODE");
 
 //starting column to write data
-_define("STARTING_COL", 1);
+_define("STARTING_COL_SR", 1);
 //starting row for writing data
 _define('STARTING_ROW_SR', 2);
 // dd(STARTING_ROW_sr);
@@ -52,9 +52,8 @@ _define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FO
  * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $returnSheet = true, $cle = 'normal', $saveInFolder = '')
+function SemesterReportRedoExams($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $returnSheet = true, $cle = 'normal', $saveInFolder = '')
 {
-
     $download = empty($saveInFolder);
     $sheet = new ExcelXport();
 
@@ -89,8 +88,6 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
             $modules = $modules + $value;
         }
     }
-
-
 
     $final_headers = $modules + $extra_headers;
 
@@ -226,7 +223,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     }
 
     // UNUSED CELLS MERGING
-    $sheet->MergeCells($ref(STARTING_COL, $lastRow) . ":" . $ref(SD_STARTING_COL - 2, $lastRow + count($final_headers_desc) - 1));
+    $sheet->MergeCells($ref(STARTING_COL_SR, $lastRow) . ":" . $ref(SD_STARTING_COL - 2, $lastRow + count($final_headers_desc) - 1));
     $sheet->MergeCells($ref($lastColIndex - count($extra_headers) + 1, $lastRow) . ":" . $ref($lastColIndex, $tu_credit_row));
 
     $lastRow = $sheet->GetLastRowIndex() - 2; //-2 due to the gap created
@@ -266,19 +263,19 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     //the student data headers
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
-    $sheet->Write($ref(STARTING_COL, $lastRow), 'N°');
-    $sheet->SetColumnWidth($alph(STARTING_COL), 5);
+    $sheet->Write($ref(STARTING_COL_SR, $lastRow), 'N°');
+    $sheet->SetColumnWidth($alph(STARTING_COL_SR), 5);
     //ID's column
-    $sheet->Write($ref(STARTING_COL + 1, $lastRow), 'ID');
-    $sheet->SetColumnWidth($alph(STARTING_COL + 1), 12);
+    $sheet->Write($ref(STARTING_COL_SR + 1, $lastRow), 'ID');
+    $sheet->SetColumnWidth($alph(STARTING_COL_SR + 1), 12);
     //Surname
-    $sheet->Write($ref(STARTING_COL + 2, $lastRow), 'Surname');
-    $sheet->SetColumnWidth($alph(STARTING_COL + 2), 15);
+    $sheet->Write($ref(STARTING_COL_SR + 2, $lastRow), 'Surname');
+    $sheet->SetColumnWidth($alph(STARTING_COL_SR + 2), 15);
     //last name
-    $sheet->Write($ref(STARTING_COL + 3, $lastRow), ' Name');
+    $sheet->Write($ref(STARTING_COL_SR + 3, $lastRow), ' Name');
     //formats the currents headers
-    $range = $ref(STARTING_COL, $lastRow) . ':' . $ref(STARTING_COL + 3, $lastRow);
-    $sheet->SetColumnWidth($alph(STARTING_COL + 3), 28);
+    $range = $ref(STARTING_COL_SR, $lastRow) . ':' . $ref(STARTING_COL_SR + 3, $lastRow);
+    $sheet->SetColumnWidth($alph(STARTING_COL_SR + 3), 28);
     $sheet->SetCenter($range, true, true);
     $sheet->SetCellsToBold($range);
     //merges the remaining cells
@@ -286,13 +283,14 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
 
 
     // STUDENT DATA
-    $col = STARTING_COL;
+    $col = STARTING_COL_SR;
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
     $row = $lastRow;
-    for ($index = 0; $index < $nbStudents; $index++) {
+    for ($index = 0; $index < $nbStudents; $index++) 
+    {
         //adds the No
-        $no_cellRef = $ref(STARTING_COL, $row);
+        $no_cellRef = $ref(STARTING_COL_SR, $row);
         $sheet->Write($no_cellRef, $index + 1);
         $sheet->SetCenter($no_cellRef, false, true);
         $col++;
@@ -311,127 +309,69 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
             $col++;
         }
         $row++;
-        $col = STARTING_COL;
+        $col = STARTING_COL_SR;
     }
 
-//    //  REMOVES AVERAGE PER SUBJECTS
-//    $lastRow = $sheet->GetLastRowIndex();
-//    //Average per subject
-//    $average_row_number = ($lastRow + 2);
-//    $sheet->Write($ref(SD_STARTING_COL-1, $average_row_number), 'Average per Subject');
-//    //finds the last module column index
-//    $lastModuleColIndex = $sheet->GetColumnIndex(4, count($alphabet), array_keys($modules)[$total_numbers_of_rows_to_set_in_italic - 1]);
-//    //calculates the average of each subject
-//    for ($col = START_COL_SE + 1; $col <= $lastModuleColIndex + 1; $col++) //the function get index removes 1 and returns the result
-//    {
-//        $total = 0;
-//        for ($row = STARTING_ROW_SE; $row <= $lastRow; $row++) {
-//            $total += floatval($sheet->GetCellValue($col, $row));
-//        }
-//        $sheet->Write($alphabet[$col - 1] . $average_row_number, $total / $nbStudents);
-//    }
-//    //sets the bg color of average cell to lite blue
-//    $sheet->SetColor("D" . $average_row_number . ":" . $alphabet[$lastModuleColIndex] . $average_row_number, SKY_BLUE);
-//    $sheet->SetBorders("D" . $average_row_number . ":" . $alphabet[$lastModuleColIndex] . $average_row_number);
-//    $sheet->SetBorders("D" . $average_row_number . ":" . $alphabet[$lastModuleColIndex] . $average_row_number, "outline", "BORDER_MEDIUM");
-//    --------------------------
-
-    // REMOVES STATISTICS ------------------------------------------------
-    // //statistics
-    // //titles
-    // //part 1
-    // $sheet->Write("D" . ($average_row_number + 2), "Best Average");
-    // $sheet->Write("D" . ($average_row_number + 3), "Lowest Average");
-    // $sheet->Write("D" . ($average_row_number + 4), "Class Room Average");
-    // $sheet->Write("D" . ($average_row_number + 5), "Percentage of Success");
-    // $sheet->Write("D" . ($average_row_number + 6), "Percentage of Failure");
-    // //part 2
-    // $sheet->Write("D" . ($average_row_number + 8), "Number of students");
-    // $sheet->Write("D" . ($average_row_number + 9), "Number of passed");
-    // $sheet->Write("D" . ($average_row_number + 10), "Number of fails");
-    // //formating
-    // $sheet->SetCellsToBold('D' . ($average_row_number + 2) . ":" . "D" . ($average_row_number + 10));
-    // //values
-    // $finalAverageCol = $alphabet[$sheet->GetColumnIndex(4, count($alphabet), "Final Average")];
-    // $pass_failColIndex = $sheet->GetColumnIndex(4, count($alphabet), "Pass/Fail?");
-    // //**increases the size of the column */
-    // $sheet->SetColumnWidth($alphabet[$pass_failColIndex], 20);
-    // //**sets its text weight to bold */
-    // $sheet->SetcellsToBold($alphabet[$pass_failColIndex] . STARTING_ROW_SE . ":" . $alphabet[$pass_failColIndex] . $lastRowIndex);
-    // $pass_failCol = $alphabet[$pass_failColIndex];
-    // $averages = flatten($sheet->GetRangeValues($finalAverageCol . STARTING_ROW_SE . ':' . $finalAverageCol . $lastRowIndex));
-    // $pass_failResults = flatten($sheet->GetRangeValues($pass_failCol . STARTING_ROW_SE . ':' . $pass_failCol . $lastRowIndex));
-    // $nbFails = array_count_values($pass_failResults)['FAIL'] ?? 0;
-    // $nbFails += array_count_values($pass_failResults)['Fail'] ?? 0;
-    // //retrieves the best average
-    // $bestAverage = round(max($averages), 2);
-    // //retrieves the lowest average
-    // $lowestAverage = round(min($averages), 2);
-    // //retrieves the mean of averages
-    // $mean = round((array_sum($averages) / $nbStudents), 2);
-    // //retrieves the percentage of failure
-    // $failurePercentage = round((($nbFails / $nbStudents) * 100), 2);
-    // //retrieves the percentage of success
-    // $successPercentage = round((100 - $failurePercentage), 2);
-
-    // //part 1
-    // $sheet->Write("E" . ($average_row_number + 2), $bestAverage);
-    // $sheet->Write("E" . ($average_row_number + 3), $lowestAverage);
-    // $sheet->Write("E" . ($average_row_number + 4), $mean);
-    // $sheet->Write("E" . ($average_row_number + 5), $successPercentage . " %");
-    // $sheet->Write("E" . ($average_row_number + 6), $failurePercentage . " %");
-    // //part 2
-    // $sheet->Write("E" . ($average_row_number + 8), $nbStudents);
-    // $sheet->Write("E" . ($average_row_number + 9), $nbStudents - $nbFails);
-    // $sheet->Write("E" . ($average_row_number + 10), $nbFails);
-    // //formatting
-    // $sheet->SetTextColor('E' . ($average_row_number + 2) . ":" . "E" . ($average_row_number + 10), RED);
-
-    // FOOTER
-
-    //index of the last row
-    $lastRow = $sheet->GetLastRowIndex();
-    $lastRow++;
-    //MEMBERS OF THE JURY
-    $cellRef = $ref(STARTING_COL + 2, $lastRow + 7);
-    $sheet->Write($cellRef, "The members of the Jury");
-    $sheet->SetCellsToBold($cellRef);
-    $sheet->UnderlineText($cellRef);
-
-    //DATE OF DELIBERATION
-    $cellRef = $ref(STARTING_COL + $nbColHeaders / 2, $lastRow + 5);
-    $sheet->Write($cellRef, "Date of deliberation: " . getDate_En());
-    $sheet->SetCellsToBold($cellRef);
-    $sheet->UnderlineText($cellRef);
-
-    //DATE OF DELIBERATION
-    $cellRef = $ref(STARTING_COL + $nbColHeaders / 2, $lastRow + 7);
-    $sheet->Write($cellRef, "The President of the Jury");
-    $sheet->SetCellsToBold($cellRef);
-    $sheet->UnderlineText($cellRef);
-
-    // LAST UPDATES
+    // LAST UPDATES ON STUDENT'S DATA (FORMATTING CELLS)
+    $lastRow = $sheet->GetLastRowIndex() + 1;
     // wordwraps cells
-    $range = $ref(STARTING_COL, $tu_unit_row) . ":" . $ref($lastColIndex, $lastRow - 1);
+    $range = $ref(STARTING_COL_SR, $tu_unit_row) . ":" . $ref($lastColIndex, $lastRow - 1);
     $sheet->WordWrap($range);
     // add border to cells
     $sheet->SetBorders($range);
     // centers the content about marks
     $sheet->SetCenter($range, true, true);
-    //increases the size of the last column
-    $sheet->SetColumnWidth($alph($lastColIndex), 16);
-    // makes the text bold for "Semester average", "Semester validation (Validated (V) /Not Validated (NV)", "Credits earned"
-    $sheet->SetCellsToBold($ref($lastColIndex - 3, SD_STARTING_ROW) . ":" . $ref($lastColIndex - 1, $lastRow - 1));
-    // green cell when validated
+
+    // SPECIAL FORMATING FOR THE `RE-DO EXAM` COLUMN
+
+    $redo_exams_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Re-do Exam") + 1;
+    $range = $ref($redo_exams_col, SD_STARTING_ROW).":".$ref($redo_exams_col, $lastRow-1);
+    $sheet->SetColor($range, RED);
+    $sheet->SetAlignment($range, "top", "left");
+    $sheet->SetCellsToBold($range);
+    $sheet->SetColumnWidth($alph($redo_exams_col), 40);
+
+    // makes the text bold for "Semester validation (Validated (V) /Not Validated (NV)"
+    $semester_validation_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Semester validation (Validated (V) /Not Validated (NV)");
+
+    $sheet->SetCellsToBold($ref($semester_validation_col, SD_STARTING_ROW));
+    
     for ($i = SD_STARTING_ROW; $i <= $lastRow; $i++) {
         $value = $sheet->GetCellValue($lastColIndex - 5, $i);
         if (strtoupper($value) == "PASS") {
-            $sheet->SetColor($ref($lastColIndex - 5, $i), 'ff' . GREEN);
+            
             $sheet->Write($ref($lastColIndex - 5, $i), 'V');
         } elseif (strtoupper($value) == "FAIL") {
             $sheet->Write($ref($lastColIndex - 5, $i), 'NV');
         }
     }
+
+    //centers the tue row only horizontally
+    $sheet->SetCenter($ref(SD_STARTING_COL, $tue_row).":".$ref($lastColIndex, $tue_row), false, true);
+
+   
+    // FOOTER
+    //index of the last row
+    $lastRow = $sheet->GetLastRowIndex();
+    $lastRow++;
+    // MEMBERS OF THE JURY
+    $cellRef = $ref(STARTING_COL_SR + 2, $lastRow + 4);
+    $sheet->Write($cellRef, "The members of the Jury");
+    $sheet->SetCellsToBold($cellRef);
+    $sheet->UnderlineText($cellRef);
+
+    // DATE OF DELIBERATION
+    $cellRef = $ref(STARTING_COL_SR + $nbColHeaders / 2, $lastRow + 2);
+    $sheet->Write($cellRef, "Date of deliberation: " . getDate_En());
+    $sheet->SetCellsToBold($cellRef);
+    $sheet->UnderlineText($cellRef);
+
+    // PRESIDENT OF THE JURY
+    $cellRef = $ref(STARTING_COL_SR + $nbColHeaders / 2, $lastRow + 4);
+    $sheet->Write($cellRef, "The President of the Jury");
+    $sheet->SetCellsToBold($cellRef);
+    $sheet->UnderlineText($cellRef);
+ 
 
     //  XLS FILE CREATION AND SAVING'S SECTION
 

@@ -16,6 +16,7 @@ use App\Http\Controllers\MarksInputController;
 
 require_once(app_path('CustomPhp/ExcelPhp/gradeReport.php'));
 require_once(app_path('CustomPhp/ExcelPhp/semesterReport.php'));
+require_once(app_path('CustomPhp/ExcelPhp/semesterReportRedoExams.php'));
 require_once(app_path('CustomPhp/ExcelPhp/studentsList.php'));
 require_once(app_path('CustomPhp/ExcelPhp/subjectReport.php'));
 require_once(app_path('CustomPhp/customHelpers.php'));
@@ -162,7 +163,7 @@ class excelExportController extends Controller
         SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'normal', $dir . DIRECTORY_SEPARATOR);
 
         //special for student that must redo some exams
-        SemesterReport($headers, $session_student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'session-list', $dir . DIRECTORY_SEPARATOR);
+        SemesterReportRedoExams($headers, $session_student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'session-list', $dir . DIRECTORY_SEPARATOR);
 
 
         // dd($semesterNumber);

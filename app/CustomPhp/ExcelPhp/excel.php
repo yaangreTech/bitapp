@@ -366,15 +366,22 @@ Class ExcelXport
     }
 
     //*get the index of a column according to a cell value
-    function GetColumnIndex(int $row, int $lastColIndex, String $cellValue)
+    function GetColumnIndex(int $row, int $lastColIndex, String $cellValue, $caseInsenzitive = true)
     {
+        if($caseInsenzitive)
+        {
+
+        }
         try
         {
             //row starts at 1 and column at 1, if cols starts at 0, it will retrieve the last col
             $index = 0;
             for($i = 1; $i < $lastColIndex; $i++)
             {
-                if($this->GetCellValue($i, $row) == $cellValue)
+                $cellValue_ = $this->GetCellValue($i, $row);
+                $cellValue_ = $caseInsenzitive ? strtoupper($cellValue_) :$cellValue_;
+                $cellValue = $caseInsenzitive ? strtoupper($cellValue) :$cellValue;
+                if($cellValue_ == $cellValue)
                 {
                     $index = $i;
                     break;
