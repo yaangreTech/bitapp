@@ -1,217 +1,161 @@
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:48:10
+fopen(C:\laragon\www\bitapp\storage\excelFiles\\Computer Science_2022-2023_FIRST_SEMESTER_2022-2023_normal.xlsx): failed to open stream: No such file or directory origins from : not set
+ on line : not set
+ by function : `fopen`
+ called at line : 123
+ in the file : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php
+ at 08/03/2022 05:03:56
 
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:48:16
+fopen(C:\laragon\www\bitapp\storage\excelFiles\\Computer Science_2022-2023_FIRST_SEMESTER_2022-2023_session-list.xlsx): failed to open stream: No such file or directory origins from : not set
+ on line : not set
+ by function : `fopen`
+ called at line : 123
+ in the file : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php
+ at 08/03/2022 05:03:56
 
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:48:16
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:48:16
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:48:17
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:48:31
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:48:35
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:49:01
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:49:02
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:49:16
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:49:17
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:49:23
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:49:49
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:50:28
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:50:30
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 10:50:35
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 11:22:25
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 11:22:26
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 11:22:32
-
-Workbook already contains a worksheet named 'SEMESTER 1'. Rename this worksheet first. origins from : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
- on line : 586
- by function : `CopySheet`
- called at line : 151
- in the file : D:\Programms\laravel\bitapp\app\Http\Controllers\excelExportController.php
- at 08/02/2022 11:23:02
-
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 08:26:50
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:03:56
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+fopen(C:\laragon\www\bitapp\storage\excelFiles\\Computer Science_2022-2023_Programming and Entrepreuneurship_Semester 1(S1)_PV-deliberation.xlsx): failed to open stream: No such file or directory origins from : not set
+ on line : not set
+ by function : `fopen`
+ called at line : 123
+ in the file : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php
+ at 08/03/2022 05:03:57
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 08:31:00
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:05:32
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 08:33:27
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:11:12
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 09:42:04
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:25:41
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 09:54:17
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:30:00
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 09:55:25
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:30:51
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 10:11:17
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:33:27
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 10:15:32
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:36:00
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 10:19:50
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:41:29
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 10:22:59
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:48:06
 
-Maximum 31 characters allowed in sheet title. origins from : C:\wamp64\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
  on line : 889
  by function : `setTitle`
  called at line : 435
- in the file : C:\wamp64\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
- at 08/02/2022 10:26:43
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:49:15
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 05:52:53
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 06:15:59
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 06:22:55
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 06:26:08
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 06:31:04
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 06:41:35
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 06:43:03
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 06:45:14
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 435
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/03/2022 06:50:58
 

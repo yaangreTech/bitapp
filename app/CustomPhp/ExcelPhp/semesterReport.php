@@ -90,8 +90,6 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         }
     }
 
-
-
     $final_headers = $modules + $extra_headers;
 
     //puts the array of student data in the correct order (following the order of the modules and the extra header)
@@ -290,7 +288,8 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
     $row = $lastRow;
-    for ($index = 0; $index < $nbStudents; $index++) {
+    for ($index = 0; $index < $nbStudents; $index++) 
+    {
         //adds the No
         $no_cellRef = $ref(STARTING_COL_SR, $row);
         $sheet->Write($no_cellRef, $index + 1);
@@ -314,24 +313,51 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         $col = STARTING_COL_SR;
     }
 
+    // LAST UPDATES ON STUDENT'S DATA (FORMATTING CELLS)
+    $lastRow = $sheet->GetLastRowIndex() + 1;
+    // wordwraps cells
+    $range = $ref(STARTING_COL_SR, $tu_unit_row) . ":" . $ref($lastColIndex, $lastRow - 1);
+    $sheet->WordWrap($range);
+    // add border to cells
+    $sheet->SetBorders($range);
+    // centers the content about marks
+    $sheet->SetCenter($range, true, true);
+   
+    // makes the text bold for "Semester average", "Semester validation (Validated (V) /Not Validated (NV)", "Credits earned"
+    $sheet->SetCellsToBold($ref($lastColIndex - 3, SD_STARTING_ROW) . ":" . $ref($lastColIndex - 1, $lastRow - 1));
+    // green cell when validated
+    for ($i = SD_STARTING_ROW; $i <= $lastRow; $i++) {
+        $value = $sheet->GetCellValue($lastColIndex - 5, $i);
+        if (strtoupper($value) == "PASS") {
+            $sheet->SetColor($ref($lastColIndex - 5, $i), 'ff' . GREEN);
+            $sheet->Write($ref($lastColIndex - 5, $i), 'V');
+        } elseif (strtoupper($value) == "FAIL") {
+            $sheet->Write($ref($lastColIndex - 5, $i), 'NV');
+        }
+    }
+    //centers the tue row only horizontally
+    $sheet->SetCenter($ref(SD_STARTING_COL, $tue_row).":".$ref($lastColIndex, $tue_row), false, true);
+
     //  AVERAGE PER SUBJECTS
     $lastRow = $sheet->GetLastRowIndex();
     //Average per subject
     $average_row_number = ($lastRow + 2);
-     $sheet->Write($ref(SD_STARTING_COL-1, $average_row_number), 'Average per Subject');
-     //finds the last module column index
-     //$lastModuleColIndex = $sheet->GetColumnIndex(SD_STARTING_ROW-3, count($alphabet), array_keys($modules)[count($modules) - 1]);
-     $lastModuleColIndex = SD_STARTING_COL + count($modules) - 1;
-     //calculates the average of each subject
-     for ($col = SD_STARTING_COL + 1; $col <= $lastModuleColIndex + 1; $col++) //the function get index removes 1 and returns the result
-     {
-         $total = 0;
-         for ($row = SD_STARTING_ROW; $row <= $lastRow; $row++) {
-             $total += floatval($sheet->GetCellValue($col, $row));
-         }
-         $sheet->Write($alphabet[$col - 1] . $average_row_number, $total / $nbStudents);
-     }
-     //sets the bg color of average cell to lite blue
+    $cellRef = $ref(SD_STARTING_COL-1, $average_row_number);
+    $sheet->Write($cellRef, 'Average per Subject');
+    $sheet->SetCellsToBold($cellRef);
+    $sheet->SetBorders($cellRef, "outline", "BORDER_MEDIUM");
+    //finds the last module column index
+    $lastModuleColIndex = SD_STARTING_COL + count($modules) - 1;
+    //calculates the average of each subject
+    for ($col = SD_STARTING_COL; $col <= $lastModuleColIndex; $col++) //the function get index removes 1 and returns the result
+    {
+        $total = 0;
+        for ($row = SD_STARTING_ROW; $row <= $lastRow; $row++) {
+            $total += floatval($sheet->GetCellValue($col, $row));
+        }
+        $sheet->Write($alphabet[$col - 1] . $average_row_number, $total / $nbStudents);
+    }
+    //sets the bg color of average cell to lite blue
     $range = $ref(SD_STARTING_COL, $average_row_number). ":" . $ref($lastModuleColIndex, $average_row_number);
     $sheet->SetColor($range, SKY_BLUE);
     $sheet->SetBorders($range);
@@ -356,17 +382,14 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
      $sheet->SetCellsToBold($ref($stats_titles_col, ($average_row_number + 2)) . ":" . $ref($stats_titles_col, ($average_row_number + 10)));
      //values
 
-     $finalAverageCol = $alphabet[$sheet->GetColumnIndex($tue_row, count($alphabet), "Semester average")];
-     $pass_failColIndex = $sheet->GetColumnIndex($tue_row, count($alphabet), "Semester validation (Validated (V) /Not Validated (NV)");
-     //**increases the size of the column */
-     $sheet->SetColumnWidth($alphabet[$pass_failColIndex], 20);
+     $finalAverageColIndex = $sheet->GetColumnIndex($tue_row, count($alphabet), "Semester average") + 1;
+     $pass_failColIndex = $sheet->GetColumnIndex($tue_row, count($alphabet), "Semester validation (Validated (V) /Not Validated (NV)") + 1;
+     
      //**sets its text weight to bold */
-     $sheet->SetcellsToBold($alphabet[$pass_failColIndex] . SD_STARTING_ROW . ":" . $alphabet[$pass_failColIndex] . $lastRow);
-     $pass_failCol = $alphabet[$pass_failColIndex];
-     $averages = flatten($sheet->GetRangeValues($finalAverageCol . SD_STARTING_ROW . ':' . $finalAverageCol . $lastRow));
-     $pass_failResults = flatten($sheet->GetRangeValues($pass_failCol . SD_STARTING_ROW . ':' . $pass_failCol . $lastRow));
+     $sheet->SetcellsToBold($ref($pass_failColIndex, SD_STARTING_ROW) . ":" . $ref($pass_failColIndex, $lastRow));
+     $averages = flatten($sheet->GetRangeValues($ref($finalAverageColIndex, SD_STARTING_ROW) . ':' . $ref($finalAverageColIndex, ($lastRow - 1))));
+     $pass_failResults = flatten($sheet->GetRangeValues($ref($pass_failColIndex, SD_STARTING_ROW) . ':' . $ref($pass_failColIndex, ($lastRow - 1))));
      $nbFails = array_count_values($pass_failResults)['NV'] ?? 0;
-     $nbFails += array_count_values($pass_failResults)['NV'] ?? 0;
      //retrieves the best average
      $bestAverage = round(max($averages), 2);
      //retrieves the lowest average
@@ -379,63 +402,46 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
      $successPercentage = round((100 - $failurePercentage), 2);
 
      //part 1
-     $sheet->Write($ref( SD_STARTING_ROW, ($average_row_number + 2)), $bestAverage);
-     $sheet->Write($ref(SD_STARTING_ROW, ($average_row_number + 3)), $lowestAverage);
-     $sheet->Write($ref(SD_STARTING_ROW, ($average_row_number + 4)), $mean);
-     $sheet->Write($ref(SD_STARTING_ROW, ($average_row_number + 5)), $successPercentage . " %");
-     $sheet->Write($ref(SD_STARTING_ROW, ($average_row_number + 6)), $failurePercentage . " %");
+     $sheet->Write($ref(SD_STARTING_COL, ($average_row_number + 2)), $bestAverage);
+     $sheet->Write($ref(SD_STARTING_COL, ($average_row_number + 3)), $lowestAverage);
+     $sheet->Write($ref(SD_STARTING_COL, ($average_row_number + 4)), $mean);
+     $sheet->Write($ref(SD_STARTING_COL, ($average_row_number + 5)), $successPercentage . " %");
+     $sheet->Write($ref(SD_STARTING_COL, ($average_row_number + 6)), $failurePercentage . " %");
      //part 2
-     $sheet->Write($ref(SD_STARTING_ROW, ($average_row_number + 8)), $nbStudents);
-     $sheet->Write($ref(SD_STARTING_ROW, ($average_row_number + 9)), $nbStudents - $nbFails);
-     $sheet->Write($ref(SD_STARTING_ROW, ($average_row_number + 10)), $nbFails);
+     $sheet->Write($ref(SD_STARTING_COL, ($average_row_number + 8)), $nbStudents);
+     $sheet->Write($ref(SD_STARTING_COL, ($average_row_number + 9)), $nbStudents - $nbFails);
+     $sheet->Write($ref(SD_STARTING_COL, ($average_row_number + 10)), $nbFails);
      //formatting
-     $sheet->SetTextColor($ref(SD_STARTING_ROW, ($average_row_number + 2)) . ":" . $ref(SD_STARTING_ROW, ($average_row_number + 10), RED));
+     $range = $ref(SD_STARTING_COL, ($average_row_number + 2)) . ":" . $ref(SD_STARTING_COL, ($average_row_number + 10));
+     $sheet->SetTextColor($range, RED);
+     $sheet->SetCenter($range, false, true);
+
+     //sets borders for the stats
+     $sheet->SetBorders($ref($stats_titles_col, ($average_row_number + 2).":".$ref(SD_STARTING_COL, ($average_row_number + 6))), 'allBorders', "BORDER_MEDIUM");
+     $sheet->SetBorders($ref($stats_titles_col, ($average_row_number + 8).":".$ref(SD_STARTING_COL, ($average_row_number + 10))), 'allBorders', "BORDER_MEDIUM");
 
     // FOOTER
-
     //index of the last row
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
     //MEMBERS OF THE JURY
-    $cellRef = $ref(STARTING_COL_SR + 2, $lastRow + 7);
+    $cellRef = $ref(STARTING_COL_SR + 2, $lastRow + 4);
     $sheet->Write($cellRef, "The members of the Jury");
     $sheet->SetCellsToBold($cellRef);
     $sheet->UnderlineText($cellRef);
 
     //DATE OF DELIBERATION
-    $cellRef = $ref(STARTING_COL_SR + $nbColHeaders / 2, $lastRow + 5);
+    $cellRef = $ref(STARTING_COL_SR + $nbColHeaders / 2, $lastRow + 2);
     $sheet->Write($cellRef, "Date of deliberation: " . getDate_En());
     $sheet->SetCellsToBold($cellRef);
     $sheet->UnderlineText($cellRef);
 
-    //DATE OF DELIBERATION
-    $cellRef = $ref(STARTING_COL_SR + $nbColHeaders / 2, $lastRow + 7);
+    //PRESIDENT OF THE JURY
+    $cellRef = $ref(STARTING_COL_SR + $nbColHeaders / 2, $lastRow + 4);
     $sheet->Write($cellRef, "The President of the Jury");
     $sheet->SetCellsToBold($cellRef);
     $sheet->UnderlineText($cellRef);
-
-    // LAST UPDATES
-    // wordwraps cells
-    $range = $ref(STARTING_COL_SR, $tu_unit_row) . ":" . $ref($lastColIndex, $lastRow - 1);
-    $sheet->WordWrap($range);
-    // add border to cells
-    $sheet->SetBorders($range);
-    // centers the content about marks
-    $sheet->SetCenter($range, true, true);
-    //increases the size of the last column
-    $sheet->SetColumnWidth($alph($lastColIndex), 16);
-    // makes the text bold for "Semester average", "Semester validation (Validated (V) /Not Validated (NV)", "Credits earned"
-    $sheet->SetCellsToBold($ref($lastColIndex - 3, SD_STARTING_ROW) . ":" . $ref($lastColIndex - 1, $lastRow - 1));
-    // green cell when validated
-    for ($i = SD_STARTING_ROW; $i <= $lastRow; $i++) {
-        $value = $sheet->GetCellValue($lastColIndex - 5, $i);
-        if (strtoupper($value) == "PASS") {
-            $sheet->SetColor($ref($lastColIndex - 5, $i), 'ff' . GREEN);
-            $sheet->Write($ref($lastColIndex - 5, $i), 'V');
-        } elseif (strtoupper($value) == "FAIL") {
-            $sheet->Write($ref($lastColIndex - 5, $i), 'NV');
-        }
-    }
+ 
 
     //  XLS FILE CREATION AND SAVING'S SECTION
 

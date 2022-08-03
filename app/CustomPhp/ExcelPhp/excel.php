@@ -601,10 +601,15 @@ Class ExcelXport
         //checks weither $err_trace is an array and not empty
         if (is_array($err_trace) AND !empty($err_trace))
         {
+            //dd(in_array("file", array_keys($err_trace[0])) ? $err_trace[0]['file'] : "not set");
+            $origins = in_array("file", array_keys($err_trace[0])) ? $err_trace[0]['file'] : "not set";
+            $line = in_array("line", array_keys($err_trace[0])) ? $err_trace[0]['line'] : "not set";
+            //dd(array_keys($err_trace[0]));
             //adds the origin file where the errors occurs
-            $err_message .= ' origins from : '.$err_trace[0]['file'].PHP_EOL;
+            $err_message .= ' origins from : '. $origins ;
+            $err_message .= PHP_EOL;
             //adds the origin line of the file where the errors occurs
-            $err_message .= ' on line : '.$err_trace[0]['line'].PHP_EOL;
+            $err_message .= ' on line : '.$line.PHP_EOL;
             //adds the origin function causing the errors
             $err_message .= ' by function : `'.$err_trace[1]['function'].'`'.PHP_EOL;
             //adds the line of the file where the function is called
