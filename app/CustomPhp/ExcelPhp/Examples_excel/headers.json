@@ -1,48 +1,70 @@
 {
     "TUS":
     {
-      "Language and Communication":
-      {
-        "Basic English": 1,
-        "Technical English": 1,
-        "Expression Technics": 3
-      },
-      "Mathematics 1":
-      {
-        "General Algebra": 1,
-        "Analysis 1": 2,
-        "Statistics & Probabilities": 2
-      },
-      "Physics":
-      {
-        "Electrostatic": 2,
-        "Electrokinetic": 2,
-        "Geometrical Optics": 1
-      },
-      "Computing Systems":
-      {
-        "Analog Electronic": 1,
-        "Digital Electronic": 1,
-        "Computers Architecture": 1,
-        "Networks & Infrastructures": 2,
-        "Operating Systems": 1
-      },
-      "Office tools 1":
-      {
-        "Microsoft Office": 2,
-        "Microsoft Office Project": 1
-      },
-      "Language and Programming":
-      {
-        "Algorithms": 3,
-        "Introduction to C programming": 3
-      }
+        "Language and Communication":
+        {
+            "TUE":
+            {
+                "Basic English": 1,
+                "Technical English": 1,
+                "Expression Technics": 3
+            },
+            "TU CODE": "xxx"
+        },
+        "Mathematics 1":
+        {
+            "TUE":
+            {
+                "General Algebra": 1,
+                "Analysis 1": 2,
+                "Statistics & Probabilities": 2
+            },
+            "TU CODE": "xxx"
+        },
+        "Physics":
+        {
+            "TUE":
+            {
+                "Electrostatic": 2,
+                "Electrokinetic": 2,
+                "Geometrical Optics": 1
+            },
+            "TU CODE": "xxx"
+        },
+        "Computing Systems":
+        {
+            "TUE":
+            {
+                "Analog Electronic": 1,
+                "Digital Electronic": 1,
+                "Computers Architecture": 1,
+                "Networks & Infrastructures": 2,
+                "Operating Systems": 1
+            },
+            "TU CODE": "xxx"
+        },
+        "Office tools 1":
+        {
+            "TUE":
+            {
+                "Microsoft Office": 2,
+                "Microsoft Office Project": 1
+            },
+            "TU CODE": "xxx"
+        },
+        "Language and Programming":
+        {
+            "TUE":
+            {
+                "Algorithms": 3,
+                "Introduction to C programming": 3
+            },
+            "TU CODE": "xxx"
+        }
     },
-    "Total of Credits": 30,
-    "Final Average": "",
-    "International Grade": "",
-    "Conversion": "",
-    "Pass/Fail?": "",
-    "Re-do exam": "",
-    "Remark": ""
-  }
+    "Total weighted scores": "",
+    "Semester average": "",
+    "Semester validation (Validated (V) /Not Validated (NV)": "",
+    "Credits earned": "",
+    "Grade": ""
+}
