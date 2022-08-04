@@ -13,7 +13,7 @@ _define("PHPSPREADSHEET_IMAGE_PATH", GetRelativePath($executingScriptFolderName,
 //creation of constant variables
 _define('GREEN', "00cc6a");
 _define('RED', "ff033c");
-_define('LITE_YELLOW', 'fffcf7b6');
+_define('LITE_YELLOW', 'fffff699');
 _define('SKY_BLUE', 'ffb8cce4');
 _define('LITE_DARK', '272822');
 _define('LITE_GREY', 'ffE9E9E9');
@@ -52,9 +52,9 @@ _define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FO
  * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $returnSheet = true, $cle = 'normal', $saveInFolder = '')
+function SemesterReport($headers = [], $student_data = [], $className, $semesterNumber, $academicYear, $session, $trainingArea, $mention, $speciality, $classPromotion, $semesterId = "", $returnSheet = true, $cle = 'normal', $is4finalreport = false, $saveInFolder = '')
 {
-
+    //dd($student_data);
     $download = empty($saveInFolder);
     $sheet = new ExcelXport();
 
@@ -64,6 +64,19 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $semesterNumber = CARDINAL_NUMBERS[$semesterNumber];
     //file name
     $fileFullName = $className . "_" . $semesterNumber . "_SEMESTER_" . $academicYear;
+
+    // FETCH AND REMOVE CATCHUP LIST
+    $catchup = [];
+    $student_data_tempo = [];
+    foreach($student_data as $key => $value)
+    {
+        $catchup[] = $value["__CATCHUP__"];
+        unset($value["__CATCHUP__"]);
+        $student_data_tempo[] = $value;
+    }
+    $student_data = $student_data_tempo;
+    //destroyes the temporarary variable
+    unset($student_data_tempo);
 
 
     //extra header columns
@@ -295,7 +308,8 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         $sheet->Write($no_cellRef, $index + 1);
         $sheet->SetCenter($no_cellRef, false, true);
         $col++;
-        foreach ($student_data[$index] as $key => $value) {
+        foreach ($student_data[$index] as $key => $value) 
+        {
             // if ($key == 'Semester validation (Validated (V) /Not Validated (NV)') {
             //     $value = strtoupper($value)  == 'PASS' ? 'V' : 'NV';
             // }
@@ -306,7 +320,19 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
                 $value = floatval($value);
             }
             //write student data in the Excel file
-            $sheet->Write($ref($col, $row), $value);
+            $cellRef = $ref($col, $row);
+            $sheet->Write($cellRef, $value);
+            //checks if the student mark is from the catchup session
+            //dd($key);
+            if(count($catchup[$index])!=0 && in_array($key, $catchup[$index]))
+            {
+                $sheet->SetColor($cellRef, LITE_YELLOW);
+                //when the xlsx file is for the grand final report
+                if($is4finalreport)
+                {
+                    $sheet->SetColor($ref(STARTING_COL_SR, $row).":".$ref($lastColIndex, $row), LITE_YELLOW);
+                }
+            }
             $col++;
         }
         $row++;
