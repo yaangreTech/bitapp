@@ -278,16 +278,14 @@ class excelExportController extends Controller
                 $weight[$test['title']] = $test['ratio'];
             }
 
-            // if(count($json['tests'])==1){
-            //     $dataContent['isSessionNote']
-            // }
+            if(count($json['tests'])==1){
+                $dataContent['Session Mark'] = $json["tests"][0]["mark"]["value"];
+            }
 
            
             $dataContent["Final Average"] = $json['average'];
             $dataContent["International Grade"] = $json['conforme']['international_Grade'];
             $dataContent["Pass or Fail?"] = $json['status'];
-
-            // dd($dataContent);
 
             array_push($data, $dataContent);
         }
@@ -295,10 +293,7 @@ class excelExportController extends Controller
 
             $weight = [$weight];
             $headers = array_keys(max($data));
-            // dd(count($jsons['testList']));
-            // dd($data);
             SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear,"",count($jsons['testList']));
-            // dd($data);
         } else {
             return back();
         }

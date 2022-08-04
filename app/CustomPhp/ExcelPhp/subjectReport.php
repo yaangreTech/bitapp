@@ -15,7 +15,6 @@ require_once(app_path('CustomPhp/ExcelPhp/excel.php'));
  */
 function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear, $saveInFolder = '', $nbrTest): void
 {
-    // dd($nbrTest);
    
     $download = empty($saveInFolder);
     //new Excel object
@@ -25,14 +24,10 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     
     //reorders the elements following the same orders as for headers
     $weight = SortAccordingToAList($weight, $headers);
-    // dd($weight);
     $weight = $weight[0];
-    // dd('ok');
     //reorders the elements following the same orders as for headers
-   
-    $data = SortAccordingToAList($data, [...$headers, "session"]);
+    $data = SortAccordingToAList($data, [...$headers, "Session Mark"]);
     //list of tests
-    // dd($data);
     $tests = array_keys($weight);
     //name of the file
     $fileFullName = "Subject Report " . $promotion . " " . $academicYear;
@@ -57,9 +52,8 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     $sheet->MergeCells($alphabet[START_COL_SJ - 1] . STARTING_ROW_SJ . ":" . $alphabet[START_COL_SJ + 1 - 1] . STARTING_ROW_SJ);
     //merges remaing cells
     $sheet->MergeCells($alphabet[START_COL_SJ + 1 + 1 - 1] . STARTING_ROW_SJ . ":" . $alphabet[$finalColIndex] . STARTING_ROW_SJ);
-    //resizes the first column width
-    $sheet->SetColumnWidth($alphabet[START_COL_SJ - 1], 3);
-    //resizes the first column height
+    
+    //resizes the first column's height
     $sheet->SetRowHeight(STARTING_ROW_SJ, 40);
     //centers elements of the first row
     $sheet->SetCenter($alphabet[START_COL_SJ - 1] . STARTING_ROW_SJ . ":" . $alphabet[$finalColIndex] . STARTING_ROW_SJ, true, true);
@@ -164,7 +158,7 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     //next row
     $lastRow = $sheet->GetLastRowIndex();
     $currentRow = $lastRow + 2; //+2 due the merged row
-
+    
     for ($row = 0; $row < count($data); $row++) {
         
         $array = $data[$row];
@@ -172,41 +166,35 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
         
         //writes order number
         $sheet->Write($alphabet[START_COL_SJ - 1] . ($currentRow + $row), $row + 1);
-        $temoin = 0;
+        //dd($data);
         for ($col = 0; $col < count($headers); $col++) {
            
-            // }
-            if (in_array($headers[$col], $tests)) {
-                
-                if($temoin==0){
-                    $sheet->Write($alphabet[START_COL_SJ + $col] . ($currentRow + $row), $array[$headers[$col]]);
+            //when the list of values to write has missing keys
+            if(!in_array($headers[$col], array_keys($array)))
+            {
+                $sheet->Write($alphabet[START_COL+$col].($currentRow+$row), $array["Session Mark"]);
+                $sheet->MergeCells($alphabet[START_COL + $col].($currentRow+$row).":".$alphabet[START_COL + $col + $nbrTest - 1].($currentRow+$row));
+            }
+            else
+            {
+                $sheet->Write($alphabet[START_COL+$col].($currentRow+$row), $array[$headers[$col]]);
+                //if the current cell record the key word "PASS"
+                if(strtoupper($array[$headers[$col]]) == "PASS")
+                {
+                    $sheet->SetColor($alphabet[START_COL+$col].($currentRow+$row), DARK_ORANGE_SJ);
                 }
-                // dd($headers[$col]);
-                if($headers[$col]=="Attendance" AND isset($array['session'])){
-                    $temoin = 1;
-                    $sheet->MergeCells($alphabet[START_COL_SJ + $col] . ($currentRow + $row) . ":" . $alphabet[START_COL_SJ + $nbrTest] . ($currentRow + $row));
-                   
+            }
 
-                }
-                
+            //if the current value is for a test
+            if(in_array($headers[$col], [...$tests, "Session Mark"]))
+            {
                 //changes the background of the cell
-                $sheet->SetColor($alphabet[START_COL_SJ + $col] . ($currentRow + $row), SKY_BLUE_SJ);
-                
+                $sheet->SetColor($alphabet[START_COL+$col].($currentRow+$row), SKY_BLUE_SJ);
             }
-            if(!in_array($headers[$col], $tests)){
-                $sheet->Write($alphabet[START_COL_SJ + $col] . ($currentRow + $row), $array[$headers[$col]]);
-            }
-            //if the current cell record the key word "PASS"
-            if (strtoupper($array[$headers[$col]]) == "PASS") {
-                $sheet->SetColor($alphabet[START_COL_SJ + $col] . ($currentRow + $row), DARK_ORANGE_SJ);
-            }
-            
         
         }
         
     }
-
-
 
     //last row
     $lastRow = $sheet->GetLastRowIndex();
@@ -243,10 +231,15 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
 
     //wordwraps all the file cells
     $sheet->WordWrap("A1:" . $alphabet[$finalColIndex] . $sheet->GetLastRowIndex());
+    
+    //resizes the first column's width
+    $sheet->SetColumnWidth($alphabet[START_COL_SJ - 1], 5);
+    //resizes the third column's width
+    $sheet->SetColumnWidth($alphabet[START_COL_SJ - 1 + 2], 20);
+    //resizes the fourth column's width
+    $sheet->SetColumnWidth($alphabet[START_COL_SJ - 1 + 3], 32);
 
-    //sets columns width to auto
-    $sheet->AutoSize($alphabet);
-    //encrypte the file
+    //encrypts the file
     $sheet->EncryptSheet($fileFullName . '_' . date("d-m-Y"));
     //saves the file
     $sheet->Save($saveInFolder . $fileFullName . '.xlsx', $download);
