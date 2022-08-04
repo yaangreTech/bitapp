@@ -58,7 +58,7 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     $sheet = new ExcelXport();
 
     //name of the sheet
-    $sheetName = "SEMESTER " . $semesterNumber;
+    $sheetName = "SEMESTER " . $semesterNumber." ".$session." ".$cle;
     //ordinal number of the semester
     $semesterNumber = CARDINAL_NUMBERS[$semesterNumber];
     //file name
@@ -323,13 +323,23 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     $sheet->SetCenter($range, true, true);
 
     // SPECIAL FORMATING FOR THE `RE-DO EXAM` COLUMN
-
     $redo_exams_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Re-do Exam") + 1;
-    $range = $ref($redo_exams_col, SD_STARTING_ROW).":".$ref($redo_exams_col, $lastRow-1);
-    $sheet->SetColor($range, RED);
-    $sheet->SetAlignment($range, "top", "left");
-    $sheet->SetCellsToBold($range);
-    $sheet->SetColumnWidth($alph($redo_exams_col), 40);
+    if($redo_exams_col>0)
+    {
+        $range = $ref($redo_exams_col, SD_STARTING_ROW).":".$ref($redo_exams_col, $lastRow-1);
+        $sheet->SetAlignment($range, "top", "left");
+        $sheet->SetCellsToBold($range);
+        $sheet->SetColumnWidth($alph($redo_exams_col), 40);
+    }
+    
+    // SPECIAL FORMATING FOR THE `Grade` COLUMN
+    $grade_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Grade") + 1;
+    if($grade_col>0)
+    {
+        $range = $ref($grade_col, SD_STARTING_ROW).":".$ref($grade_col, $lastRow-1);
+        $sheet->SetCellsToBold($range);
+        $sheet->SetColumnWidth($alph($grade_col), 30);
+    }
 
     // makes the text bold for "Semester validation (Validated (V) /Not Validated (NV)"
     $semester_validation_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Semester validation (Validated (V) /Not Validated (NV)");
@@ -380,7 +390,6 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     $sheet->EncryptSheet($fileFullName . '_' . date("d-m-Y"));
     //renames the sheet
     $sheet->RenameSheet($sheetName);
-    // $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
 
     if (!$returnSheet) {
         //saves the file

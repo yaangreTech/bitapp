@@ -59,7 +59,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet = new ExcelXport();
 
     //name of the sheet
-    $sheetName = "SEMESTER " . $semesterNumber;
+    $sheetName = "SEMESTER ".$semesterNumber." ".$session. " ".$cle;
     //ordinal number of the semester
     $semesterNumber = CARDINAL_NUMBERS[$semesterNumber];
     //file name
@@ -198,7 +198,6 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
 
     //index of the last col
     $lastColIndex = SD_STARTING_COL - 1 + $nbColHeaders;
-    // dd('oooooo');
     //adds the name of the TU and the total of credits
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
@@ -286,10 +285,10 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->Write($ref(STARTING_COL_SR + 2, $lastRow), 'Surname');
     $sheet->SetColumnWidth($alph(STARTING_COL_SR + 2), 15);
     //last name
-    $sheet->Write($ref(STARTING_COL_SR + 3, $lastRow), ' Name');
+    $sheet->Write($ref(STARTING_COL_SR + 3, $lastRow), 'Name');
     //formats the currents headers
     $range = $ref(STARTING_COL_SR, $lastRow) . ':' . $ref(STARTING_COL_SR + 3, $lastRow);
-    $sheet->SetColumnWidth($alph(STARTING_COL_SR + 3), 28);
+    $sheet->SetColumnWidth($alph(STARTING_COL_SR + 3), 44);
     $sheet->SetCenter($range, true, true);
     $sheet->SetCellsToBold($range);
     //merges the remaining cells
@@ -323,7 +322,6 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
             $cellRef = $ref($col, $row);
             $sheet->Write($cellRef, $value);
             //checks if the student mark is from the catchup session
-            //dd($key);
             if(count($catchup[$index])!=0 && in_array($key, $catchup[$index]))
             {
                 $sheet->SetColor($cellRef, LITE_YELLOW);
@@ -348,7 +346,26 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->SetBorders($range);
     // centers the content about marks
     $sheet->SetCenter($range, true, true);
-   
+
+    // SPECIAL FORMATING FOR THE `RE-DO EXAM` COLUMN
+    $redo_exams_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Re-do Exam") + 1;
+    if($redo_exams_col>0)
+    {
+        $range = $ref($redo_exams_col, SD_STARTING_ROW).":".$ref($redo_exams_col, $lastRow-1);
+        $sheet->SetAlignment($range, "top", "left");
+        $sheet->SetCellsToBold($range);
+        $sheet->SetColumnWidth($alph($redo_exams_col), 40);
+    }
+    
+    // SPECIAL FORMATING FOR THE `Grade` COLUMN
+    $grade_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Grade") + 1;
+    if($grade_col>0)
+    {
+        $range = $ref($grade_col, SD_STARTING_ROW).":".$ref($grade_col, $lastRow-1);
+        $sheet->SetCellsToBold($range);
+        $sheet->SetColumnWidth($alph($grade_col), 30);
+    }
+
     // makes the text bold for "Semester average", "Semester validation (Validated (V) /Not Validated (NV)", "Credits earned"
     $sheet->SetCellsToBold($ref($lastColIndex - 3, SD_STARTING_ROW) . ":" . $ref($lastColIndex - 1, $lastRow - 1));
     // green cell when validated
@@ -381,7 +398,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         for ($row = SD_STARTING_ROW; $row <= $lastRow; $row++) {
             $total += floatval($sheet->GetCellValue($col, $row));
         }
-        $sheet->Write($alphabet[$col - 1] . $average_row_number, $total / $nbStudents);
+        $sheet->Write($alphabet[$col - 1] . $average_row_number, round($total / $nbStudents, 2));
     }
     //sets the bg color of average cell to lite blue
     $range = $ref(SD_STARTING_COL, $average_row_number). ":" . $ref($lastModuleColIndex, $average_row_number);
@@ -476,7 +493,6 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->EncryptSheet($fileFullName . '_' . date("d-m-Y"));
     //renames the sheet
     $sheet->RenameSheet($sheetName);
-    // $sheet->Save($saveInFolder . DIRECTORY_SEPARATOR . $fileFullName . '.xlsx', $download);
 
     if (!$returnSheet) {
         //saves the file
