@@ -159,6 +159,7 @@ class AverageController extends Controller
         );
         foreach ($inscriptions as $inscription) {
             $conforme = new Conforme();
+            $did_session=false;
             $tus = $semester->tus;
             $les_note = [];
             $inscription->student;
@@ -170,12 +171,12 @@ class AverageController extends Controller
             $average = 0;
             $validate_tue = 0;
             foreach ($tus as $tu) {
-               
                 $modules = $tu->modulus;
                 $tu_average = 0;
                 $tu_credit = 0;
                 $tu_ponderer = 0;
                 foreach ($modules as $mod) {
+
                     $sessione = new Sessione();
                     $tests = [];
                     // dd($sessione->has_Session_mark(
@@ -202,6 +203,7 @@ class AverageController extends Controller
 
      if ($sessione->has_Session_mark($mod->id,$inscription->id)) {
         $sessions_tests = $mod->tests->where('year_id', $yearID)->where('type', 'session');
+        $did_session=true;
     }
      foreach ($normal_tests as $normal_test) {
         //  if($sessions_test->markOf($inscription->id)!=null) {
@@ -216,9 +218,10 @@ class AverageController extends Controller
      }
 
      $tests=$sessions_tests;
-
+     $mod['choix']='session';
      if($note_normal>$note_Session){
         $tests=$normal_tests;
+        $mod['choix']='normal';
     }
      // ===================================
 
@@ -281,6 +284,7 @@ class AverageController extends Controller
             $inscription['conforme'] = $conforme->conformeOf($average);
             $inscription['t_n_average'] = $average;
             $inscription['t_n_status'] = $status;
+            $inscription['did_session'] = $did_session;
         }
         return response()->json([
             'theadModulus' => $theadModulus,

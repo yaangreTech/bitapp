@@ -372,12 +372,12 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
      $sheet->Write($ref($stats_titles_col, ($average_row_number + 2)), "Best Average");
      $sheet->Write($ref($stats_titles_col, ($average_row_number + 3)), "Lowest Average");
      $sheet->Write($ref($stats_titles_col, ($average_row_number + 4)), "Class Room Average");
-     $sheet->Write($ref($stats_titles_col, ($average_row_number + 5)), "Percentage of Success");
-     $sheet->Write($ref($stats_titles_col, ($average_row_number + 6)), "Percentage of Failure");
+     $sheet->Write($ref($stats_titles_col, ($average_row_number + 5)), "Percentage of Validated");
+     $sheet->Write($ref($stats_titles_col, ($average_row_number + 6)), "Percentage of Not Validated");
      //part 2
      $sheet->Write($ref($stats_titles_col, ($average_row_number + 8)), "Number of students");
-     $sheet->Write($ref($stats_titles_col, ($average_row_number + 9)), "Number of passed");
-     $sheet->Write($ref($stats_titles_col, ($average_row_number + 10)), "Number of fails");
+     $sheet->Write($ref($stats_titles_col, ($average_row_number + 9)), "Number of Students(all TU Validated)");
+     $sheet->Write($ref($stats_titles_col, ($average_row_number + 10)), "Number of Students(At least one Tu not validated)");
      //formating
      $sheet->SetCellsToBold($ref($stats_titles_col, ($average_row_number + 2)) . ":" . $ref($stats_titles_col, ($average_row_number + 10)));
      //values

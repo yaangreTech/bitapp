@@ -159,10 +159,15 @@
                                         <i class="material-icons">more_vert</i>
                                     </a>
                                     <ul class="dropdown-menu pull-right">
+
                                         <li>
-                                            <a href="#" id="excel_it">
+                                            <a href="#" data-toggle="modal" data-target="#exportAveage">
                                                 export to excel</a>
                                         </li>
+                                        {{-- <li>
+                                            <a href="#" id="excel_it">
+                                                export to excel</a>
+                                        </li> --}}
                                     </ul>
                                 </li>
                             </ul>
@@ -244,6 +249,7 @@
                 </div>
             </div>
         </div>
+        <x-export-average/>
     </section>
 
 

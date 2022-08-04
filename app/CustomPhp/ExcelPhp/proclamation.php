@@ -87,7 +87,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $start = $ref(STARTING_COL_+4, $lastRow);
     $end = $ref($lastColIndex-4, $lastRow);
     $range = $start.":".$end;
-    $sheet->Write($start, "SESSION ".ucfirst($sessionType));
+    $sheet->Write($start, ucfirst($sessionType)." SESSION");
     $sheet->SetRowHeight($lastRow, 18);
     $sheet->SetFontSize($range, 14);
     $sheet->SetCenter($range, true, true);

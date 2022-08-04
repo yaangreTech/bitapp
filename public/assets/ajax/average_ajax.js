@@ -17,8 +17,13 @@ function getAverageOf(yearID, semesterID) {
             // console.log(year);
             selectionner('/semester_averages/get_average_of/' + year.id + '/' + semesterID, averageData);
             // yearData = year;
+            $('#nbr').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/false/false')
+            $('#nar').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/false/true')
+            $('#cbr').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true/false')
+            $('#car').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true/true')
+            $('#fdf').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/both/true')
 
-            $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/false');
+            // $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/false');
         },
         error: function(error) {
             // console.log(error);
@@ -41,12 +46,20 @@ function getAverageWithSessionOf(yearID, semesterID) {
             // console.log(year);
             selectionner('/semester_averages/get_average_with_session_of/' + year.id + '/' + semesterID, average_with_session_Data);
             // yearData = year;
-            $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true');
+
+            $('#nbr').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/false/false')
+            $('#nar').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/false/true')
+            $('#cbr').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true/false')
+            $('#car').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true/true')
+            $('#fdf').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/both/true')
+
+            // $('#excel_it').attr('href', '/generateSemester/' + year.id + '/' + semesterID + '/true');
         },
         error: function(error) {
             // console.log(error);
             $('.card').html(emptyYear());
             // $('#marks_modulus').html('<div class=" col-md-12 center"><h3>No School year<br/><span class="font-bold">Please Create a school year before !!!</span></h3></div>')
+
         }
     });
 

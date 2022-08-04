@@ -60,24 +60,182 @@ class excelExportController extends Controller
         zipAndDownload($academicYear . "_gradeReport.zip");
     }
 
-    public function genSemester($yearID, $semesterID, $isWithSession)
+    public function genSemester($yearID, $semesterID, $isWithSession,$before_reclaim)
     {
+        
         // $semesterJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
 
         // $file = fopen($semesterJson . '/studentData.json', 'r');
         // $student_data = json_decode(fread($file, filesize($semesterJson . '/studentData.json')), true);
         // $file = fopen($semesterJson . '/headers.json', 'r');
         // $headers = json_decode(fread($file, filesize($semesterJson . '/headers.json')), true);
-
+        $jsons=[];
+         // dd( $jsons);
+         $student_data = [];
+         $session_student_data = [];
+         $pv_data = [];
+         $cp = 0;
+ 
         $semesterAverages = new AverageController();
         if ($isWithSession == 'true') {
-
+          
             $jsons = $semesterAverages->getAverage_with_session_Of($yearID, $semesterID);
-        } else {
+            $jsons = json_decode($jsons->getContent(), true);
 
+            foreach ($jsons['inscriptions'] as $inscription) {
+                if($inscription['did_session']==true) {
+                    
+                // dd($inscription);
+                $student = [];
+    
+                $student["id"] = $inscription['student']['matricule'];
+                $student["Surname"] = $inscription['student']['first_name'];
+                $student["Name"] = $inscription['student']['Last_name'];
+                $student["__CATCHUP__"] = [];
+                
+                foreach ($inscription['notes'] as $mod) {
+                    $student[$mod["name"]] = $mod["note"];
+                    if(isset($mod['choix']) && $mod['choix']=='session'){
+                       
+                       
+                        array_push($student["__CATCHUP__"],$mod["name"]);
+                    }
+                }
+              
+    
+    
+    
+                $student["Total weighted scores"] = $inscription["t_n_ponderer"];
+                $student["Semester average"] = $inscription["t_n_average"];
+                $student["Semester validation (Validated (V) /Not Validated (NV)"] = $inscription['t_n_status'];
+                $student["International Grade"] = $inscription['conforme']["international_Grade"];
+                $student["Grade"] = $inscription['conforme']["mention"];
+                $student["Re-do exam"] = substr($inscription["t_n_redo_mod"], 1);
+                $student["Remark"] = $inscription["status"]=='active'?"":$inscription["status"];
+                $student["Credits earned"] = $inscription["validate_tue"];
+    
+                array_push($student_data, $student);
+    
+                if (!empty($inscription["t_n_redo_mod"])) {
+                    array_push($session_student_data, $student);
+
+                }
+    
+                if ($inscription["t_n_average"]>10 && empty($inscription["t_n_redo_mod"])) {
+                    array_push($pv_data, [
+                        "REGISTRATION NUMBER" => $inscription['student']['matricule'],
+                        "NAME" => $inscription['student']['first_name'],
+                        "FORENAMES" => $inscription['student']['Last_name'],
+                        "SEX" => $inscription['student']['gender'],
+                        "RATING" => $inscription["t_n_average"]
+                    ]);
+                }
+               
+                }
+            }
+           
+
+        } else if($isWithSession == 'false') {
+           
             $jsons = $semesterAverages->getAverageOf($yearID, $semesterID);
+            $jsons = json_decode($jsons->getContent(), true);
+            foreach ($jsons['inscriptions'] as $inscription) {
+                // dd($inscription);
+                $student = [];
+    
+                $student["id"] = $inscription['student']['matricule'];
+                $student["Surname"] = $inscription['student']['first_name'];
+                $student["Name"] = $inscription['student']['Last_name'];
+                $student["__CATCHUP__"] = [];
+                foreach ($inscription['notes'] as $mod) {
+                    $student[$mod["name"]] = $mod["note"];
+                    if(isset($mod['choix']) && $mod['choix']=='session'){
+                        array_push($student["__CATCHUP__"],$mod["name"]);
+                        
+                    }
+                }
+    
+    
+    
+                $student["Total weighted scores"] = $inscription["t_n_ponderer"];
+                $student["Semester average"] = $inscription["t_n_average"];
+                $student["Semester validation (Validated (V) /Not Validated (NV)"] = $inscription['t_n_status'];
+                $student["International Grade"] = $inscription['conforme']["international_Grade"];
+                $student["Grade"] = $inscription['conforme']["mention"];
+                $student["Re-do exam"] = substr($inscription["t_n_redo_mod"], 1);
+                $student["Remark"] = $inscription["status"]=='active'?"":$inscription["status"];
+                $student["Credits earned"] = $inscription["validate_tue"];
+                
+    
+                array_push($student_data, $student);
+    
+                if (!empty($inscription["t_n_redo_mod"])) {
+                    array_push($session_student_data, $student);
+                }
+    
+                if ($inscription["t_n_average"]>10 && empty($inscription["t_n_redo_mod"])) {
+                    array_push($pv_data, [
+                        "REGISTRATION NUMBER" => $inscription['student']['matricule'],
+                        "NAME" => $inscription['student']['first_name'],
+                        "FORENAMES" => $inscription['student']['Last_name'],
+                        "SEX" => $inscription['student']['gender'],
+                        "RATING" => $inscription["t_n_average"]
+                    ]);
+                }
+               
+            }
+        }else{
+            // dd('bokkk');
+            $jsons = $semesterAverages->getAverage_with_session_Of($yearID, $semesterID);
+            $jsons = json_decode($jsons->getContent(), true);
+            dd($jsons);
+            foreach ($jsons['inscriptions'] as $inscription) {
+                // dd($inscription);
+                $student = [];
+    
+                $student["id"] = $inscription['student']['matricule'];
+                $student["Surname"] = $inscription['student']['first_name'];
+                $student["Name"] = $inscription['student']['Last_name'];
+                $student["__CATCHUP__"]=[];
+                foreach ($inscription['notes'] as $mod) {
+                    $student[$mod["name"]] = $mod["note"];
+                    if(isset($mod['choix']) && $mod['choix']=='session'){
+                        array_push($student["__CATCHUP__"],$mod["name"]);
+                    }
+                }
+    
+    
+    
+                $student["Total weighted scores"] = $inscription["t_n_ponderer"];
+                $student["Semester average"] = $inscription["t_n_average"];
+                $student["Semester validation (Validated (V) /Not Validated (NV)"] = $inscription['t_n_status'];
+                $student["International Grade"] = $inscription['conforme']["international_Grade"];
+                $student["Grade"] = $inscription['conforme']["mention"];
+                $student["Re-do exam"] = substr($inscription["t_n_redo_mod"], 1);
+                $student["Remark"] = $inscription["status"]=='active'?"":$inscription["status"];
+                $student["Credits earned"] = $inscription["validate_tue"];
+    
+                array_push($student_data, $student);
+    
+                if (!empty($inscription["t_n_redo_mod"])) {
+                    array_push($session_student_data, $student);
+                }
+    
+                if ($inscription["t_n_average"]>10 && empty($inscription["t_n_redo_mod"])) {
+                    array_push($pv_data, [
+                        "REGISTRATION NUMBER" => $inscription['student']['matricule'],
+                        "NAME" => $inscription['student']['first_name'],
+                        "FORENAMES" => $inscription['student']['Last_name'],
+                        "SEX" => $inscription['student']['gender'],
+                        "RATING" => $inscription["t_n_average"]
+                    ]);
+                }
+               
+            }
+
+            
         }
-        $jsons = json_decode($jsons->getContent(), true);
+       
         $headers = [];
         $tus = [];
         $total_credicts = 0;
@@ -102,46 +260,47 @@ class excelExportController extends Controller
         $headers["Remark"] = "";
 
 
-        // dd( $jsons);
-        $student_data = [];
-        $session_student_data = [];
-        $pv_data = [];
-        $cp = 0;
-        foreach ($jsons['inscriptions'] as $inscription) {
-            $student = [];
+       
 
-            $student["id"] = $inscription['student']['matricule'];
-            $student["Surname"] = $inscription['student']['first_name'];
-            $student["Name"] = $inscription['student']['Last_name'];
-            foreach ($inscription['notes'] as $mod) {
-                $student[$mod["name"]] = $mod["note"];
-            }
+        // foreach ($jsons['inscriptions'] as $inscription) {
+        //     // dd($inscription);
+        //     $student = [];
+
+        //     $student["id"] = $inscription['student']['matricule'];
+        //     $student["Surname"] = $inscription['student']['first_name'];
+        //     $student["Name"] = $inscription['student']['Last_name'];
+        //     foreach ($inscription['notes'] as $mod) {
+        //         $student[$mod["name"]] = $mod["note"];
+        //     }
 
 
 
-            $student["Total weighted scores"] = $inscription["t_n_ponderer"];
-            $student["Semester average"] = $inscription["t_n_average"];
-            $student["Semester validation (Validated (V) /Not Validated (NV)"] = $inscription['t_n_status'];
-            $student["International Grade"] = $inscription['conforme']["international_Grade"];
-            $student["Grade"] = $inscription['conforme']["mention"];
-            $student["Re-do exam"] = substr($inscription["t_n_redo_mod"], 1);
-            $student["Remark"] = $inscription["status"]=='active'?"":$inscription["status"];
-            $student["Credits earned"] = $inscription["validate_tue"];
+        //     $student["Total weighted scores"] = $inscription["t_n_ponderer"];
+        //     $student["Semester average"] = $inscription["t_n_average"];
+        //     $student["Semester validation (Validated (V) /Not Validated (NV)"] = $inscription['t_n_status'];
+        //     $student["International Grade"] = $inscription['conforme']["international_Grade"];
+        //     $student["Grade"] = $inscription['conforme']["mention"];
+        //     $student["Re-do exam"] = substr($inscription["t_n_redo_mod"], 1);
+        //     $student["Remark"] = $inscription["status"]=='active'?"":$inscription["status"];
+        //     $student["Credits earned"] = $inscription["validate_tue"];
 
-            array_push($student_data, $student);
+        //     array_push($student_data, $student);
 
-            if (!empty($inscription["t_n_redo_mod"])) {
-                array_push($session_student_data, $student);
-            }
+        //     if (!empty($inscription["t_n_redo_mod"])) {
+        //         array_push($session_student_data, $student);
+        //     }
 
-            array_push($pv_data, [
-                "REGISTRATION NUMBER" => $inscription['student']['matricule'],
-                "NAME" => $inscription['student']['first_name'],
-                "FORENAMES" => $inscription['student']['Last_name'],
-                "SEX" => $inscription['student']['gender'],
-                "RATING" => $inscription["t_n_average"]
-            ]);
-        }
+        //     if ($inscription["t_n_average"]>10 && empty($inscription["t_n_redo_mod"])) {
+        //         array_push($pv_data, [
+        //             "REGISTRATION NUMBER" => $inscription['student']['matricule'],
+        //             "NAME" => $inscription['student']['first_name'],
+        //             "FORENAMES" => $inscription['student']['Last_name'],
+        //             "SEX" => $inscription['student']['gender'],
+        //             "RATING" => $inscription["t_n_average"]
+        //         ]);
+        //     }
+           
+        // }
 
         // dd( $headers,$student_data);
 
@@ -157,8 +316,11 @@ class excelExportController extends Controller
         // dd(substr(explode('-',Year::find($yearID)->promotion->name)[1],2));
         // dd($student_data,$headers);
         $session = $isWithSession == 'true' ? 'Catch-up' : 'Normal';
+        if($isWithSession=='both'){
+            $session=  'Both Normal and Catch-up';
+        }
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
-
+        dd($student_data);
         //normal sheet for all students
         SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'normal', $dir . DIRECTORY_SEPARATOR);
 
@@ -173,7 +335,12 @@ class excelExportController extends Controller
         //     "Sanou Lougoudoro",
         //     "Yanogo Yves Wengundi Patrick"
         // ], "Dr Kabore W. Rodrigue");
-        Proclamation($academicYear, $session, $semester->level->branche->name, $className . "_" . $academicYear, $semester->label . '(' . $semester->name . ')', "After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:", $pv_data,  [], "", $dir . DIRECTORY_SEPARATOR);
+        $pv_message="Subject to an in-depth check, are declared admitted the students whose names follow by order of merit:";
+        if($before_reclaim=='true'){
+            $pv_message="After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:";
+        }
+
+        Proclamation($academicYear, $session, $semester->level->branche->name, $className . "_" . $academicYear, $semester->label . '(' . $semester->name . ')', $pv_message, $pv_data,  [], "", $dir . DIRECTORY_SEPARATOR);
 
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
