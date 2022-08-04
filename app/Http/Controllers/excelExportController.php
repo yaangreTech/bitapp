@@ -188,7 +188,7 @@ class excelExportController extends Controller
             // dd('bokkk');
             $jsons = $semesterAverages->getAverage_with_session_Of($yearID, $semesterID);
             $jsons = json_decode($jsons->getContent(), true);
-            dd($jsons);
+            // dd($jsons);
             foreach ($jsons['inscriptions'] as $inscription) {
                 // dd($inscription);
                 $student = [];
@@ -320,12 +320,12 @@ class excelExportController extends Controller
             $session=  'Both Normal and Catch-up';
         }
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
-        dd($student_data);
+        // dd($student_data);
         //normal sheet for all students
-        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'normal', $dir . DIRECTORY_SEPARATOR);
+        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'all-list', $dir . DIRECTORY_SEPARATOR);
 
         //special for student that must redo some exams
-        SemesterReportRedoExams($headers, $session_student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'session-list', $dir . DIRECTORY_SEPARATOR);
+        SemesterReportRedoExams($headers, $session_student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'in-session-list', $dir . DIRECTORY_SEPARATOR);
 
 
         // dd($semesterNumber);

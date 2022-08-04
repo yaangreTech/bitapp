@@ -103,7 +103,7 @@ function viewMarks_with_session_Of(yearID, modulusID) {
             selectionner('/marks_modulus/viewMarksModulusMarks_with_session_Of/' + year.id + '/' + modulusID, marksModulusMarksData_with_session_view)
                 // $('.saveText').attr('id', year.id + '_' + modulusID);
                 // yearData = year;
-            $('#excel_it').attr('href', '/generateSubjects/' + year.id + '/' + modulusID + '/false')
+            $('#excel_it').attr('href', '/generateSubjects/' + year.id + '/' + modulusID + '/true')
 
         },
         error: function(error) { console.log(error); }
