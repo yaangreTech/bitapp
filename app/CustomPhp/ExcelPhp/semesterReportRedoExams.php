@@ -58,7 +58,7 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     $sheet = new ExcelXport();
 
     //name of the sheet
-    $sheetName = "SEMESTER " . $semesterNumber." ".$session." ".$cle;
+    $sheetName = "S " . $semesterNumber." ".$cle;
     //ordinal number of the semester
     $semesterNumber = CARDINAL_NUMBERS[$semesterNumber];
     //file name
@@ -328,6 +328,7 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     {
         $range = $ref($redo_exams_col, SD_STARTING_ROW).":".$ref($redo_exams_col, $lastRow-1);
         $sheet->SetAlignment($range, "top", "left");
+        $sheet->SetColor($range, RED);
         $sheet->SetCellsToBold($range);
         $sheet->SetColumnWidth($alph($redo_exams_col), 40);
     }

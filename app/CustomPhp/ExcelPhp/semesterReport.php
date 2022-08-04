@@ -59,7 +59,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet = new ExcelXport();
 
     //name of the sheet
-    $sheetName = "SEMESTER ".$semesterNumber." ".$session. " ".$cle;
+    $sheetName = "S " . $semesterNumber." ".$cle;
     //ordinal number of the semester
     $semesterNumber = CARDINAL_NUMBERS[$semesterNumber];
     //file name

@@ -656,3 +656,45 @@ Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bita
  in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
  at 08/04/2022 04:51:32
 
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/04/2022 04:58:40
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/04/2022 04:58:40
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/04/2022 05:00:48
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/04/2022 05:00:48
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/04/2022 05:02:41
+
+Maximum 31 characters allowed in sheet title. origins from : C:\laragon\www\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : C:\laragon\www\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 08/04/2022 05:04:50
+
