@@ -95,9 +95,7 @@ class excelExportController extends Controller
                 
                 foreach ($inscription['notes'] as $mod) {
                     $student[$mod["name"]] = $mod["note"];
-                    if(isset($mod['choix']) && $mod['choix']=='session'){
-                       
-                       
+                    if(isset($mod['choix']) && $mod['choix']=='session'){  
                         array_push($student["__CATCHUP__"],$mod["name"]);
                     }
                 }
@@ -317,7 +315,7 @@ class excelExportController extends Controller
         // dd($student_data,$headers);
         $session = $isWithSession == 'true' ? 'Catch-up' : 'Normal';
         if($isWithSession=='both'){
-            $session=  'Both Normal and Catch-up';
+            $session=  'Final after Catch-up';
         }
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
         // dd($student_data);
