@@ -63,7 +63,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <input id="studentBirthDate" name="studentBirthDate" type="text"
-                                                class="form-control date" placeholder="Ex: 1999-07-10" required />
+                                                class="form-control" placeholder="Ex: 1999-07-10" required />
                                         </div>
                                     </div>
                                 </div>

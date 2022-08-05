@@ -46,6 +46,7 @@ function editer(assosValues = '', id, tuName = "") {
     $('.save').hide();
 
     $.each(assosValues.split('&&&'), function(key, val) {
+        // alert(val);
         if (val.split('=')[0].indexOf('^') != -1) {
             $('#' + val.split('=')[0].split('^')[1]).val(val.split('=')[1]).change();
 

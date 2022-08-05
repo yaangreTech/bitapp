@@ -1,4 +1,6 @@
  var rangeInput = null;
+
+
  $(function() {
      getAllDepartments();
      // getAllSemesters();

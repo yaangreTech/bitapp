@@ -80,7 +80,7 @@ class StudentController extends Controller
         $level=Level::findOrFail($classID);
         $level->branche->departement;
         return response()->json([
-        'page_title'=> $level,
+            'page_title'=> $level,
             'inscriptions'=>$inscriptions
         ]);
     }
@@ -157,12 +157,13 @@ class StudentController extends Controller
     }
     public function updateStudent(Request $request, $id)
     {
+
         $request->validate([
             'studentID' => ['required'],
             'studentFirstName' => ['required'],
             'studentLastName' => ['required'],
             'studentBirthDate' => ['required'],
-            'studentBirthPlace'=> ['required'],
+            // 'studentBirthPlace'=> ['required'],
             'studentPhone' => ['required'],
             'studentEmail' => ['required'],
             // 'studentParentFirstName' => ['required'],
@@ -172,13 +173,15 @@ class StudentController extends Controller
             // 'studentParentType' => ['required'],
         ]);
 
+
         $inscription = Inscription::findOrFail($id);
         $student = $inscription->student;
+       
         $student->matricule = $request->studentID;
         $student->first_name = $request->studentFirstName;
         $student->Last_name = $request->studentLastName;
         $student->birth_date = $request->studentBirthDate;
-        $student->birth_place = $request->studentBirthPlace;
+        // $student->birth_place = $request->studentBirthPlace;
         $student->phone = $request->studentPhone;
         $student->email = $request->studentEmail;
         $student = $student->update();

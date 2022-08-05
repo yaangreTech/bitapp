@@ -1,3 +1,4 @@
+var initialize = 0;
 $(function() {
     // getAllDepartments();
     // getAllSemesters();
@@ -97,6 +98,7 @@ function viewStudentInfos(inscID) {
 }
 
 function studentData(data) {
+
     var elements = ''
         // console.log(data);
     student_editparames = []
@@ -168,11 +170,14 @@ function studentData(data) {
         elements += '</tr>'
     });
 
+    if (initialize == 0) {
+        setBreadcrumb(
+            data.page_title.branche.name + '&&&' + data.page_title.label,
+            data.page_title.branche.departement.name + '&&&' + data.page_title.branche.name + '&&&' + data.page_title.name
+        );
+        initialize = 1;
+    }
 
-    setBreadcrumb(
-        data.page_title.branche.name + '&&&' + data.page_title.label,
-        data.page_title.branche.departement.name + '&&&' + data.page_title.branche.name + '&&&' + data.page_title.name
-    );
     // console.log(student_editparames[0]);
     $.fn.dataTable.isDataTable('#students_table') && students_table.destroy();
 
