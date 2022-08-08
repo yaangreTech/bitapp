@@ -1,0 +1,98 @@
+[
+    {
+        "Registration number": "bs00190",
+        "Name": "BADO",
+        "Forenames": "Rock Parfait",
+        "Sex": "M",
+        "Module(s) to validate Semester 1": "Nil",
+        "Module(s) to validate Semester 2": "Linear Algebra, Analysis 2, Inferential Statistics"
+    },
+    {
+        "Registration number": "bs00194",
+        "Name": "BEREWIDOUGOU",
+        "Forenames": "Wendkuni Edwige",
+        "Sex": "F",
+        "Module(s) to validate Semester 1": "Algorythm",
+        "Module(s) to validate Semester 2": "Nil"
+    },
+    {
+        "Registration number": "bs00111",
+        "Name": "GAGRE",
+        "Forenames": "Raoul",
+        "Sex": "M",
+        "Module(s) to validate Semester 1": "General Algebra, Analysis 1, Statistic & Probabilities",
+        "Module(s) to validate Semester 2": "Nil"
+    },
+    {
+        "Registration number": "bs00112",
+        "Name": "GOUEM",
+        "Forenames": "Mohamed",
+        "Sex": "M",
+        "Module(s) to validate Semester 1": "Algorythm",
+        "Module(s) to validate Semester 2": "Nil"
+    },
+    {
+        "Registration number": "bs00113",
+        "Name": "GUISSOU",
+        "Forenames": "Wend Payangdé Dimitri Frank",
+        "Sex": "M",
+        "Module(s) to validate Semester 1": "Nil",
+        "Module(s) to validate Semester 2": "Linear Algebra, Analysis 2, Analogical & Numerical Electronic"
+    },
+    {
+        "Registration number": "bs00114",
+        "Name": "KABORE",
+        "Forenames": "Abdoulaye",
+        "Sex": "M",
+        "Module(s) to validate Semester 1": "Nil",
+        "Module(s) to validate Semester 2": "Linear Algebra, Analysis 2, Inferential Statistics"
+    },
+    {
+        "Registration number": "bs00121",
+        "Name": "NANA",
+        "Forenames": "Hadidjatou",
+        "Sex": "F",
+        "Module(s) to validate Semester 1": "Algorythm",
+        "Module(s) to validate Semester 2": "Nil"
+    },
+    {
+        "Registration number": "bs00188",
+        "Name": "ROAMBA",
+        "Forenames": "Cheik Abdoul Rahim",
+        "Sex": "M",
+        "Module(s) to validate Semester 1": "Nil",
+        "Module(s) to validate Semester 2": "Linear Algebra, Analysis 2, Analogical & Numerical Electronic"
+    },
+    {
+        "Registration number": "bs00135",
+        "Name": "SEMDE",
+        "Forenames": "Abdoulaye",
+        "Sex": "M",
+        "Module(s) to validate Semester 1": "Electrostatic, Algorythm",
+        "Module(s) to validate Semester 2": "Analysis 2, Inferential Statistics, Electric Systems, Electric Engines, Analogical & Numerical Electronic"
+    },
+    {
+        "Registration number": "bs00124",
+        "Name": "SO",
+        "Forenames": "Nafissatou Bientakwoni",
+        "Sex": "F",
+        "Module(s) to validate Semester 1": "Nil",
+        "Module(s) to validate Semester 2": "Electric Systems"
+    },
+    {
+        "Registration number": "bs00123",
+        "Name": "YAMEOGO",
+        "Forenames": "Kiswendsida Léa",
+        "Sex": "F",
+        "Module(s) to validate Semester 1": "Algorithm",
+        "Module(s) to validate Semester 2": "Nil"
+    },
+    {
+        "Registration number": "bs00132",
+        "Name": "ZONGO",
+        "Forenames": "Wend-Pagnangdé Eliab",
+        "Sex": "M",
+        "Module(s) to validate Semester 1": "General Algebra, Analysis 1",
+        "Module(s) to validate Semester 2": "Nil"
+    }
+]
