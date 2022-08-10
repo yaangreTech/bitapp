@@ -15,13 +15,13 @@ require_once(app_path('CustomPhp/ExcelPhp/excel.php'));
  */
 function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promotion, $academicYear, $saveInFolder = '', $nbrTest): void
 {
-   
+
     $download = empty($saveInFolder);
     //new Excel object
     $sheet = new ExcelXport();
     //list of alphabet characters
     $alphabet = Alphabet();
-    
+
     //reorders the elements following the same orders as for headers
     $weight = SortAccordingToAList($weight, $headers);
     $weight = $weight[0];
@@ -31,7 +31,7 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     $tests = array_keys($weight);
     //name of the file
     $fileFullName = "Subject Report " . $promotion . " " . $academicYear;
-   
+
     // start column
     define("START_COL_SJ", 1);
     //starting row for writing data
@@ -52,7 +52,7 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     $sheet->MergeCells($alphabet[START_COL_SJ - 1] . STARTING_ROW_SJ . ":" . $alphabet[START_COL_SJ + 1 - 1] . STARTING_ROW_SJ);
     //merges remaing cells
     $sheet->MergeCells($alphabet[START_COL_SJ + 1 + 1 - 1] . STARTING_ROW_SJ . ":" . $alphabet[$finalColIndex] . STARTING_ROW_SJ);
-    
+
     //resizes the first column's height
     $sheet->SetRowHeight(STARTING_ROW_SJ, 40);
     //centers elements of the first row
@@ -158,17 +158,17 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     //next row
     $lastRow = $sheet->GetLastRowIndex();
     $currentRow = $lastRow + 2; //+2 due the merged row
-    
+
     for ($row = 0; $row < count($data); $row++) {
-        
+
         $array = $data[$row];
-        
-        
+
+
         //writes order number
         $sheet->Write($alphabet[START_COL_SJ - 1] . ($currentRow + $row), $row + 1);
         //dd($data);
         for ($col = 0; $col < count($headers); $col++) {
-           
+
             //when the list of values to write has missing keys
             if(!in_array($headers[$col], array_keys($array)))
             {
@@ -191,9 +191,9 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
                 //changes the background of the cell
                 $sheet->SetColor($alphabet[START_COL+$col].($currentRow+$row), SKY_BLUE_SJ);
             }
-        
+
         }
-        
+
     }
 
     //last row
@@ -231,7 +231,7 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
 
     //wordwraps all the file cells
     $sheet->WordWrap("A1:" . $alphabet[$finalColIndex] . $sheet->GetLastRowIndex());
-    
+
     //resizes the first column's width
     $sheet->SetColumnWidth($alphabet[START_COL_SJ - 1], 5);
     //resizes the third column's width
@@ -240,7 +240,7 @@ function SubjectReport($data, $headers, $weight, $subject, $teacherName, $promot
     $sheet->SetColumnWidth($alphabet[START_COL_SJ - 1 + 3], 32);
 
     //encrypts the file
-    $sheet->EncryptSheet($fileFullName . '_' . date("d-m-Y"));
+    $sheet->EncryptSheet(date("d-m-Y"));
     //saves the file
     $sheet->Save($saveInFolder . $fileFullName . '.xlsx', $download);
 }

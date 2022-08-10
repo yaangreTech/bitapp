@@ -161,8 +161,8 @@ function FinalProclamation($academicYear, $className, $domain, $yearNumber, $dat
     //  XLS FILE CREATION AND SAVING'S SECTION
 
     //encrypts the file
-    //the password = filename + _ + current data in php according to the following format day-month-full year
-    $sheet->EncryptSheet($fileFullName.'_'.date("d-m-Y"));
+    //the password = current data in php according to the following format day-month-full year
+    $sheet->EncryptSheet(date("d-m-Y"));
     //renames the sheet
     $sheet->RenameSheet($sheetName);
     //die();

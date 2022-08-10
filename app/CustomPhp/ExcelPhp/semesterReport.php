@@ -300,14 +300,14 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
     $row = $lastRow;
-    for ($index = 0; $index < $nbStudents; $index++) 
+    for ($index = 0; $index < $nbStudents; $index++)
     {
         //adds the No
         $no_cellRef = $ref(STARTING_COL_SR, $row);
         $sheet->Write($no_cellRef, $index + 1);
         $sheet->SetCenter($no_cellRef, false, true);
         $col++;
-        foreach ($student_data[$index] as $key => $value) 
+        foreach ($student_data[$index] as $key => $value)
         {
             // if ($key == 'Semester validation (Validated (V) /Not Validated (NV)') {
             //     $value = strtoupper($value)  == 'PASS' ? 'V' : 'NV';
@@ -356,7 +356,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
         $sheet->SetCellsToBold($range);
         $sheet->SetColumnWidth($alph($redo_exams_col), 40);
     }
-    
+
     // SPECIAL FORMATING FOR THE `Grade` COLUMN
     $grade_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Grade") + 1;
     if($grade_col>0)
@@ -427,7 +427,7 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
 
      $finalAverageColIndex = $sheet->GetColumnIndex($tue_row, count($alphabet), "Semester average") + 1;
      $pass_failColIndex = $sheet->GetColumnIndex($tue_row, count($alphabet), "Semester validation (Validated (V) /Not Validated (NV)") + 1;
-     
+
      //**sets its text weight to bold */
      $sheet->SetcellsToBold($ref($pass_failColIndex, SD_STARTING_ROW) . ":" . $ref($pass_failColIndex, $lastRow));
      $averages = flatten($sheet->GetRangeValues($ref($finalAverageColIndex, SD_STARTING_ROW) . ':' . $ref($finalAverageColIndex, ($lastRow - 1))));
@@ -484,13 +484,13 @@ function SemesterReport($headers = [], $student_data = [], $className, $semester
     $sheet->Write($cellRef, "The President of the Jury");
     $sheet->SetCellsToBold($cellRef);
     $sheet->UnderlineText($cellRef);
- 
+
 
     //  XLS FILE CREATION AND SAVING'S SECTION
 
     //encrypts the file
-    //the password = filename + _ + current data in php according to the following format day-month-full year
-    $sheet->EncryptSheet($fileFullName . '_' . date("d-m-Y"));
+    //the password = current data in php according to the following format day-month-full year
+    $sheet->EncryptSheet(date("d-m-Y"));
     //renames the sheet
     $sheet->RenameSheet($sheetName);
 

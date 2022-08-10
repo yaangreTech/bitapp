@@ -287,7 +287,7 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow++;
     $row = $lastRow;
-    for ($index = 0; $index < $nbStudents; $index++) 
+    for ($index = 0; $index < $nbStudents; $index++)
     {
         //adds the No
         $no_cellRef = $ref(STARTING_COL_SR, $row);
@@ -332,7 +332,7 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
         $sheet->SetCellsToBold($range);
         $sheet->SetColumnWidth($alph($redo_exams_col), 40);
     }
-    
+
     // SPECIAL FORMATING FOR THE `Grade` COLUMN
     $grade_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Grade") + 1;
     if($grade_col>0)
@@ -346,11 +346,11 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     $semester_validation_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Semester validation (Validated (V) /Not Validated (NV)");
 
     $sheet->SetCellsToBold($ref($semester_validation_col, SD_STARTING_ROW));
-    
+
     for ($i = SD_STARTING_ROW; $i <= $lastRow; $i++) {
         $value = $sheet->GetCellValue($lastColIndex - 5, $i);
         if (strtoupper($value) == "PASS") {
-            
+
             $sheet->Write($ref($lastColIndex - 5, $i), 'V');
         } elseif (strtoupper($value) == "FAIL") {
             $sheet->Write($ref($lastColIndex - 5, $i), 'NV');
@@ -360,7 +360,7 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     //centers the tue row only horizontally
     $sheet->SetCenter($ref(SD_STARTING_COL, $tue_row).":".$ref($lastColIndex, $tue_row), false, true);
 
-   
+
     // FOOTER
     //index of the last row
     $lastRow = $sheet->GetLastRowIndex();
@@ -382,13 +382,13 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     $sheet->Write($cellRef, "The President of the Jury");
     $sheet->SetCellsToBold($cellRef);
     $sheet->UnderlineText($cellRef);
- 
+
 
     //  XLS FILE CREATION AND SAVING'S SECTION
 
     //encrypts the file
-    //the password = filename + _ + current data in php according to the following format day-month-full year
-    $sheet->EncryptSheet($fileFullName . '_' . date("d-m-Y"));
+    //the password = current data in php according to the following format day-month-full year
+    $sheet->EncryptSheet(date("d-m-Y"));
     //renames the sheet
     $sheet->RenameSheet($sheetName);
 

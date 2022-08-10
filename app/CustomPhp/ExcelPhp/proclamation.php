@@ -43,7 +43,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     foreach (range('A', 'Z') as $char) {
         $alphabet[] = 'A' . $char;
     }
-    
+
     //returns the corresponding column by reducing automatically by 1 to the passed index
     $alph = function($index) use ($alphabet) {return $alphabet[$index - 1];};
 
@@ -54,7 +54,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
 
     //last column index
     $lastColIndex = STARTING_COL_+TOTAL_N_COLS;
-   
+
     //ACADEMIC YEAR
     $cellRef = $ref($lastColIndex-2, STARTING_ROW_);
     $sheet->Write($cellRef, "Academic year: ".$academicYear);
@@ -120,7 +120,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $sheet->SetRowHeight($lastRow, 20);
     $sheet->SetFontSize($range, 16);
     $sheet->SetCellsToBold($range);
-   
+
     //MESSAGE
     $lastRow = $sheet->GetLastRowIndex();
     $lastRow += 3;
@@ -162,7 +162,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     //gets the last element of the THEADERS
     $sortAccordingTo = $titles[count(THEADERS)-1];
     //sorts students data according to their averages
-    
+
     uasort($data, function($prev, $next) use ($sortAccordingTo){return $next[$sortAccordingTo] - $prev[$sortAccordingTo];});
     foreach ($data as $row => $value)
     {
@@ -186,7 +186,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
             }
         }
     }
-   
+
     // ADD BORDERS
     $lastRow = $sheet->GetLastRowIndex();
     $range = $ref(STARTING_COL_, $bordersToFixFirstRow).":".$ref($lastColIndex, $lastRow);
@@ -236,17 +236,17 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $sheet->SetCellsToBold($cellRef);
 
 
-  
+
 
     //  XLS FILE CREATION AND SAVING'S SECTION
     //encrypts the file
-    //the password = filename + _ + current data in php according to the following format day-month-full year
+    //the password = current data in php according to the following format day-month-full year
     // dd($fileFullName.'_'.date("d-m-Y"));
-    $sheet->EncryptSheet($fileFullName.'_'.date("d-m-Y"));
-  
+    $sheet->EncryptSheet(date("d-m-Y"));
+
     //renames the sheet
     $sheet->RenameSheet($sheetName);
-    $sheet->Save( $saveInFolder . DIRECTORY_SEPARATOR . $sheetName. '.xlsx', false);
+    $sheet->Save( $saveInFolder . DIRECTORY_SEPARATOR . $fileFullName. '.xlsx', false);
     // return $sheet;
     //saves the file
     // $sheet->Save($fileFullName . '.xlsx', true);

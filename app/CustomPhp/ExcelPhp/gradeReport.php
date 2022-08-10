@@ -538,6 +538,6 @@ function GradeReport($data, $studentId, $studentSurname, $studentName, $class, $
     //sets printing area of the sheet
     $lastRow = $sheet->GetLastRowIndex();
     $sheet->SetPrintingArea($alphabet[START_COL - 1] . STARTING_ROW . ":" . $alphabet[$lastColIndex] . $lastRow);
-    $sheet->EncryptSheet($fileName . '_' . date("d-m-Y"));
+    $sheet->EncryptSheet(date("d-m-Y"));
     $sheet->save($saveInFolder . $fileName . ".xlsx", $download);
 }

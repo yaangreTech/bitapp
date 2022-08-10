@@ -55,7 +55,7 @@ function StudentsList($data = [], $class = "", $academicYear = "", $saveInFolder
 
     //sets columns width to auto
     $sheet->AutoSize($alphabet);
-    $sheet->EncryptSheet($fileName . '_' . date("d-m-Y"));
+    $sheet->EncryptSheet(date("d-m-Y"));
 
     $sheet->save($saveInFolder . $fileName . ".xlsx", $download);
 }
