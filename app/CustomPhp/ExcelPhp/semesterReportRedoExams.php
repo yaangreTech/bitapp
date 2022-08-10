@@ -343,9 +343,8 @@ function SemesterReportRedoExams($headers = [], $student_data = [], $className, 
     }
 
     // makes the text bold for "Semester validation (Validated (V) /Not Validated (NV)"
-    $semester_validation_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Semester validation (Validated (V) /Not Validated (NV)");
-
-    $sheet->SetCellsToBold($ref($semester_validation_col, SD_STARTING_ROW));
+    $semester_validation_col = $sheet->GetColumnIndex($tue_row, $lastColIndex, "Semester validation (Validated (V) /Not Validated (NV)") + 1;
+    $sheet->SetCellsToBold($ref($semester_validation_col, SD_STARTING_ROW).":".$ref($semester_validation_col, $lastRow-1));
 
     for ($i = SD_STARTING_ROW; $i <= $lastRow; $i++) {
         $value = $sheet->GetCellValue($lastColIndex - 5, $i);
