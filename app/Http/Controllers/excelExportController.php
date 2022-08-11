@@ -317,6 +317,9 @@ class excelExportController extends Controller
         if($isWithSession=='both'){
             $session=  'Final after Catch-up';
         }
+
+
+      
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
         // dd($student_data);
         //normal sheet for all students
@@ -325,7 +328,7 @@ class excelExportController extends Controller
         //special for student that must redo some exams
         SemesterReportRedoExams($headers, $session_student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'in-session-list', $dir . DIRECTORY_SEPARATOR);
 
-
+        
         // dd($semesterNumber);
         //proclamation file
         // dd($academicYear, $session, $className, $semester, "After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:", $pv_data,  [
@@ -337,9 +340,9 @@ class excelExportController extends Controller
         if($before_reclaim=='true'){
             $pv_message="After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:";
         }
-
-        Proclamation($academicYear, $session, $semester->level->branche->name, $className . "_" . $academicYear, $semester->label . '(' . $semester->name . ')', $pv_message, $pv_data,  [], "", $dir . DIRECTORY_SEPARATOR);
-
+        // dd('qqqqqqqqqqqqqqqqqqqqqeee');
+        Proclamation($academicYear, $session, $semester->level->branche->name, $className . "_" . $academicYear, $semester->label . '(' . $semester->name . ')', $pv_message, $pv_data, /* [], "", */$dir . DIRECTORY_SEPARATOR);
+       
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
 
