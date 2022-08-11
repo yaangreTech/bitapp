@@ -25,7 +25,7 @@ _define("THEADERS", ["REGISTRATION NUMBER"=>2, "NAME"=>2, "FORENAMES"=>4, "SEX"=
  * @return void
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  */
-function Proclamation(string $academicYear, string $sessionType="Normal",$identity="", string $class, string $semester, string $message, array $data, array $juryMembers, string $juryPresident,$saveInFolder='')
+function Proclamation(string $academicYear, string $sessionType="Normal",$identity="", string $class, string $semester, string $message, array $data, $saveInFolder='')
 {
     $download = empty($saveInFolder);
     //spreadsheet object
@@ -163,7 +163,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $sortAccordingTo = $titles[count(THEADERS)-1];
     //sorts students data according to their averages
 
-    uasort($data, function($prev, $next) use ($sortAccordingTo){return $next[$sortAccordingTo] - $prev[$sortAccordingTo];});
+    uasort($data, function($prev, $next) use ($sortAccordingTo){return (floatval($next[$sortAccordingTo]) < floatval($prev[$sortAccordingTo]))?-1:1;});
     foreach ($data as $row => $value)
     {
         $lastRow = $sheet->GetLastRowIndex();
@@ -219,10 +219,10 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $sheet->SetCellsToBold($cellRef);
     //inserts the different members of the jury
 
-    foreach ($juryMembers as $key => $value)
-    {
-        $sheet->Write($ref($juryMembersCol, $juryRow+1+$key), $value);
-    }
+//    foreach ($juryMembers as $key => $value)
+//    {
+//        $sheet->Write($ref($juryMembersCol, $juryRow+1+$key), $value);
+//    }
 
     // PRESIDENT OF THE JURY
     $juryPresidentCol = $lastColIndex - 3;
@@ -231,9 +231,9 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $sheet->UnderlineText($cellRef);
     $sheet->SetCellsToBold($cellRef);
     //name of the jury's president
-    $cellRef = $ref($juryPresidentCol, $juryRow+3);
-    $sheet->Write($cellRef, $juryPresident);
-    $sheet->SetCellsToBold($cellRef);
+//    $cellRef = $ref($juryPresidentCol, $juryRow+3);
+//    $sheet->Write($cellRef, $juryPresident);
+//    $sheet->SetCellsToBold($cellRef);
 
 
 
