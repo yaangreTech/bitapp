@@ -173,9 +173,9 @@ class MarksInputController extends Controller
         //         ->where('type', 'session');
         // }
         foreach ($normal_tests as $normal_test) {
-            // if($sessions_test->markOf($inscription->id)!=null) {
+            if($normal_test->markOf($inscription->id)!=null) {
                 $note_normal += ($normal_test->markOf($inscription->id)['value'] * $normal_test->ratio) / 100;
-            // }
+            }
         }
 
         foreach ($sessions_tests as $sessions_test) {

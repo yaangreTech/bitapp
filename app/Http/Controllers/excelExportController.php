@@ -62,7 +62,8 @@ class excelExportController extends Controller
 
     public function genSemester($yearID, $semesterID, $isWithSession,$before_reclaim)
     {
-        
+       
+       
         // $semesterJson = app_path('CustomPhp/ExcelPhp/Examples_excel');
 
         // $file = fopen($semesterJson . '/studentData.json', 'r');
@@ -75,13 +76,14 @@ class excelExportController extends Controller
          $session_student_data = [];
          $pv_data = [];
          $cp = 0;
- 
+      
         $semesterAverages = new AverageController();
         if ($isWithSession == 'true') {
-          
+            
             $jsons = $semesterAverages->getAverage_with_session_Of($yearID, $semesterID);
+  
             $jsons = json_decode($jsons->getContent(), true);
-
+   
             foreach ($jsons['inscriptions'] as $inscription) {
                 if($inscription['did_session']==true) {
                     
@@ -92,17 +94,14 @@ class excelExportController extends Controller
                 $student["Surname"] = $inscription['student']['first_name'];
                 $student["Name"] = $inscription['student']['Last_name'];
                 $student["__CATCHUP__"] = [];
-                
+               
                 foreach ($inscription['notes'] as $mod) {
                     $student[$mod["name"]] = $mod["note"];
                     if(isset($mod['choix']) && $mod['choix']=='session'){  
                         array_push($student["__CATCHUP__"],$mod["name"]);
                     }
                 }
-              
-    
-    
-    
+
                 $student["Total weighted scores"] = $inscription["t_n_ponderer"];
                 $student["Semester average"] = $inscription["t_n_average"];
                 $student["Semester validation (Validated (V) /Not Validated (NV)"] = $inscription['t_n_status'];
@@ -125,7 +124,8 @@ class excelExportController extends Controller
                         "NAME" => $inscription['student']['first_name'],
                         "FORENAMES" => $inscription['student']['Last_name'],
                         "SEX" => $inscription['student']['gender'],
-                        "RATING" => $inscription["t_n_average"]
+                        "RATING" => $inscription["t_n_average"],
+                        'rating'=> $inscription["conforme"]['mention'],
                     ]);
                 }
                
@@ -136,7 +136,10 @@ class excelExportController extends Controller
         } else if($isWithSession == 'false') {
            
             $jsons = $semesterAverages->getAverageOf($yearID, $semesterID);
+          
             $jsons = json_decode($jsons->getContent(), true);
+
+        
             foreach ($jsons['inscriptions'] as $inscription) {
                 // dd($inscription);
                 $student = [];
@@ -146,6 +149,7 @@ class excelExportController extends Controller
                 $student["Name"] = $inscription['student']['Last_name'];
                 $student["__CATCHUP__"] = [];
                 foreach ($inscription['notes'] as $mod) {
+            
                     $student[$mod["name"]] = $mod["note"];
                     if(isset($mod['choix']) && $mod['choix']=='session'){
                         array_push($student["__CATCHUP__"],$mod["name"]);
@@ -177,7 +181,9 @@ class excelExportController extends Controller
                         "NAME" => $inscription['student']['first_name'],
                         "FORENAMES" => $inscription['student']['Last_name'],
                         "SEX" => $inscription['student']['gender'],
-                        "RATING" => $inscription["t_n_average"]
+                        "RATING" => $inscription["t_n_average"],
+                        'rating'=> $inscription["conforme"]['mention'],
+
                     ]);
                 }
                
@@ -225,7 +231,8 @@ class excelExportController extends Controller
                         "NAME" => $inscription['student']['first_name'],
                         "FORENAMES" => $inscription['student']['Last_name'],
                         "SEX" => $inscription['student']['gender'],
-                        "RATING" => $inscription["t_n_average"]
+                        "RATING" => $inscription["t_n_average"],
+                        'rating'=> $inscription["conforme"]['mention'],
                     ]);
                 }
                
@@ -233,6 +240,8 @@ class excelExportController extends Controller
 
             
         }
+
+       
        
         $headers = [];
         $tus = [];
@@ -301,7 +310,7 @@ class excelExportController extends Controller
         // }
 
         // dd( $headers,$student_data);
-
+      
         $dir = storage_path('excelFiles');
 
         $semester = Semester::find($semesterID);
@@ -323,11 +332,25 @@ class excelExportController extends Controller
         // dd($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear,$session,'Sciences & Technologies',$semester->level->branche->departement->label,$semester->level->branche->name,$semester->level->branche->departement->name.substr(explode('-',Year::find($yearID)->promotion->name)[1],2),$semester->level->name.$semester->name, $dir . DIRECTORY_SEPARATOR);
         // dd($student_data);
         //normal sheet for all students
-        SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'all-list', $isWithSession == "both" ? true: false, $dir . DIRECTORY_SEPARATOR);
+        // dd($student_data);
+        // dd( $headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'all-list', $isWithSession == "both" ? true: false, $dir . DIRECTORY_SEPARATOR);
+        try {
+            SemesterReport($headers, $student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'all-list', $isWithSession == "both" ? true: false, $dir . DIRECTORY_SEPARATOR);
+            //code...
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
-        //special for student that must redo some exams
+        try {
+          
         SemesterReportRedoExams($headers, $session_student_data, $className . "_" . $academicYear, $semesterNumber, $academicYear, $session, 'Sciences & Technologies', $semester->level->branche->departement->label, $semester->level->branche->name, $semester->level->branche->departement->name . substr(explode('-', Year::find($yearID)->promotion->name)[1], 2), $semester->level->name . $semester->name, false, 'in-session-list', $dir . DIRECTORY_SEPARATOR);
-
+     
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    
+        //special for student that must redo some exams
+      
         
         // dd($semesterNumber);
         //proclamation file
@@ -340,9 +363,13 @@ class excelExportController extends Controller
         if($before_reclaim=='true'){
             $pv_message="After an in-depth check, are declared definitively admitted the students whose names follow by order of merit:";
         }
-        // dd('qqqqqqqqqqqqqqqqqqqqqeee');
+       
+     try {
         Proclamation($academicYear, $session, $semester->level->branche->name, $className . "_" . $academicYear, $semester->label . '(' . $semester->name . ')', $pv_message, $pv_data, /* [], "", */$dir . DIRECTORY_SEPARATOR);
        
+     } catch (\Throwable $th) {
+        //throw $th;
+     }
         // Lorsque le(s) fichies sont generes  la fonction zipAndDownload
         // peut etre appelee pour compresser et telechearger
 

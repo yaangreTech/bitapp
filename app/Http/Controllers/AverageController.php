@@ -151,13 +151,16 @@ class AverageController extends Controller
     public function getAverage_with_session_Of($yearID, $semesterID)
     {
         $semester = Semester::findOrFail($semesterID);
+       
         $theadModulus = $semester->modulus;
         $Vtus = $semester->tus->load('modulus');
         $inscriptions = $semester->level->inscriptions->where(
             'year_id',
             $yearID
         );
+        
         foreach ($inscriptions as $inscription) {
+            
             $conforme = new Conforme();
             $did_session=false;
             $tus = $semester->tus;
@@ -171,12 +174,13 @@ class AverageController extends Controller
             $average = 0;
             $validate_tue = 0;
             foreach ($tus as $tu) {
+                
                 $modules = $tu->modulus;
                 $tu_average = 0;
                 $tu_credit = 0;
                 $tu_ponderer = 0;
-                foreach ($modules as $mod) {
-
+                foreach ($modules as $we=>$mod) {
+                 
                     $sessione = new Sessione();
                     $tests = [];
                     // dd($sessione->has_Session_mark(
@@ -184,50 +188,55 @@ class AverageController extends Controller
                     //     $mod->id,
                     //     $inscription->id
                     // ));
-     // ====================================
-   
-     $normal_tests = $mod->tests
-            ->where('year_id', $yearID)
-            ->where('type', 'normal');
-     
-     $sessions_tests=[];
-     $note_normal= 0;
-     $note_Session= 0;
-
-    //  if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
-    //      $sessions_tests = $mod->tests
-    //          ->where('year_id', $inscription->year_id)
-    //          ->where('type', 'session');
-    //  }
-
-
-     if ($sessione->has_Session_mark($mod->id,$inscription->id)) {
-        $sessions_tests = $mod->tests->where('year_id', $yearID)->where('type', 'session');
-        $did_session=true;
-    }
-     foreach ($normal_tests as $normal_test) {
-        //  if($sessions_test->markOf($inscription->id)!=null) {
-             $note_normal += ($normal_test->markOf($inscription->id)['value'] * $normal_test->ratio) / 100;
-        //  }
-     }
-
-     foreach ($sessions_tests as $sessions_test) {
-         if($sessions_test->markOf($inscription->id)!=null) {
-             $note_Session += ($sessions_test->markOf($inscription->id)['value'] * $sessions_test->ratio) / 100;
-         }
-     }
-
-     $tests=$sessions_tests;
-     $mod['choix']='session';
-     if($note_normal>$note_Session){
-        $tests=$normal_tests;
-        $mod['choix']='normal';
-    }
-     // ===================================
-
-
-
+                        // ====================================
                     
+                        $normal_tests = $mod->tests
+                                ->where('year_id', $yearID)
+                                ->where('type', 'normal');
+                               
+                        $sessions_tests=[];
+                        $note_normal= 0;
+                        $note_Session= 0;
+
+                        //  if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
+                        //      $sessions_tests = $mod->tests
+                        //          ->where('year_id', $inscription->year_id)
+                        //          ->where('type', 'session');
+                        //  }
+
+
+                        if ($sessione->has_Session_mark($mod->id,$inscription->id)) {
+                            $sessions_tests = $mod->tests->where('year_id', $yearID)->where('type', 'session');
+                            $did_session=true;
+                        }
+                       
+                        foreach ($normal_tests as $normal_test) {
+                            
+                             if($normal_test->markOf($inscription->id)!=null) {
+                                
+                                $note_normal += ($normal_test->markOf($inscription->id)['value'] * $normal_test->ratio) / 100;
+                              
+                             }
+                           
+                        }
+                        
+                        foreach ($sessions_tests as $sessions_test) {
+                            if($sessions_test->markOf($inscription->id)!=null) {
+                                $note_Session += ($sessions_test->markOf($inscription->id)['value'] * $sessions_test->ratio) / 100;
+                            }
+                        }
+                       
+                        $tests=$sessions_tests;
+                        $mod['choix']='session';
+                        if($note_normal>$note_Session){
+                            $tests=$normal_tests;
+                            $mod['choix']='normal';
+                        }
+                        // ===================================
+
+
+
+                       
                     $note = 0;
                     $pourcentage = 0;
                     foreach ($tests as $test) {
@@ -244,8 +253,11 @@ class AverageController extends Controller
                     array_push($les_note, $mod);
                     $tu_credit += $mod['credict'];
                     $tu_ponderer += $note * $mod['credict'];
+                  
+                    // if( $we==1){dd($les_note);}
+                      
                 }
-
+               
                 $t_n_ponderer += $tu_ponderer;
                 $t_credit += $tu_credit;
                 $tu_credit > 0
@@ -285,7 +297,10 @@ class AverageController extends Controller
             $inscription['t_n_average'] = $average;
             $inscription['t_n_status'] = $status;
             $inscription['did_session'] = $did_session;
+            
         }
+
+      
         return response()->json([
             'theadModulus' => $theadModulus,
             'inscriptions' => $inscriptions,

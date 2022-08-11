@@ -9,9 +9,9 @@ _define("STARTING_ROW_", 2);
 //starting col
 _define("STARTING_COL_", 1);
 //number of cols that the data will occupy
-_define("TOTAL_N_COLS", 9);
+_define("TOTAL_N_COLS", 11);
 //headers
-_define("THEADERS", ["REGISTRATION NUMBER"=>2, "NAME"=>2, "FORENAMES"=>4, "SEX"=>1, "RATING"=>1]);
+_define("THEADERS", ["REGISTRATION NUMBER"=>2, "NAME"=>2, "FORENAMES"=>4, "SEX"=>1,'rating'=>3, "RATING"=>1]);
 
 /**
  * @param string $academicYear
@@ -27,6 +27,7 @@ _define("THEADERS", ["REGISTRATION NUMBER"=>2, "NAME"=>2, "FORENAMES"=>4, "SEX"=
  */
 function Proclamation(string $academicYear, string $sessionType="Normal",$identity="", string $class, string $semester, string $message, array $data, $saveInFolder='')
 {
+    // dd( $data);
     $download = empty($saveInFolder);
     //spreadsheet object
     $sheet = new ExcelXport();
@@ -52,6 +53,13 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $ref = function($colIndex, $rowindex) use ($alph) {return $alph($colIndex) . $rowindex;};
 
 
+    $autorisation="Autorisation de création: N° 2018-00/01347/MESRSI/SG/DGESup/DIPES du 13 Septembre 2018\nAutorisation d’ouverture: N° 2018-00001511/MESRSI/SG/DGESup/DIPES du 25 Septembre 2018";
+
+
+
+
+
+    
     //last column index
     $lastColIndex = STARTING_COL_+TOTAL_N_COLS;
 
@@ -138,11 +146,13 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $lastCol = 0;
     foreach (THEADERS as $title => $factor)
     {
+        if($title!='RATING'){
         $start = $ref($lastCol+1, $lastRow);
         $lastCol += $factor;
         $end = $ref($lastCol, $lastRow);
-        $sheet->Write($start, $title);
+        $sheet->Write($start, strtoupper($title));
         $sheet->MergeCells($start.":".$end);
+        }
     }
     $range = $ref(STARTING_COL_, $lastRow).":".$ref($lastColIndex, $lastRow);
     $sheet->SetCenter($range, true, true);
@@ -171,6 +181,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
         $lastCol = 0;
         foreach ($value as $key => $element)
         {
+          if($key !='RATING'){
             $factor = THEADERS[$key];
             $start = $ref($lastCol+1, $lastRow);
             $lastCol += $factor;
@@ -184,6 +195,7 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
             {
                 $sheet->SetCenter($range, true, true);
             }
+          }
         }
     }
 
