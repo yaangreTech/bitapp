@@ -81,9 +81,11 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $sheet->SetFontSize($range, 8);
 
     //ACADEMIC YEAR
-    $cellRef = $ref($lastColIndex-2, STARTING_ROW_);
+    $lastRow = $sheet->GetLastRowIndex();
+    $lastRow += 2;
+    $cellRef = $ref($lastColIndex-2, $lastRow);
     $sheet->Write($cellRef, "Academic year: ".$academicYear);
-    $sheet->SetRowHeight(STARTING_ROW_, 14);
+    $sheet->SetRowHeight($lastRow, 14);
     $sheet->SetFontSize($cellRef, 12);
     $sheet->SetCellsToBold($cellRef);
 
