@@ -4,6 +4,14 @@ require_once(app_path('CustomPhp/ExcelPhp/excel.php'));
 // require("../functions.php");
 require_once(app_path("CustomPhp/customHelpers.php"));
 
+//finds the name of the image path for tcpdf
+
+//name of the file executing the script's folder name
+$executingScriptFolderName = dirname($_SERVER['SCRIPT_FILENAME']);
+//name of the current folder
+$currentFolderName = dirname(__FILE__);
+_define("PHPSPREADSHEET_IMAGE_PATH_", GetRelativePath($executingScriptFolderName, $currentFolderName));
+
 //starting row
 _define("STARTING_ROW_", 2);
 //starting col
@@ -49,19 +57,28 @@ function Proclamation(string $academicYear, string $sessionType="Normal",$identi
     $alph = function($index) use ($alphabet) {return $alphabet[$index - 1];};
 
     //creates a cell reference
-
     $ref = function($colIndex, $rowindex) use ($alph) {return $alph($colIndex) . $rowindex;};
 
 
-    $autorisation="Autorisation de création: N° 2018-00/01347/MESRSI/SG/DGESup/DIPES du 13 Septembre 2018\nAutorisation d’ouverture: N° 2018-00001511/MESRSI/SG/DGESup/DIPES du 25 Septembre 2018";
-
-
-
-
-
-    
     //last column index
     $lastColIndex = STARTING_COL_+TOTAL_N_COLS;
+
+    //last column index
+    $lastColIndex = STARTING_COL_+TOTAL_N_COLS;
+
+    // LOGO
+    $sheet->SetImage($ref(STARTING_COL_, STARTING_ROW_), PHPSPREADSHEET_IMAGE_PATH_, 'logo.png', [320, 70], 0, 0);
+
+    // AUTHORIZATION
+    $autorisation="Autorisation de création: N° 2018-00/01347/MESRSI/SG/DGESup/DIPES du 13 Septembre 2018\nAutorisation d’ouverture: N° 2018-00001511/MESRSI/SG/DGESup/DIPES du 25 Septembre 2018";
+    $cellRef = $ref(STARTING_COL_ + 3, STARTING_ROW_);
+    $range = $cellRef.":".$ref($lastColIndex, STARTING_ROW_);
+    $sheet->Write($cellRef, $autorisation);
+    $sheet->MergeCells($range);
+    $sheet->SetRowHeight(STARTING_ROW_, 25);
+    $sheet->WordWrap($range);
+    $sheet->SetFontSize($range, 8);
+    $sheet->SetFontSize($range, 8);
 
     //ACADEMIC YEAR
     $cellRef = $ref($lastColIndex-2, STARTING_ROW_);
