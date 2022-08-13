@@ -1,0 +1,669 @@
+{
+"tus": [
+	{
+		"id" : 39,
+		"semester_id" : 19,
+		"code" : null,
+		"name" : "Data analytics",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 40,
+		"semester_id" : 20,
+		"code" : null,
+		"name" : "Elective",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 41,
+		"semester_id" : 20,
+		"code" : null,
+		"name" : "Accelerator",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 26,
+		"semester_id" : 1,
+		"code" : "LAC1101",
+		"name" : "Language & Communication",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:04:46.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 27,
+		"semester_id" : 1,
+		"code" : "MTH1102",
+		"name" : "Mathematics 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:05:21.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 28,
+		"semester_id" : 1,
+		"code" : "PHY1103",
+		"name" : "Physics 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:05:40.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 29,
+		"semester_id" : 1,
+		"code" : "INF1104",
+		"name" : "Computer Science 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:05:56.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 30,
+		"semester_id" : 1,
+		"code" : "CHM1105",
+		"name" : "Chemistry",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:06:07.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 31,
+		"semester_id" : 1,
+		"code" : "MEC1106",
+		"name" : "Mechanical I",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:06:19.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 32,
+		"semester_id" : 1,
+		"code" : "PRO1107",
+		"name" : "Industrielle Technology 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:06:31.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 33,
+		"semester_id" : 2,
+		"code" : "CPT1201",
+		"name" : "Accounting",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:07:23.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 34,
+		"semester_id" : 2,
+		"code" : "MTH1203",
+		"name" : "Mathematics 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:07:48.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 35,
+		"semester_id" : 2,
+		"code" : "INF1202",
+		"name" : "Computing Tools 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:09:28.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 36,
+		"semester_id" : 2,
+		"code" : "PHY1204",
+		"name" : "Physics 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:10:08.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 37,
+		"semester_id" : 2,
+		"code" : "MEC1205",
+		"name" : "Mechanical 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:10:21.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 38,
+		"semester_id" : 2,
+		"code" : "SCG1206",
+		"name" : "Graphic Sciences",
+		"created_at" : null,
+		"updated_at" : "2022-08-05T13:10:35.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 74,
+		"semester_id" : 14,
+		"code" : "0",
+		"name" : "Elective",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 42,
+		"semester_id" : 9,
+		"code" : "LAC1101",
+		"name" : "Language & Communication",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:33:03.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 43,
+		"semester_id" : 9,
+		"code" : "MTH1102",
+		"name" : "Mathematics 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:34:31.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 44,
+		"semester_id" : 9,
+		"code" : "PHY1103",
+		"name" : "Physics 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:35:09.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 45,
+		"semester_id" : 9,
+		"code" : "INF1104",
+		"name" : "Computing Tools 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:35:44.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 46,
+		"semester_id" : 9,
+		"code" : "PEE1105",
+		"name" : "Production of Electrical Energy",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:36:20.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 47,
+		"semester_id" : 9,
+		"code" : "ENR1106",
+		"name" : "Renewable Energy 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:36:56.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 48,
+		"semester_id" : 9,
+		"code" : "GEL1107",
+		"name" : "Electrical Engineering 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:37:55.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 49,
+		"semester_id" : 10,
+		"code" : "CPT1201",
+		"name" : "Accountancy",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:38:58.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 50,
+		"semester_id" : 10,
+		"code" : "MTH1203",
+		"name" : "Mathematics 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:40:11.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 51,
+		"semester_id" : 10,
+		"code" : "INF1202",
+		"name" : "Computing Tools 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:41:07.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 52,
+		"semester_id" : 10,
+		"code" : "PHY1204",
+		"name" : "Physics 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:42:03.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 53,
+		"semester_id" : 10,
+		"code" : "ENR1205",
+		"name" : "Renewable energy 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:42:49.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 54,
+		"semester_id" : 10,
+		"code" : "GEL1206",
+		"name" : "Electrical Engineering 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:44:55.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 55,
+		"semester_id" : 10,
+		"code" : "SCG1207",
+		"name" : "Graphic Sciences",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:45:39.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 56,
+		"semester_id" : 11,
+		"code" : "MGT1301",
+		"name" : "Strategy and Management",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:51:27.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 19,
+		"semester_id" : 17,
+		"code" : "SYI1306",
+		"name" : "Method of analysis and design of information systems",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:24:18.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 57,
+		"semester_id" : 11,
+		"code" : "DRT1302",
+		"name" : "Law",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:52:35.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 60,
+		"semester_id" : 11,
+		"code" : "PRG1303",
+		"name" : "Language and Programming 3",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:54:47.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 58,
+		"semester_id" : 11,
+		"code" : "INF1305",
+		"name" : "Computer systems",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T09:56:46.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 59,
+		"semester_id" : 11,
+		"code" : "PHY1304",
+		"name" : "Physics 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:00:17.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 61,
+		"semester_id" : 11,
+		"code" : "SPV1306",
+		"name" : "Solar Photovoltaic 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:04:08.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 62,
+		"semester_id" : 12,
+		"code" : "MKT1401",
+		"name" : "Marketing Management and sales",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:06:02.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 67,
+		"semester_id" : 12,
+		"code" : "PRG1406",
+		"name" : "Computer Programming",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:06:49.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 63,
+		"semester_id" : 12,
+		"code" : "MER1402",
+		"name" : "Measurements and Regulations",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:07:55.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 64,
+		"semester_id" : 12,
+		"code" : "GEL1403",
+		"name" : "Electrical Engineering 3",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:09:11.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 66,
+		"semester_id" : 12,
+		"code" : "ENR1405",
+		"name" : "Renewable Energy Projects",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:10:25.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 65,
+		"semester_id" : 12,
+		"code" : "SPV1404",
+		"name" : "Solar Photovoltaic 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:11:09.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 68,
+		"semester_id" : 13,
+		"code" : "GEL1501",
+		"name" : "Electrical Engineering",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:14:03.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 69,
+		"semester_id" : 13,
+		"code" : "GEL1502",
+		"name" : "Electrical Enegy Project",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:16:02.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 70,
+		"semester_id" : 13,
+		"code" : "ENR1503",
+		"name" : "Renawable Energy",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:16:36.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 71,
+		"semester_id" : 13,
+		"code" : "GEL1504",
+		"name" : "Electrical Engineering \/ Safety Installation",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:17:15.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 72,
+		"semester_id" : 13,
+		"code" : "ENR1505",
+		"name" : "Renewable Energy Projects",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:18:05.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 73,
+		"semester_id" : 13,
+		"code" : "MGT1506",
+		"name" : "Industrial Economics \/ Entrepreneurship",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T10:19:45.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 20,
+		"semester_id" : 18,
+		"code" : "MKT1401",
+		"name" : "Marketing, Management and Sales",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:25:11.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 21,
+		"semester_id" : 18,
+		"code" : "MTH1402",
+		"name" : "Mathematics 3",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:25:45.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 22,
+		"semester_id" : 18,
+		"code" : "LOG1403",
+		"name" : "Software Engineering",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:26:39.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 4,
+		"semester_id" : 15,
+		"code" : "INF1100",
+		"name" : "Electronic",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:09:53.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 5,
+		"semester_id" : 15,
+		"code" : "IIN1104",
+		"name" : "Data Processing",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:12:44.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 2,
+		"semester_id" : 15,
+		"code" : "MTH1102",
+		"name" : "Mathematics 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:13:59.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 3,
+		"semester_id" : 15,
+		"code" : "PHY1103",
+		"name" : "Physics 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:14:23.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 1,
+		"semester_id" : 15,
+		"code" : "ANG1101",
+		"name" : "Language & Communication",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:14:50.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 6,
+		"semester_id" : 15,
+		"code" : "OIN1105",
+		"name" : "Computing Tools 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:15:53.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 7,
+		"semester_id" : 15,
+		"code" : "PRG1107",
+		"name" : "Language and Programming 1",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:17:14.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 9,
+		"semester_id" : 16,
+		"code" : "MTH1202",
+		"name" : "Mathematics 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:17:44.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 10,
+		"semester_id" : 16,
+		"code" : "OIN1203",
+		"name" : "Computing Tools 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:18:13.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 12,
+		"semester_id" : 16,
+		"code" : "PRG1205",
+		"name" : "Language and Programming 2",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:18:51.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 11,
+		"semester_id" : 16,
+		"code" : "WEB1204",
+		"name" : "Web Programming",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:19:29.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 13,
+		"semester_id" : 16,
+		"code" : "PRG1206",
+		"name" : "Operating System (OS)",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:20:27.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 8,
+		"semester_id" : 16,
+		"code" : "CPT1201",
+		"name" : "Accounting",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:21:08.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 14,
+		"semester_id" : 17,
+		"code" : "MGT1301",
+		"name" : "Strategy and Management",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:21:40.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 15,
+		"semester_id" : 17,
+		"code" : "DRT1302",
+		"name" : "Law",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:22:07.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 16,
+		"semester_id" : 17,
+		"code" : "PRG1303",
+		"name" : "Language and Programming 3",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:22:39.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 17,
+		"semester_id" : 17,
+		"code" : "WEB1304",
+		"name" : "Advanced Web Programming",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:23:19.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 18,
+		"semester_id" : 17,
+		"code" : "BDO1305",
+		"name" : "Database",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:23:43.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 23,
+		"semester_id" : 18,
+		"code" : "RXS1404",
+		"name" : "Network and system Architecture",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:27:05.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 24,
+		"semester_id" : 18,
+		"code" : "DMO1405",
+		"name" : "Mobile Development",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:27:35.000Z",
+		"deleted_at" : null
+	},
+	{
+		"id" : 25,
+		"semester_id" : 18,
+		"code" : "PRJ1406",
+		"name" : "Tutored Project",
+		"created_at" : null,
+		"updated_at" : "2022-08-10T12:28:08.000Z",
+		"deleted_at" : null
+	}
+]}

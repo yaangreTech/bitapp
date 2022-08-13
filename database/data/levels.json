@@ -1,0 +1,103 @@
+{
+"levels": [
+	{
+		"id" : 1,
+		"branche_id" : 1,
+		"name" : "L1",
+		"label" : "Licence 1",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 2,
+		"branche_id" : 1,
+		"name" : "L2",
+		"label" : "Licence 2",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 3,
+		"branche_id" : 2,
+		"name" : "L3",
+		"label" : "Licence 3",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 4,
+		"branche_id" : 3,
+		"name" : "L3",
+		"label" : "Licence 3",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 5,
+		"branche_id" : 4,
+		"name" : "L1",
+		"label" : "Licence 1",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 6,
+		"branche_id" : 4,
+		"name" : "L2",
+		"label" : "Licence 2",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 7,
+		"branche_id" : 4,
+		"name" : "L3",
+		"label" : "Licence 3",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 8,
+		"branche_id" : 5,
+		"name" : "L1",
+		"label" : "Licence 1",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 9,
+		"branche_id" : 5,
+		"name" : "L2",
+		"label" : "Licence 2",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 10,
+		"branche_id" : 5,
+		"name" : "L3",
+		"label" : "Licence 3",
+		"cycle" : "licence",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	}
+]}

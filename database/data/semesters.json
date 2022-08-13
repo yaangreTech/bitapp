@@ -1,0 +1,183 @@
+{
+"semesters": [
+	{
+		"id" : 1,
+		"level_id" : 1,
+		"name" : "S1",
+		"label" : "Semester 1",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 2,
+		"level_id" : 1,
+		"name" : "S2",
+		"label" : "Semester 2",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 3,
+		"level_id" : 2,
+		"name" : "S3",
+		"label" : "Semester 3",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 4,
+		"level_id" : 2,
+		"name" : "S4",
+		"label" : "Semester 4",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 5,
+		"level_id" : 3,
+		"name" : "S5",
+		"label" : "Semester 5",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 6,
+		"level_id" : 3,
+		"name" : "S6",
+		"label" : "Semester 6",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 7,
+		"level_id" : 4,
+		"name" : "S5",
+		"label" : "Semester 5",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 8,
+		"level_id" : 4,
+		"name" : "S6",
+		"label" : "Semester 6",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 9,
+		"level_id" : 5,
+		"name" : "S1",
+		"label" : "Semester 1",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 10,
+		"level_id" : 5,
+		"name" : "S2",
+		"label" : "Semester 2",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 11,
+		"level_id" : 6,
+		"name" : "S3",
+		"label" : "Semester 3",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 12,
+		"level_id" : 6,
+		"name" : "S4",
+		"label" : "Semester 4",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 13,
+		"level_id" : 7,
+		"name" : "S5",
+		"label" : "Semester 5",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 14,
+		"level_id" : 7,
+		"name" : "S6",
+		"label" : "Semester 6",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 15,
+		"level_id" : 8,
+		"name" : "S1",
+		"label" : "Semester 1",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 16,
+		"level_id" : 8,
+		"name" : "S2",
+		"label" : "Semester 2",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 17,
+		"level_id" : 9,
+		"name" : "S3",
+		"label" : "Semester 3",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 18,
+		"level_id" : 9,
+		"name" : "S4",
+		"label" : "Semester 4",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 19,
+		"level_id" : 10,
+		"name" : "S5",
+		"label" : "Semester 5",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	},
+	{
+		"id" : 20,
+		"level_id" : 10,
+		"name" : "S6",
+		"label" : "Semester 6",
+		"created_at" : null,
+		"updated_at" : null,
+		"deleted_at" : null
+	}
+]}
