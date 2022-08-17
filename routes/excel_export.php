@@ -9,3 +9,4 @@ Route::get('/generateGrade', [excelExportController::class, 'genGrade'])->name('
 Route::get('/generateSemester/{yearID}/{semesterID}/{isWithSession}/{before_reclaim}', [excelExportController::class, 'genSemester'])->name('genSemester');
 Route::get('/generateStudentListe/{yearID}/{classID}', [excelExportController::class, 'studentList'])->name('studentList');
 Route::get('/generateSubjects/{yearID}/{modulusID}/{isWithSession}', [excelExportController::class, 'subjectsGen'])->name('subjectsGen');
+Route::get('/generate-finale-proclamation/{yearID}/{classeID}', [excelExportController::class, 'genFinalProclamation']);

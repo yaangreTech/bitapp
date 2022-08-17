@@ -46,6 +46,8 @@
                         </ul>
                     </div>
                 </div>
+
+                
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -64,6 +66,26 @@
                                     </span>
                                 </label>
                             </div>
+
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
+                                        role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+            
+                                        <li>
+                                            <a href="#" id="exportfinal">
+                                                export final proclamation</a>
+                                        </li>
+                                        {{-- <li>
+                                            <a href="#" id="excel_it">
+                                                export to excel</a>
+                                        </li> --}}
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                         <div class="body">
                             <div class="table-responsive">

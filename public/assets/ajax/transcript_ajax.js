@@ -8,6 +8,7 @@ $(function() {
 var yearData = {};
 var grade_transcript_table = null;
 var marksModulusMarks_table = null;
+var isfist = true;
 
 
 
@@ -25,6 +26,7 @@ function getTranscriptOf(yearID, classID) {
             // console.log(year);
             selectionner('/grades/get_grades_of/' + year.id + '/' + classID, getTranscriptData);
             // yearData = year;
+            $('#exportfinal').attr('href', 'generate-finale-proclamation/' + year.id + '/' + classID);
         },
         error: function(error) {
             $('.card').html(emptyYear());
@@ -45,6 +47,7 @@ function getTranscript_with_session_Of(yearID, classID) {
             // console.log(year);
             selectionner('/grades/getGrades_with_session_Of/' + year.id + '/' + classID, getTranscript_with_session_Data);
             // yearData = year;
+            $('#exportfinal').attr('href', 'generate-finale-proclamation/' + year.id + '/' + classID);
         },
         error: function(error) {
             // console.log(error);
@@ -132,12 +135,15 @@ function getTranscriptData(data) {
 
 
     // $('#grade_transcript').html(body_elements);
+    if (isfist) {
+        setBreadcrumb(
+            /* data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
+            data.page_title.name + '&&&' + 'Grade transcripts',
+            data.page_title.branche.departement.name + '&&&' + data.page_title.name
+        );
+        isfist = false;
+    }
 
-    setBreadcrumb(
-        /* data.page_title.tu.semester.level.name + '&' + data.page_title.tu.semester.semestre_name.name + ' --> ' +*/
-        data.page_title.name + '&&&' + 'Grade transcripts',
-        data.page_title.branche.departement.name + '&&&' + data.page_title.name
-    );
 
 
     $.fn.dataTable.isDataTable('#grade_transcript_table') && grade_transcript_table.destroy();

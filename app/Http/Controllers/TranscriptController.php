@@ -140,7 +140,9 @@ class TranscriptController extends Controller
             $average_s = 0;
             $year_semester = [];
             $head_element = [];
-            foreach ($semesters as $semester) {
+            $toredo=[];
+            foreach ($semesters as $key=>$semester) {
+                $toredo[$semester->label]='';
                 array_push($head_element, $semester);
                 $tus = $semester->tus;
                 $s_average = 0;
@@ -210,6 +212,7 @@ class TranscriptController extends Controller
 
                     if ($tu_average < 8) {
                         $status = 'Fail';
+                        $toredo[$semester->label].=$tu->name.", ";
                     }
                 }
                 if ($s_credit > 0) {
@@ -237,11 +240,13 @@ class TranscriptController extends Controller
 
             $inscription['conforme'] = $conforme->conformeOf($average);
             $inscription['t_n_average'] = $average;
+            $inscription['toredo'] = $toredo;
+
             $inscription['t_n_status'] = $status;
             $inscription['year_semesters'] = $year_semester;
 
             
-        // dd($inscriptions);
+        // dd($inscription->toArray());
             // $inscription=$inscription->getAttributes();
         }
 

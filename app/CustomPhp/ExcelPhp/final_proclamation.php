@@ -1,7 +1,9 @@
 <?php
 
-require('excel.php');
-require("../functions.php");
+require_once(app_path('CustomPhp/ExcelPhp/excel.php'));
+
+// require("../functions.php");
+require_once(app_path("CustomPhp/customHelpers.php"));
 
 
 //name of the file executing the script's folder name
@@ -16,10 +18,12 @@ _define("LAST_COL_FP", 7);
 //starting row for writing data
 _define('STARTING_ROW_FP', 2);
 //defines ordinal numbers from cardinal
-_define("CARDINAL_NUMBERS", [1 => "FIRST", 2 => "SECOND", 3 => "THIRD", 4 => "FOURTH", 5 => "FIFTH", 6 => "SIXTH",7=>"SEVEN",8=>"EIGHT",9=>"NINE",10=>"TEN"]);
+_define("CARDINAL_NUMBERS_", ['L1' => "FIRST", 'L2' => "SECOND", 'L3' => "THIRD", 'M1' => "FOURTH", 'M2' => "FIFTH"]);
 
 function FinalProclamation($academicYear, $className, $domain, $yearNumber, $data, $saveInFolder = '')
 {
+    // dd($yearNumber);
+    
     $download = empty($saveInFolder);
     $sheet = new ExcelXport();
 
@@ -52,7 +56,7 @@ function FinalProclamation($academicYear, $className, $domain, $yearNumber, $dat
 
     $nextAcademicYear = implode("-", $nextAcademicYear);
 
-    $message = "The students whose names follow are allowed to register in ".ucfirst(strtolower(CARDINAL_NUMBERS[$yearNumber]))." Year of ".$domain.", under the condition of retaking and validating the mentioned modules during next year ".$nextAcademicYear.":";
+    $message = "The students whose names follow are allowed to register in ".ucfirst(strtolower(CARDINAL_NUMBERS_[$yearNumber]))." Year of ".$domain.", under the condition of retaking and validating the mentioned modules during next year ".$nextAcademicYear.":";
 
     //retrieves the headers of the table
     $headers = array_keys(max($data));

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\AverageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MarksInputController;
+use App\Http\Controllers\TranscriptController;
 
 require_once(app_path('CustomPhp/ExcelPhp/gradeReport.php'));
 require_once(app_path('CustomPhp/ExcelPhp/semesterReport.php'));
@@ -21,6 +22,7 @@ require_once(app_path('CustomPhp/ExcelPhp/studentsList.php'));
 require_once(app_path('CustomPhp/ExcelPhp/subjectReport.php'));
 require_once(app_path('CustomPhp/customHelpers.php'));
 require_once(app_path('CustomPhp\ExcelPhp\proclamation.php'));
+require_once(app_path('CustomPhp\ExcelPhp\final_proclamation.php'));
 
 class excelExportController extends Controller
 {
@@ -492,5 +494,52 @@ class excelExportController extends Controller
         } else {
             return back();
         }
+    }
+
+    public function genFinalProclamation($yearID, $classeID){
+     
+        $transcriptcontroller=new TranscriptController();
+        // $file = file_get_contents("final_proclamation.json");
+        $jsons=$transcriptcontroller->getGrades_with_session_Of($yearID, $classeID);
+        $jsons = json_decode($jsons->getContent(), true);
+        $total=0;
+        $data=[];
+        foreach ($jsons['head_element'] as $head){
+            $total+=count($head['tus']);
+        }
+
+        
+
+        foreach ($jsons['inscriptions'] as $inscription) {
+            $allredo=$inscription['toredo'][$jsons['head_element'][0]['label']].$inscription['toredo'][$jsons['head_element'][1]['label']];
+         if($allredo!=""){
+            if(count(explode(',',$allredo))<($total/4)){
+            
+                array_push($data,[
+                    "Registration number"=>$inscription['student']['matricule'],
+                    "Name"=>$inscription['student']['first_name'],
+                    "Forenames"=>$inscription['student']['Last_name'],
+                    "Sex"=>$inscription['student']['gender'],
+                    $jsons['head_element'][0]['label']=>$inscription['toredo'][$jsons['head_element'][0]['label']]!=""?substr($inscription['toredo'][$jsons['head_element'][0]['label']],0,-2):'Nil',
+                    $jsons['head_element'][1]['label']=>$inscription['toredo'][$jsons['head_element'][1]['label']]!=""?substr($inscription['toredo'][$jsons['head_element'][1]['label']],0,-2):'Nil'
+                ]);
+            }
+                
+         }  
+        }
+
+        // dd($data);
+
+        // dd($jsons,$total);
+        // $file = json_decode($file, true);
+
+    try {
+        $year=Year::findOrFail($yearID);
+        $level=Level::findOrFail($classeID);
+        FinalProclamation($year->name, $level->branche->name.': '.$level->label, $level->branche->name, $level->name, $data);
+    } catch (\Throwable $th) {
+        //throw $th;
+    }
+       
     }
 }
