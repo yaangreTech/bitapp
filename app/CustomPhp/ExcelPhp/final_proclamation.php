@@ -18,7 +18,7 @@ _define("LAST_COL_FP", 7);
 //starting row for writing data
 _define('STARTING_ROW_FP', 2);
 //defines ordinal numbers from cardinal
-_define("CARDINAL_NUMBERS_", ['L1' => "FIRST", 'L2' => "SECOND", 'L3' => "THIRD", 'M1' => "FOURTH", 'M2' => "FIFTH"]);
+_define("CARDINAL_NUMBERS_", ['L1' => "SECOND", 'L2' => "THIRD", 'L3' => "FOURTH", 'M1' => "FIFTH", 'M2' => "FIFTH"]);
 
 function FinalProclamation($academicYear, $className, $domain, $yearNumber, $data, $saveInFolder = '')
 {
