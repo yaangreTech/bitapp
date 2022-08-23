@@ -10,6 +10,7 @@ require_once(app_path("CustomPhp/customHelpers.php"));
 $executingScriptFolderName = dirname($_SERVER['SCRIPT_FILENAME']);
 //name of the current folder
 $currentFolderName = dirname(__FILE__);
+_define("PHPSPREADSHEET_IMAGE_PATH_", GetRelativePath($executingScriptFolderName, $currentFolderName));
 
 //starting column to write data
 _define("STARTING_COL_FP", 1);
@@ -19,6 +20,7 @@ _define("LAST_COL_FP", 7);
 _define('STARTING_ROW_FP', 2);
 //defines ordinal numbers from cardinal
 _define("CARDINAL_NUMBERS_", ['L1' => "SECOND", 'L2' => "THIRD", 'L3' => "FOURTH", 'M1' => "FIFTH", 'M2' => "FIFTH"]);
+
 
 function FinalProclamation($academicYear, $className, $domain, $yearNumber, $data, $saveInFolder = '')
 {
@@ -63,10 +65,34 @@ function FinalProclamation($academicYear, $className, $domain, $yearNumber, $dat
     //reorganizes all data keys according to the current headers list
     $data = SortAccordingToAList($data, $headers);
 
-    // ACADEMIC YEAR
-    $cellRef = $ref(LAST_COL_FP-1, STARTING_ROW_FP);
-    $sheet->Write($cellRef, "Academic Year: ".$academicYear);
+    //last column index
+    $lastColIndex = LAST_COL_FP;
+    
+    // LOGO
+    $sheet->SetImage($ref(STARTING_COL_FP, STARTING_ROW_FP), PHPSPREADSHEET_IMAGE_PATH_, 'logo.png', [400, 100], 0, 0);
+
+    // AUTHORIZATION
+    $autorisation="Autorisation de création: N° 2018-00/01347/MESRSI/SG/DGESup/DIPES du 13 Septembre 2018\nAutorisation d’ouverture: N° 2018-00001511/MESRSI/SG/DGESup/DIPES du 25 Septembre 2018";
+    $cellRef = $ref(STARTING_COL_FP + 4, STARTING_ROW_FP);
+    $range = $cellRef.":".$ref($lastColIndex-1, STARTING_ROW_FP);
+    $sheet->Write($cellRef, $autorisation);
+    $sheet->MergeCells($range);
+    $sheet->SetRowHeight(STARTING_ROW_FP, 25);
+    $sheet->WordWrap($range);
+    $sheet->SetFontSize($range, 8);
+    $sheet->SetFontSize($range, 8);
+    $sheet->SetAlignment($range, "center", "right");
+    
+
+    //ACADEMIC YEAR
+    $lastRow = $sheet->GetLastRowIndex();
+    $lastRow += 2;
+    $cellRef = $ref($lastColIndex-1, $lastRow);
+    $sheet->Write($cellRef, "Academic year: ".$academicYear);
+    $sheet->SetRowHeight($lastRow, 14);
+    $sheet->SetFontSize($cellRef, 12);
     $sheet->SetCellsToBold($cellRef);
+    
 
     // FINAL PROCLAMATION OF RESULTS
     $lastRow = $sheet->GetLastRowIndex() + 2;
@@ -93,12 +119,12 @@ function FinalProclamation($academicYear, $className, $domain, $yearNumber, $dat
     // MESSAGE
     $lastRow = $sheet->GetLastRowIndex() + 2;
     $cellRef = $ref(STARTING_COL_FP, $lastRow);
-    $range = $cellRef.":".$ref(LAST_COL_FP, $lastRow);
+    $range = $cellRef.":".$ref(LAST_COL_FP - 1, $lastRow);
     $sheet->Indent($range, 3);
     $sheet->Write($cellRef, $message);
     $sheet->MergeCells($range);
     $sheet->WordWrap($range);
-    $sheet->SetRowHeight($lastRow, 16);
+    $sheet->SetRowHeight($lastRow, 26);
 
     // HEADERS
     $lastRow = $sheet->GetLastRowIndex() + 2;
