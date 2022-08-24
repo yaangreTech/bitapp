@@ -24,7 +24,7 @@ _define("CARDINAL_NUMBERS_", ['L1' => "SECOND", 'L2' => "THIRD", 'L3' => "FOURTH
 
 function FinalProclamation($academicYear, $className, $domain, $yearNumber, $data, $saveInFolder = '')
 {
-    // dd($yearNumber);
+    // dd($data);
     
     $download = empty($saveInFolder);
     $sheet = new ExcelXport();
