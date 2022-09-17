@@ -19,7 +19,7 @@ class TestSeeders extends Seeder
             0 => 
             array (
               'module_id' => '55',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -29,7 +29,7 @@ class TestSeeders extends Seeder
             1 => 
             array (
               'module_id' => '55',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -39,7 +39,7 @@ class TestSeeders extends Seeder
             2 => 
             array (
               'module_id' => '55',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -49,7 +49,7 @@ class TestSeeders extends Seeder
             3 => 
             array (
               'module_id' => '69',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -59,7 +59,7 @@ class TestSeeders extends Seeder
             4 => 
             array (
               'module_id' => '69',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -69,7 +69,7 @@ class TestSeeders extends Seeder
             5 => 
             array (
               'module_id' => '69',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -79,7 +79,7 @@ class TestSeeders extends Seeder
             6 => 
             array (
               'module_id' => '69',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -89,7 +89,7 @@ class TestSeeders extends Seeder
             7 => 
             array (
               'module_id' => '68',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -99,7 +99,7 @@ class TestSeeders extends Seeder
             8 => 
             array (
               'module_id' => '68',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -109,7 +109,7 @@ class TestSeeders extends Seeder
             9 => 
             array (
               'module_id' => '68',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -119,7 +119,7 @@ class TestSeeders extends Seeder
             10 => 
             array (
               'module_id' => '68',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -129,7 +129,7 @@ class TestSeeders extends Seeder
             11 => 
             array (
               'module_id' => '79',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -139,7 +139,7 @@ class TestSeeders extends Seeder
             12 => 
             array (
               'module_id' => '79',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -149,7 +149,7 @@ class TestSeeders extends Seeder
             13 => 
             array (
               'module_id' => '79',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -159,7 +159,7 @@ class TestSeeders extends Seeder
             14 => 
             array (
               'module_id' => '72',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -169,7 +169,7 @@ class TestSeeders extends Seeder
             15 => 
             array (
               'module_id' => '72',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -179,7 +179,7 @@ class TestSeeders extends Seeder
             16 => 
             array (
               'module_id' => '72',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -189,7 +189,7 @@ class TestSeeders extends Seeder
             17 => 
             array (
               'module_id' => '80',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -199,7 +199,7 @@ class TestSeeders extends Seeder
             18 => 
             array (
               'module_id' => '80',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -209,7 +209,7 @@ class TestSeeders extends Seeder
             19 => 
             array (
               'module_id' => '80',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '60',
               'type' => 'normal',
@@ -219,7 +219,7 @@ class TestSeeders extends Seeder
             20 => 
             array (
               'module_id' => '80',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '30',
               'type' => 'normal',
@@ -229,7 +229,7 @@ class TestSeeders extends Seeder
             21 => 
             array (
               'module_id' => '71',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -239,7 +239,7 @@ class TestSeeders extends Seeder
             22 => 
             array (
               'module_id' => '71',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -249,7 +249,7 @@ class TestSeeders extends Seeder
             23 => 
             array (
               'module_id' => '71',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -259,7 +259,7 @@ class TestSeeders extends Seeder
             24 => 
             array (
               'module_id' => '77',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -269,7 +269,7 @@ class TestSeeders extends Seeder
             25 => 
             array (
               'module_id' => '77',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -279,7 +279,7 @@ class TestSeeders extends Seeder
             26 => 
             array (
               'module_id' => '77',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '30',
               'type' => 'normal',
@@ -289,7 +289,7 @@ class TestSeeders extends Seeder
             27 => 
             array (
               'module_id' => '77',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '60',
               'type' => 'normal',
@@ -299,7 +299,7 @@ class TestSeeders extends Seeder
             28 => 
             array (
               'module_id' => '56',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -309,7 +309,7 @@ class TestSeeders extends Seeder
             29 => 
             array (
               'module_id' => '56',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -319,7 +319,7 @@ class TestSeeders extends Seeder
             30 => 
             array (
               'module_id' => '56',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -329,7 +329,7 @@ class TestSeeders extends Seeder
             31 => 
             array (
               'module_id' => '56',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -339,7 +339,7 @@ class TestSeeders extends Seeder
             32 => 
             array (
               'module_id' => '57',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -349,7 +349,7 @@ class TestSeeders extends Seeder
             33 => 
             array (
               'module_id' => '57',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -359,7 +359,7 @@ class TestSeeders extends Seeder
             34 => 
             array (
               'module_id' => '57',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -369,7 +369,7 @@ class TestSeeders extends Seeder
             35 => 
             array (
               'module_id' => '57',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -379,7 +379,7 @@ class TestSeeders extends Seeder
             36 => 
             array (
               'module_id' => '58',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -389,7 +389,7 @@ class TestSeeders extends Seeder
             37 => 
             array (
               'module_id' => '58',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -399,7 +399,7 @@ class TestSeeders extends Seeder
             38 => 
             array (
               'module_id' => '58',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -409,7 +409,7 @@ class TestSeeders extends Seeder
             39 => 
             array (
               'module_id' => '59',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -419,7 +419,7 @@ class TestSeeders extends Seeder
             40 => 
             array (
               'module_id' => '59',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -429,7 +429,7 @@ class TestSeeders extends Seeder
             41 => 
             array (
               'module_id' => '59',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -439,7 +439,7 @@ class TestSeeders extends Seeder
             42 => 
             array (
               'module_id' => '60',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -449,7 +449,7 @@ class TestSeeders extends Seeder
             43 => 
             array (
               'module_id' => '60',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -459,7 +459,7 @@ class TestSeeders extends Seeder
             44 => 
             array (
               'module_id' => '60',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -469,7 +469,7 @@ class TestSeeders extends Seeder
             45 => 
             array (
               'module_id' => '61',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -479,7 +479,7 @@ class TestSeeders extends Seeder
             46 => 
             array (
               'module_id' => '61',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -489,7 +489,7 @@ class TestSeeders extends Seeder
             47 => 
             array (
               'module_id' => '61',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '30',
               'type' => 'normal',
@@ -499,7 +499,7 @@ class TestSeeders extends Seeder
             48 => 
             array (
               'module_id' => '61',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '60',
               'type' => 'normal',
@@ -509,7 +509,7 @@ class TestSeeders extends Seeder
             49 => 
             array (
               'module_id' => '62',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -519,7 +519,7 @@ class TestSeeders extends Seeder
             50 => 
             array (
               'module_id' => '62',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -529,7 +529,7 @@ class TestSeeders extends Seeder
             51 => 
             array (
               'module_id' => '62',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -539,7 +539,7 @@ class TestSeeders extends Seeder
             52 => 
             array (
               'module_id' => '63',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -549,7 +549,7 @@ class TestSeeders extends Seeder
             53 => 
             array (
               'module_id' => '63',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -559,7 +559,7 @@ class TestSeeders extends Seeder
             54 => 
             array (
               'module_id' => '63',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -569,7 +569,7 @@ class TestSeeders extends Seeder
             55 => 
             array (
               'module_id' => '64',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -579,7 +579,7 @@ class TestSeeders extends Seeder
             56 => 
             array (
               'module_id' => '64',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -589,7 +589,7 @@ class TestSeeders extends Seeder
             57 => 
             array (
               'module_id' => '64',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -599,7 +599,7 @@ class TestSeeders extends Seeder
             58 => 
             array (
               'module_id' => '64',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -609,7 +609,7 @@ class TestSeeders extends Seeder
             59 => 
             array (
               'module_id' => '66',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -619,7 +619,7 @@ class TestSeeders extends Seeder
             60 => 
             array (
               'module_id' => '66',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -629,7 +629,7 @@ class TestSeeders extends Seeder
             61 => 
             array (
               'module_id' => '66',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -639,7 +639,7 @@ class TestSeeders extends Seeder
             62 => 
             array (
               'module_id' => '67',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -649,7 +649,7 @@ class TestSeeders extends Seeder
             63 => 
             array (
               'module_id' => '67',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -659,7 +659,7 @@ class TestSeeders extends Seeder
             64 => 
             array (
               'module_id' => '67',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -669,7 +669,7 @@ class TestSeeders extends Seeder
             65 => 
             array (
               'module_id' => '65',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -679,7 +679,7 @@ class TestSeeders extends Seeder
             66 => 
             array (
               'module_id' => '65',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -689,7 +689,7 @@ class TestSeeders extends Seeder
             67 => 
             array (
               'module_id' => '65',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -699,7 +699,7 @@ class TestSeeders extends Seeder
             68 => 
             array (
               'module_id' => '76',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -709,7 +709,7 @@ class TestSeeders extends Seeder
             69 => 
             array (
               'module_id' => '76',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -719,7 +719,7 @@ class TestSeeders extends Seeder
             70 => 
             array (
               'module_id' => '76',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -729,7 +729,7 @@ class TestSeeders extends Seeder
             71 => 
             array (
               'module_id' => '76',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -739,7 +739,7 @@ class TestSeeders extends Seeder
             72 => 
             array (
               'module_id' => '75',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -749,7 +749,7 @@ class TestSeeders extends Seeder
             73 => 
             array (
               'module_id' => '75',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -759,7 +759,7 @@ class TestSeeders extends Seeder
             74 => 
             array (
               'module_id' => '75',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -769,7 +769,7 @@ class TestSeeders extends Seeder
             75 => 
             array (
               'module_id' => '70',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -779,7 +779,7 @@ class TestSeeders extends Seeder
             76 => 
             array (
               'module_id' => '70',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -789,7 +789,7 @@ class TestSeeders extends Seeder
             77 => 
             array (
               'module_id' => '70',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -799,7 +799,7 @@ class TestSeeders extends Seeder
             78 => 
             array (
               'module_id' => '15',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -809,7 +809,7 @@ class TestSeeders extends Seeder
             79 => 
             array (
               'module_id' => '15',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -819,7 +819,7 @@ class TestSeeders extends Seeder
             80 => 
             array (
               'module_id' => '15',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -829,7 +829,7 @@ class TestSeeders extends Seeder
             81 => 
             array (
               'module_id' => '15',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -839,7 +839,7 @@ class TestSeeders extends Seeder
             82 => 
             array (
               'module_id' => '14',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -849,7 +849,7 @@ class TestSeeders extends Seeder
             83 => 
             array (
               'module_id' => '14',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -859,7 +859,7 @@ class TestSeeders extends Seeder
             84 => 
             array (
               'module_id' => '14',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -869,7 +869,7 @@ class TestSeeders extends Seeder
             85 => 
             array (
               'module_id' => '14',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -879,7 +879,7 @@ class TestSeeders extends Seeder
             86 => 
             array (
               'module_id' => '16',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -889,7 +889,7 @@ class TestSeeders extends Seeder
             87 => 
             array (
               'module_id' => '16',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -899,7 +899,7 @@ class TestSeeders extends Seeder
             88 => 
             array (
               'module_id' => '16',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -909,7 +909,7 @@ class TestSeeders extends Seeder
             89 => 
             array (
               'module_id' => '17',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -919,7 +919,7 @@ class TestSeeders extends Seeder
             90 => 
             array (
               'module_id' => '17',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -929,7 +929,7 @@ class TestSeeders extends Seeder
             91 => 
             array (
               'module_id' => '17',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -939,7 +939,7 @@ class TestSeeders extends Seeder
             92 => 
             array (
               'module_id' => '18',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -949,7 +949,7 @@ class TestSeeders extends Seeder
             93 => 
             array (
               'module_id' => '18',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -959,7 +959,7 @@ class TestSeeders extends Seeder
             94 => 
             array (
               'module_id' => '18',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -969,7 +969,7 @@ class TestSeeders extends Seeder
             95 => 
             array (
               'module_id' => '24',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -979,7 +979,7 @@ class TestSeeders extends Seeder
             96 => 
             array (
               'module_id' => '24',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -989,7 +989,7 @@ class TestSeeders extends Seeder
             97 => 
             array (
               'module_id' => '24',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -999,7 +999,7 @@ class TestSeeders extends Seeder
             98 => 
             array (
               'module_id' => '23',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1009,7 +1009,7 @@ class TestSeeders extends Seeder
             99 => 
             array (
               'module_id' => '23',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1019,7 +1019,7 @@ class TestSeeders extends Seeder
             100 => 
             array (
               'module_id' => '23',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1029,7 +1029,7 @@ class TestSeeders extends Seeder
             101 => 
             array (
               'module_id' => '25',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1039,7 +1039,7 @@ class TestSeeders extends Seeder
             102 => 
             array (
               'module_id' => '25',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1049,7 +1049,7 @@ class TestSeeders extends Seeder
             103 => 
             array (
               'module_id' => '19',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1059,7 +1059,7 @@ class TestSeeders extends Seeder
             104 => 
             array (
               'module_id' => '19',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1069,7 +1069,7 @@ class TestSeeders extends Seeder
             105 => 
             array (
               'module_id' => '19',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1079,7 +1079,7 @@ class TestSeeders extends Seeder
             106 => 
             array (
               'module_id' => '73',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1089,7 +1089,7 @@ class TestSeeders extends Seeder
             107 => 
             array (
               'module_id' => '73',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1099,7 +1099,7 @@ class TestSeeders extends Seeder
             108 => 
             array (
               'module_id' => '73',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -1109,7 +1109,7 @@ class TestSeeders extends Seeder
             109 => 
             array (
               'module_id' => '73',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -1119,7 +1119,7 @@ class TestSeeders extends Seeder
             110 => 
             array (
               'module_id' => '1',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1129,7 +1129,7 @@ class TestSeeders extends Seeder
             111 => 
             array (
               'module_id' => '1',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1139,7 +1139,7 @@ class TestSeeders extends Seeder
             112 => 
             array (
               'module_id' => '1',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -1149,7 +1149,7 @@ class TestSeeders extends Seeder
             113 => 
             array (
               'module_id' => '1',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -1159,7 +1159,7 @@ class TestSeeders extends Seeder
             114 => 
             array (
               'module_id' => '2',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1169,7 +1169,7 @@ class TestSeeders extends Seeder
             115 => 
             array (
               'module_id' => '2',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1179,7 +1179,7 @@ class TestSeeders extends Seeder
             116 => 
             array (
               'module_id' => '2',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -1189,7 +1189,7 @@ class TestSeeders extends Seeder
             117 => 
             array (
               'module_id' => '2',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -1199,7 +1199,7 @@ class TestSeeders extends Seeder
             118 => 
             array (
               'module_id' => '3',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1209,7 +1209,7 @@ class TestSeeders extends Seeder
             119 => 
             array (
               'module_id' => '3',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1219,7 +1219,7 @@ class TestSeeders extends Seeder
             120 => 
             array (
               'module_id' => '3',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1229,7 +1229,7 @@ class TestSeeders extends Seeder
             121 => 
             array (
               'module_id' => '78',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1239,7 +1239,7 @@ class TestSeeders extends Seeder
             122 => 
             array (
               'module_id' => '78',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1249,7 +1249,7 @@ class TestSeeders extends Seeder
             123 => 
             array (
               'module_id' => '78',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1259,7 +1259,7 @@ class TestSeeders extends Seeder
             124 => 
             array (
               'module_id' => '4',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1269,7 +1269,7 @@ class TestSeeders extends Seeder
             125 => 
             array (
               'module_id' => '4',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1279,7 +1279,7 @@ class TestSeeders extends Seeder
             126 => 
             array (
               'module_id' => '4',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1289,7 +1289,7 @@ class TestSeeders extends Seeder
             127 => 
             array (
               'module_id' => '5',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1299,7 +1299,7 @@ class TestSeeders extends Seeder
             128 => 
             array (
               'module_id' => '5',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1309,7 +1309,7 @@ class TestSeeders extends Seeder
             129 => 
             array (
               'module_id' => '5',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1319,7 +1319,7 @@ class TestSeeders extends Seeder
             130 => 
             array (
               'module_id' => '6',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1329,7 +1329,7 @@ class TestSeeders extends Seeder
             131 => 
             array (
               'module_id' => '6',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1339,7 +1339,7 @@ class TestSeeders extends Seeder
             132 => 
             array (
               'module_id' => '6',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1349,7 +1349,7 @@ class TestSeeders extends Seeder
             133 => 
             array (
               'module_id' => '138',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1359,7 +1359,7 @@ class TestSeeders extends Seeder
             134 => 
             array (
               'module_id' => '138',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1369,7 +1369,7 @@ class TestSeeders extends Seeder
             135 => 
             array (
               'module_id' => '138',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1379,7 +1379,7 @@ class TestSeeders extends Seeder
             136 => 
             array (
               'module_id' => '7',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1389,7 +1389,7 @@ class TestSeeders extends Seeder
             137 => 
             array (
               'module_id' => '7',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1399,7 +1399,7 @@ class TestSeeders extends Seeder
             138 => 
             array (
               'module_id' => '7',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1409,7 +1409,7 @@ class TestSeeders extends Seeder
             139 => 
             array (
               'module_id' => '9',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1419,7 +1419,7 @@ class TestSeeders extends Seeder
             140 => 
             array (
               'module_id' => '9',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1429,7 +1429,7 @@ class TestSeeders extends Seeder
             141 => 
             array (
               'module_id' => '9',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1439,7 +1439,7 @@ class TestSeeders extends Seeder
             142 => 
             array (
               'module_id' => '10',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1449,7 +1449,7 @@ class TestSeeders extends Seeder
             143 => 
             array (
               'module_id' => '10',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1459,7 +1459,7 @@ class TestSeeders extends Seeder
             144 => 
             array (
               'module_id' => '10',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1469,7 +1469,7 @@ class TestSeeders extends Seeder
             145 => 
             array (
               'module_id' => '11',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1479,7 +1479,7 @@ class TestSeeders extends Seeder
             146 => 
             array (
               'module_id' => '11',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1489,7 +1489,7 @@ class TestSeeders extends Seeder
             147 => 
             array (
               'module_id' => '11',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1499,7 +1499,7 @@ class TestSeeders extends Seeder
             148 => 
             array (
               'module_id' => '12',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1509,7 +1509,7 @@ class TestSeeders extends Seeder
             149 => 
             array (
               'module_id' => '12',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1519,7 +1519,7 @@ class TestSeeders extends Seeder
             150 => 
             array (
               'module_id' => '12',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1529,7 +1529,7 @@ class TestSeeders extends Seeder
             151 => 
             array (
               'module_id' => '139',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1539,7 +1539,7 @@ class TestSeeders extends Seeder
             152 => 
             array (
               'module_id' => '139',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1549,7 +1549,7 @@ class TestSeeders extends Seeder
             153 => 
             array (
               'module_id' => '139',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1559,7 +1559,7 @@ class TestSeeders extends Seeder
             154 => 
             array (
               'module_id' => '141',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1569,7 +1569,7 @@ class TestSeeders extends Seeder
             155 => 
             array (
               'module_id' => '141',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1579,7 +1579,7 @@ class TestSeeders extends Seeder
             156 => 
             array (
               'module_id' => '141',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1589,7 +1589,7 @@ class TestSeeders extends Seeder
             157 => 
             array (
               'module_id' => '42',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1599,7 +1599,7 @@ class TestSeeders extends Seeder
             158 => 
             array (
               'module_id' => '42',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1609,7 +1609,7 @@ class TestSeeders extends Seeder
             159 => 
             array (
               'module_id' => '42',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1619,7 +1619,7 @@ class TestSeeders extends Seeder
             160 => 
             array (
               'module_id' => '143',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1629,7 +1629,7 @@ class TestSeeders extends Seeder
             161 => 
             array (
               'module_id' => '143',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1639,7 +1639,7 @@ class TestSeeders extends Seeder
             162 => 
             array (
               'module_id' => '143',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1649,7 +1649,7 @@ class TestSeeders extends Seeder
             163 => 
             array (
               'module_id' => '44',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1659,7 +1659,7 @@ class TestSeeders extends Seeder
             164 => 
             array (
               'module_id' => '44',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1669,7 +1669,7 @@ class TestSeeders extends Seeder
             165 => 
             array (
               'module_id' => '44',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '60',
               'type' => 'normal',
@@ -1679,7 +1679,7 @@ class TestSeeders extends Seeder
             166 => 
             array (
               'module_id' => '44',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '30',
               'type' => 'normal',
@@ -1689,7 +1689,7 @@ class TestSeeders extends Seeder
             167 => 
             array (
               'module_id' => '144',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1699,7 +1699,7 @@ class TestSeeders extends Seeder
             168 => 
             array (
               'module_id' => '144',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1709,7 +1709,7 @@ class TestSeeders extends Seeder
             169 => 
             array (
               'module_id' => '144',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1719,7 +1719,7 @@ class TestSeeders extends Seeder
             170 => 
             array (
               'module_id' => '145',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1729,7 +1729,7 @@ class TestSeeders extends Seeder
             171 => 
             array (
               'module_id' => '145',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1739,7 +1739,7 @@ class TestSeeders extends Seeder
             172 => 
             array (
               'module_id' => '145',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '30',
               'type' => 'normal',
@@ -1749,7 +1749,7 @@ class TestSeeders extends Seeder
             173 => 
             array (
               'module_id' => '145',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '30',
               'type' => 'normal',
@@ -1759,7 +1759,7 @@ class TestSeeders extends Seeder
             174 => 
             array (
               'module_id' => '145',
-              'year_id' => '3',
+             
               'title' => 'Test#3',
               'ratio' => '30',
               'type' => 'normal',
@@ -1769,7 +1769,7 @@ class TestSeeders extends Seeder
             175 => 
             array (
               'module_id' => '146',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1779,7 +1779,7 @@ class TestSeeders extends Seeder
             176 => 
             array (
               'module_id' => '146',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1789,7 +1789,7 @@ class TestSeeders extends Seeder
             177 => 
             array (
               'module_id' => '146',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -1799,7 +1799,7 @@ class TestSeeders extends Seeder
             178 => 
             array (
               'module_id' => '146',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -1809,7 +1809,7 @@ class TestSeeders extends Seeder
             179 => 
             array (
               'module_id' => '147',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1819,7 +1819,7 @@ class TestSeeders extends Seeder
             180 => 
             array (
               'module_id' => '147',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1829,7 +1829,7 @@ class TestSeeders extends Seeder
             181 => 
             array (
               'module_id' => '147',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1839,7 +1839,7 @@ class TestSeeders extends Seeder
             182 => 
             array (
               'module_id' => '45',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1849,7 +1849,7 @@ class TestSeeders extends Seeder
             183 => 
             array (
               'module_id' => '45',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1859,7 +1859,7 @@ class TestSeeders extends Seeder
             184 => 
             array (
               'module_id' => '149',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1869,7 +1869,7 @@ class TestSeeders extends Seeder
             185 => 
             array (
               'module_id' => '149',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1879,7 +1879,7 @@ class TestSeeders extends Seeder
             186 => 
             array (
               'module_id' => '148',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1889,7 +1889,7 @@ class TestSeeders extends Seeder
             187 => 
             array (
               'module_id' => '148',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1899,7 +1899,7 @@ class TestSeeders extends Seeder
             188 => 
             array (
               'module_id' => '148',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '50',
               'type' => 'normal',
@@ -1909,7 +1909,7 @@ class TestSeeders extends Seeder
             189 => 
             array (
               'module_id' => '148',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '40',
               'type' => 'normal',
@@ -1919,7 +1919,7 @@ class TestSeeders extends Seeder
             190 => 
             array (
               'module_id' => '46',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1929,7 +1929,7 @@ class TestSeeders extends Seeder
             191 => 
             array (
               'module_id' => '46',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1939,7 +1939,7 @@ class TestSeeders extends Seeder
             192 => 
             array (
               'module_id' => '46',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -1949,7 +1949,7 @@ class TestSeeders extends Seeder
             193 => 
             array (
               'module_id' => '46',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -1959,7 +1959,7 @@ class TestSeeders extends Seeder
             194 => 
             array (
               'module_id' => '74',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1969,7 +1969,7 @@ class TestSeeders extends Seeder
             195 => 
             array (
               'module_id' => '74',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -1979,7 +1979,7 @@ class TestSeeders extends Seeder
             196 => 
             array (
               'module_id' => '74',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -1989,7 +1989,7 @@ class TestSeeders extends Seeder
             197 => 
             array (
               'module_id' => '47',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -1999,7 +1999,7 @@ class TestSeeders extends Seeder
             198 => 
             array (
               'module_id' => '47',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2009,7 +2009,7 @@ class TestSeeders extends Seeder
             199 => 
             array (
               'module_id' => '47',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -2019,7 +2019,7 @@ class TestSeeders extends Seeder
             200 => 
             array (
               'module_id' => '47',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -2029,7 +2029,7 @@ class TestSeeders extends Seeder
             201 => 
             array (
               'module_id' => '48',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2039,7 +2039,7 @@ class TestSeeders extends Seeder
             202 => 
             array (
               'module_id' => '48',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2049,7 +2049,7 @@ class TestSeeders extends Seeder
             203 => 
             array (
               'module_id' => '48',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2059,7 +2059,7 @@ class TestSeeders extends Seeder
             204 => 
             array (
               'module_id' => '49',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2069,7 +2069,7 @@ class TestSeeders extends Seeder
             205 => 
             array (
               'module_id' => '49',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2079,7 +2079,7 @@ class TestSeeders extends Seeder
             206 => 
             array (
               'module_id' => '49',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2089,7 +2089,7 @@ class TestSeeders extends Seeder
             207 => 
             array (
               'module_id' => '50',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2099,7 +2099,7 @@ class TestSeeders extends Seeder
             208 => 
             array (
               'module_id' => '50',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2109,7 +2109,7 @@ class TestSeeders extends Seeder
             209 => 
             array (
               'module_id' => '52',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2119,7 +2119,7 @@ class TestSeeders extends Seeder
             210 => 
             array (
               'module_id' => '52',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2129,7 +2129,7 @@ class TestSeeders extends Seeder
             211 => 
             array (
               'module_id' => '52',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2139,7 +2139,7 @@ class TestSeeders extends Seeder
             212 => 
             array (
               'module_id' => '53',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2149,7 +2149,7 @@ class TestSeeders extends Seeder
             213 => 
             array (
               'module_id' => '53',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2159,7 +2159,7 @@ class TestSeeders extends Seeder
             214 => 
             array (
               'module_id' => '53',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2169,7 +2169,7 @@ class TestSeeders extends Seeder
             215 => 
             array (
               'module_id' => '51',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2179,7 +2179,7 @@ class TestSeeders extends Seeder
             216 => 
             array (
               'module_id' => '51',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2189,7 +2189,7 @@ class TestSeeders extends Seeder
             217 => 
             array (
               'module_id' => '51',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2199,7 +2199,7 @@ class TestSeeders extends Seeder
             218 => 
             array (
               'module_id' => '45',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '25',
               'type' => 'normal',
@@ -2209,7 +2209,7 @@ class TestSeeders extends Seeder
             219 => 
             array (
               'module_id' => '45',
-              'year_id' => '3',
+             
               'title' => 'Test#3',
               'ratio' => '50',
               'type' => 'normal',
@@ -2219,7 +2219,7 @@ class TestSeeders extends Seeder
             220 => 
             array (
               'module_id' => '123',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2229,7 +2229,7 @@ class TestSeeders extends Seeder
             221 => 
             array (
               'module_id' => '123',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2239,7 +2239,7 @@ class TestSeeders extends Seeder
             222 => 
             array (
               'module_id' => '123',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '60',
               'type' => 'normal',
@@ -2249,7 +2249,7 @@ class TestSeeders extends Seeder
             223 => 
             array (
               'module_id' => '123',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '30',
               'type' => 'normal',
@@ -2259,7 +2259,7 @@ class TestSeeders extends Seeder
             224 => 
             array (
               'module_id' => '111',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2269,7 +2269,7 @@ class TestSeeders extends Seeder
             225 => 
             array (
               'module_id' => '111',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2279,7 +2279,7 @@ class TestSeeders extends Seeder
             226 => 
             array (
               'module_id' => '111',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -2289,7 +2289,7 @@ class TestSeeders extends Seeder
             227 => 
             array (
               'module_id' => '111',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -2299,7 +2299,7 @@ class TestSeeders extends Seeder
             228 => 
             array (
               'module_id' => '112',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2309,7 +2309,7 @@ class TestSeeders extends Seeder
             229 => 
             array (
               'module_id' => '112',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2319,7 +2319,7 @@ class TestSeeders extends Seeder
             230 => 
             array (
               'module_id' => '112',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -2329,7 +2329,7 @@ class TestSeeders extends Seeder
             231 => 
             array (
               'module_id' => '122',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2339,7 +2339,7 @@ class TestSeeders extends Seeder
             232 => 
             array (
               'module_id' => '122',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2349,7 +2349,7 @@ class TestSeeders extends Seeder
             233 => 
             array (
               'module_id' => '45',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -2359,7 +2359,7 @@ class TestSeeders extends Seeder
             234 => 
             array (
               'module_id' => '149',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -2369,7 +2369,7 @@ class TestSeeders extends Seeder
             235 => 
             array (
               'module_id' => '122',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2379,7 +2379,7 @@ class TestSeeders extends Seeder
             236 => 
             array (
               'module_id' => '112',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -2389,7 +2389,7 @@ class TestSeeders extends Seeder
             237 => 
             array (
               'module_id' => '121',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2399,7 +2399,7 @@ class TestSeeders extends Seeder
             238 => 
             array (
               'module_id' => '121',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2409,7 +2409,7 @@ class TestSeeders extends Seeder
             239 => 
             array (
               'module_id' => '121',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2419,7 +2419,7 @@ class TestSeeders extends Seeder
             240 => 
             array (
               'module_id' => '113',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2429,7 +2429,7 @@ class TestSeeders extends Seeder
             241 => 
             array (
               'module_id' => '113',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2439,7 +2439,7 @@ class TestSeeders extends Seeder
             242 => 
             array (
               'module_id' => '113',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2449,7 +2449,7 @@ class TestSeeders extends Seeder
             243 => 
             array (
               'module_id' => '120',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2459,7 +2459,7 @@ class TestSeeders extends Seeder
             244 => 
             array (
               'module_id' => '120',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2469,7 +2469,7 @@ class TestSeeders extends Seeder
             245 => 
             array (
               'module_id' => '120',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2479,7 +2479,7 @@ class TestSeeders extends Seeder
             246 => 
             array (
               'module_id' => '114',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2489,7 +2489,7 @@ class TestSeeders extends Seeder
             247 => 
             array (
               'module_id' => '114',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2499,7 +2499,7 @@ class TestSeeders extends Seeder
             248 => 
             array (
               'module_id' => '114',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2509,7 +2509,7 @@ class TestSeeders extends Seeder
             249 => 
             array (
               'module_id' => '118',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2519,7 +2519,7 @@ class TestSeeders extends Seeder
             250 => 
             array (
               'module_id' => '118',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2529,7 +2529,7 @@ class TestSeeders extends Seeder
             251 => 
             array (
               'module_id' => '118',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '40',
               'type' => 'normal',
@@ -2539,7 +2539,7 @@ class TestSeeders extends Seeder
             252 => 
             array (
               'module_id' => '118',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -2549,7 +2549,7 @@ class TestSeeders extends Seeder
             253 => 
             array (
               'module_id' => '119',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2559,7 +2559,7 @@ class TestSeeders extends Seeder
             254 => 
             array (
               'module_id' => '119',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2569,7 +2569,7 @@ class TestSeeders extends Seeder
             255 => 
             array (
               'module_id' => '119',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2579,7 +2579,7 @@ class TestSeeders extends Seeder
             256 => 
             array (
               'module_id' => '116',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2589,7 +2589,7 @@ class TestSeeders extends Seeder
             257 => 
             array (
               'module_id' => '116',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2599,7 +2599,7 @@ class TestSeeders extends Seeder
             258 => 
             array (
               'module_id' => '116',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2609,7 +2609,7 @@ class TestSeeders extends Seeder
             259 => 
             array (
               'module_id' => '115',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2619,7 +2619,7 @@ class TestSeeders extends Seeder
             260 => 
             array (
               'module_id' => '115',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2629,7 +2629,7 @@ class TestSeeders extends Seeder
             261 => 
             array (
               'module_id' => '115',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2639,7 +2639,7 @@ class TestSeeders extends Seeder
             262 => 
             array (
               'module_id' => '117',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2649,7 +2649,7 @@ class TestSeeders extends Seeder
             263 => 
             array (
               'module_id' => '117',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2659,7 +2659,7 @@ class TestSeeders extends Seeder
             264 => 
             array (
               'module_id' => '117',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '45',
               'type' => 'normal',
@@ -2669,7 +2669,7 @@ class TestSeeders extends Seeder
             265 => 
             array (
               'module_id' => '117',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '45',
               'type' => 'normal',
@@ -2679,7 +2679,7 @@ class TestSeeders extends Seeder
             266 => 
             array (
               'module_id' => '20',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2689,7 +2689,7 @@ class TestSeeders extends Seeder
             267 => 
             array (
               'module_id' => '20',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2699,7 +2699,7 @@ class TestSeeders extends Seeder
             268 => 
             array (
               'module_id' => '20',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2709,7 +2709,7 @@ class TestSeeders extends Seeder
             269 => 
             array (
               'module_id' => '26',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2719,7 +2719,7 @@ class TestSeeders extends Seeder
             270 => 
             array (
               'module_id' => '26',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2729,7 +2729,7 @@ class TestSeeders extends Seeder
             271 => 
             array (
               'module_id' => '26',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2739,7 +2739,7 @@ class TestSeeders extends Seeder
             272 => 
             array (
               'module_id' => '21',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2749,7 +2749,7 @@ class TestSeeders extends Seeder
             273 => 
             array (
               'module_id' => '21',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2759,7 +2759,7 @@ class TestSeeders extends Seeder
             274 => 
             array (
               'module_id' => '21',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2769,7 +2769,7 @@ class TestSeeders extends Seeder
             275 => 
             array (
               'module_id' => '50',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '60',
               'type' => 'normal',
@@ -2779,7 +2779,7 @@ class TestSeeders extends Seeder
             276 => 
             array (
               'module_id' => '50',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '30',
               'type' => 'normal',
@@ -2789,7 +2789,7 @@ class TestSeeders extends Seeder
             277 => 
             array (
               'module_id' => '41',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2799,7 +2799,7 @@ class TestSeeders extends Seeder
             278 => 
             array (
               'module_id' => '41',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2809,7 +2809,7 @@ class TestSeeders extends Seeder
             279 => 
             array (
               'module_id' => '41',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2819,7 +2819,7 @@ class TestSeeders extends Seeder
             280 => 
             array (
               'module_id' => '142',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2829,7 +2829,7 @@ class TestSeeders extends Seeder
             281 => 
             array (
               'module_id' => '142',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2839,7 +2839,7 @@ class TestSeeders extends Seeder
             282 => 
             array (
               'module_id' => '142',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2849,7 +2849,7 @@ class TestSeeders extends Seeder
             283 => 
             array (
               'module_id' => '149',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '50',
               'type' => 'normal',
@@ -2859,7 +2859,7 @@ class TestSeeders extends Seeder
             284 => 
             array (
               'module_id' => '22',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2869,7 +2869,7 @@ class TestSeeders extends Seeder
             285 => 
             array (
               'module_id' => '22',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2879,7 +2879,7 @@ class TestSeeders extends Seeder
             286 => 
             array (
               'module_id' => '22',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2889,7 +2889,7 @@ class TestSeeders extends Seeder
             287 => 
             array (
               'module_id' => '54',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2899,7 +2899,7 @@ class TestSeeders extends Seeder
             288 => 
             array (
               'module_id' => '54',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2909,7 +2909,7 @@ class TestSeeders extends Seeder
             289 => 
             array (
               'module_id' => '54',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2919,7 +2919,7 @@ class TestSeeders extends Seeder
             290 => 
             array (
               'module_id' => '25',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '50',
               'type' => 'normal',
@@ -2929,7 +2929,7 @@ class TestSeeders extends Seeder
             291 => 
             array (
               'module_id' => '25',
-              'year_id' => '3',
+             
               'title' => 'Test#2',
               'ratio' => '40',
               'type' => 'normal',
@@ -2939,7 +2939,7 @@ class TestSeeders extends Seeder
             292 => 
             array (
               'module_id' => '110',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2949,7 +2949,7 @@ class TestSeeders extends Seeder
             293 => 
             array (
               'module_id' => '110',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2959,7 +2959,7 @@ class TestSeeders extends Seeder
             294 => 
             array (
               'module_id' => '110',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2969,7 +2969,7 @@ class TestSeeders extends Seeder
             295 => 
             array (
               'module_id' => '43',
-              'year_id' => '3',
+             
               'title' => 'Attendance',
               'ratio' => '5',
               'type' => 'normal',
@@ -2979,7 +2979,7 @@ class TestSeeders extends Seeder
             296 => 
             array (
               'module_id' => '43',
-              'year_id' => '3',
+             
               'title' => 'Participation',
               'ratio' => '5',
               'type' => 'normal',
@@ -2989,7 +2989,7 @@ class TestSeeders extends Seeder
             297 => 
             array (
               'module_id' => '43',
-              'year_id' => '3',
+             
               'title' => 'Test#1',
               'ratio' => '90',
               'type' => 'normal',
@@ -2999,7 +2999,7 @@ class TestSeeders extends Seeder
             298 => 
             array (
               'module_id' => '20',
-              'year_id' => '3',
+             
               'title' => 'session',
               'ratio' => '100',
               'type' => 'session',
@@ -3009,7 +3009,7 @@ class TestSeeders extends Seeder
             299 => 
             array (
               'module_id' => '21',
-              'year_id' => '3',
+             
               'title' => 'session',
               'ratio' => '100',
               'type' => 'session',
@@ -3019,7 +3019,7 @@ class TestSeeders extends Seeder
             300 => 
             array (
               'module_id' => '114',
-              'year_id' => '3',
+             
               'title' => 'session',
               'ratio' => '100',
               'type' => 'session',

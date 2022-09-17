@@ -115,11 +115,11 @@ Route::get('/school/destroy_classe/{id}', [
 ])->middleware(['auth']);
 
 // for tu
-Route::get('/school/get_tu_of/{classID}', [
+Route::get('/school/get_tu_of/{yearID}/{semesterID}', [
     SchoolController::class,
     'getTuOf',
 ])->middleware(['auth']);
-Route::post('/school/store_tu', [
+Route::post('/school/store_tu/{yearID}', [
     SchoolController::class,
     'storeTu',
 ])->middleware(['auth']);
@@ -209,7 +209,7 @@ Route::get('/school/verifier_email/{email}', [
 Route::get('promotions', [YearController::class, 'index'])
     ->middleware(['auth', 'isAdmin'])
     ->name('all_promotions');
-Route::post('/school/store_year', [
+Route::post('/school/store_year/{previousID}', [
     YearController::class,
     'storeYear',
 ])->middleware(['auth', 'isAdmin']);

@@ -22,27 +22,29 @@ class MarksController extends Controller
     {
         // get tus of the given semester
         $semester= Semester::findOrFail($semesterID);  
-        $tus =  $semester->tus;
+        $tus =  $semester->tus($yearID);
         foreach ($tus as $tu) {
           // get the modulud of the given tu
             $modulus = $tu->modulus;
             foreach ($modulus as $modulu) {
-                $modulu->tests->where('year_id',$yearID);
+                $modulu->tests;
             }
         }
         $semester->level->branche->departement;
+        $semester=$semester->toArray();
+        $semester['tus']=$tus;
         return response()->json($semester);
     }
 
     public function getMarksModulusTestsOf($yearID, $modulusID)
     {
         $modulu = Module::findOrFail($modulusID);
-        $tests = $modulu->tests->where('year_id', $yearID);
+        $tests = $modulu->tests;
 
         return response()->json($tests);
     }
 
-    public function storeTest(Request $request, $yearID, $modulusID)
+    public function storeTest(Request $request, $modulusID)
     {
         $test=false;
         $total_ratio=0;
@@ -52,20 +54,9 @@ class MarksController extends Controller
             'test_type' => ['required'],
         ]);
         if ($request->test_type == 'session') {
-           
-
-            // dd([
-            //     'module_id' => $modulusID,
-            //     'year_id' => $yearID,
-            //     'type' => $request->test_type,
-            //     'title' => $request->test_type,
-            //     'ratio' => 100,
-            //     // 'created_at' => Carbon::now(),
-            //     // 'updated_at' => Carbon::now(),
-            // ]);
+      
             $test = Test::insert([
                 'module_id' => $modulusID,
-                'year_id' => $yearID,
                 'type' => $request->test_type,
                 'title' => $request->test_type,
                 'ratio' => 100,
@@ -82,14 +73,12 @@ class MarksController extends Controller
 
             // get [attendance, participation] from the test table of the given year
             $others = $modulu->tests
-                ->whereIn('title', ['Attendance', 'Participation'])
-                ->where('year_id', $yearID);
+                ->whereIn('title', ['Attendance', 'Participation']);
 
                 // in no [attendance, participation] as test, it we insert it!
             if ($others->count() == 0) {
                 Test::insert([
                     'module_id' => $modulusID,
-                    'year_id' => $yearID,
                     'type' => $request->test_type,
                     'title' => 'Attendance',
                     'ratio' => 5,
@@ -98,7 +87,6 @@ class MarksController extends Controller
                 ]);
                 Test::insert([
                     'module_id' => $modulusID,
-                    'year_id' => $yearID,
                     'type' => $request->test_type,
                     'title' => 'Participation',
                     'ratio' => 5,
@@ -108,13 +96,11 @@ class MarksController extends Controller
             }
             $total_ratio=$modulu->tests
             ->where('type', 'normal')
-            ->where('year_id', $yearID)
             ->sum('ratio');
             // finally we insert the test in question
             if($total_ratio+$request->test_ration<=100){
                 $test = Test::insert([
                     'module_id' => $modulusID,
-                    'year_id' => $yearID,
                     'type' => $request->test_type,
                     'title' => $request->test_label,
                     'ratio' => $request->test_ration,
@@ -136,7 +122,6 @@ class MarksController extends Controller
 
         $total_ratio=$modulu->tests
         ->where('type', 'normal')
-        ->where('year_id', $test->year_id)
         ->sum('ratio');
 
         if ($request->test_type == 'session') {

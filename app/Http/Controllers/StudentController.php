@@ -98,7 +98,7 @@ class StudentController extends Controller
 
     public function storeStudent(Request $request)
     {
-        $current_year = Year::all()->last();
+        $current_year = Year::orderBy('id','DESC')->first();
 
         $request->validate([
             'studentID' => ['required'],
@@ -163,14 +163,8 @@ class StudentController extends Controller
             'studentFirstName' => ['required'],
             'studentLastName' => ['required'],
             'studentBirthDate' => ['required'],
-            // 'studentBirthPlace'=> ['required'],
             'studentPhone' => ['required'],
             'studentEmail' => ['required'],
-            // 'studentParentFirstName' => ['required'],
-            // 'studentParentLastName' => ['required'],
-            // 'studentParentPhone' => ['required'],
-            // 'studentParentProfession' => ['required'],
-            // 'studentParentType' => ['required'],
         ]);
 
 
@@ -248,7 +242,7 @@ class StudentController extends Controller
     {
         $lastYear = Year::findOrFail($lastYear_id);
         $initialClass = Level::findOrFail($initialClass_id);
-        $current_year = Year::all()->last();
+        $current_year = Year::orderBy('id', 'DESC')->first();
         $head_element = [];
         $last_inscriptions = $initialClass->inscriptions
             ->where('year_id', $lastYear_id)
@@ -273,7 +267,7 @@ class StudentController extends Controller
             foreach ($semesters as $semester) {
                 $semester->semestre_name;
                 array_push($head_element, $semester);
-                $tus = $semester->tus;
+                $tus = $semester->tus($inscription->year_id);
                 $s_average = 0;
                 $s_credit = 0;
                 $s_ponderer = 0;
@@ -285,7 +279,6 @@ class StudentController extends Controller
                     foreach ($modules as $mod) {
                         $sessione = new Sessione();
                         $tests = $mod->tests
-                            ->where('year_id', $lastYear_id)
                             ->where('type', 'normal');
                         $note = 0;
                         if (
@@ -295,7 +288,6 @@ class StudentController extends Controller
                             )
                         ) {
                             $tests = $mod->tests
-                                ->where('year_id', $inscription->year_id)
                                 ->where('type', 'session');
                         }
                         foreach ($tests as $test) {
@@ -335,7 +327,7 @@ class StudentController extends Controller
                 }
 
                 $t_credit += $s_credit;
-
+                $semester['tus']=$tus;
                 array_push($year_semester, $semester->getAttributes());
             }
             if ($t_credit > 0) {
@@ -358,7 +350,7 @@ class StudentController extends Controller
     public function reinscriptStudent(Request $request)
     {
         $data = false;
-        $current_year = Year::all()->last();
+        $current_year = Year::orderBy('id', 'DESC')->first();
         $request->validate([
             // 'initial_class'=>['required'],
             'students_ids' => ['required'],
@@ -429,7 +421,7 @@ class StudentController extends Controller
          $head_elements=$classe->semesters;
 
         $inscriptions = $classe->inscriptions->where('year_id', $yearID)->where('status','!=','ended');
-// dd($inscriptions);
+        // dd($inscriptions);
         foreach ($inscriptions as $inscription) {
             $conforme = new Conforme();
             $inscription->student;
@@ -444,7 +436,7 @@ class StudentController extends Controller
             foreach ($semesters as $semester) {
                 // $semester->semestre_name;
                 array_push($head_element, $semester);
-                $tus = $semester->tus;
+                $tus = $semester->tus($inscription->year_id);
                 $s_average = 0;
                 $s_credit = 0;
                 $s_ponderer = 0;
@@ -456,7 +448,6 @@ class StudentController extends Controller
                     foreach ($modules as $mod) {
                         $sessione = new Sessione();
                         $tests = $mod->tests
-                            ->where('year_id', $yearID)
                             ->where('type', 'normal');
                         $note = 0;
                         if (
@@ -466,7 +457,6 @@ class StudentController extends Controller
                             )
                         ) {
                             $tests = $mod->tests
-                                ->where('year_id', $inscription->year_id)
                                 ->where('type', 'session');
                         }
                         foreach ($tests as $test) {
@@ -506,7 +496,7 @@ class StudentController extends Controller
                 }
 
                 $t_credit += $s_credit;
-
+                $semester['tus']=$tus;
                 array_push($year_semester, $semester->getAttributes());
             }
             if ($t_credit > 0) {

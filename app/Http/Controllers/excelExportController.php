@@ -503,18 +503,18 @@ class excelExportController extends Controller
         $jsons=$transcriptcontroller->getGrades_with_session_Of($yearID, $classeID);
         $jsons = json_decode($jsons->getContent(), true);
         $total=0;
+       
         $data=[];
         foreach ($jsons['head_element'] as $head){
             $total+=count($head['tus']);
         }
 
         
-
+        
         foreach ($jsons['inscriptions'] as $inscription) {
             $allredo=$inscription['toredo'][$jsons['head_element'][0]['label']].$inscription['toredo'][$jsons['head_element'][1]['label']];
          if($allredo!=""){
             if(count(explode(',',$allredo))<($total/4)){
-            
                 array_push($data,[
                     "Registration number"=>$inscription['student']['matricule'],
                     "Name"=>$inscription['student']['first_name'],
@@ -523,12 +523,11 @@ class excelExportController extends Controller
                     $jsons['head_element'][0]['label']=>$inscription['toredo'][$jsons['head_element'][0]['label']]!=""?substr($inscription['toredo'][$jsons['head_element'][0]['label']],0,-2):'Nil',
                     $jsons['head_element'][1]['label']=>$inscription['toredo'][$jsons['head_element'][1]['label']]!=""?substr($inscription['toredo'][$jsons['head_element'][1]['label']],0,-2):'Nil'
                 ]);
-            }
-                
+            }                
          }  
         }
 
-        // dd($data);
+      
 
         // dd($jsons,$total);
         // $file = json_decode($file, true);
@@ -536,9 +535,11 @@ class excelExportController extends Controller
     try {
         $year=Year::findOrFail($yearID);
         $level=Level::findOrFail($classeID);
+       
         FinalProclamation($year->name, $level->branche->name.': '.$level->label, $level->branche->name, $level->name, $data);
     } catch (\Throwable $th) {
         //throw $th;
+        return back();
     }
        
     }

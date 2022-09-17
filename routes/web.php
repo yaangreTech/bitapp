@@ -18,8 +18,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/', [AuthenticatedSessionController::class, 'create'])->middleware('guest');
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 Route::get('/dashboard/get-chart-details', [DashboardController::class, 'getChartDetails'])->middleware(['auth']);
 
@@ -51,3 +49,6 @@ require __DIR__ . '/pdf_routes.php';
 
 // Excel
 require __DIR__ . '/excel_export.php';
+
+// Alumni
+require __DIR__ . '/alumni_routes.php';

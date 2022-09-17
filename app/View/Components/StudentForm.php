@@ -21,7 +21,7 @@ class StudentForm extends Component
         //
 
         $this->departments = Departement::all();
-        $this->promotions = Promotion::all();
+        $this->promotions = Promotion::orderBy('id', 'desc')->take(3)->get();
     }
 
     /**

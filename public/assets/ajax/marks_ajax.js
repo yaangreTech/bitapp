@@ -126,7 +126,7 @@ function addTest(value) {
     // console.log(value);
     var year_id = value.split('_')[0];
     var modulus_id = value.split('_')[1];
-    inserer('/marks_modulus/store_test/' + year_id + '/' + modulus_id, 'mark_modulus_test_from', () => {
+    inserer('/marks_modulus/store_test/' + modulus_id, 'mark_modulus_test_from', () => {
         getTestOf(year_id, modulus_id);
     });
     // yearData = year;

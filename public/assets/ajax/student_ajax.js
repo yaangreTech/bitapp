@@ -252,7 +252,7 @@ function getDestinationClass(initialClassID) {
 function bindDestination_class(dest_classes) {
     elements = '<option value="" disabled selected>Choose the destination class</option>'
     $.each(dest_classes, function(key, classe) {
-        elements += '<option value="' + classe.id + '">' + classe.name + '</option>'
+        elements += '<option value="' + classe.id + '">' + classe.label + ' (' + classe.name + ')' + '</option>'
     });
     $('#destination_class').html(elements);
 }

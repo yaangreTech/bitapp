@@ -26,6 +26,9 @@ class LeftAside extends Component
             case 'isCh':
                 $this->departements =Departement::all();
                 break;
+            case 'isha':
+                $this->departements =Departement::all();
+                break;
             case 'isHd':
                 $manage=Auth::user()->manage;   
                  $this->departements =Departement::where('id','=',$manage->departement_id)->get();

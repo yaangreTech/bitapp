@@ -32,7 +32,7 @@ class GuestLayout extends Component
     protected function saveRights(){
         $check_rights=Right::find(1);
         if($check_rights==null){
-            $string='[{"title":"isAdmin", "label":"Admin"},{"title":"isHd", "label":"Head of department"},{"title":"isCh", "label":"Head of Scolarity"}]';
+            $string='[{"title":"isAdmin", "label":"Admin"},{"title":"isHd", "label":"Head of department"},{"title":"isCh", "label":"Head of Scolarity"},{"title":"isha", "label":"Head of Alumni"}]';
             $json=json_decode($string);
             foreach ($json as $right){
                 $array=(array) $right;

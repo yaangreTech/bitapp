@@ -6,7 +6,18 @@ $(function() {
 
 
 function add_Year(formID) {
-    inserer("/school/store_year", formID, null, true);
+    $.ajax({
+        type: "GET",
+        dataType: "JSON",
+        url: '/school/get_year/0',
+        success: function(year) {
+            inserer("/school/store_year/" + year.id, formID, null, true);
+        },
+        error: function(error) {
+            inserer("/school/store_year/0", formID, null, true);
+        }
+    })
+
 }
 
 

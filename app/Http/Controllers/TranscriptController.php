@@ -49,7 +49,7 @@ class TranscriptController extends Controller
             $head_element = [];
             foreach ($semesters as $semester) {
                 array_push($head_element, $semester);
-                $tus = $semester->tus;
+                $tus = $semester->tus($yearID);
                 $s_average = 0;
                 $s_credit = 0;
                 $s_ponderer = 0;
@@ -60,7 +60,6 @@ class TranscriptController extends Controller
                     $tu_ponderer = 0;
                     foreach ($modules as $mod) {
                         $tests = $mod->tests
-                            ->where('year_id', $yearID)
                             ->where('type', 'normal');
                         $note = 0;
                         foreach ($tests as $test) {
@@ -100,7 +99,7 @@ class TranscriptController extends Controller
                 }
 
                 $t_credit += $s_credit;
-
+                $semester['tus']=$tus;
                 array_push($year_semester, $semester->getAttributes());
             }
             if ($t_credit > 0) {
@@ -144,7 +143,7 @@ class TranscriptController extends Controller
             foreach ($semesters as $key=>$semester) {
                 $toredo[$semester->label]='';
                 array_push($head_element, $semester);
-                $tus = $semester->tus;
+                $tus = $semester->tus($yearID);
                 $s_average = 0;
                 $s_credit = 0;
                 $s_ponderer = 0;
@@ -160,7 +159,6 @@ class TranscriptController extends Controller
                         // ====================================
                         $tests=[];
                         $normal_tests = $mod->tests
-                            ->where('year_id', $yearID)
                             ->where('type', 'normal');
                         
                         $sessions_tests=[];
@@ -169,7 +167,6 @@ class TranscriptController extends Controller
 
                         if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
                             $sessions_tests = $mod->tests
-                                ->where('year_id', $inscription->year_id)
                                 ->where('type', 'session');
                         }
                         foreach ($normal_tests as $normal_test) {
@@ -231,7 +228,7 @@ class TranscriptController extends Controller
                 }
 
                 $t_credit += $s_credit;
-
+                $semester['tus']=$tus;
                 array_push($year_semester, $semester->getAttributes());
             }
             if ($t_credit > 0) {
@@ -266,7 +263,7 @@ class TranscriptController extends Controller
         $semesters = $inscription->level->semesters;
         foreach ($semesters as $semester) {
             $conforme = new Conforme();
-            $tus = $semester->tus;
+            $tus = $semester->tus($inscription->year->id);
             $les_note = [];
             $inscription->student;
             $s_credit = 0;
@@ -288,7 +285,6 @@ class TranscriptController extends Controller
                 $s_n_modulus += $modules->count();
                 foreach ($modules as $mod) {
                     $tests = $mod->tests
-                        ->where('year_id', $inscription->year_id)
                         ->where('type', 'normal');
                     $note = 0;
                     $pourcentage = 0;
@@ -338,6 +334,7 @@ class TranscriptController extends Controller
             }
             // $inscription['notes']=$les_note;
             // $semester=$semester->getAttributes();
+            $semester['tus'] = $tus;
             $semester['s_credit'] = $s_credit;
             $semester['s_v_credit'] = $s_v_credit;
             $semester['s_n_ponderer'] = $s_n_ponderer;
@@ -368,7 +365,7 @@ class TranscriptController extends Controller
         $semesters = $inscription->level->semesters;
         foreach ($semesters as $semester) {
             $conforme = new Conforme();
-            $tus = $semester->tus;
+            $tus = $semester->tus($inscription->year->id);
             $les_note = [];
             $inscription->student;
             $s_credit = 0;
@@ -398,7 +395,6 @@ class TranscriptController extends Controller
 
                     if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
                         $tests = $mod->tests
-                            ->where('year_id', $inscription->year_id)
                             ->where('type', 'session');
                     }
 
@@ -409,7 +405,6 @@ class TranscriptController extends Controller
                      // ====================================
                      $tests=[];
                      $normal_tests = $mod->tests
-                         ->where('year_id', $inscription->year_id)
                          ->where('type', 'normal');
                      
                      $sessions_tests=[];
@@ -418,7 +413,6 @@ class TranscriptController extends Controller
 
                      if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
                          $sessions_tests = $mod->tests
-                             ->where('year_id', $inscription->year_id)
                              ->where('type', 'session');
                      }
                      foreach ($normal_tests as $normal_test) {
@@ -496,6 +490,7 @@ class TranscriptController extends Controller
             }
             // $inscription['notes']=$les_note;
             // $semester=$semester->getAttributes();
+            $semester['tus'] = $tus;
             $semester['s_credit'] = $s_credit;
             $semester['s_v_credit'] = $s_v_credit;
             $semester['s_n_ponderer'] = $s_n_ponderer;

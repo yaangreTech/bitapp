@@ -15,7 +15,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 Route::get('marks_modulus/',[MarksController::class, 'index'])->middleware(['auth','isHdep'])->name('marks_modulus');
 Route::get('/marks_modulus/get_marks_modulus_of/{yearID}/{semesterID}/',[MarksController::class, 'getMarksModulusOf'])->middleware(['auth','isHdep']);
 Route::get('/marks_modulus/get_marks_modulus_tests_of/{yearID}/{modulusID}/',[MarksController::class, 'getMarksModulusTestsOf'])->middleware(['auth','isHdep']);
-Route::post('/marks_modulus/store_test/{yearID}/{modulusID}/',[MarksController::class, 'storeTest'])->middleware(['auth','isHdep']);
+Route::post('/marks_modulus/store_test/{modulusID}/',[MarksController::class, 'storeTest'])->middleware(['auth','isHdep']);
 Route::get('/marks_modulus/delete_test/{id}/',[MarksController::class, 'deleteTest'])->middleware(['auth','isHdep']);
 Route::post('/marks_modulus/update_test/{id}/',[MarksController::class, 'updateTest'])->middleware(['auth','isHdep']);
 

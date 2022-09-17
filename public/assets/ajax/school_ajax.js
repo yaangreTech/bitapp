@@ -152,18 +152,39 @@
 
  // function to get Tus of a given classe
  function getTuOf(semesterID) {
+     $.ajax({
+         type: "GET",
+         dataType: "JSON",
+         url: '/school/get_year/0',
+         success: function(year) {
+             selectionner("/school/get_tu_of/" + year.id + "/" + semesterID, tuData);
+         },
+         error: function(error) {
+             alert('ajouter d\'abord une annee scolaire');
+         }
+     })
 
-     selectionner("/school/get_tu_of/" + semesterID, tuData);
 
  }
 
  // function to add a tu to the database
  function add_tu(formID) {
-     inserer("/school/store_tu/", formID, () => {
-         getAllDepartments();
-         addedecu = [];
-         bindEcu('action');
-     });
+     $.ajax({
+         type: "GET",
+         dataType: "JSON",
+         url: '/school/get_year/0',
+         success: function(year) {
+             inserer("/school/store_tu/" + year.id, formID, () => {
+                 getAllDepartments();
+                 addedecu = [];
+                 bindEcu('action');
+             });
+         },
+         error: function(error) {
+             alert('ajouter d\'abord une annee scolaire');
+         }
+     })
+
  }
 
  // function to update a given tu

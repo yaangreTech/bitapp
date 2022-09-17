@@ -16,7 +16,7 @@ class CreateAlumnisTable extends Migration
         Schema::create('alumnis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('Inscription_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('inscription_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->date('graduated_date');
             $table->timestamps();
         });

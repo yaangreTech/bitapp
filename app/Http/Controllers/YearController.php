@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tu;
 use Carbon\Carbon;
 use App\Models\Year;
+use App\Models\Module;
 use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,16 +27,16 @@ class YearController extends Controller
     {
         switch ($id) {
             case 0:
-                $year = Year::all()->last();
+                $year = Year::orderBy('id', 'DESC')->first();
                 $year->promotion;
                 break;
             case -1:
-                $data = Year::all();
+                $data = Year::orderBy('id', 'ASC')->get();
                 if ($data->count() > 1) {
                     $year = $data[$data->count() - 2];
                     $year->promotion;
                 } else {
-                    $year = Object();
+                    $year = [];
                 }
 
                 break;
@@ -47,7 +49,7 @@ class YearController extends Controller
         return response()->json($year);
     }
 
-    public function storeYear(Request $request)
+    public function storeYear(Request $request,$previousID)
     {
         $request->validate([
             'start_date' => ['required'],
@@ -55,25 +57,55 @@ class YearController extends Controller
             'promotion_name' => ['required'],
         ]);
 
-        $current_year = Year::all()->last();
-        if ($current_year != null) {
+        if($previousID!=0 && $previousID!='0'){
+            $current_year = Year::find($previousID);
             $current_year->end_date = Carbon::now();
             $current_year->update();
         }
-
         $new_year_id = DB::table('years')->insertGetId([
             'start_date' => $request->start_date,
             'name' => $request->year_name,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-
         $new_promotion = Promotion::insert([
             'name' => $request->promotion_name,
             'year_id' => $new_year_id,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+
+        
+     
+        if($previousID!=0 && $previousID!='0'){
+            // Copy tus
+
+            $tus=Tu::where('year_id',$current_year->id)->get();
+           
+            foreach($tus as $tu){
+                $modules=Module:: where('tu_id',$tu->id)->get(['name','credict','heure']);
+                $copiedtuID=DB::table('tus')->insertGetId([
+                    'semester_id'=>$tu->semester_id,
+                    'year_id'=>$new_year_id,
+                    'code'=>$tu->code,
+                    'name'=>$tu->name,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+                foreach ($modules as $module){
+                    DB::table('modules')->insert([
+                        'tu_id'=> $copiedtuID,
+                        'name'=>$module->name,
+                        'credict'=>$module->credict,
+                        'heure'=>$module->heure,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
+                }
+            }   
+        }
+
+    
         return response()->json($new_promotion);
     }
     public function updateYear($id)

@@ -929,3 +929,115 @@ Invalid character found in sheet title origins from : D:\Programms\laravel\bitap
  in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
  at 08/26/2022 10:45:00
 
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/14/2022 12:37:20
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/14/2022 12:38:21
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/14/2022 12:39:56
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/14/2022 12:40:42
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/14/2022 01:29:44
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/14/2022 01:30:38
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 10:02:25
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 10:02:56
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 03:41:02
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 03:41:09
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 03:51:08
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 04:31:50
+
+Maximum 31 characters allowed in sheet title. origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 04:33:24
+
+Invalid character found in sheet title origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 04:39:54
+
+Invalid character found in sheet title origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 04:41:49
+
+Invalid character found in sheet title origins from : D:\Programms\laravel\bitapp\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php
+ on line : 889
+ by function : `setTitle`
+ called at line : 442
+ in the file : D:\Programms\laravel\bitapp\app\CustomPhp\ExcelPhp\excel.php
+ at 09/15/2022 04:44:27
+

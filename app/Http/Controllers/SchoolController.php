@@ -366,19 +366,21 @@ class SchoolController extends Controller
 
     /** about TU*/
 
-    public function getTuOf($semesterID)
+    public function getTuOf($yearID,$semesterID)
     {
-        // dd('ddd');
+        // dd( $yearID);
         $tu_body = [];
         $semester = Semester::findOrFail($semesterID);
         $semester->level->branche;
-        $semester->tus->load(['modulus','semester']);
-        
-
+       $tus=$semester->tus($yearID)->load(['modulus','semester']);
+        // dd( $semester->tus->where('year_id', $yearID)->load(['modulus','semester']));
+        // $semester['tus']=$tus;
+        $semester=$semester->toArray();
+        $semester['tus']=$tus;
         return response()->json($semester);
     }
 
-    public function storeTu(Request $request)
+    public function storeTu(Request $request,$yearID)
     {
      
         $request->validate([
@@ -396,6 +398,7 @@ class SchoolController extends Controller
 
         $tuID=Tu::insertGetId([
             'semester_id'=>$semester->id,
+            'year_id'=>$yearID,
             'code'=>$request->TU_code,
             'name'=>$request->TU_name
         ]);

@@ -16,6 +16,7 @@ class CreateTusTable extends Migration
         Schema::create('tus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('semester_id')->constrained()->onDelete('cascade');
+            $table->foreignId('year_id')->constrained()->onDelete('cascade');
             $table->string('code')->nullable();
             $table->string('name');
             $table->timestamps();

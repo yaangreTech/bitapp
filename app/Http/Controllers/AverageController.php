@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tu;
+use App\Models\Module;
+use App\Models\Student;
 use App\Models\Conforme;
 use App\Models\Semester;
 use App\Models\Sessione;
-use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AverageController extends Controller
@@ -22,10 +24,11 @@ class AverageController extends Controller
         $semester = Semester::findOrFail($semesterID);
 
         // modulus to buid the table head later
-        $theadModulus = $semester->modulus;
-
+        $theadModulus = $semester->modulus($yearID);
+        // $theadModulus=Module::whereIn('tu_id', Tu::where('year_id', $yearID)->where('semester_id', $semesterID)->select('id')->pluck('id'))->get();
+        // dd($theadModulus);
         // get all tus of the semester
-        $Vtus = $semester->tus->load('modulus');
+        $Vtus = $semester->tus($yearID)->load('modulus');
 
         // all inscription of the level for the given year
         $inscriptions = $semester->level->inscriptions->where(
@@ -41,7 +44,7 @@ class AverageController extends Controller
             // tus to calculate the year
 
 
-            $tus = $semester->tus;
+            $tus = $Vtus;
 
             // variable to save all marks of a students
             $les_note = [];
@@ -69,7 +72,6 @@ class AverageController extends Controller
                 $tu_ponderer = 0;
                 foreach ($modules as $mod) {
                     $tests = $mod->tests
-                        ->where('year_id', $yearID)
                         ->where('type', 'normal');
                     $note = 0;
                     $pourcentage = 0;
@@ -152,8 +154,11 @@ class AverageController extends Controller
     {
         $semester = Semester::findOrFail($semesterID);
        
-        $theadModulus = $semester->modulus;
-        $Vtus = $semester->tus->load('modulus');
+       
+        $theadModulus = $semester->modulus($yearID);
+       
+        $Vtus = $semester->tus($yearID)->load('modulus');
+
         $inscriptions = $semester->level->inscriptions->where(
             'year_id',
             $yearID
@@ -163,7 +168,7 @@ class AverageController extends Controller
             
             $conforme = new Conforme();
             $did_session=false;
-            $tus = $semester->tus;
+            $tus = $Vtus;
             $les_note = [];
             $inscription->student;
             $t_credit = 0;
@@ -191,7 +196,6 @@ class AverageController extends Controller
                         // ====================================
                     
                         $normal_tests = $mod->tests
-                                ->where('year_id', $yearID)
                                 ->where('type', 'normal');
                                
                         $sessions_tests=[];
@@ -206,7 +210,7 @@ class AverageController extends Controller
 
 
                         if ($sessione->has_Session_mark($mod->id,$inscription->id)) {
-                            $sessions_tests = $mod->tests->where('year_id', $yearID)->where('type', 'session');
+                            $sessions_tests = $mod->tests->where('type', 'session');
                             $did_session=true;
                         }
                        

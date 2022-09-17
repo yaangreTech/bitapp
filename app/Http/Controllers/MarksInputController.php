@@ -36,7 +36,6 @@ class MarksInputController extends Controller
         //  get the class of the module
         $testList=Array();
         $Tests = $module->tests
-            ->where('year_id', $yearID)
             ->where('type', 'session');
         $level = $module->tu->semester->level;
         $S_check_inscriptions = $level->inscriptions->where(
@@ -87,7 +86,6 @@ class MarksInputController extends Controller
 
         //    get all tests of the modulus for the year
         $Tests = $module->tests
-            ->where('year_id', $yearID)
             ->where('type', 'normal');
         //
         foreach ($inscriptions as $inscription) {
@@ -129,7 +127,6 @@ class MarksInputController extends Controller
 
         //    get all tests of the modulus for the year
         $Tests = $module->tests
-            ->where('year_id', $yearID)
             ->where('type', 'normal');
 
         // loop inscription one by one
@@ -153,12 +150,10 @@ class MarksInputController extends Controller
 
 
             $normal_tests = $module->tests
-            ->where('year_id', $yearID)
             ->where('type', 'normal');
 
             if($sessione->has_Session_mark($module->id,$inscription->id)){
                 $sessions_tests = $module->tests
-                ->where('year_id', $yearID)
                 ->where('type', 'session');
             }
             $average = 0;
@@ -239,7 +234,6 @@ class MarksInputController extends Controller
 
         //    get all tests of the modulus for the year
         $Tests = $module->tests
-            ->where('year_id', $yearID)
             ->where('type', 'normal');
 
         // loop inscription one by one

@@ -16,7 +16,7 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('module_id')->constrained()->onDelete('cascade');
-            $table->foreignId('year_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('year_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->integer('ratio');
             $table->string('type');

@@ -20,16 +20,17 @@ class Semester extends Model
 
     protected $cascadeDeletes=['tus'];
 
-    public function tus() {
-        return $this->hasMany(Tu::class);
+    public function tus($yearID) {
+        return $this->hasMany(Tu::class)->where('year_id',$yearID)->orderBy('id')->get();
     }
 
     public function level() {
         return $this->belongsTo(Level::class);
     }
 
-    public function modulus() {
-        return $this->hasManyThrough(Module::class,Tu::class);
+    public function modulus($yearID) {
+        // dd(Tu::where('year_id', $yearID)->select('id')->pluck('id')->toArray());
+        return $this->hasManyThrough(Module::class,Tu::class)->whereIn('tu_id', Tu::where('year_id', $yearID)->select('id')->pluck('id')->toArray())->get();
     }
 
     public function getAttributes(){

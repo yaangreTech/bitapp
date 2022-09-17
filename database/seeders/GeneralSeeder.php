@@ -15,7 +15,7 @@ class GeneralSeeder extends Seeder
     public function run()
     {
 
-        $tables=['departements','branches', 'levels','semesters','tus','modules','years','promotions','students','parentes',
+        $tables=['departements','branches', 'levels','semesters','years','promotions','tus','modules','students','parentes',
             'inscriptions',
             'tests',
             'marks'
@@ -32,7 +32,7 @@ class GeneralSeeder extends Seeder
                         print_r($data);
                     }
                 } catch (\Throwable $th) {
-                    dd( $table);
+                    dd( $table,$th);
                 }
                
                

@@ -54,6 +54,7 @@ class tcpfController extends Controller
 
     public function pdfAtestation($inscription_id, $lang)
     {
+      
         $inscription = Inscription::findOrFail($inscription_id);
         $inscription->with(['student', 'level']);
 
@@ -106,7 +107,7 @@ class tcpfController extends Controller
         $head_element = [];
         foreach ($semesters as $semester) {
             array_push($head_element, $semester);
-            $tus = $semester->tus;
+            $tus = $semester->tus($inscription->year_id);
             $s_credit = 0;
             $s_ponderer = 0;
             foreach ($tus as $tu) {
@@ -117,12 +118,10 @@ class tcpfController extends Controller
                 foreach ($modules as $mod) {
                     $sessione = new Sessione();
                     $tests = $mod->tests
-                        ->where('year_id', $inscription->year_id)
                         ->where('type', 'normal');
                     $note = 0;
                     if ($sessione->has_Session_mark($mod->id, $inscription->id)) {
                         $tests = $mod->tests
-                            ->where('year_id', $inscription->year_id)
                             ->where('type', 'session');
                     }
                     foreach ($tests as $test) {
