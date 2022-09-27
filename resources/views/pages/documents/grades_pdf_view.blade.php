@@ -7,6 +7,8 @@
     <style>
         body {
             font-family: Arial;
+            /* font-family: Calibri; */
+            word-wrap: break-word;
             font-size: 11px;
         }
 
@@ -43,12 +45,6 @@
             /* float: right; */
         }
 
-        .titre {
-            width: 300px;
-            line-height: 13px;
-            font-weight: bold;
-            text-decoration: underline;
-        }
 
         .sname {
             width: 500px;
@@ -70,11 +66,12 @@
         .vrai td {
             border: 1px solid !important;
             word-wrap: break-word!important;
-            
+            font-weight: bold;
         }
 
         .vrai tr {
             font-size: 8px !important;
+          
         }
 
         .vrai th {
@@ -84,10 +81,10 @@
 
         .theade {
             /* font-size: 8px; */
-            vertical-align: sub;
+            /* vertical-align: sub; */
             font-weight: bold;
             text-align: center;
-            display: flex;
+            /* display: flex; */
             align-items: center;
             justify-content: center;
             /* white-space: pre ! important; */
@@ -108,17 +105,17 @@
             /* white-space: nowrap; */
         /* }  */
 
-        .mini{
+        /* .mini{
             word-wrap: break-word!important;
-            /* padding:2px; */
+           
         }
 
         .cost1{
             width: 20%;
-        }
+        } */
         .cost2{
-            width: 30%;
-            font-weight: normal;
+            font-weight: normal!important;
+            font-size:8px!important;
         }
 
 
@@ -155,8 +152,9 @@
                                 <strong style="font-size:18px">F</strong>ASO
                             </p>
                             <p class="font-bold">
-                                Ministry of Higher Education,<br /> Scientific Research and
-                                Innovation
+                                {{-- Ministry of Higher Education,<br /> Scientific Research and
+                                Innovation --}}
+                                Ministry of Higher Education,<br /> Research and Innovation
                             </p>
                         </div>
                     </td>
@@ -234,19 +232,19 @@
             </table>
 
             <table class="vrai">
-                <!-- <thead> -->
-                <tr  style="background-color:#d8d8d8">
-                    <th style="" class="theade semester"></th>
-                    <th style="" class="theade">TU</th>
-                    <th style="" class="theade">TUE</th>
-                    <th style="" class="theade">TUE Credits</th>
-                    <th style="" class="theade">Grade/20</th>
-                    <th style="" class="theade">TU Average</th>
-                    <th style="" class="theade">Acquired Credits</th>
-                    <th style="" class="theade">TU Validation</th>
-                    <th style="" class="theade">Rating</th>
-                </tr>
-                <!-- </thead> -->
+               <thead>
+                    <tr  style="background-color:#d8d8d8">
+                        <th style="" class="theade semester"></th>
+                        <th style="" class="theade">TU</th>
+                        <th style="" class="theade">TUE</th>
+                        <th style="" class="theade">TUE Credits</th>
+                        <th style="" class="theade">Grade/20</th>
+                        <th style="" class="theade">TU Average</th>
+                        <th style="" class="theade">Acquired Credits</th>
+                        <th style="" class="theade">TU Validation</th>
+                        <th style="" class="theade">Rating</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <?php $new_semester = 1; ?>
                     @foreach ($data->level->semesters as $semester)
@@ -257,15 +255,13 @@
                                     @if ($new_semester == 1)
                                         <?php $new_semester = -1; ?>
                                         <?php $semestre_rowspan = $semester->s_n_modulus + 1; ?>
-
-
                                         <tr>
                                             <td class="center mini semester " rowspan="{{ $semestre_rowspan }}"> 
-                                                <span class="rotater">{{ $semester->label }}</span>
+                                                <span>{{ $semester->label }}</span>
                                              </td>
-                                            <td class=" mini cost1" rowspan="{{ $tu->t_n_modulus }}"> {{ $tu->name }}
+                                            <td class=" mini cost1" style="word-wrap: break-word;padding-right:10px" rowspan="{{ $tu->t_n_modulus }}"> {{ $tu->name }}
                                             </td>
-                                            <td class=" mini cost2">{{ $modul->name }}</td>
+                                            <td class=" mini cost2" style="word-wrap: break-word;padding-right:10px;">{{ $modul->name }}</td>
                                             <td class="center mini">{{ $modul->credict }}</td>
                                             <td class="center mini">{{ $modul->note }}</td>
                                             <td class="center mini" rowspan="{{ $tu->t_n_modulus }}">
@@ -279,9 +275,9 @@
                                         </tr>
                                     @else
                                         <tr>
-                                            <td class=" mini cost1" rowspan="{{ $tu->t_n_modulus }}">{{ $tu->name }}
+                                            <td class=" mini cost1" style="word-wrap: break-word;padding-right:10px" rowspan="{{ $tu->t_n_modulus }}">{{ $tu->name }}
                                             </td>
-                                            <td class=" mini cost2">{{ $modul->name }}</td>
+                                            <td class=" mini cost2" style="word-wrap: break-word;padding-right:10px">{{ $modul->name }}</td>
                                             <td class="center mini">{{ $modul->credict }}</td>
                                             <td class="center mini">{{ $modul->note }}</td>
                                             <td class="center mini" rowspan="{{ $tu->t_n_modulus }}">
@@ -318,39 +314,47 @@
                 </tbody>
             </table>
 
-            <table style="width:100%; margin-top: 8px">
+            <table style="width:100%;">
+                {{--  margin-top: 8px --}}
                 <tr>
-                    <td style="width:73.5%">
+                    <td style="width:65%;"></td>
+                    <td class="center" style="width:35%;">
+                        <div>  Koudougou, {{ $today }}</div>
+                        <div class="" style="width:300px;">
+                            <br />
+                            <span class="font-bold font-underline;" style="color:black;">
+                                &nbsp;Accademic
+                                Director&nbsp;</span><br />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:65%;">
                     
-<span style="font-style: italic">NB:  </span> 
-<span style="font-size:8px; font-style: italic">- A semester is validated if and only if the semester average ≥ 10 and the average of each TU ≥ 08;</span><br/> 
-    <span style="font-size:8px; font-style: italic">- Any nature or overload causes the invalidity of this document;</span> <br/>
-        <span style="font-size:8px; font-style: italic">- Only one transcript is issued. It is up to the interested party to make certified copies.</span> 
+                        <span style="">NB:  </span> 
+                        <span style="font-size:8px;">&ordm;&nbsp; Description;<br/> 
+                        <span style="">	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            - V : TU Validated;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            - NV : TU Not Validated;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            - V/C : TU Validated by Compensation;<br/> 
+                        </span>
+                       &ordm;&nbsp; A semester is validated if and only if the semester average ≥ 10 and the average of each TU ≥ 08;<br/> 
+                        &ordm;&nbsp; Any nature or overload causes the invalidity of this document;<br/>
+                        &ordm;&nbsp; Only one transcript is issued. It is up to the interested party to make certified copies.</span> 
                     </td>
 
-                    <td  class="center" style="width:26.5%">
-                        <div >
-                            <div class="">
-                                Koudougou, {{ $today }}
-                            </div>
-    
-                            <div class="" style="width:300px;">
-                                <span class="font-bold font-underline" style="color:black;">
-                                    Accademic
-                                    Director</span><br />
-                            </div>
-                        </div>
+                    <td  class="center" style="width:35%">
+                         
                     </td>
                 </tr>
             </table>
 
-            <table style="width:100%; margin-top: 70px">
+            <table style="width:100%; margin-top: 20px">
                 <tr >
-                    <td style="width:73.5%"></td>
-
-                    <td class="center" style="width:26.5%;">
+                    <td style="width:65%"></td>
+                    <td class="center" style="width:35%;">
                         <div class="center" style="width:300px;">
-                            <span class="" style="color:black;text-decoration: underline"> Dr.
+                            <span class="" style="color:black;text-decoration: underline; font-size:15px"> Dr.
                                 Bawindsom Marcel KEBRE</span><br />
                             <span>Maître de Conférences (Lecturer)</span>
                         </div>
@@ -360,6 +364,4 @@
         </section>
     </div>
 </body>
-
-
 </html>
